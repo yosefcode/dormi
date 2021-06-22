@@ -10,6 +10,8 @@ import Location from "./Location";
 import Users from "./ListOfUsers";
 import Categoris from "./Categoris";
 import Setings from "./Setings";
+import Affiliation from "./Affiliation";
+
 const ContrulScreen = () => {
   return (
     <Router>
@@ -44,6 +46,9 @@ const ContrulScreen = () => {
         </Route>
         <Route path="/setings">
           <Setings />
+        </Route>
+        <Route path="/Affiliation">
+          <Affiliation />
         </Route>
       </Switch>
     </Router>

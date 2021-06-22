@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Modal, Tag, Form, Menu, Dropdown, Card, Select, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
 import {
   Contener,
   StyeldSelect,
@@ -12,6 +11,8 @@ import {
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
 import { FaFilter } from "react-icons/fa";
+import { GiPresent } from "react-icons/gi";
+
 import Item from "antd/lib/list/Item";
 const { Option } = Select;
 const layout = {
@@ -282,6 +283,9 @@ const Checkform = (props) => {
             );
           })
         : null}
+      <Link to="Affiliation" className="Affiliationbutton">
+        <GiPresent className="Affiliationicon" />
+      </Link>
     </Contener>
   );
 };

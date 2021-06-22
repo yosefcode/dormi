@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const Contyner = styled.div`
+  @media only screen and (min-width: 600px) {
+    .imagelogo {
+      width: 80px;
+      margin-inline-start: 40%;
+      margin-inline-end: 280px;
+    }
+  }
   .imagelogo {
     width: 80px;
   }

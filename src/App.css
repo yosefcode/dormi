@@ -1,5 +1,28 @@
 @import "~antd/dist/antd.css";
 
+.Affiliationbutton {
+  background-color: red;
+  position: fixed;
+  left: 12%;
+  top: 82%;
+
+  color: #fff;
+  overflow: hidden;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%),
+    0 4px 15px 0 rgb(0 0 0 / 15%);
+  box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  width: 47px;
+  height: 47px;
+}
+.Affiliationicon {
+  margin: 10px;
+  font-size: 25px;
+}
 .App {
   text-align: center;
 }
