@@ -12,23 +12,9 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
 import { FaFilter } from "react-icons/fa";
 import { GiPresent } from "react-icons/gi";
-
-import Item from "antd/lib/list/Item";
+import { listoftascs } from "../fackarrylisofreq";
 const { Option } = Select;
-const layout = {
-  labelCol: {
-    span: 2,
-  },
-  wrapperCol: {
-    span: 5,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+
 const menu = (
   <Menu>
     <Menu.Item>סגירה מהירה</Menu.Item>
@@ -59,69 +45,80 @@ const Checkform = (props) => {
     setIsModalVisible(false);
   };
 
-  const fackearry1 = [
-    {
-      id: 9999,
-      urgency: 1,
-      date: "23/4/5",
-      incharge: "אביתר",
-      phonenumber: "05266336",
-      type: "אינסטלציה",
-      problom: "סתימה",
-      location: "כיתה5",
-      status: 2,
-      Repeatedtask: "כל שלושה חודשים",
-    },
-    {
-      id: 9995,
-      urgency: 2,
-      date: "23/4/5",
-      incharge: "אביתר",
-      phonenumber: "05266336",
-      type: "אינסטלציה",
-      problom: "סתימה",
-      location: "כיתה5",
-      status: 1,
-      Repeatedtask: "כל שלושה חודשים",
-    },
-    {
-      id: 9994,
-      urgency: 3,
-      date: "23/4/5",
-      incharge: "בעז",
-      phonenumber: "05266336",
-      type: "אינסטלציה",
-      problom: "סתימה",
-      location: "כיתה5",
-      status: 1,
-      Repeatedtask: "כל שלושה חודשים",
-    },
-  ];
-  const [fackearry, setfackearry] = useState(fackearry1);
+  const [fackearry, setfackearry] = useState();
 
   const [filter, setfilter] = useState(false);
 
   const problomtypearry = [
-    { type: "חשמל", id: 123 },
-    { type: "אינסטלציה", id: 456 },
+    {
+      maincategorys: [
+        { maincategory: "חשמל", id: 2 },
+        { maincategory: "אינסטלציה", id: 1 },
+      ],
+
+      urgency: [
+        { urgency: "נמוך", urgencyid: 1 },
+        { urgency: "בינוני", urgencyid: 2 },
+        { urgency: "גבוהה", urgencyid: 3 },
+      ],
+    },
   ];
   const [problom, setproblom] = useState();
 
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-  const [ref, setref] = useState(false);
 
-  function handleChange(value) {
-    let requst = fackearry.find((Item) => Item.id === value[1]);
-    requst.urgency = value[2];
-
-    setfackearry(fackearry);
-    setref(true);
+  const [AllOpenCategoris, setAllOpenCategoris] = useState();
+  const [filterallUrgency, setfilterallUrgency] = useState();
+  function filterAllOpenCategoris(arry) {
+    if (AllOpenCategoris) {
+      return arry.filter((el) => {
+        return el.maincategorid === AllOpenCategoris;
+      });
+    } else {
+      return arry;
+    }
   }
+  function filterUrgency(arry) {
+    if (filterallUrgency) {
+      return arry.filter((el) => {
+        return el.urgency === filterallUrgency;
+      });
+    } else {
+      return arry;
+    }
+  }
+  const [locallist, setlocallist] = useState();
+  const [firstlode, setlfirstlode] = useState();
+  const [chingeurgency, setchingeurgency] = useState(false);
+  function findChangeurgency(value) {
+    let requst = listoftascs.findIndex((Item) => Item.id === value[1]);
+    listoftascs[requst].urgency = value[2];
+    setchingeurgency(!chingeurgency);
+    setlocallist(listoftascs);
+  }
+
   useEffect(() => {
-    setref(false);
-  }, [ref]);
+    if (!firstlode) {
+      setlocallist(listoftascs);
+
+      setlfirstlode(true);
+      setfackearry(listoftascs);
+    } else {
+      let result = locallist;
+
+      result = filterAllOpenCategoris(result);
+
+      result = filterUrgency(result);
+
+      // result = findChangeurgency(result);
+
+      // debugger;
+      setfackearry(result);
+    }
+  }, [AllOpenCategoris, filterallUrgency, chingeurgency]);
+
   return (
     <Contener>
       <div className="top_icon">
@@ -149,66 +146,73 @@ const Checkform = (props) => {
       </div>
 
       {filter ? (
-        <div>
-          <Form {...layout} name="basic" onFinish={onFinish}>
-            <Form.Item label="סוג הבעיה">
-              <input
-                type="text"
-                list="data"
-                value={problom}
-                onChange={(e) => {
-                  setproblom(e.target.value);
-                }}
-              />
+        <div className="filteroption">
+          <div className="selcts">
+            <Select
+              showSearch
+              placeholder="כל הקטגוריות"
+              onChange={(value) => {
+                setAllOpenCategoris(value);
+              }}
+            >
+              <Option value={false}>כל הקטגוריות </Option>
 
-              <datalist id="data">
-                {problomtypearry.map((el) => (
-                  <option value={el.type} />
-                ))}
-              </datalist>
-            </Form.Item>
-            <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
-                שלח פנייה
-              </Button>
-            </Form.Item>
-          </Form>
+              {problomtypearry[0]?.maincategorys.map((el) => (
+                <Option value={el.id}>{el.maincategory} </Option>
+              ))}
+            </Select>
+          </div>
+          <div className="selcts">
+            <Select
+              showSearch
+              placeholder="כל הרמות"
+              onChange={(value) => {
+                setfilterallUrgency(value);
+              }}
+            >
+              <Option value={false}>כל הרמות </Option>
+
+              {problomtypearry[0]?.urgency.map((el) => (
+                <Option value={el.urgencyid}>{el.urgency} </Option>
+              ))}
+            </Select>
+          </div>
         </div>
       ) : null}
 
       {fackearry
-        ? fackearry.map((el) => {
+        ? fackearry?.map((el) => {
             let urgency;
             let urgencytext;
 
             switch (el.urgency) {
               case 1:
+                urgencytext = "נמוך";
                 urgency = {
                   color: "#389e0d",
                   backgroundcoler: "#f6ffed",
                   border: "#b7eb8f",
                 };
-                urgencytext = "נמוך";
                 break;
               case 2:
+                urgencytext = "בינוני";
                 urgency = {
                   color: "#fa8c16",
                   backgroundcoler: "#fff7e6",
                   border: "#ffd591;",
                 };
-                urgencytext = "בינוני";
                 break;
               case 3:
+                urgencytext = "גבוהה";
                 urgency = {
                   color: "#cf1322",
                   backgroundcoler: "#fff1f0",
                   border: "#ffa39e",
                 };
-                urgencytext = "גבוהה";
 
                 break;
             }
-
+            console.log(el.id, urgencytext, urgency);
             let status;
             let statustext;
 
@@ -226,7 +230,7 @@ const Checkform = (props) => {
             return (
               <div>
                 <StyelsCard
-                  title={`${el.type} / ${el.problom}`}
+                  title={`${el.maincategory} / ${el.subname}`}
                   primary={urgency}
                   actions={[
                     <Dropdown overlay={menu} className="dotsDropdown">
@@ -235,12 +239,12 @@ const Checkform = (props) => {
                     <StyeldSelect
                       primary={urgency}
                       defaultValue={urgencytext}
-                      onChange={handleChange}
+                      value={urgencytext}
+                      onChange={findChangeurgency}
                       dropdownClassName="dropdownClassName"
                     >
                       <Option value={["נמוך", el.id, 1]}>
                         {" "}
-                        {/* <div className="success">נמוך</div> */}
                         <StyeldTag color="success">נמוך</StyeldTag>
                       </Option>
                       <Option value={["בינוני", el.id, 2]}>
@@ -249,7 +253,7 @@ const Checkform = (props) => {
                       </Option>
                       <Option value={["גבוהה", el.id, 3]}>
                         {" "}
-                        <Tag color="red">גבוה</Tag>
+                        <StyeldTag color="red">גבוה</StyeldTag>
                       </Option>
                     </StyeldSelect>,
                   ]}
@@ -265,7 +269,6 @@ const Checkform = (props) => {
                     <span>{el.Repeatedtask}</span>
                   ) : (
                     <span>
-                      {" "}
                       <Tag color={status}>{statustext}</Tag>
                     </span>
                   )}
@@ -291,3 +294,43 @@ const Checkform = (props) => {
 };
 
 export default Checkform;
+// let programdata = [
+//   {
+//     categorynames: [
+//       {
+//         id: 31,
+//         maincategory: "חשמל",
+//         subcategory: [
+//           { subcategoryid: 1, subname: "נורה" },
+//           { subcategoryid: 1, subname: "שקע" },
+//         ],
+//       },
+//       {
+//         id: 31,
+//         maincategory: "אינסטליצייה",
+//         subcategory: [
+//           { subcategoryid: 1, subname: "ברז" },
+//           { subcategoryid: 1, subname: "ביוב" },
+//         ],
+//       },
+//     ],
+//     locations: [
+//       {
+//         locationid: 1,
+//         locationname: " פנימייה",
+//         rooms: [
+//           { roomid: 1, roomname: "חדר1" },
+//           { roomid: 2, roomname: "חדר2" },
+//         ],
+//       },
+//       {
+//         locationid: 2,
+//         locationname: "בניין ",
+//         rooms: [
+//           { roomid: 3, roomname: "חדר1" },
+//           { roomid: 4, roomname: "חדר2" },
+//         ],
+//       },
+//     ],
+//   },
+// ];
