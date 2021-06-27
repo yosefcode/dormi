@@ -29,4 +29,18 @@ export const GettfromServer = async (ruter) => {
   });
   return myPromis;
 };
+export const GettLangfromServer = async (lang) => {
+  let myPromis = new Promise((resolve, reject) => {
+    axios.post(`https://b.dormi.co.il/requests/lang`, { lang: lang }).then(
+      (res) => {
+        resolve(res.data);
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+  return myPromis;
+};
+
 // GettfromServer("");

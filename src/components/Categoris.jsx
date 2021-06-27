@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Menu, Dropdown, Form, Input } from "antd";
 import { FiChrome } from "react-icons/fi";
+import DataContext from "../DataContext";
 
 function Categoris() {
   document.body.style.backgroundColor = "white";
-
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+  const lang = data.data?.lang;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -26,17 +29,17 @@ function Categoris() {
 
   const menuofproject = (
     <Menu>
-      <Menu.Item>הוספת קטגוריה משנית </Menu.Item>
-      <Menu.Item>עריכת שם קטגוריה</Menu.Item>
-      <Menu.Item>מחיקה</Menu.Item>
+      <Menu.Item>{lang?.lang291} </Menu.Item>
+      <Menu.Item>{lang?.lang294}</Menu.Item>
+      <Menu.Item>{lang?.lang147}</Menu.Item>
     </Menu>
   );
 
   const menuoflocation = (
     <Menu>
-      <Menu.Item>רשימת פניות בחדר זה </Menu.Item>
-      <Menu.Item>עריכה</Menu.Item>
-      <Menu.Item>מחיקה</Menu.Item>
+      <Menu.Item>{lang?.lang235}</Menu.Item>
+      <Menu.Item>{lang?.lang243}</Menu.Item>
+      <Menu.Item>{lang?.lang147}</Menu.Item>
     </Menu>
   );
 
@@ -65,9 +68,9 @@ function Categoris() {
   return (
     <Contener>
       <div className="hader">
-        <p>מתחמים וחדרים</p>
+        <p>{lang?.lang211}</p>
 
-        <button onClick={showModal}>הוספת מתחם</button>
+        <button onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
         {arryofcards
@@ -108,7 +111,7 @@ function Categoris() {
                       })
                     ) : (
                       <div>
-                        <p className="noroms">אין חדרים במתחם </p>
+                        <p className="noroms">{lang?.lang225} </p>
                       </div>
                     )}
                   </div>
@@ -118,7 +121,7 @@ function Categoris() {
           : null}
       </div>
       <ModalStyeld
-        title="הוספת מתחם"
+        title={lang?.lang210}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
@@ -130,13 +133,13 @@ function Categoris() {
           }}
           onFinish={onFinish}
         >
-          <p>:שם המתחם</p>
+          <p>{lang?.lang223}:</p>
           <Form.Item name="newproject">
             <Input />
           </Form.Item>
           <Form.Item>
             <button className="okbutton" type="primary" htmlType="submit">
-              שמור
+              {lang?.lang290}
             </button>
           </Form.Item>
         </Form>

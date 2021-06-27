@@ -100,12 +100,12 @@ const Login = () => {
       </div>
       <div className="info">
         <div className="bg-info">
-          <img src="/images/manHead.png" className="avatar" alt="Image" />
+          <imag src="/images/manHead.png" className="avatar" alt="Image" />
           <div>
             <p>אין לכם עדיין חשבון בדורמי?</p>
             <p>
               {" "}
-              <a>תלמדו איך עובדים עם ניהול אחזקה חכם</a>
+              <a href={"ddd"}>תלמדו איך עובדים עם ניהול אחזקה חכם</a>
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import Login from "./components/login";
@@ -7,14 +7,13 @@ import { Language } from "./styelscomponents/Language";
 
 import Menu from "./components/Menu";
 import { DataProvider } from "./DataContext";
-
+import { GettLangfromServer } from "./serveses";
 function App() {
   const [loginstatus, setloginstatus] = useState(true);
   let x = "rtl";
   // let x = "ltr";
 
   // context DataProvider
-
   const [data, setdata] = useState();
   const providerOptions = {
     data,
@@ -22,6 +21,12 @@ function App() {
       setdata(value);
     },
   };
+  useEffect(async () => {
+    let res = await GettLangfromServer(2);
+
+    setdata({ lang: res });
+  }, []);
+
   // setdata({ userid: "12345" });
   let user = {
     userid: "rtyui",
@@ -83,11 +88,6 @@ function App() {
   // const [Language, setLanguage] = useState("tlr");
   return (
     <div>
-      {/* <Helmet>
-                <meta charSet="utf-8" />
-                <title>My Title</title>
-                <link rel="canonical" href="http://mysite.com/example" />
-            </Helmet> */}
       <DataProvider value={providerOptions}>
         {!loginstatus ? (
           <div>

@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Contener,
   Styeldformitem,
   Styeldformitem2,
 } from "../styelscomponents/Styelsuser";
 import { Form, Input, Button, Select, Switch } from "antd";
+import DataContext from "../DataContext";
+
 const { Option } = Select;
-const layout = {
-  labelCol: {
-    span: 16,
-  },
-  wrapperCol: {
-    span: 5,
-  },
-};
+
 const tailLayout = {
   wrapperCol: {
     offset: 8,
@@ -21,6 +16,10 @@ const tailLayout = {
   },
 };
 const User = () => {
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+  const lang = data.data?.lang;
+
   document.body.style.backgroundColor = "white";
 
   const onFinish = (values) => {
@@ -34,18 +33,26 @@ const User = () => {
       <div className="usernoteficationautt">boaz</div> */}
       <Form name="basic" onFinish={onFinish}>
         <div className="userpersonalinfi">
-          <p>פרטי משתמש</p>
-          <Styeldformitem label="שם פרטי" name="username" initialValue="boaz">
+          <p>{lang?.lang315}</p>
+          <a>{lang?.lang316}</a>
+          <Styeldformitem
+            label={lang?.lang305}
+            name="username"
+            initialValue="boaz"
+          >
             <Input />
           </Styeldformitem>
 
-          <Styeldformitem label="שם משפחה" name="last_name">
+          <Styeldformitem label={lang?.lang306} name="last_name">
             <Input />
           </Styeldformitem>
-          <Styeldformitem label="כתובת מייל (לצורך כניסה למערכת)" name="email">
+          <Styeldformitem
+            label={`${lang?.lang307}(${lang?.lang312})`}
+            name="email"
+          >
             <Input />
           </Styeldformitem>
-          <Styeldformitem label="חדר ראשוני" name="room">
+          <Styeldformitem label={lang?.lang313} name="room">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
@@ -53,14 +60,11 @@ const User = () => {
             </Select>
           </Styeldformitem>
 
-          <Styeldformitem
-            label="אישור כניסה לחדרי/דירתי ללא נוכחותי?"
-            name="entrance"
-          >
+          <Styeldformitem label={`${lang?.lang377}?`} name="entrance">
             <Switch defaultChecked={false} />
           </Styeldformitem>
 
-          <Styeldformitem label="דרגת הרשאה" name="auht_rank">
+          <Styeldformitem label={lang?.lang319} name="auht_rank">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
@@ -68,7 +72,7 @@ const User = () => {
             </Select>
           </Styeldformitem>
           <Styeldformitem
-            label="שיוך לשנת לימוד (במידה ולוונטי)"
+            label={`${lang?.lang320}(${lang?.lang321})`}
             name="school_year"
           >
             <Select defaultValue="עברית">
@@ -77,13 +81,13 @@ const User = () => {
               })}
             </Select>
           </Styeldformitem>
-          <Styeldformitem label="סיסמא" name="password">
+          <Styeldformitem label={lang?.lang309} name="password">
             <Input />
           </Styeldformitem>
-          <Styeldformitem label="טלפון נייד" name="phonenumber">
+          <Styeldformitem label={lang?.lang308} name="phonenumber">
             <Input />
           </Styeldformitem>
-          <Styeldformitem label="שפת ממשק" name="language">
+          <Styeldformitem label={lang?.lang310} name="language">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
@@ -97,62 +101,53 @@ const User = () => {
               })}
             </Select>
           </Styeldformitem>
-          <Styeldformitem label="משתמש פעיל?" name="user_active">
+          <Styeldformitem label={`${lang?.lang311}?`} name="user_active">
             <Switch defaultChecked={false} />
           </Styeldformitem>
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
-              Submit
+              {lang?.lang156}
             </Button>
           </Form.Item>
         </div>
         <div className="usernoteficationautt">
-          <p>קבלת הודעה מהמערכת:</p>
+          <p>{lang?.lang364}:</p>
 
-          <p>בעת פתיחת פנייה:</p>
+          <p>{lang?.lang365}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label="באימייל" name="open_req_in_email">
+            <Styeldformitem2 label={lang?.lang369} name="open_req_in_email">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
             {/* </div>
           <div className="noteficationautt"> */}
-            <Styeldformitem2 label="בנוטיפיקציה / הודעה" name="open_req_masege">
+            <Styeldformitem2 label={lang?.lang370} name="open_req_masege">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
           </div>
-          <p>בעת סגירת פנייה:</p>
+          <p>{lang?.lang380}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label="באימייל" name="close_req_in_email">
+            <Styeldformitem2 label={lang?.lang369} name="close_req_in_email">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
-            <Styeldformitem2
-              label="בנוטיפיקציה / הודעה"
-              name="close_req_masege"
-            >
+            <Styeldformitem2 label={lang?.lang370} name="close_req_masege">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
           </div>
-          <p>כאשר מתחילים לטפל בפנייה שלי:</p>
+          <p>{lang?.lang366}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label="באימייל" name="start_handle_in_email">
+            <Styeldformitem2 label={lang?.lang369} name="start_handle_in_email">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
-            <Styeldformitem2
-              label="בנוטיפיקציה / הודעה"
-              name="start_handle_masege"
-            >
+            <Styeldformitem2 label={lang?.lang370} name="start_handle_masege">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
           </div>
-          <p>כאשר מסיימים את הטיפול בפנייה שלי:</p>
+          <p>{lang?.lang367}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label="באימייל" name="end_handle_in_email">
+            <Styeldformitem2 label={lang?.lang369} name="end_handle_in_email">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
-            <Styeldformitem2
-              label="בנוטיפיקציה / הודעה"
-              name="end_handle_masege"
-            >
+            <Styeldformitem2 label={lang?.lang370} name="end_handle_masege">
               <Switch defaultChecked={false} />
             </Styeldformitem2>
           </div>

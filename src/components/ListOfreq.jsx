@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Modal, Tag, Form, Menu, Dropdown, Card, Select, Button } from "antd";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { Tag, Form, Menu, Dropdown, Select, Button, Input } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import {
@@ -7,43 +7,29 @@ import {
   StyeldSelect,
   StyeldTag,
   StyelsCard,
+  StyelsDropdown,
 } from "../styelscomponents/styeldListReq";
+import { ModalStyeld } from "../styelscomponents/modaldtyeld";
+
+import ModaelGeneric from "./ModaelGeneric";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
 import { FaFilter } from "react-icons/fa";
 import { GiPresent } from "react-icons/gi";
 import { listoftascs } from "../fackarrylisofreq";
-const { Option } = Select;
 
-const menu = (
-  <Menu>
-    <Menu.Item>סגירה מהירה</Menu.Item>
-    <Menu.Item>סמן כטיפול בפנייה</Menu.Item>
-    <Menu.Item>שלח הודעה</Menu.Item>
-    <Menu.Item>הפנה לאיש צוות</Menu.Item>
-    <Menu.Item>סמן כפנייה חדשה</Menu.Item>
-    <Menu.Item>סגירה מתקדמת</Menu.Item>
-    <Menu.Item>עריכה</Menu.Item>
-    <Menu.Item>מחיקה</Menu.Item>
-  </Menu>
-);
+import DataContext from "../DataContext";
+
+const { Option } = Select;
+const { TextArea } = Input;
+
 const Checkform = (props) => {
   document.body.style.backgroundColor = "white";
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+  const lang = data.data?.lang;
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const Repeatedtask = props.Repeatedtask;
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = (value) => {
-    console.log(value);
-    setIsModalVisible(false);
-  };
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   const [fackearry, setfackearry] = useState();
 
@@ -63,11 +49,6 @@ const Checkform = (props) => {
       ],
     },
   ];
-  const [problom, setproblom] = useState();
-
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
 
   const [AllOpenCategoris, setAllOpenCategoris] = useState();
   const [filterallUrgency, setfilterallUrgency] = useState();
@@ -119,8 +100,70 @@ const Checkform = (props) => {
     }
   }, [AllOpenCategoris, filterallUrgency, chingeurgency]);
 
+  // רשימת פקודות לשיונוי כרטיס
+  const [form] = Form.useForm();
+  const [Sendmassege, setSendmassege] = useState(false);
+  const [problemid, setproblemid] = useState();
+  const onsendmassege = (value, id) => {
+    setSendmassege(false);
+    console.log(value, problemid);
+    form.resetFields();
+  };
+
+  const [Referraltostaff, setReferraltostaff] = useState(false);
+
+  const onReferr = (value, id) => {
+    setSendmassege(false);
+    console.log(value, problemid);
+    form.resetFields();
+  };
   return (
     <Contener>
+      <ModalStyeld
+        title={lang?.lang263}
+        visible={Sendmassege}
+        onCancel={() => {
+          setSendmassege(false);
+        }}
+        footer={false}
+      >
+        <Form name="masseg" onFinish={onsendmassege} form={form}>
+          <Form.Item name="comments" placeholder={lang?.lang266}>
+            <TextArea rows={4} />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              {lang?.lang265}
+            </Button>
+          </Form.Item>
+        </Form>
+      </ModalStyeld>
+      <ModalStyeld
+        title={lang?.lang240}
+        visible={Referraltostaff}
+        onCancel={() => {
+          setReferraltostaff(false);
+        }}
+        footer={false}
+      >
+        <Form name="masseg" onFinish={onReferr} form={form}>
+          <Form.Item name="comments">
+            <Select showSearch placeholder="בחר איש צוות">
+              <Option value={1}>אביתר </Option>
+
+              <Option value={2}>בעז</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              {lang?.lang265}
+            </Button>
+          </Form.Item>
+        </Form>
+      </ModalStyeld>
+
       <div className="top_icon">
         <span className="export_exel">
           <ImCloudDownload />
@@ -129,12 +172,11 @@ const Checkform = (props) => {
           <button>
             {" "}
             <Link style={{ color: "#FFF" }} to="/temmembertask">
-              {" "}
-              פתח פנייה חדשה{" "}
+              {lang?.lang100}
             </Link>
           </button>
         ) : null}
-        <span className="text">רשימת פניות</span>
+        <span className="text">{lang.lang196}</span>
         <span
           onClick={() => {
             setfilter(!filter);
@@ -150,12 +192,12 @@ const Checkform = (props) => {
           <div className="selcts">
             <Select
               showSearch
-              placeholder="כל הקטגוריות"
+              placeholder={lang?.lang354}
               onChange={(value) => {
                 setAllOpenCategoris(value);
               }}
             >
-              <Option value={false}>כל הקטגוריות </Option>
+              <Option value={false}>{lang.lang354}</Option>
 
               {problomtypearry[0]?.maincategorys.map((el) => (
                 <Option value={el.id}>{el.maincategory} </Option>
@@ -165,12 +207,12 @@ const Checkform = (props) => {
           <div className="selcts">
             <Select
               showSearch
-              placeholder="כל הרמות"
+              placeholder={lang?.lang353}
               onChange={(value) => {
                 setfilterallUrgency(value);
               }}
             >
-              <Option value={false}>כל הרמות </Option>
+              <Option value={false}>{lang?.lang353}</Option>
 
               {problomtypearry[0]?.urgency.map((el) => (
                 <Option value={el.urgencyid}>{el.urgency} </Option>
@@ -182,12 +224,38 @@ const Checkform = (props) => {
 
       {fackearry
         ? fackearry?.map((el) => {
+            const menu = (
+              <Menu>
+                <Menu.Item>{lang?.lang145}</Menu.Item>
+                <Menu.Item>{lang?.lang190}</Menu.Item>
+                <Menu.Item
+                  onClick={() => {
+                    setSendmassege(true);
+                    setproblemid(el.id);
+                  }}
+                >
+                  {lang?.lang263}
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => {
+                    setReferraltostaff(true);
+                    setproblemid(el.id);
+                  }}
+                >
+                  {lang?.lang240}
+                </Menu.Item>
+                <Menu.Item>{lang?.lang190}</Menu.Item>
+                <Menu.Item>{lang?.lang208}</Menu.Item>
+                <Menu.Item>{lang?.lang243}</Menu.Item>
+                <Menu.Item>{lang?.lang147}</Menu.Item>
+              </Menu>
+            );
             let urgency;
             let urgencytext;
 
             switch (el.urgency) {
               case 1:
-                urgencytext = "נמוך";
+                urgencytext = lang?.lang122;
                 urgency = {
                   color: "#389e0d",
                   backgroundcoler: "#f6ffed",
@@ -195,7 +263,7 @@ const Checkform = (props) => {
                 };
                 break;
               case 2:
-                urgencytext = "בינוני";
+                urgencytext = lang?.lang121;
                 urgency = {
                   color: "#fa8c16",
                   backgroundcoler: "#fff7e6",
@@ -203,7 +271,7 @@ const Checkform = (props) => {
                 };
                 break;
               case 3:
-                urgencytext = "גבוהה";
+                urgencytext = lang?.lang120;
                 urgency = {
                   color: "#cf1322",
                   backgroundcoler: "#fff1f0",
@@ -212,18 +280,18 @@ const Checkform = (props) => {
 
                 break;
             }
-            console.log(el.id, urgencytext, urgency);
+
             let status;
             let statustext;
 
             switch (el.status) {
               case 1:
                 status = "#108ee9";
-                statustext = "פנייה חדשה";
+                statustext = lang?.lang162;
                 break;
               case 2:
                 status = "#87d068";
-                statustext = "בטיפול";
+                statustext = lang?.lang174;
                 break;
             }
 
@@ -233,9 +301,13 @@ const Checkform = (props) => {
                   title={`${el.maincategory} / ${el.subname}`}
                   primary={urgency}
                   actions={[
-                    <Dropdown overlay={menu} className="dotsDropdown">
+                    <StyelsDropdown
+                      trigger={["click"]}
+                      overlay={menu}
+                      className="dotsDropdown"
+                    >
                       <HiOutlineDotsHorizontal />
-                    </Dropdown>,
+                    </StyelsDropdown>,
                     <StyeldSelect
                       primary={urgency}
                       defaultValue={urgencytext}
@@ -243,45 +315,36 @@ const Checkform = (props) => {
                       onChange={findChangeurgency}
                       dropdownClassName="dropdownClassName"
                     >
-                      <Option value={["נמוך", el.id, 1]}>
+                      <Option value={[lang?.lang122, el.id, 1]}>
                         {" "}
-                        <StyeldTag color="success">נמוך</StyeldTag>
+                        <StyeldTag color="success">{lang?.lang122}</StyeldTag>
                       </Option>
-                      <Option value={["בינוני", el.id, 2]}>
+                      <Option value={[lang?.lang121, el.id, 2]}>
                         {" "}
-                        <StyeldTag color="warning">בינוני</StyeldTag>
+                        <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
                       </Option>
-                      <Option value={["גבוהה", el.id, 3]}>
+                      <Option value={[lang?.lang120, el.id, 3]}>
                         {" "}
-                        <StyeldTag color="red">גבוה</StyeldTag>
+                        <StyeldTag color="red">{lang?.lang120}</StyeldTag>
                       </Option>
                     </StyeldSelect>,
                   ]}
-                  style={{ width: "300px" }}
+                  style={{ width: 300 }}
                   extra={<div>מיקום: {el.location}</div>}
                 >
-                  <span> {el.id}</span> <span> {el.date}</span>
-                  <span>
+                  <span className="card-body-spen"> {el.id}</span>{" "}
+                  <span className="card-body-spen"> {el.date}</span>
+                  <span className="card-body-spen">
                     {el.incharge} {el.phonenumber}
-                  </span>{" "}
-                  <span> {el.status}</span>{" "}
+                  </span>
                   {Repeatedtask ? (
-                    <span>{el.Repeatedtask}</span>
+                    <span className="card-body-spen">{el.Repeatedtask}</span>
                   ) : (
-                    <span>
+                    <span className="card-body-spen">
                       <Tag color={status}>{statustext}</Tag>
                     </span>
                   )}
                 </StyelsCard>
-
-                <Modal
-                  title="עדכן את רמת הדחיפות"
-                  visible={isModalVisible}
-                  footer={null}
-                  onCancel={handleCancel}
-                >
-                  <p>הפונה לא יראה את הסיווג</p>
-                </Modal>
               </div>
             );
           })

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Select, Card, Checkbox, Input, Modal, Button, Tag } from "antd";
+import { Select, Card, Tag, Dropdown } from "antd";
 
 export const Contener = styled.div`
   display: flex;
@@ -64,13 +64,18 @@ export const Contener = styled.div`
 
   @media only screen and (min-width: 600px) {
     .ant-card.ant-card-bordered {
-      width: 550px !important;
+      width: 900px !important;
+    }
+    .card-body-spen {
+      margin-inline-start: 84px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .card-body-spen {
+      margin-inline-start: 3px;
     }
   }
 
-  .dotsDropdown {
-    /* background-color: red; */
-  }
   .top_icon button {
     background-color: blue;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
@@ -81,9 +86,18 @@ export const Contener = styled.div`
   }
 `;
 
+export const StyelsDropdown = styled(Dropdown)``;
+
 export const StyelsCard = styled(Card)`
   .ant-card-head {
     background-color: ${(props) => props.primary.backgroundcoler}!important;
+    height: 39px;
+  }
+  .ant-card-actions {
+    height: 51px;
+  }
+  .ant-card-body {
+    padding: 10px;
   }
 `;
 

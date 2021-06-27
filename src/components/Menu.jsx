@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Menu, Select, Badge } from "antd";
 import {
@@ -11,25 +11,22 @@ import { VscAccount } from "react-icons/vsc";
 // import logo from "/images/sopergas.logo";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import DataContext from "../DataContext";
+
 const { SubMenu } = Menu;
 const HaderMenu = (props) => {
-  let history = useHistory();
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+
   const [current, setcurrent] = useState(`mail`);
   let status = props.LoginScreen;
   const handleClick = (e) => {
     setcurrent(e.key);
   };
 
-  const { Option } = Select;
+  const lang = data.data?.lang;
 
-  const fackearry = [
-    { id: 1, type: "פנייה" },
-    { id: 2, type: "הליכה אחרוה" },
-  ];
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
-  let data = { chors: 10 };
+  let chors = { chors: 10 };
   return (
     <Contyner>
       {status ? (
@@ -67,42 +64,42 @@ const HaderMenu = (props) => {
           </SubMenu>
 
           <Menu.Item key="new_complain">
-            <Link to="/"> פתיחת פנייה חדשה</Link>
+            <Link to="/"> {lang?.lang100}</Link>
           </Menu.Item>
           <Menu.Item key="Repeatedtask">
-            <Link to="/Repeatedtask">מטלות מתוזמנות </Link>
+            <Link to="/Repeatedtask">{lang?.lang285} </Link>
           </Menu.Item>
           <Menu.Item key="new_chors">
             <Link to="/ListOfreq">
               {" "}
-              <Badge dir="tlr" count={data.chors}>
-                רשימת פניות
+              <Badge dir="tlr" count={chors.chors}>
+                {lang?.lang196}
               </Badge>
             </Link>
           </Menu.Item>
-          <SubMenu key="sub1-3" title="הגדרות">
+          <SubMenu key="sub1-3" title={lang?.lang167}>
             <Menu.Item key="5">
-              <Link to="list_users">משתמשים </Link>
+              <Link to="list_users">{lang?.lang102} </Link>
             </Menu.Item>
             <Menu.Item key="6">
               {" "}
-              <Link to="location">מיקום </Link>
+              <Link to="location">{lang?.lang333} </Link>
             </Menu.Item>
             <Menu.Item key="7">
-              <Link to="categoris">קטגוריות </Link>
+              <Link to="categoris">{lang?.lang104} </Link>
             </Menu.Item>
             <Menu.Item key="8">
-              <Link to="setings">הגדרות</Link>
+              <Link to="setings">{lang?.lang167}</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="statisic">סטטיסטיקות</Menu.Item>
+          <Menu.Item key="statisic">{lang?.lang105}</Menu.Item>
 
           <SubMenu key="sub1-4" icon={<VscAccount />}>
             <Menu.Item key="5">
               {" "}
-              <Link to="/Users"> הפרופיל שלי</Link>
+              <Link to="/Users"> {lang?.lang289}</Link>
             </Menu.Item>
-            <Menu.Item key="6">יציאה</Menu.Item>
+            <Menu.Item key="6">{lang?.lang107}</Menu.Item>
           </SubMenu>
         </Menu>
       )}

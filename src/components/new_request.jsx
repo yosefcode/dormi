@@ -3,17 +3,7 @@ import DataContext from "../DataContext";
 
 import { Link } from "react-router-dom";
 
-import {
-  Form,
-  Input,
-  Button,
-  Modal,
-  Checkbox,
-  Radio,
-  Space,
-  Select,
-  Upload,
-} from "antd";
+import { Form, Input, Button, Modal, Radio, Space, Select, Upload } from "antd";
 import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
@@ -35,6 +25,8 @@ const Nwerequest = (props) => {
   const { TextArea } = Input;
   const Temmembertask = props.Temmembertask;
   const data = useContext(DataContext);
+  const lang = data.data?.lang;
+
   const changdata = useContext(DataContext).changdata;
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
 
@@ -142,7 +134,7 @@ const Nwerequest = (props) => {
     <div>
       <BsCloudUpload />
 
-      <div className="uplodeimage">בחר קובץ</div>
+      <div className="uplodeimage">{lang?.lang274}</div>
     </div>
   );
 
@@ -175,8 +167,8 @@ const Nwerequest = (props) => {
           <Problemcontener>
             <img src="/images/man.png" className="avatar" alt="Image" />
             <div className="icondisply">
-              <p id="hadep">יש'ך בעיה?</p>
-              <p>תעדכן אותנו במה מדובר וכבר נתחיל את הטיפול</p>
+              <p id="hadep">{lang?.lang337}</p>
+              <p>{lang?.lang338}</p>
               <div>
                 <div className="listofproblom">
                   {listtips.map((el) => {
@@ -233,7 +225,7 @@ const Nwerequest = (props) => {
                     },
                   ]}
                 >
-                  <Select showSearch>
+                  <Select showSearch placeholder={lang?.lang110}>
                     {problomtypearry.map((el) => {
                       return (
                         <Option value={[el.type, el.id]}>{el.type}</Option>
@@ -250,7 +242,11 @@ const Nwerequest = (props) => {
                     },
                   ]}
                 >
-                  <Select showSearch onChange={onChange}>
+                  <Select
+                    showSearch
+                    placeholder={lang?.lang340}
+                    onChange={onChange}
+                  >
                     {locationarry.map((el) => {
                       return (
                         <Option value={[el.type, el.id]}>{el.type}</Option>
@@ -267,7 +263,7 @@ const Nwerequest = (props) => {
                       },
                     ]}
                   >
-                    <Select showSearch placeholder="בחר חדר">
+                    <Select showSearch placeholder={lang?.lang341}>
                       {locationarry.map((el) => {
                         return (
                           <Option value={[el.type, el.id]}>{el.type}</Option>
@@ -276,14 +272,7 @@ const Nwerequest = (props) => {
                     </Select>
                   </Form.Item>
                 ) : null}
-                <Form.Item
-                  name="comments"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
+                <Form.Item label={lang?.lang123} name="comments">
                   <TextArea rows={4} />
                 </Form.Item>
                 <Form.Item
@@ -297,15 +286,15 @@ const Nwerequest = (props) => {
                   <Radio.Group>
                     <Space direction="vertical">
                       <Radio className="Radio1" value={1}>
-                        גבוה
+                        {lang?.lang120}
                       </Radio>
 
                       <Radio className="Radio2" value={2}>
-                        בינוני
+                        {lang?.lang121}
                       </Radio>
 
                       <Radio className="Radio3" value={3}>
-                        נמוך
+                        {lang?.lang122}
                       </Radio>
                     </Space>
                   </Radio.Group>
@@ -314,7 +303,7 @@ const Nwerequest = (props) => {
                   <div className="frequency">
                     <Form.Item
                       name="frequency"
-                      label="תדירות"
+                      label={lang?.lang269}
                       rules={[
                         {
                           required: true,
@@ -337,17 +326,16 @@ const Nwerequest = (props) => {
                     htmlType="submit"
                     loading={loadings[2]}
                   >
-                    {Temmembertask ? "שלח פניה" : "צור מטלה"}
+                    {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}
                   </Button>
                 </Form.Item>
               </Form>
             ) : (
               <div className="textbloon">
-                <p>
-                  תודה - רשמנו את פנייתך. אם תרצו, תוכלו לצרף כעת תמונה
-                  רלוונטית.
-                </p>
-                <Link to="/ListOfreq">או עברו לרשימת הפניות</Link>
+                <p>{lang?.lang131}</p>
+                <p>{lang?.lang132}</p>
+
+                <Link to="/ListOfreq">{lang?.lang283}</Link>
                 <div className="avaterpopup"></div>
                 <div className="uploadimage">
                   <Upload
@@ -359,7 +347,7 @@ const Nwerequest = (props) => {
                     {uploadButton}
                   </Upload>
                   {uplodeimage?.fileList?.length >= 1 ? (
-                    <button onClick={sendimage}>שלח</button>
+                    <button onClick={sendimage}>{lang?.lang265}</button>
                   ) : null}
                 </div>
                 <Modal

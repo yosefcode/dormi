@@ -4,9 +4,12 @@ import styled from "styled-components";
 export const ModalStyeld = styled(Modal)`
   .ant-modal-content {
     border-radius: 19px;
+    text-align: center;
   }
   .ant-modal-header {
     border-radius: 19px;
+    border-bottom: none;
+    text-align: center;
   }
   .okbutton {
     color: #fff;

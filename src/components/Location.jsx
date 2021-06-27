@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Menu, Dropdown, Form, Input } from "antd";
 import { FiChrome } from "react-icons/fi";
+import DataContext from "../DataContext";
 
 function Location() {
   document.body.style.backgroundColor = "white";
-
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+  const lang = data.data?.lang;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -26,18 +29,18 @@ function Location() {
 
   const menuofproject = (
     <Menu>
-      <Menu.Item>הוספת חדר במתחם </Menu.Item>
-      <Menu.Item>עריכת חדר במתחם</Menu.Item>
-      <Menu.Item>מחיקה</Menu.Item>
+      <Menu.Item>{lang?.lang213} </Menu.Item>
+      <Menu.Item>{lang?.lang212}</Menu.Item>
+      <Menu.Item>{lang?.lang147}</Menu.Item>
     </Menu>
   );
 
   const menuoflocation = (
     <Menu>
-      <Menu.Item>רשימת פניות בחדר זה </Menu.Item>
-      <Menu.Item>עריכה</Menu.Item>
-      <Menu.Item>מחיקה</Menu.Item>
-      <Menu.Item>יצירת קוד QR</Menu.Item>
+      <Menu.Item>{lang?.lang235} </Menu.Item>
+      <Menu.Item>{lang?.lang243}</Menu.Item>
+      <Menu.Item>{lang?.lang147}</Menu.Item>
+      <Menu.Item>{lang?.lang359}</Menu.Item>
     </Menu>
   );
 
@@ -67,9 +70,9 @@ function Location() {
   return (
     <Contener>
       <div className="hader">
-        <p>מתחמים וחדרים</p>
+        <p>{lang?.lang211}</p>
 
-        <button onClick={showModal}>הוספת מתחם</button>
+        <button onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
         {arryofcards
@@ -110,7 +113,7 @@ function Location() {
                       })
                     ) : (
                       <div>
-                        <p className="noroms">אין חדרים במתחם </p>
+                        <p className="noroms">{lang?.lang225} </p>
                       </div>
                     )}
                   </div>
@@ -120,7 +123,7 @@ function Location() {
           : null}
       </div>
       <ModalStyeld
-        title="הוספת מתחם"
+        title={lang?.lang210}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
@@ -132,13 +135,13 @@ function Location() {
           }}
           onFinish={onFinish}
         >
-          <p>:שם המתחם</p>
+          <p>:{lang?.lang223}</p>
           <Form.Item name="newproject">
             <Input />
           </Form.Item>
           <Form.Item>
             <button className="okbutton" type="primary" htmlType="submit">
-              שמור
+              {lang?.lang156}
             </button>
           </Form.Item>
         </Form>

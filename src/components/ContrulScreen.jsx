@@ -11,7 +11,7 @@ import Users from "./ListOfUsers";
 import Categoris from "./Categoris";
 import Setings from "./Setings";
 import Affiliation from "./Affiliation";
-
+import SendMassege from "./SendMassege";
 const ContrulScreen = () => {
   return (
     <Router>
@@ -49,6 +49,9 @@ const ContrulScreen = () => {
         </Route>
         <Route path="/Affiliation">
           <Affiliation />
+        </Route>
+        <Route path="/SendMassege">
+          <SendMassege />
         </Route>
       </Switch>
     </Router>

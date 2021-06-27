@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Cardstyeld, Contener } from "../styelscomponents/UsersStyeld";
 import { Input, Space } from "antd";
+import DataContext from "../DataContext";
+import { Link } from "react-router-dom";
+
 function Users() {
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+  const lang = data.data?.lang;
   document.body.style.backgroundColor = "white";
   const onSearch = (e) => console.log(e.target.value);
   return (
     <Contener>
       <div className="haderflex">
         {/* <span className="span_buttons"> */}
+        <h2>{lang?.lang102}</h2>
         <Input
-          placeholder="חיפוש משתמש"
+          placeholder={lang?.lang248}
           onChange={onSearch}
           className="serch"
         />
         {/* </div> */}
         {/* <span className="span_buttons"> */}
-        <button className="sendmail"> שליחת הזמנה למשתמשים</button>
+
+        <Link className="sendmail" to="/SendMassege">
+          שליחת הזמנה למשתמשים
+        </Link>
+
         {/* </span> */}
         {/* < className="span_buttons"> */}
-        <button className="adduser">הוספת משתמש חדש </button>
+        <button className="adduser">{lang?.lang244} </button>
       </div>
       <Cardstyeld>
         <span>כרטיס לקוח</span>

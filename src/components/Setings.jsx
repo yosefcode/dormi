@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Select } from "antd";
+import React, { useContext } from "react";
+import { Form, Button, Select } from "antd";
 import { Contener } from "../styelscomponents/setingstyeld";
+import DataContext from "../DataContext";
 
 function Setings() {
   document.body.style.backgroundColor = "white";
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
+  const lang = data.data?.lang;
   const { Option } = Select;
   const onFinish = (value) => {
     console.log(value);
@@ -14,10 +18,10 @@ function Setings() {
   ];
   return (
     <Contener>
-      <p>עדכון הגדרות מערכת</p>
+      <p>{lang?.lang152}</p>
       <Form name="basic" onFinish={onFinish}>
         <Form.Item
-          label="שם איש קשר"
+          label={lang?.lang154}
           name="contact"
           rules={[
             {
@@ -30,11 +34,11 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
-          <div>מופיע באימייל שנשלח למשתמש חדש במערכת</div>
+          <div>{lang?.lang153}</div>
         </Form.Item>
         <Form.Item
-          name="email"
-          label="מייל"
+          name="contact-email"
+          label={lang?.lang307}
           rules={[
             {
               required: true,
@@ -46,10 +50,10 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
-          <div>* מופיע באימייל שנשלח למשתמש חדש במערכת</div>
+          <div>*{lang?.lang153}</div>
         </Form.Item>
         <Form.Item
-          label="שפה"
+          label={lang?.lang168}
           name="language"
           rules={[
             {
@@ -62,10 +66,10 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
-          <div>* ההגדרה האישית של המשתמש (אם ישנה) תגבר על הגדרה זו</div>
+          <div>* {lang?.lang169}</div>
         </Form.Item>
         <Form.Item
-          label="כתובת לעדכון פניות"
+          label={lang?.lang155}
           name="mail addres"
           rules={[
             {
@@ -96,10 +100,11 @@ function Setings() {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            שמור
+            {lang?.lang156}
           </Button>
         </Form.Item>
       </Form>
+      <a>משלוח הזמנה למשתמשים</a>
     </Contener>
   );
 }

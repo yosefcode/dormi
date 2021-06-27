@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Select, Checkbox, Input, Modal, Button } from "antd";
+import { Form } from "antd";
 
 export const Contener = styled.div`
   .ant-input {
