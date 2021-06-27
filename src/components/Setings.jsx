@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Form, Button, Select } from "antd";
 import { Contener } from "../styelscomponents/setingstyeld";
 import DataContext from "../DataContext";
+import { Link } from "react-router-dom";
 
 function Setings() {
   document.body.style.backgroundColor = "white";
@@ -104,7 +105,7 @@ function Setings() {
           </Button>
         </Form.Item>
       </Form>
-      <a>משלוח הזמנה למשתמשים</a>
+      <Link to="/SendMassege">משלוח הזמנה למשתמשים</Link>
     </Contener>
   );
 }
