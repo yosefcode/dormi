@@ -18,7 +18,9 @@ const tailLayout = {
 const User = () => {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
-  const lang = data.data?.lang;
+  const defoltlang = useContext(DataContext).lang;
+
+  const lang = defoltlang?.lang;
 
   document.body.style.backgroundColor = "white";
 

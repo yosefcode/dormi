@@ -13,7 +13,10 @@ import Checkboxgrop from "./Checkbox";
 const SendMassege = () => {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
-  const lang = data.data?.lang;
+  const defoltlang = useContext(DataContext).lang;
+
+  const lang = defoltlang?.lang;
+
   const { TextArea } = Input;
 
   document.body.style.backgroundColor = "white";
@@ -88,7 +91,7 @@ const SendMassege = () => {
 
   return (
     <Container>
-      <p>משלוח הזמנה למשתמשים</p>
+      <h2>שלח הזמנה למשתמשים</h2>
       <Form
         name="basic"
         initialValues={{

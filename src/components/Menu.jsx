@@ -17,14 +17,14 @@ const { SubMenu } = Menu;
 const HaderMenu = (props) => {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
+  const defoltlang = useContext(DataContext).lang;
+  const lang = defoltlang?.lang;
 
   const [current, setcurrent] = useState(`mail`);
   let status = props.LoginScreen;
   const handleClick = (e) => {
     setcurrent(e.key);
   };
-
-  const lang = data.data?.lang;
 
   let chors = { chors: 10 };
   return (

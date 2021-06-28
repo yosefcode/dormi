@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { PostToServer } from "../serveses";
 import { Form, Input, Button } from "antd";
 import QRCode from "qrcode.react";
 import { Contener } from "../styelscomponents/Loginstyels";
-
-const Login = () => {
+import DataContext from "../DataContext";
+import Cookies from "universal-cookie";
+const Login = (props) => {
   const [fult, setfult] = useState(false);
   const [emailforcheackpass, setemailforcheackpass] = useState();
+  const defoltlang = useContext(DataContext).lang;
+  const changloginstatus = useContext(DataContext).changloginstatus;
+  const changlang = useContext(DataContext).changlang;
+  const login = useContext(DataContext).login;
 
+  const lang = defoltlang?.lang;
   let ruter = "login";
 
   let email = "email";
@@ -18,13 +24,51 @@ const Login = () => {
   let captcha = "captcha";
   let language = 1;
   let obj = { status: { aout: false, info: "pas" }, language: 1 };
+  const cookies = new Cookies();
+  // cookies.remove("pas");
+  // cookies.remove("email");
+  // cookies.remove("aut");
+
+  const [form] = Form.useForm();
+  const loadProfile = () => {
+    let getemailcookies = cookies.get("email");
+    let getpascookies = cookies.get("pas");
+    form.setFieldsValue({ email: getemailcookies });
+    form.setFieldsValue({ pas: getpascookies });
+  };
+  useEffect(() => {
+    loadProfile();
+
+    if (cookies.get("aut")) {
+      changloginstatus(true);
+    }
+  }, []);
+
+  const date = new Date();
+  const dateforminits = new Date();
+
+  const newDate = new Date(date.setMonth(date.getMonth() + 6));
+  const testDate = new Date(
+    dateforminits.setMinutes(dateforminits.getMinutes() + 1)
+  );
 
   const onFinish = async (values) => {
     console.log(values);
     //  let res = await PostToServer(ruter, values);
     // console.log(res);
 
-    console.log(obj.status.info);
+    cookies.set("email", values.email, {
+      path: "/",
+      expires: newDate,
+    });
+    cookies.set("pas", values.pas, { path: "/", expires: newDate });
+    cookies.set("aut", true, { path: "/", expires: testDate });
+
+    defoltlang.langid = 3;
+
+    changlang(defoltlang);
+
+    changloginstatus(true);
 
     switch (obj.status.info) {
       case email:
@@ -54,9 +98,10 @@ const Login = () => {
           }}
           onFinish={onFinish}
           Forgetpass={Forgetpass}
+          form={form}
         >
           <Form.Item
-            label="מייל"
+            label={lang?.lang307}
             name="email"
             rules={[
               {
@@ -86,6 +131,7 @@ const Login = () => {
           >
             <Input.Password />
           </Form.Item>
+
           <Form.Item>
             <Button type="primary" htmlType="submit">
               הכנס

@@ -9,7 +9,10 @@ const ModaelGeneric = (props) => {
   const { TextArea } = Input;
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
-  const lang = data.data?.lang;
+  const defoltlang = useContext(DataContext).lang;
+
+  const lang = defoltlang?.lang;
+
   const [Sendmassege, setSendmassege] = useState(false);
 
   if (props.visible) {

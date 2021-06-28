@@ -25,7 +25,9 @@ const Nwerequest = (props) => {
   const { TextArea } = Input;
   const Temmembertask = props.Temmembertask;
   const data = useContext(DataContext);
-  const lang = data.data?.lang;
+  const defoltlang = useContext(DataContext).lang;
+
+  const lang = defoltlang?.lang;
 
   const changdata = useContext(DataContext).changdata;
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);

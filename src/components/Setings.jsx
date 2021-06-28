@@ -8,7 +8,10 @@ function Setings() {
   document.body.style.backgroundColor = "white";
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
-  const lang = data.data?.lang;
+  const defoltlang = useContext(DataContext).lang;
+
+  const lang = defoltlang?.lang;
+
   const { Option } = Select;
   const onFinish = (value) => {
     console.log(value);
@@ -105,7 +108,7 @@ function Setings() {
           </Button>
         </Form.Item>
       </Form>
-      <Link to="/SendMassege">משלוח הזמנה למשתמשים</Link>
+      <Link to="/SendMassege">שלוח הזמנה למשתמשים</Link>
     </Contener>
   );
 }

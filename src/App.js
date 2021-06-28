@@ -8,23 +8,39 @@ import { Language } from "./styelscomponents/Language";
 import Menu from "./components/Menu";
 import { DataProvider } from "./DataContext";
 import { GettLangfromServer } from "./serveses";
+import Cookies from "universal-cookie";
+
 function App() {
-  const [loginstatus, setloginstatus] = useState(true);
   let x = "rtl";
   // let x = "ltr";
 
   // context DataProvider
   const [data, setdata] = useState();
+  const [lang, setlang] = useState();
+  const [loginstatus, setloginstatus] = useState();
   const providerOptions = {
     data,
     changdata: (value) => {
       setdata(value);
     },
+    lang,
+    changlang: (value) => {
+      setlang(value);
+    },
+    loginstatus,
+    changloginstatus: (value) => {
+      setloginstatus(value);
+    },
   };
+  const [cookiesdata, setcookiesdata] = useState();
+  const cookies = new Cookies();
   useEffect(async () => {
-    let res = await GettLangfromServer(2);
+    let res = await GettLangfromServer(1);
 
-    setdata({ lang: res });
+    setloginstatus(false);
+
+    let obj = { lang: res, langid: 1 };
+    setlang(obj);
   }, []);
 
   // setdata({ userid: "12345" });
@@ -91,16 +107,14 @@ function App() {
       <DataProvider value={providerOptions}>
         {!loginstatus ? (
           <div>
-            <Language Language={"rtl"}>
+            <Language Language={"tlr"}>
               <Menu LoginScreen={true} />
-              <Login />
+              <Login cookiesdata={cookiesdata} />
             </Language>
           </div>
         ) : (
           <div>
-            <Language Language={x}>
-              <ContrulScreen />
-            </Language>
+            <ContrulScreen />
           </div>
         )}
       </DataProvider>

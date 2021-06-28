@@ -7,7 +7,10 @@ import { Link } from "react-router-dom";
 function Users() {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
-  const lang = data.data?.lang;
+  const defoltlang = useContext(DataContext).lang;
+
+  const lang = defoltlang?.lang;
+
   document.body.style.backgroundColor = "white";
   const onSearch = (e) => console.log(e.target.value);
   return (
@@ -20,16 +23,14 @@ function Users() {
           onChange={onSearch}
           className="serch"
         />
-        {/* </div> */}
-        {/* <span className="span_buttons"> */}
 
         <Link className="sendmail" to="/SendMassege">
           שליחת הזמנה למשתמשים
         </Link>
 
-        {/* </span> */}
-        {/* < className="span_buttons"> */}
-        <button className="adduser">{lang?.lang244} </button>
+        <Link className="adduser" to="/Adduser">
+          {lang?.lang244}{" "}
+        </Link>
       </div>
       <Cardstyeld>
         <span>כרטיס לקוח</span>
