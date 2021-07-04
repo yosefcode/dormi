@@ -14,7 +14,7 @@ import Affiliation from "./Affiliation";
 import SendMassege from "./SendMassege";
 import Adduser from "./Adduser";
 import { Language } from "../styelscomponents/Language";
-import { GettLangfromServer } from "../serveses";
+import { PostToServer } from "../serveses";
 import DataContext from "../DataContext";
 
 const ContrulScreen = () => {
@@ -23,20 +23,34 @@ const ContrulScreen = () => {
   const changlang = useContext(DataContext).changlang;
 
   const changdata = useContext(DataContext).changdata;
+  const [dir, setsir] = useState("tlr");
+  const DirectionOfLang = (languigtype) => {
+    switch (languigtype) {
+      case 2:
+        setsir("rtl");
+        break;
+      case 5:
+        setsir("rtl");
+        break;
+      default:
+        setsir("tlr");
+    }
+  };
   useEffect(async () => {
-    let languigtype = 2;
+    // let langugtypie = 2;
+    DirectionOfLang(defullang.langid);
 
-    let res = await GettLangfromServer(languigtype);
-    // defullang.lang = res;
-    let obj = { lang: res, langid: languigtype };
+    // let ruter = "lang";
+    // let value = { lang: langugtypie };
+    // let res = await PostToServer(ruter, value);
+    // let obj = { lang: res, langid: langugtypie };
 
-    changlang(obj);
+    // changlang(obj);
   }, []);
-  let direction = "rtl";
 
   return (
     <Router>
-      <Language Language={direction}>
+      <Language Language={dir}>
         <Menu />
         <Switch>
           <Route path="/Users">

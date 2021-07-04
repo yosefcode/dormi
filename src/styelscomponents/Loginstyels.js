@@ -7,6 +7,14 @@ export const Contener = styled.div`
   .info {
     margin-inline-start: 40px;
   }
+  h2 {
+    color: white;
+    text-decoration: underline;
+  }
+  a {
+    color: white;
+    text-decoration: underline;
+  }
   .qrcode {
     margin-inline-start: 146px;
     margin-top: 34px;
@@ -23,13 +31,13 @@ export const Contener = styled.div`
   }
   .bg-info {
     display: flex;
-    background-color: blue;
+    background-color: #33b5e5;
     justify-content: space-between;
     text-align: start;
   }
 
   .ant-form-item-label > label {
-    width: 200px;
+    width: 78px;
 
     color: #aaa;
     margin-bottom: -3px;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { Menu, Select, Badge } from "antd";
 import {
@@ -12,12 +12,16 @@ import { VscAccount } from "react-icons/vsc";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import DataContext from "../DataContext";
+import Cookies from "universal-cookie";
 
 const { SubMenu } = Menu;
 const HaderMenu = (props) => {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
+  const changloginstatus = useContext(DataContext).changloginstatus;
+  const loginstatus = useContext(DataContext).loginstatus;
+
   const lang = defoltlang?.lang;
 
   const [current, setcurrent] = useState(`mail`);
@@ -27,6 +31,17 @@ const HaderMenu = (props) => {
   };
 
   let chors = { chors: 10 };
+  const exit = () => {
+    const cookies = new Cookies();
+    cookies.remove("aut");
+
+    let logde = { logde: false };
+
+    changloginstatus(logde);
+  };
+  let userlevelid = loginstatus?.levelid;
+  console.log("level", userlevelid);
+
   return (
     <Contyner>
       {status ? (
@@ -36,7 +51,7 @@ const HaderMenu = (props) => {
           mode="horizontal"
           triggerSubMenuAction="click"
         >
-          <Menu.Item key="new_complain">
+          <Menu.Item key="1">
             <img
               src="/images/logo_dormi.png"
               alt="Image"
@@ -51,25 +66,34 @@ const HaderMenu = (props) => {
           mode="horizontal"
           triggerSubMenuAction="click"
         >
-          <Menu.Item key="new_complain">
+          <Menu.Item key="2">
             <img
               src="/images/logo_dormi.png"
               alt="Image"
               className="imagelogo"
             />
           </Menu.Item>
-          <SubMenu key="sub1-2" title="תפריט">
-            <Menu.Item key="5">תפריט</Menu.Item>
-            <Menu.Item key="6">טפסים שנשלחו</Menu.Item>
-          </SubMenu>
+          {userlevelid === 10 ? (
+            <SubMenu key="sub1-2" title="תפריט">
+              <Menu.Item key="3">תפריט</Menu.Item>
+              <Menu.Item key="4">טפסים שנשלחו</Menu.Item>
+            </SubMenu>
+          ) : null}
 
-          <Menu.Item key="new_complain">
+          {/* "פתח פנייה חדשה" */}
+          <Menu.Item key="5">
             <Link to="/"> {lang?.lang100}</Link>
           </Menu.Item>
-          <Menu.Item key="Repeatedtask">
-            <Link to="/Repeatedtask">{lang?.lang285} </Link>
-          </Menu.Item>
-          <Menu.Item key="new_chors">
+
+          {/*  "מטלות מתוזמנות" */}
+
+          {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+            <Menu.Item key="6">
+              <Link to="/Repeatedtask">{lang?.lang285} </Link>
+            </Menu.Item>
+          ) : null}
+          <Menu.Item key="7">
+            {/*  "רשימת פניות" */}
             <Link to="/ListOfreq">
               {" "}
               <Badge dir="tlr" count={chors.chors}>
@@ -77,29 +101,42 @@ const HaderMenu = (props) => {
               </Badge>
             </Link>
           </Menu.Item>
+
+          {/* "הגדרות" */}
+          {/* {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? ( */}
           <SubMenu key="sub1-3" title={lang?.lang167}>
-            <Menu.Item key="5">
+            <Menu.Item key="8">
+              {/* "משתמשים" */}
               <Link to="list_users">{lang?.lang102} </Link>
             </Menu.Item>
-            <Menu.Item key="6">
+            <Menu.Item key="9">
               {" "}
+              {/* מיקום */}
               <Link to="location">{lang?.lang333} </Link>
             </Menu.Item>
-            <Menu.Item key="7">
+            <Menu.Item key="10">
+              {/* קטגוריות */}
               <Link to="categoris">{lang?.lang104} </Link>
             </Menu.Item>
-            <Menu.Item key="8">
+            <Menu.Item key="11">
+              {/* הגדרות */}
               <Link to="setings">{lang?.lang167}</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="statisic">{lang?.lang105}</Menu.Item>
-
+          {/* ) : null} */}
+          {/* סטטיסטיקות */}
+          {userlevelid === 10 || userlevelid === 13 ? (
+            <Menu.Item key="12">{lang?.lang105}</Menu.Item>
+          ) : null}
           <SubMenu key="sub1-4" icon={<VscAccount />}>
-            <Menu.Item key="5">
+            <Menu.Item key="13">
               {" "}
+              {/* הפרופיל שלי */}
               <Link to="/Users"> {lang?.lang289}</Link>
             </Menu.Item>
-            <Menu.Item key="6">{lang?.lang107}</Menu.Item>
+            <Menu.Item key="14" onClick={exit}>
+              {lang?.lang107}
+            </Menu.Item>
           </SubMenu>
         </Menu>
       )}

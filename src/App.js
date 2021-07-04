@@ -7,17 +7,16 @@ import { Language } from "./styelscomponents/Language";
 
 import Menu from "./components/Menu";
 import { DataProvider } from "./DataContext";
-import { GettLangfromServer } from "./serveses";
+import { PostToServer } from "./serveses";
 import Cookies from "universal-cookie";
 
 function App() {
-  let x = "rtl";
-  // let x = "ltr";
-
   // context DataProvider
   const [data, setdata] = useState();
   const [lang, setlang] = useState();
   const [loginstatus, setloginstatus] = useState();
+  const [masof, setmasof] = useState();
+
   const providerOptions = {
     data,
     changdata: (value) => {
@@ -31,13 +30,20 @@ function App() {
     changloginstatus: (value) => {
       setloginstatus(value);
     },
+    masof,
+    changmasof: (value) => {
+      setmasof(value);
+    },
   };
   const [cookiesdata, setcookiesdata] = useState();
   const cookies = new Cookies();
   useEffect(async () => {
-    let res = await GettLangfromServer(1);
+    let ruter = "lang";
+    let value = { lang: 1 };
+    let res = await PostToServer(ruter, value);
 
-    setloginstatus(false);
+    let logde = { logde: false };
+    setloginstatus(logde);
 
     let obj = { lang: res, langid: 1 };
     setlang(obj);
@@ -105,7 +111,7 @@ function App() {
   return (
     <div>
       <DataProvider value={providerOptions}>
-        {!loginstatus ? (
+        {!loginstatus?.logde ? (
           <div>
             <Language Language={"tlr"}>
               <Menu LoginScreen={true} />

@@ -28,6 +28,8 @@ const Checkform = (props) => {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
+  const masof = useContext(DataContext).masof;
+  let locationarry = masof?.locations;
 
   const lang = defoltlang?.lang;
 
@@ -54,6 +56,7 @@ const Checkform = (props) => {
 
   const [AllOpenCategoris, setAllOpenCategoris] = useState();
   const [filterallUrgency, setfilterallUrgency] = useState();
+
   function filterAllOpenCategoris(arry) {
     if (AllOpenCategoris) {
       return arry.filter((el) => {
@@ -72,6 +75,7 @@ const Checkform = (props) => {
       return arry;
     }
   }
+
   const [locallist, setlocallist] = useState();
   const [firstlode, setlfirstlode] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);

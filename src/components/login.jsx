@@ -6,41 +6,90 @@ import { Contener } from "../styelscomponents/Loginstyels";
 import DataContext from "../DataContext";
 import Cookies from "universal-cookie";
 const Login = (props) => {
+  document.body.style.backgroundColor = "white";
+
   const [fult, setfult] = useState(false);
   const [emailforcheackpass, setemailforcheackpass] = useState();
   const defoltlang = useContext(DataContext).lang;
   const changloginstatus = useContext(DataContext).changloginstatus;
   const changlang = useContext(DataContext).changlang;
+  const changmasof = useContext(DataContext).changmasof;
   const login = useContext(DataContext).login;
 
   const lang = defoltlang?.lang;
-  let ruter = "login";
 
-  let email = "email";
-  let pas = "pas";
+  let email = "The user does not exist in the system";
+  let pas = "The password is incorrect";
   let notfound = "notfound";
   let bad = "bad";
   let program = "program";
   let captcha = "captcha";
   let language = 1;
-  let obj = { status: { aout: false, info: "pas" }, language: 1 };
+  // let obj = { status: { aout: false, info: "pas" }, language: 1 };
   const cookies = new Cookies();
   // cookies.remove("pas");
   // cookies.remove("email");
   // cookies.remove("aut");
 
   const [form] = Form.useForm();
+
+  let getemailcookies = cookies.get("email");
+  let getpascookies = cookies.get("pas");
   const loadProfile = () => {
-    let getemailcookies = cookies.get("email");
-    let getpascookies = cookies.get("pas");
     form.setFieldsValue({ email: getemailcookies });
-    form.setFieldsValue({ pas: getpascookies });
+    form.setFieldsValue({ pass: getpascookies });
+  };
+
+  const Loginfunction = async (values) => {
+    let ruter = "login";
+    let res = await PostToServer(ruter, values);
+    console.log("res", res);
+    if (res.error === "1") {
+      switch (res.message) {
+        case email:
+          setfult(email);
+          break;
+        case pas:
+          setfult(pas);
+          break;
+        case bad:
+          setfult(bad);
+      }
+    } else if (res.langid) {
+      let ruteruserid = "masof";
+      let value = { userid: res.userid };
+      let masof = await PostToServer(ruteruserid, value);
+      changmasof(masof);
+      console.log(masof);
+      cookies.set("email", values.email, {
+        path: "/",
+      });
+      cookies.set("pas", values.pass, { path: "/" });
+
+      cookies.set("aut", true, { path: "/", expires: testDate });
+
+      let langruter = "lang";
+      let langid = { lang: res.langid };
+      let reslang = await PostToServer(langruter, langid);
+
+      let objlang = { lang: reslang, langid: res.langid };
+
+      changlang(objlang);
+      let logde = { logde: true, levelid: res.levelid };
+
+      changloginstatus(logde);
+    }
   };
   useEffect(() => {
     loadProfile();
 
     if (cookies.get("aut")) {
-      changloginstatus(true);
+      let values = {
+        email: getemailcookies,
+        pass: getpascookies,
+      };
+
+      Loginfunction(values);
     }
   }, []);
 
@@ -53,37 +102,9 @@ const Login = (props) => {
   );
 
   const onFinish = async (values) => {
-    console.log(values);
-    //  let res = await PostToServer(ruter, values);
-    // console.log(res);
-
-    cookies.set("email", values.email, {
-      path: "/",
-      expires: newDate,
-    });
-    cookies.set("pas", values.pas, { path: "/", expires: newDate });
-    cookies.set("aut", true, { path: "/", expires: testDate });
-
-    defoltlang.langid = 3;
-
-    changlang(defoltlang);
-
-    changloginstatus(true);
-
-    switch (obj.status.info) {
-      case email:
-        setfult(email);
-        break;
-      case pas:
-        setfult(pas);
-        break;
-      case bad:
-        setfult(bad);
-    }
-
-    console.log(fult);
+    setfult(" ");
+    Loginfunction(values);
   };
-
   const Forgetpass = () => {
     console.log(emailforcheackpass);
   };
@@ -97,7 +118,6 @@ const Login = (props) => {
             remember: true,
           }}
           onFinish={onFinish}
-          Forgetpass={Forgetpass}
           form={form}
         >
           <Form.Item
@@ -121,7 +141,7 @@ const Login = (props) => {
 
           <Form.Item
             label="סיסמה"
-            name="pas"
+            name="pass"
             rules={[
               {
                 required: true,
@@ -146,13 +166,12 @@ const Login = (props) => {
       </div>
       <div className="info">
         <div className="bg-info">
-          <imag src="/images/manHead.png" className="avatar" alt="Image" />
+          <imag src="images/manHead.png" className="avatar" alt="Image" />
           <div>
-            <p>אין לכם עדיין חשבון בדורמי?</p>
-            <p>
-              {" "}
-              <a href={"ddd"}>תלמדו איך עובדים עם ניהול אחזקה חכם</a>
-            </p>
+            <h2>?אין לכם עדיין חשבון בדורמי</h2>{" "}
+            <a href="http://dormi.co.il/">
+              תלמדו איך עובדים עם ניהול אחזקה חכם
+            </a>
           </div>
         </div>
         <div className="bg-qr">

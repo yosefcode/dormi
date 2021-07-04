@@ -12,6 +12,7 @@ function Location() {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
+  const masof = useContext(DataContext).masof;
 
   const lang = defoltlang?.lang;
 
@@ -46,6 +47,9 @@ function Location() {
       <Menu.Item>{lang?.lang359}</Menu.Item>
     </Menu>
   );
+  let locationarry = masof?.locations;
+  // console.log(locationarry);
+  // debugger;
 
   let arryofcards = [
     {
@@ -78,12 +82,12 @@ function Location() {
         <button onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
-        {arryofcards
-          ? arryofcards.map((el) => {
+        {locationarry
+          ? locationarry.map((el) => {
               return (
                 <CardStyeld
                   hoverable
-                  title={el.projact}
+                  title={el.locationname}
                   extra={
                     <Dropdown
                       overlay={menuofproject}
@@ -95,11 +99,11 @@ function Location() {
                   }
                 >
                   <div className="listodors">
-                    {el.alllocation ? (
-                      el.alllocation.map((item) => {
+                    {el.rooms ? (
+                      el.rooms.map((item) => {
                         return (
                           <div className="singellocation">
-                            <div>{item.location}</div>
+                            <div>{item.roomname}</div>
                             <div>
                               <Dropdown
                                 overlay={menuoflocation}

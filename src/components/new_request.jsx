@@ -8,7 +8,7 @@ import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
 import { PoweroffOutlined } from "@ant-design/icons";
-import { GettfromServer, PostToServer } from "../serveses";
+import { PostToServer } from "../serveses";
 
 import { Arryoficons } from "../Icons";
 function getBase64(file) {
@@ -26,7 +26,7 @@ const Nwerequest = (props) => {
   const Temmembertask = props.Temmembertask;
   const data = useContext(DataContext);
   const defoltlang = useContext(DataContext).lang;
-
+  const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
 
   const changdata = useContext(DataContext).changdata;
@@ -35,17 +35,17 @@ const Nwerequest = (props) => {
   const [typeofreq, settypeofreq] = useState();
   const [typs, settyps] = useState(true);
 
-  useEffect(async () => {
-    let ruter = "post-read3";
-    let res = await GettfromServer();
-    console.log("newreqget", res);
-    let valeu = { name: "moshe", phonenumber: "1" };
-    let respost = await PostToServer(ruter, valeu);
-    console.log("respost", respost);
-  }, []);
+  useEffect(async () => {}, []);
 
   const [selectromm, setselectromm] = useState(false);
-  const onChange = () => {
+  let locationarry = masof?.locations;
+  let [rommarry, setrommarry] = useState();
+  const onChange = (value) => {
+    let listofrooms = locationarry.filter((el) => {
+      return el.locationid === value[1];
+    });
+
+    setrommarry(listofrooms[0].rooms);
     setselectromm(true);
   };
 
@@ -60,14 +60,8 @@ const Nwerequest = (props) => {
     { type: "חשמל", id: 123 },
     { type: "אינסטלציה", id: 456 },
   ];
-  const locationarry = [
-    { type: "חדר אוכל", id: 123 },
-    { type: "פנימייה", id: 456 },
-  ];
 
-  // changdata({ userid: "12345" });
   const onFinish = (value) => {
-    debugger;
     enterLoading(2);
 
     let userid = data?.data?.userid;
@@ -251,7 +245,9 @@ const Nwerequest = (props) => {
                   >
                     {locationarry.map((el) => {
                       return (
-                        <Option value={[el.type, el.id]}>{el.type}</Option>
+                        <Option value={[el.locationname, el.locationid]}>
+                          {el.locationname}
+                        </Option>
                       );
                     })}
                   </Select>
@@ -266,11 +262,15 @@ const Nwerequest = (props) => {
                     ]}
                   >
                     <Select showSearch placeholder={lang?.lang341}>
-                      {locationarry.map((el) => {
-                        return (
-                          <Option value={[el.type, el.id]}>{el.type}</Option>
-                        );
-                      })}
+                      {rommarry
+                        ? rommarry.map((el) => {
+                            return (
+                              <Option value={[el.roomname, el.roomid]}>
+                                {el.roomname}
+                              </Option>
+                            );
+                          })
+                        : null}
                     </Select>
                   </Form.Item>
                 ) : null}

@@ -1,10 +1,10 @@
 import axios from "axios";
-const url = "http://b.dormi.co.il/users";
-const posturl = "http://b.dormi.co.il/boaz/";
+
+const posturl = "https://b.dormi.co.il/requests";
 
 export const PostToServer = async (ruter, valeu) => {
   let myPromis = new Promise((resolve, reject) => {
-    axios.post(`http://b.dormi.co.il/boaz/post-read3`, valeu).then(
+    axios.post(`${posturl}/${ruter}`, valeu).then(
       (res) => {
         resolve(res.data);
       },
@@ -29,18 +29,3 @@ export const GettfromServer = async (ruter) => {
   });
   return myPromis;
 };
-export const GettLangfromServer = async (lang) => {
-  let myPromis = new Promise((resolve, reject) => {
-    axios.post(`https://b.dormi.co.il/requests/lang`, { lang: lang }).then(
-      (res) => {
-        resolve(res.data);
-      },
-      (error) => {
-        reject(error);
-      }
-    );
-  });
-  return myPromis;
-};
-
-// GettfromServer("");

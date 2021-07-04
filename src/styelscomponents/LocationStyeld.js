@@ -27,7 +27,9 @@ export const CardStyeld = styled(Card)`
   height: 267px;
   margin: 31px;
   .ant-card-body {
+    overflow-y: scroll;
     text-align: start;
+    height: 208px;
   }
   .ant-card-head {
     background-color: rgba(0, 0, 0, 0.03);
