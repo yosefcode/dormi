@@ -37,8 +37,9 @@ const ContrulScreen = () => {
     }
   };
   useEffect(async () => {
-    // let langugtypie = 2;
-    DirectionOfLang(defullang.langid);
+    // let langugtypie = defullang?.langid;
+    // debugger;
+    DirectionOfLang(defullang?.langid);
 
     // let ruter = "lang";
     // let value = { lang: langugtypie };

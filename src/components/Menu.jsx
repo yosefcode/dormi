@@ -40,7 +40,6 @@ const HaderMenu = (props) => {
     changloginstatus(logde);
   };
   let userlevelid = loginstatus?.levelid;
-  console.log("level", userlevelid);
 
   return (
     <Contyner>
@@ -103,27 +102,27 @@ const HaderMenu = (props) => {
           </Menu.Item>
 
           {/* "הגדרות" */}
-          {/* {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? ( */}
-          <SubMenu key="sub1-3" title={lang?.lang167}>
-            <Menu.Item key="8">
-              {/* "משתמשים" */}
-              <Link to="list_users">{lang?.lang102} </Link>
-            </Menu.Item>
-            <Menu.Item key="9">
-              {" "}
-              {/* מיקום */}
-              <Link to="location">{lang?.lang333} </Link>
-            </Menu.Item>
-            <Menu.Item key="10">
-              {/* קטגוריות */}
-              <Link to="categoris">{lang?.lang104} </Link>
-            </Menu.Item>
-            <Menu.Item key="11">
-              {/* הגדרות */}
-              <Link to="setings">{lang?.lang167}</Link>
-            </Menu.Item>
-          </SubMenu>
-          {/* ) : null} */}
+          {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+            <SubMenu key="sub1-3" title={lang?.lang167}>
+              <Menu.Item key="8">
+                {/* "משתמשים" */}
+                <Link to="list_users">{lang?.lang102} </Link>
+              </Menu.Item>
+              <Menu.Item key="9">
+                {" "}
+                {/* מיקום */}
+                <Link to="location">{lang?.lang333} </Link>
+              </Menu.Item>
+              <Menu.Item key="10">
+                {/* קטגוריות */}
+                <Link to="categoris">{lang?.lang104} </Link>
+              </Menu.Item>
+              <Menu.Item key="11">
+                {/* הגדרות */}
+                <Link to="setings">{lang?.lang167}</Link>
+              </Menu.Item>
+            </SubMenu>
+          ) : null}
           {/* סטטיסטיקות */}
           {userlevelid === 10 || userlevelid === 13 ? (
             <Menu.Item key="12">{lang?.lang105}</Menu.Item>

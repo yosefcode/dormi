@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Contener = styled.div`
   display: flex;
   text-align: start;
-  margin: 82px;
+  margin-top: 70px;
+  margin-inline-start: 327px;
   .info {
     margin-inline-start: 40px;
   }

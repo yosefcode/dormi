@@ -19,6 +19,8 @@ const User = () => {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
+  const loginstatus = useContext(DataContext).loginstatus;
+  // let userdata = loginstatus;
 
   const lang = defoltlang?.lang;
 
@@ -40,12 +42,16 @@ const User = () => {
           <Styeldformitem
             label={lang?.lang305}
             name="username"
-            initialValue="boaz"
+            initialValue={loginstatus?.firstname}
           >
             <Input />
           </Styeldformitem>
 
-          <Styeldformitem label={lang?.lang306} name="last_name">
+          <Styeldformitem
+            label={lang?.lang306}
+            name="last_name"
+            initialValue={loginstatus?.lastname}
+          >
             <Input />
           </Styeldformitem>
           <Styeldformitem

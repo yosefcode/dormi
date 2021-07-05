@@ -29,6 +29,9 @@ const Checkform = (props) => {
   const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
+  const loginstatus = useContext(DataContext).loginstatus;
+  let userlevelid = loginstatus?.levelid;
+
   let locationarry = masof?.locations;
 
   const lang = defoltlang?.lang;
@@ -303,54 +306,81 @@ const Checkform = (props) => {
 
             return (
               <div>
-                <StyelsCard
-                  title={`${el.maincategory} / ${el.subname}`}
-                  primary={urgency}
-                  actions={[
-                    <StyelsDropdown
-                      trigger={["click"]}
-                      overlay={menu}
-                      className="dotsDropdown"
-                    >
-                      <HiOutlineDotsHorizontal />
-                    </StyelsDropdown>,
-                    <StyeldSelect
-                      primary={urgency}
-                      defaultValue={urgencytext}
-                      value={urgencytext}
-                      onChange={findChangeurgency}
-                      dropdownClassName="dropdownClassName"
-                    >
-                      <Option value={[lang?.lang122, el.id, 1]}>
-                        {" "}
-                        <StyeldTag color="success">{lang?.lang122}</StyeldTag>
-                      </Option>
-                      <Option value={[lang?.lang121, el.id, 2]}>
-                        {" "}
-                        <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
-                      </Option>
-                      <Option value={[lang?.lang120, el.id, 3]}>
-                        {" "}
-                        <StyeldTag color="red">{lang?.lang120}</StyeldTag>
-                      </Option>
-                    </StyeldSelect>,
-                  ]}
-                  style={{ width: 300 }}
-                  extra={<div>מיקום: {el.location}</div>}
-                >
-                  <span className="card-body-spen"> {el.id}</span>{" "}
-                  <span className="card-body-spen"> {el.date}</span>
-                  <span className="card-body-spen">
-                    {el.incharge} {el.phonenumber}
-                  </span>
-                  {Repeatedtask ? (
-                    <span className="card-body-spen">{el.Repeatedtask}</span>
-                  ) : (
+                {userlevelid === 10 ||
+                userlevelid === 5 ||
+                userlevelid === 13 ? (
+                  <StyelsCard
+                    title={`${el.maincategory} / ${el.subname}`}
+                    primary={urgency}
+                    // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+                    actions={[
+                      <StyelsDropdown
+                        trigger={["click"]}
+                        overlay={menu}
+                        className="dotsDropdown"
+                      >
+                        <HiOutlineDotsHorizontal />
+                      </StyelsDropdown>,
+                      <StyeldSelect
+                        primary={urgency}
+                        defaultValue={urgencytext}
+                        value={urgencytext}
+                        onChange={findChangeurgency}
+                        dropdownClassName="dropdownClassName"
+                      >
+                        <Option value={[lang?.lang122, el.id, 1]}>
+                          {" "}
+                          <StyeldTag color="success">{lang?.lang122}</StyeldTag>
+                        </Option>
+                        <Option value={[lang?.lang121, el.id, 2]}>
+                          {" "}
+                          <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
+                        </Option>
+                        <Option value={[lang?.lang120, el.id, 3]}>
+                          {" "}
+                          <StyeldTag color="red">{lang?.lang120}</StyeldTag>
+                        </Option>
+                      </StyeldSelect>,
+                    ]}
+                    style={{ width: 300 }}
+                    extra={<div>מיקום: {el.location}</div>}
+                  >
+                    <span className="card-body-spen"> {el.id}</span>{" "}
+                    <span className="card-body-spen"> {el.date}</span>
                     <span className="card-body-spen">
-                      <Tag color={status}>{statustext}</Tag>
+                      {el.incharge} {el.phonenumber}
                     </span>
-                  )}
-                </StyelsCard>
+                    {Repeatedtask ? (
+                      <span className="card-body-spen">{el.Repeatedtask}</span>
+                    ) : (
+                      <span className="card-body-spen">
+                        <Tag color={status}>{statustext}</Tag>
+                      </span>
+                    )}
+                  </StyelsCard>
+                ) : (
+                  <StyelsCard
+                    title={`${el.maincategory} / ${el.subname}`}
+                    primary={urgency}
+                    // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+
+                    style={{ width: 300 }}
+                    extra={<div>מיקום: {el.location}</div>}
+                  >
+                    <span className="card-body-spen"> {el.id}</span>{" "}
+                    <span className="card-body-spen"> {el.date}</span>
+                    <span className="card-body-spen">
+                      {el.incharge} {el.phonenumber}
+                    </span>
+                    {Repeatedtask ? (
+                      <span className="card-body-spen">{el.Repeatedtask}</span>
+                    ) : (
+                      <span className="card-body-spen">
+                        <Tag color={status}>{statustext}</Tag>
+                      </span>
+                    )}
+                  </StyelsCard>
+                )}
               </div>
             );
           })

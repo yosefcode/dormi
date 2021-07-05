@@ -69,7 +69,7 @@ const Nwerequest = (props) => {
     let roomid = value.roomid[1];
     let subcategoryid = value.subcategoryid[1];
     let urgencyid = value.urgencyid;
-    let comments = value.comments;
+    let comments = value.comments.replace(/[<>${}]/g, "danger$&");
 
     let obj = {
       userid,
@@ -243,13 +243,15 @@ const Nwerequest = (props) => {
                     placeholder={lang?.lang340}
                     onChange={onChange}
                   >
-                    {locationarry.map((el) => {
-                      return (
-                        <Option value={[el.locationname, el.locationid]}>
-                          {el.locationname}
-                        </Option>
-                      );
-                    })}
+                    {locationarry
+                      ? locationarry.map((el) => {
+                          return (
+                            <Option value={[el.locationname, el.locationid]}>
+                              {el.locationname}
+                            </Option>
+                          );
+                        })
+                      : null}
                   </Select>
                 </Form.Item>
                 {selectromm ? (

@@ -71,19 +71,19 @@ export const FormContener = styled.div`
     background-color: #d0021b;
     color: white;
     border-radius: 10px;
-    width: 73px;
+    width: 100px;
   }
   .Radio2 {
     background-color: #f3a40c;
     color: white;
     border-radius: 10px;
-    width: 73px;
+    width: 100px;
   }
   .Radio3 {
     background-color: #42bd41;
     color: white;
     border-radius: 10px;
-    width: 73px;
+    width: 100px;
   }
   .ant-input {
     border-bottom-color: #ced4da;
@@ -113,25 +113,26 @@ export const FormContener = styled.div`
   }
 
   .textbloon {
+    width: 274px;
+    height: 146px;
+    background: white;
     position: relative;
-    width: 286px;
-    height: 140px;
-    margin-right: 32px;
-    background-color: white;
-    padding: 2%;
-    border-radius: 24px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    text-align: center;
   }
 
   .avaterpopup {
-    width: 28px;
-    height: 28px;
-    background-color: white;
-    position: relative;
-    top: -1%;
-    left: 8%;
-    border-radius: 0px;
-
-    transform: rotate(71deg);
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 96px;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 26px solid white;
+    border-bottom: 13px solid transparent;
   }
   .uploadimage {
     margin-top: 5%;

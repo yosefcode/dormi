@@ -8,6 +8,8 @@ import { Language } from "./styelscomponents/Language";
 import Menu from "./components/Menu";
 import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
+import { Loginfunction } from "./components/Loginfanction";
+
 import Cookies from "universal-cookie";
 
 function App() {
@@ -35,9 +37,12 @@ function App() {
       setmasof(value);
     },
   };
-  const [cookiesdata, setcookiesdata] = useState();
   const cookies = new Cookies();
-  useEffect(async () => {
+
+  let getemailcookies = cookies.get("email");
+  let getpascookies = cookies.get("pas");
+
+  const defultlang = async () => {
     let ruter = "lang";
     let value = { lang: 1 };
     let res = await PostToServer(ruter, value);
@@ -47,67 +52,30 @@ function App() {
 
     let obj = { lang: res, langid: 1 };
     setlang(obj);
+  };
+
+  useEffect(async () => {
+    if (cookies.get("aut")) {
+      setloginstatus({ logde: true });
+      let values = {
+        email: getemailcookies,
+        pass: getpascookies,
+      };
+
+      let res = await Loginfunction(values);
+      if (res.error === "1") {
+        setloginstatus({ logde: false });
+        defultlang();
+      } else {
+        setloginstatus(res.changloginstatus);
+        setlang(res.changlang);
+        setmasof(res.changmasof);
+      }
+    } else {
+      defultlang();
+    }
   }, []);
 
-  // setdata({ userid: "12345" });
-  let user = {
-    userid: "rtyui",
-    firstname: "boaz",
-    lastname: "katz",
-    email: "fffff",
-    phonenumner: "06060660",
-    levelid: 1234,
-
-    language: [{ 100: "hloo", 200: "dor" }],
-    programname: "כפר סטודנטים",
-  };
-
-  // פתח פנייה
-  let categorinamys = [
-    {
-      categorinamys: [
-        {
-          id: 31,
-          maincategori: "חשמל",
-          subcatgory: [
-            { subcategoriid: 1, subname: "נורה" },
-            { subcategoriid: 1, subname: "שקע" },
-          ],
-        },
-        {
-          id: 31,
-          maincategori: "אינסטליצייה",
-          subcatgory: [
-            { id: 1, subname: "ברז" },
-            { id: 1, subname: "ביוב" },
-          ],
-        },
-      ],
-      locations: {
-        locationid: 1,
-        locationname: "כפר סטודנטים",
-        rooms: [
-          { roomid: 1, room: "חדר1" },
-          { roomid: 1, room: "חדר2" },
-        ],
-      },
-    },
-  ];
-
-  let formreq = {
-    userid: "12345",
-    locationid: 1,
-    roomid: 1234,
-    subcategoriid: 1,
-    urgencyid: 2,
-    comments: "בלה בלה",
-  };
-  // let form1 =[{ location: [
-  //   { id: 1, room: "חדר1" },
-  //   { id: 2, room: 3 },
-
-  // ]
-  // const [Language, setLanguage] = useState("tlr");
   return (
     <div>
       <DataProvider value={providerOptions}>
@@ -115,7 +83,7 @@ function App() {
           <div>
             <Language Language={"tlr"}>
               <Menu LoginScreen={true} />
-              <Login cookiesdata={cookiesdata} />
+              <Login />
             </Language>
           </div>
         ) : (
