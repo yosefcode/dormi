@@ -1,6 +1,7 @@
 import axios from "axios";
+const { REACT_APP_URL_POST } = process.env;
 
-const posturl = "https://b.dormi.co.il/requests";
+const posturl = REACT_APP_URL_POST;
 
 export const PostToServer = async (ruter, valeu) => {
   let myPromis = new Promise((resolve, reject) => {
