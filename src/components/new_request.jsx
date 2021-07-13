@@ -9,7 +9,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { PostToServer } from "../serveses";
-
+import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { Arryoficons } from "../Icons";
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -24,7 +24,8 @@ const Nwerequest = (props) => {
   const { Option } = Select;
   const { TextArea } = Input;
   const Temmembertask = props.Temmembertask;
-  const data = useContext(DataContext);
+  const loginstatus = useContext(DataContext).loginstatus;
+
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
@@ -39,6 +40,7 @@ const Nwerequest = (props) => {
 
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
+  let categorynames = masof?.categorynames;
   let [rommarry, setrommarry] = useState();
   const onChange = (value) => {
     let listofrooms = locationarry.filter((el) => {
@@ -56,39 +58,64 @@ const Nwerequest = (props) => {
     { type: "שקר2", id: 1011 },
     { type: "שקר1", id: 1213 },
   ];
-  const problomtypearry = [
-    { type: "חשמל", id: 123 },
-    { type: "אינסטלציה", id: 456 },
-  ];
-
-  const onFinish = (value) => {
+  const [errmassege, seterrmassege] = useState(false);
+  const [errmassegetext, seterrmassegetext] = useState();
+  const [ticketid, setticketid] = useState();
+  const onFinish = async (value) => {
     enterLoading(2);
+    let task = "save";
 
-    let userid = data?.data?.userid;
+    if (ticketid) {
+      setticketid(value.ticketid);
+    } else {
+      setticketid(null);
+    }
+    debugger;
+    let userid = loginstatus.userid;
     let locationid = value.locationid[1];
-    let roomid = value.roomid[1];
-    let subcategoryid = value.subcategoryid[1];
+    let roomid = parseInt(value.roomid[1]);
+    let categoryid = value.categoryid[1];
     let urgencyid = value.urgencyid;
     let comments = value.comments.replace(/[<>${}]/g, "danger$&");
 
     let obj = {
+      task,
+      ticketid,
       userid,
       locationid,
       roomid,
-      subcategoryid,
+      categoryid,
       urgencyid,
       comments,
-      ...typeofreq,
+      // ...typeofreq,
     };
-    console.log("Success:", obj);
-    setTimeout(() => {
-      setuplodeimagescreen(true);
-    }, 3000);
-  };
 
+    console.log("Success:", obj);
+    let reqruter = "newticket";
+    let res = await PostToServer(reqruter, obj);
+    if (res.error === 1) {
+      seterrmassege(true);
+      seterrmassegetext(res.message);
+      setloadings([0]);
+    } else {
+      setloadings([0]);
+      seterrmassege(true);
+      setticketid(res.ticketid);
+      seterrmassegetext(res.message);
+      debugger;
+      setTimeout(() => {
+        setuplodeimagescreen(true);
+        seterrmassege(false);
+      }, 2000);
+    }
+  };
+  // כפתור טעינה
+  const [subcategory, setsubcategory] = useState();
   const chosentyp = (value) => {
     settyps(false);
-    settypeofreq({ maincategory: value.type });
+    settypeofreq({ maincategory: value.id });
+    setsubcategory(value.subcategory);
+    console.log(" maincategory", value);
   };
 
   const [loadings, setloadings] = useState([]);
@@ -134,8 +161,23 @@ const Nwerequest = (props) => {
     </div>
   );
 
-  const sendimage = () => {
-    console.log("state", uplodeimage);
+  const sendimage = async () => {
+    let task = "edit";
+    let img = "img";
+    let userid = loginstatus.userid;
+    let reqruter = "newticket";
+    let obj = {
+      task,
+      ticketid,
+      userid,
+      img,
+    };
+
+    let res = await PostToServer(reqruter, obj);
+    debugger;
+    console.log("state", res);
+
+    // console.log("state", uplodeimage);
   };
   const onFormSubmit = (value) => {
     // e.preventDefault();
@@ -167,34 +209,38 @@ const Nwerequest = (props) => {
               <p>{lang?.lang338}</p>
               <div>
                 <div className="listofproblom">
-                  {listtips.map((el) => {
-                    let finicon = Arryoficons.find((ic) => {
-                      if (el.id === ic.iconid) {
-                        return ic;
-                      }
-                    });
-                    let icon;
+                  {categorynames
+                    ? categorynames.map((el) => {
+                        let finicon = Arryoficons.find((ic) => {
+                          if (el.id === ic.iconid) {
+                            return ic;
+                          }
+                        });
+                        let icon;
 
-                    if (finicon?.icon) {
-                      icon = finicon.icon;
-                    } else {
-                      icon = false;
-                    }
+                        if (finicon?.icon) {
+                          icon = finicon.icon;
+                        } else {
+                          icon = false;
+                        }
 
-                    return (
-                      <div className="problome">
-                        <p
-                          onClick={() => {
-                            chosentyp(el);
-                          }}
-                          className="iconproblem"
-                        >
-                          {icon ? <finicon.icon /> : <PoweroffOutlined />}
-                        </p>
-                        <p className="uniqueproblem">{el.type}</p>
-                      </div>
-                    );
-                  })}
+                        return (
+                          <div className="problome">
+                            <p
+                              onClick={() => {
+                                chosentyp(el);
+                              }}
+                              className="iconproblem"
+                            >
+                              {icon ? <finicon.icon /> : <PoweroffOutlined />}
+                            </p>
+                            <p className="uniqueproblem">
+                              {el.maincategoryname}
+                            </p>
+                          </div>
+                        );
+                      })
+                    : null}
                 </div>
               </div>
             </div>
@@ -205,7 +251,11 @@ const Nwerequest = (props) => {
             <img src="/images/man.png" className="avatar" alt="Image" />
             {/* </div> */}
             {!uplodeimagescreen ? (
-              <Form name="basic" onFinish={onFinish}>
+              <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+              >
                 <div className="goback">
                   <FiArrowRight
                     onClick={() => {
@@ -214,7 +264,7 @@ const Nwerequest = (props) => {
                   />
                 </div>
                 <Form.Item
-                  name="subcategoryid"
+                  name="categoryid"
                   rules={[
                     {
                       required: true,
@@ -222,11 +272,15 @@ const Nwerequest = (props) => {
                   ]}
                 >
                   <Select showSearch placeholder={lang?.lang110}>
-                    {problomtypearry.map((el) => {
-                      return (
-                        <Option value={[el.type, el.id]}>{el.type}</Option>
-                      );
-                    })}
+                    {subcategory
+                      ? subcategory.map((el) => {
+                          return (
+                            <Option value={[el.subname, el.subcategoryid]}>
+                              {el.subname}
+                            </Option>
+                          );
+                        })
+                      : null}
                   </Select>
                 </Form.Item>
 
@@ -276,7 +330,15 @@ const Nwerequest = (props) => {
                     </Select>
                   </Form.Item>
                 ) : null}
-                <Form.Item label={lang?.lang123} name="comments">
+                <Form.Item
+                  label={lang?.lang123}
+                  name="comments"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
                   <TextArea rows={4} />
                 </Form.Item>
                 <Form.Item
@@ -368,6 +430,15 @@ const Nwerequest = (props) => {
                 </Modal>
               </div>
             )}
+            <ModalStyeld
+              visible={errmassege}
+              onCancel={() => {
+                seterrmassege(false);
+              }}
+              footer={false}
+            >
+              {errmassegetext}
+            </ModalStyeld>
           </FormContener>
         )}
       </div>

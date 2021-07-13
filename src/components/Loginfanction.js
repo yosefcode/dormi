@@ -23,9 +23,11 @@ export const Loginfunction = async (value) => {
     } else if (res.langid) {
       let ruteruserid = "masof";
       let userid = { userid: res.userid };
-      let masof = await PostToServer(ruteruserid, userid);
-      // changmasof(masof);
 
+      let masof = await PostToServer(ruteruserid, userid);
+
+      // changmasof(masof);
+      console.log("masof", masof);
       cookies.set("email", uservalue.email, {
         path: "/",
       });

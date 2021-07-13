@@ -111,7 +111,11 @@ export const FormContener = styled.div`
     padding: 8px;
     inset-inline-start: 96%;
   }
-
+  svg {
+    width: 32%;
+    height: 15px;
+    color: white;
+  }
   .textbloon {
     width: 274px;
     height: 146px;

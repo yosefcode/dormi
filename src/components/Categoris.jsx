@@ -12,7 +12,7 @@ function Categoris() {
   const data = useContext(DataContext);
   const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
-
+  const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -46,28 +46,8 @@ function Categoris() {
     </Menu>
   );
 
-  let arryofcards = [
-    {
-      id: 1,
-      projact: ",תאורה",
-      alllocation: [
-        { location: "החלפת נורה", id: 1 },
-        { location: "מנורה", id: 2 },
-      ],
-    },
-    {
-      id: 2,
-      projact: "חשמל",
-      alllocation: [
-        { location: "מיזוג", id: 1 },
-        { location: "מתג תקול", id: 2 },
-      ],
-    },
-    {
-      id: 2,
-      projact: "מכונת חלב",
-    },
-  ];
+  let categoryarry = masof?.categorynames;
+
   return (
     <Contener>
       <div className="hader">
@@ -76,12 +56,12 @@ function Categoris() {
         <button onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
-        {arryofcards
-          ? arryofcards.map((el) => {
+        {categoryarry
+          ? categoryarry.map((el) => {
               return (
                 <CardStyeld
                   hoverable
-                  title={el.projact}
+                  title={el.maincategoryname}
                   extra={
                     <Dropdown
                       overlay={menuofproject}
@@ -93,11 +73,11 @@ function Categoris() {
                   }
                 >
                   <div className="listodors">
-                    {el.alllocation ? (
-                      el.alllocation.map((item) => {
+                    {el.subcategory ? (
+                      el.subcategory.map((item) => {
                         return (
                           <div className="singellocation">
-                            <div>{item.location}</div>
+                            <div>{item.subname}</div>
                             <div>
                               <Dropdown
                                 overlay={menuoflocation}

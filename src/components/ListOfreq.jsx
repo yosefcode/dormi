@@ -88,7 +88,11 @@ const Checkform = (props) => {
     setchingeurgency(!chingeurgency);
     setlocallist(listoftascs);
   }
+  const [nolist, setnolist] = useState(false);
 
+  const Checkstatuslist = (value) => {
+    setnolist(value);
+  };
   useEffect(() => {
     if (!firstlode) {
       setlocallist(listoftascs);
@@ -105,9 +109,16 @@ const Checkform = (props) => {
       // result = findChangeurgency(result);
 
       // debugger;
+
+      if (result.length >= 1) {
+        Checkstatuslist(false);
+      } else {
+        Checkstatuslist(true);
+      }
+
       setfackearry(result);
     }
-  }, [AllOpenCategoris, filterallUrgency, chingeurgency]);
+  }, [AllOpenCategoris, filterallUrgency, chingeurgency, nolist]);
 
   // רשימת פקודות לשיונוי כרטיס
   const [form] = Form.useForm();
@@ -231,160 +242,160 @@ const Checkform = (props) => {
         </div>
       ) : null}
 
-      {fackearry
-        ? fackearry?.map((el) => {
-            const menu = (
-              <Menu>
-                <Menu.Item>{lang?.lang145}</Menu.Item>
-                <Menu.Item>{lang?.lang190}</Menu.Item>
-                <Menu.Item
-                  onClick={() => {
-                    setSendmassege(true);
-                    setproblemid(el.id);
-                  }}
+      {!nolist ? (
+        fackearry?.map((el) => {
+          const menu = (
+            <Menu>
+              <Menu.Item>{lang?.lang145}</Menu.Item>
+              <Menu.Item>{lang?.lang190}</Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  setSendmassege(true);
+                  setproblemid(el.id);
+                }}
+              >
+                {lang?.lang263}
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  setReferraltostaff(true);
+                  setproblemid(el.id);
+                }}
+              >
+                {lang?.lang240}
+              </Menu.Item>
+              <Menu.Item>{lang?.lang190}</Menu.Item>
+              <Menu.Item>{lang?.lang208}</Menu.Item>
+              <Menu.Item>{lang?.lang243}</Menu.Item>
+              <Menu.Item>{lang?.lang147}</Menu.Item>
+            </Menu>
+          );
+          let urgency;
+          let urgencytext;
+
+          switch (el.urgency) {
+            case 1:
+              urgencytext = lang?.lang122;
+              urgency = {
+                color: "#389e0d",
+                backgroundcoler: "#f6ffed",
+                border: "#b7eb8f",
+              };
+              break;
+            case 2:
+              urgencytext = lang?.lang121;
+              urgency = {
+                color: "#fa8c16",
+                backgroundcoler: "#fff7e6",
+                border: "#ffd591;",
+              };
+              break;
+            case 3:
+              urgencytext = lang?.lang120;
+              urgency = {
+                color: "#cf1322",
+                backgroundcoler: "#fff1f0",
+                border: "#ffa39e",
+              };
+
+              break;
+          }
+
+          let status;
+          let statustext;
+
+          switch (el.status) {
+            case 1:
+              status = "#108ee9";
+              statustext = lang?.lang162;
+              break;
+            case 2:
+              status = "#87d068";
+              statustext = lang?.lang174;
+              break;
+          }
+
+          return (
+            <div>
+              {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+                <StyelsCard
+                  title={`${el.maincategory} / ${el.subname}`}
+                  primary={urgency}
+                  // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+                  actions={[
+                    <StyelsDropdown
+                      trigger={["click"]}
+                      overlay={menu}
+                      className="dotsDropdown"
+                    >
+                      <HiOutlineDotsHorizontal />
+                    </StyelsDropdown>,
+                    <StyeldSelect
+                      primary={urgency}
+                      defaultValue={urgencytext}
+                      value={urgencytext}
+                      onChange={findChangeurgency}
+                      dropdownClassName="dropdownClassName"
+                    >
+                      <Option value={[lang?.lang122, el.id, 1]}>
+                        {" "}
+                        <StyeldTag color="success">{lang?.lang122}</StyeldTag>
+                      </Option>
+                      <Option value={[lang?.lang121, el.id, 2]}>
+                        {" "}
+                        <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
+                      </Option>
+                      <Option value={[lang?.lang120, el.id, 3]}>
+                        {" "}
+                        <StyeldTag color="red">{lang?.lang120}</StyeldTag>
+                      </Option>
+                    </StyeldSelect>,
+                  ]}
+                  style={{ width: 300 }}
+                  extra={<div>מיקום: {el.location}</div>}
                 >
-                  {lang?.lang263}
-                </Menu.Item>
-                <Menu.Item
-                  onClick={() => {
-                    setReferraltostaff(true);
-                    setproblemid(el.id);
-                  }}
+                  <span className="card-body-spen"> {el.id}</span>{" "}
+                  <span className="card-body-spen"> {el.date}</span>
+                  <span className="card-body-spen">
+                    {el.incharge} {el.phonenumber}
+                  </span>
+                  {Repeatedtask ? (
+                    <span className="card-body-spen">{el.Repeatedtask}</span>
+                  ) : (
+                    <span className="card-body-spen">
+                      <Tag color={status}>{statustext}</Tag>
+                    </span>
+                  )}
+                </StyelsCard>
+              ) : (
+                <StyelsCard
+                  title={`${el.maincategory} / ${el.subname}`}
+                  primary={urgency}
+                  // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+
+                  style={{ width: 300 }}
+                  extra={<div>מיקום: {el.location}</div>}
                 >
-                  {lang?.lang240}
-                </Menu.Item>
-                <Menu.Item>{lang?.lang190}</Menu.Item>
-                <Menu.Item>{lang?.lang208}</Menu.Item>
-                <Menu.Item>{lang?.lang243}</Menu.Item>
-                <Menu.Item>{lang?.lang147}</Menu.Item>
-              </Menu>
-            );
-            let urgency;
-            let urgencytext;
-
-            switch (el.urgency) {
-              case 1:
-                urgencytext = lang?.lang122;
-                urgency = {
-                  color: "#389e0d",
-                  backgroundcoler: "#f6ffed",
-                  border: "#b7eb8f",
-                };
-                break;
-              case 2:
-                urgencytext = lang?.lang121;
-                urgency = {
-                  color: "#fa8c16",
-                  backgroundcoler: "#fff7e6",
-                  border: "#ffd591;",
-                };
-                break;
-              case 3:
-                urgencytext = lang?.lang120;
-                urgency = {
-                  color: "#cf1322",
-                  backgroundcoler: "#fff1f0",
-                  border: "#ffa39e",
-                };
-
-                break;
-            }
-
-            let status;
-            let statustext;
-
-            switch (el.status) {
-              case 1:
-                status = "#108ee9";
-                statustext = lang?.lang162;
-                break;
-              case 2:
-                status = "#87d068";
-                statustext = lang?.lang174;
-                break;
-            }
-
-            return (
-              <div>
-                {userlevelid === 10 ||
-                userlevelid === 5 ||
-                userlevelid === 13 ? (
-                  <StyelsCard
-                    title={`${el.maincategory} / ${el.subname}`}
-                    primary={urgency}
-                    // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
-                    actions={[
-                      <StyelsDropdown
-                        trigger={["click"]}
-                        overlay={menu}
-                        className="dotsDropdown"
-                      >
-                        <HiOutlineDotsHorizontal />
-                      </StyelsDropdown>,
-                      <StyeldSelect
-                        primary={urgency}
-                        defaultValue={urgencytext}
-                        value={urgencytext}
-                        onChange={findChangeurgency}
-                        dropdownClassName="dropdownClassName"
-                      >
-                        <Option value={[lang?.lang122, el.id, 1]}>
-                          {" "}
-                          <StyeldTag color="success">{lang?.lang122}</StyeldTag>
-                        </Option>
-                        <Option value={[lang?.lang121, el.id, 2]}>
-                          {" "}
-                          <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
-                        </Option>
-                        <Option value={[lang?.lang120, el.id, 3]}>
-                          {" "}
-                          <StyeldTag color="red">{lang?.lang120}</StyeldTag>
-                        </Option>
-                      </StyeldSelect>,
-                    ]}
-                    style={{ width: 300 }}
-                    extra={<div>מיקום: {el.location}</div>}
-                  >
-                    <span className="card-body-spen"> {el.id}</span>{" "}
-                    <span className="card-body-spen"> {el.date}</span>
+                  <span className="card-body-spen"> {el.id}</span>{" "}
+                  <span className="card-body-spen"> {el.date}</span>
+                  <span className="card-body-spen">
+                    {el.incharge} {el.phonenumber}
+                  </span>
+                  {Repeatedtask ? (
+                    <span className="card-body-spen">{el.Repeatedtask}</span>
+                  ) : (
                     <span className="card-body-spen">
-                      {el.incharge} {el.phonenumber}
+                      <Tag color={status}>{statustext}</Tag>
                     </span>
-                    {Repeatedtask ? (
-                      <span className="card-body-spen">{el.Repeatedtask}</span>
-                    ) : (
-                      <span className="card-body-spen">
-                        <Tag color={status}>{statustext}</Tag>
-                      </span>
-                    )}
-                  </StyelsCard>
-                ) : (
-                  <StyelsCard
-                    title={`${el.maincategory} / ${el.subname}`}
-                    primary={urgency}
-                    // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
-
-                    style={{ width: 300 }}
-                    extra={<div>מיקום: {el.location}</div>}
-                  >
-                    <span className="card-body-spen"> {el.id}</span>{" "}
-                    <span className="card-body-spen"> {el.date}</span>
-                    <span className="card-body-spen">
-                      {el.incharge} {el.phonenumber}
-                    </span>
-                    {Repeatedtask ? (
-                      <span className="card-body-spen">{el.Repeatedtask}</span>
-                    ) : (
-                      <span className="card-body-spen">
-                        <Tag color={status}>{statustext}</Tag>
-                      </span>
-                    )}
-                  </StyelsCard>
-                )}
-              </div>
-            );
-          })
-        : null}
+                  )}
+                </StyelsCard>
+              )}
+            </div>
+          );
+        })
+      ) : (
+        <div>{lang?.lang181}</div>
+      )}
       <Link to="Affiliation" className="Affiliationbutton">
         <GiPresent className="Affiliationicon" />
       </Link>

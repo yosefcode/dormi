@@ -38,7 +38,7 @@ function App() {
     },
   };
   const cookies = new Cookies();
-
+  console.log({ masof: masof, loginstatus: loginstatus, data: data });
   let getemailcookies = cookies.get("email");
   let getpascookies = cookies.get("pas");
 
