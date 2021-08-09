@@ -37,6 +37,14 @@ export const Contener = styled.div`
     text-align: center;
     margin-left: 3%;
   }
+  .cardname {
+    background-color: #33b5e5;
+    color: white;
+  }
+  .cardphone {
+    background-color: #00c851;
+    color: white;
+  }
   @media only screen and (min-width: 600px) {
     span.text {
       width: 500px;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Spin } from "antd";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Checkform from "./checkform";
@@ -21,6 +22,7 @@ const ContrulScreen = () => {
   const data = useContext(DataContext).data;
   const defullang = useContext(DataContext).lang;
   const changlang = useContext(DataContext).changlang;
+  const ticketlist = useContext(DataContext).ticketlist;
 
   const changdata = useContext(DataContext).changdata;
   const [dir, setsir] = useState("tlr");
@@ -64,10 +66,18 @@ const ContrulScreen = () => {
             <Nwerequest />
           </Route>
           <Route path="/ListOfreq">
-            <ListOfreq repeatedtask={false} />
+            {ticketlist ? (
+              <ListOfreq repeatedtask={false} />
+            ) : (
+              <Spin size="large" />
+            )}
           </Route>
           <Route path="/Repeatedtask">
-            <ListOfreq Repeatedtask={true} />
+            {ticketlist ? (
+              <ListOfreq Repeatedtask={true} />
+            ) : (
+              <Spin size="large" />
+            )}
           </Route>
           <Route path="/temmembertask">
             <Nwerequest Temmembertask={true} />

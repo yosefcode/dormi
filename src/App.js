@@ -18,7 +18,7 @@ function App() {
   const [lang, setlang] = useState();
   const [loginstatus, setloginstatus] = useState();
   const [masof, setmasof] = useState();
-
+  const [ticketlist, setticketlist] = useState();
   const providerOptions = {
     data,
     changdata: (value) => {
@@ -35,6 +35,10 @@ function App() {
     masof,
     changmasof: (value) => {
       setmasof(value);
+    },
+    ticketlist,
+    changeticketlist: (value) => {
+      setticketlist(value);
     },
   };
   const cookies = new Cookies();
@@ -67,6 +71,14 @@ function App() {
         setloginstatus({ logde: false });
         defultlang();
       } else {
+        let obj = {
+          userid: res.changloginstatus.userid,
+        };
+
+        let ressult = await PostToServer("ticketlist", obj);
+
+        setticketlist(ressult);
+
         setloginstatus(res.changloginstatus);
         setlang(res.changlang);
         setmasof(res.changmasof);

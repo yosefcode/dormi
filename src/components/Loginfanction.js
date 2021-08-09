@@ -7,7 +7,7 @@ const cookies = new Cookies();
 export const Loginfunction = async (value) => {
   const dateforminits = new Date();
   const testDate = new Date(
-    dateforminits.setMinutes(dateforminits.getMinutes() + 1)
+    dateforminits.setMinutes(dateforminits.getMinutes() + 10)
   );
   let uservalue = {
     email: value.email.replace(/[<>${}]/g, "danger$&"),

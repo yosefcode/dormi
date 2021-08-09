@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
-import { Menu, Select, Badge } from "antd";
+import { Menu, Badge } from "antd";
 import {
   MailOutlined,
   AppstoreOutlined,
@@ -21,6 +21,7 @@ const HaderMenu = (props) => {
   const defoltlang = useContext(DataContext).lang;
   const changloginstatus = useContext(DataContext).changloginstatus;
   const loginstatus = useContext(DataContext).loginstatus;
+  const ticketlist = useContext(DataContext).ticketlist;
 
   const lang = defoltlang?.lang;
 
@@ -30,7 +31,12 @@ const HaderMenu = (props) => {
     setcurrent(e.key);
   };
 
-  let chors = { chors: 10 };
+  let chors;
+  if (ticketlist?.length) {
+    chors = { chors: ticketlist?.length };
+  } else {
+    chors = { chors: 0 };
+  }
   const exit = () => {
     const cookies = new Cookies();
     cookies.remove("aut");
@@ -72,7 +78,7 @@ const HaderMenu = (props) => {
               className="imagelogo"
             />
           </Menu.Item>
-          {userlevelid === 10 ? (
+          {userlevelid === "10" ? (
             <SubMenu key="sub1-2" title="תפריט">
               <Menu.Item key="3">תפריט</Menu.Item>
               <Menu.Item key="4">טפסים שנשלחו</Menu.Item>
@@ -86,47 +92,47 @@ const HaderMenu = (props) => {
 
           {/*  "מטלות מתוזמנות" */}
 
-          {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
-            <Menu.Item key="6">
-              <Link to="/Repeatedtask">{lang?.lang285} </Link>
-            </Menu.Item>
-          ) : null}
+          {userlevelid === "10" || userlevelid === "5" || userlevelid === "13" ? (
+          <Menu.Item key="6">
+            <Link to="/Repeatedtask">{lang?.lang285} </Link>
+          </Menu.Item>
+           ) : null} 
           <Menu.Item key="7">
             {/*  "רשימת פניות" */}
             <Link to="/ListOfreq">
               {" "}
-              <Badge dir="tlr" count={chors.chors}>
+              <Badge dir="tlr" overflowCount={999} count={chors.chors}>
                 {lang?.lang196}
               </Badge>
             </Link>
           </Menu.Item>
 
           {/* "הגדרות" */}
-          {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
-            <SubMenu key="sub1-3" title={lang?.lang167}>
-              <Menu.Item key="8">
-                {/* "משתמשים" */}
-                <Link to="list_users">{lang?.lang102} </Link>
-              </Menu.Item>
-              <Menu.Item key="9">
-                {" "}
-                {/* מיקום */}
-                <Link to="location">{lang?.lang333} </Link>
-              </Menu.Item>
-              <Menu.Item key="10">
-                {/* קטגוריות */}
-                <Link to="categoris">{lang?.lang104} </Link>
-              </Menu.Item>
-              <Menu.Item key="11">
-                {/* הגדרות */}
-                <Link to="setings">{lang?.lang167}</Link>
-              </Menu.Item>
-            </SubMenu>
-          ) : null}
+          {userlevelid === "10" || userlevelid === "5" || userlevelid === "13" ? (
+          <SubMenu key="sub1-3" title={lang?.lang167}>
+            <Menu.Item key="8">
+              {/* "משתמשים" */}
+              <Link to="list_users">{lang?.lang102} </Link>
+            </Menu.Item>
+            <Menu.Item key="9">
+              {" "}
+              {/* מיקום */}
+              <Link to="location">{lang?.lang333} </Link>
+            </Menu.Item>
+            <Menu.Item key="10">
+              {/* קטגוריות */}
+              <Link to="categoris">{lang?.lang104} </Link>
+            </Menu.Item>
+            <Menu.Item key="11">
+              {/* הגדרות */}
+              <Link to="setings">{lang?.lang167}</Link>
+            </Menu.Item>
+          </SubMenu>
+           ) : null} 
           {/* סטטיסטיקות */}
-          {userlevelid === 10 || userlevelid === 13 ? (
-            <Menu.Item key="12">{lang?.lang105}</Menu.Item>
-          ) : null}
+          {userlevelid === "10" || userlevelid === "13" ? (
+          <Menu.Item key="12">{lang?.lang105}</Menu.Item>
+           ) : null} 
           <SubMenu key="sub1-4" icon={<VscAccount />}>
             <Menu.Item key="13">
               {" "}

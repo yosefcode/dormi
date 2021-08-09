@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { Tag, Form, Menu, Dropdown, Select, Button, Input } from "antd";
+import { Tag, Form, Menu, Dropdown, Select, Button, Input, Badge } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import {
@@ -30,6 +30,7 @@ const Checkform = (props) => {
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const loginstatus = useContext(DataContext).loginstatus;
+  const ticketlist = useContext(DataContext).ticketlist;
   let userlevelid = loginstatus?.levelid;
 
   let locationarry = masof?.locations;
@@ -38,21 +39,21 @@ const Checkform = (props) => {
 
   const Repeatedtask = props.Repeatedtask;
 
-  const [fackearry, setfackearry] = useState();
+  const [fackearry, setfackearry] = useState([]);
 
   const [filter, setfilter] = useState(false);
-
+  const [filterarry, setfilterarry] = useState();
   const problomtypearry = [
     {
       maincategorys: [
-        { maincategory: "חשמל", id: 2 },
-        { maincategory: "אינסטלציה", id: 1 },
+        { maincategory: "חשמל", id: "חשמל" },
+        { maincategory: "אינסטלציה", id: "אינסטלציה" },
       ],
 
       urgency: [
-        { urgency: "נמוך", urgencyid: 1 },
-        { urgency: "בינוני", urgencyid: 2 },
-        { urgency: "גבוהה", urgencyid: 3 },
+        { urgency: "נמוך", urgencyid: "1" },
+        { urgency: "בינוני", urgencyid: "2" },
+        { urgency: "גבוהה", urgencyid: "3" },
       ],
     },
   ];
@@ -63,7 +64,7 @@ const Checkform = (props) => {
   function filterAllOpenCategoris(arry) {
     if (AllOpenCategoris) {
       return arry.filter((el) => {
-        return el.maincategorid === AllOpenCategoris;
+        return el.breadcrumb === AllOpenCategoris;
       });
     } else {
       return arry;
@@ -72,7 +73,7 @@ const Checkform = (props) => {
   function filterUrgency(arry) {
     if (filterallUrgency) {
       return arry.filter((el) => {
-        return el.urgency === filterallUrgency;
+        return el.urgencyadmin === filterallUrgency;
       });
     } else {
       return arry;
@@ -84,21 +85,50 @@ const Checkform = (props) => {
   const [chingeurgency, setchingeurgency] = useState(false);
   function findChangeurgency(value) {
     let requst = listoftascs.findIndex((Item) => Item.id === value[1]);
-    listoftascs[requst].urgency = value[2];
+    ticketlist[requst].urgency = value[2];
     setchingeurgency(!chingeurgency);
-    setlocallist(listoftascs);
+    setlocallist(ticketlist);
   }
   const [nolist, setnolist] = useState(false);
 
   const Checkstatuslist = (value) => {
     setnolist(value);
   };
+
+  const filterforcareguris = (data) => {
+    let arryofprojects = [];
+
+    const uniqueArray = data.filter((item, index) => {
+      return data.indexOf(item) === index;
+    });
+
+    for (let i = 0; i < uniqueArray.length; i++) {
+      const breadcrumb = data.filter((item) => item === uniqueArray[i]);
+      arryofprojects.push({ breadcrumb });
+    }
+
+    return arryofprojects;
+  };
   useEffect(() => {
     if (!firstlode) {
-      setlocallist(listoftascs);
+      setlocallist(ticketlist);
+      let breadcrumb = [];
+      let urgencyadmin = [];
+      for (let i = 0; ticketlist?.length > i; i++) {
+        breadcrumb.push(ticketlist[i].breadcrumb);
 
+        urgencyadmin.push(ticketlist[i].urgencyadmin);
+      }
+      let resultcategoris = filterforcareguris(breadcrumb);
+
+      let allcategoristofilter = {
+        breadcrumb: resultcategoris,
+      };
+
+      setfilterarry(allcategoristofilter);
       setlfirstlode(true);
-      setfackearry(listoftascs);
+
+      setfackearry(ticketlist);
     } else {
       let result = locallist;
 
@@ -196,7 +226,7 @@ const Checkform = (props) => {
             </Link>
           </button>
         ) : null}
-        <span className="text">{lang.lang196}</span>
+        <span className="text">{lang?.lang196}</span>
         <span
           onClick={() => {
             setfilter(!filter);
@@ -219,9 +249,21 @@ const Checkform = (props) => {
             >
               <Option value={false}>{lang.lang354}</Option>
 
-              {problomtypearry[0]?.maincategorys.map((el) => (
+              {filterarry
+                ? filterarry.breadcrumb.map((el) => (
+                    <Option value={el?.breadcrumb[0]}>
+                      {el?.breadcrumb[0]}{" "}
+                      <Badge
+                        dir="tlr"
+                        overflowCount={999}
+                        count={el?.breadcrumb?.length}
+                      />
+                    </Option>
+                  ))
+                : null}
+              {/* {problomtypearry[0]?.maincategorys.map((el) => (
                 <Option value={el.id}>{el.maincategory} </Option>
-              ))}
+              ))} */}
             </Select>
           </div>
           <div className="selcts">
@@ -243,7 +285,7 @@ const Checkform = (props) => {
       ) : null}
 
       {!nolist ? (
-        fackearry?.map((el) => {
+        fackearry.map((el) => {
           const menu = (
             <Menu>
               <Menu.Item>{lang?.lang145}</Menu.Item>
@@ -273,8 +315,8 @@ const Checkform = (props) => {
           let urgency;
           let urgencytext;
 
-          switch (el.urgency) {
-            case 1:
+          switch (el.urgencyadmin) {
+            case "1":
               urgencytext = lang?.lang122;
               urgency = {
                 color: "#389e0d",
@@ -282,7 +324,7 @@ const Checkform = (props) => {
                 border: "#b7eb8f",
               };
               break;
-            case 2:
+            case "2":
               urgencytext = lang?.lang121;
               urgency = {
                 color: "#fa8c16",
@@ -290,7 +332,7 @@ const Checkform = (props) => {
                 border: "#ffd591;",
               };
               break;
-            case 3:
+            case "3":
               urgencytext = lang?.lang120;
               urgency = {
                 color: "#cf1322",
@@ -304,12 +346,12 @@ const Checkform = (props) => {
           let status;
           let statustext;
 
-          switch (el.status) {
-            case 1:
+          switch (el.statusname) {
+            case "פנייה חדשה":
               status = "#108ee9";
               statustext = lang?.lang162;
               break;
-            case 2:
+            case "בטיפול":
               status = "#87d068";
               statustext = lang?.lang174;
               break;
@@ -317,11 +359,12 @@ const Checkform = (props) => {
 
           return (
             <div>
-              {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+              {userlevelid === "10" ||
+              userlevelid === "5" ||
+              userlevelid === "13" ? (
                 <StyelsCard
-                  title={`${el.maincategory} / ${el.subname}`}
+                  title={`${el.breadcrumb} / ${el.categoryname}`}
                   primary={urgency}
-                  // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
                   actions={[
                     <StyelsDropdown
                       trigger={["click"]}
@@ -352,15 +395,28 @@ const Checkform = (props) => {
                     </StyeldSelect>,
                   ]}
                   style={{ width: 300 }}
-                  extra={<div>מיקום: {el.location}</div>}
+                  extra={<div>מיקום: {el.locationName}</div>}
                 >
-                  <span className="card-body-spen"> {el.id}</span>{" "}
-                  <span className="card-body-spen"> {el.date}</span>
+                  <span className="card-body-spen"> {`#${el.ticketid}`}</span>
+                  <span className="card-body-spen"> {el.dateopened}</span>
                   <span className="card-body-spen">
-                    {el.incharge} {el.phonenumber}
+                    <span>
+                      <span className="cardname">
+                        {el.firstname},{el.lastname}
+                      </span>
+                    </span>
+
+                    <span className="card-body-spen">
+                      <span className="cardphone"> {el.phone}</span>
+                    </span>
                   </span>
                   {Repeatedtask ? (
-                    <span className="card-body-spen">{el.Repeatedtask}</span>
+                    <span className="card-body-spen">
+                      {/* <Tag color={status}>{statustext}</Tag>
+                       */}
+                      תדירות כל:
+                      {el.ticketPlanID}
+                    </span>
                   ) : (
                     <span className="card-body-spen">
                       <Tag color={status}>{statustext}</Tag>
@@ -369,17 +425,23 @@ const Checkform = (props) => {
                 </StyelsCard>
               ) : (
                 <StyelsCard
-                  title={`${el.maincategory} / ${el.subname}`}
+                  title={`${el.breadcrumb} / ${el.categoryname}`}
                   primary={urgency}
-                  // {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
-
                   style={{ width: 300 }}
-                  extra={<div>מיקום: {el.location}</div>}
+                  extra={<div>מיקום: {el.locationName}</div>}
                 >
-                  <span className="card-body-spen"> {el.id}</span>{" "}
-                  <span className="card-body-spen"> {el.date}</span>
+                  <span className="card-body-spen"> {`#${el.ticketid}`}</span>
+                  <span className="card-body-spen"> {el.dateopened}</span>
                   <span className="card-body-spen">
-                    {el.incharge} {el.phonenumber}
+                    <span>
+                      <span className="cardname">
+                        {el.firstname},{el.lastname}
+                      </span>
+                    </span>
+
+                    <span className="card-body-spen">
+                      <span className="cardphone"> {el.phone}</span>
+                    </span>
                   </span>
                   {Repeatedtask ? (
                     <span className="card-body-spen">{el.Repeatedtask}</span>
@@ -404,43 +466,3 @@ const Checkform = (props) => {
 };
 
 export default Checkform;
-// let programdata = [
-//   {
-//     categorynames: [
-//       {
-//         id: 31,
-//         maincategory: "חשמל",
-//         subcategory: [
-//           { subcategoryid: 1, subname: "נורה" },
-//           { subcategoryid: 1, subname: "שקע" },
-//         ],
-//       },
-//       {
-//         id: 31,
-//         maincategory: "אינסטליצייה",
-//         subcategory: [
-//           { subcategoryid: 1, subname: "ברז" },
-//           { subcategoryid: 1, subname: "ביוב" },
-//         ],
-//       },
-//     ],
-//     locations: [
-//       {
-//         locationid: 1,
-//         locationname: " פנימייה",
-//         rooms: [
-//           { roomid: 1, roomname: "חדר1" },
-//           { roomid: 2, roomname: "חדר2" },
-//         ],
-//       },
-//       {
-//         locationid: 2,
-//         locationname: "בניין ",
-//         rooms: [
-//           { roomid: 3, roomname: "חדר1" },
-//           { roomid: 4, roomname: "חדר2" },
-//         ],
-//       },
-//     ],
-//   },
-// ];

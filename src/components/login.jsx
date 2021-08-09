@@ -15,7 +15,7 @@ const Login = (props) => {
   const changloginstatus = useContext(DataContext).changloginstatus;
   const changlang = useContext(DataContext).changlang;
   const changmasof = useContext(DataContext).changmasof;
-
+  const changeticketlist = useContext(DataContext).changeticketlist;
   const lang = defoltlang?.lang;
 
   const cookies = new Cookies();
@@ -36,14 +36,24 @@ const Login = (props) => {
     loadProfile();
   }, []);
 
-  const date = new Date();
-  const dateforminits = new Date();
+  // const date = new Date();
+  // const dateforminits = new Date();
 
-  const newDate = new Date(date.setMonth(date.getMonth() + 6));
-  const testDate = new Date(
-    dateforminits.setMinutes(dateforminits.getMinutes() + 1)
-  );
+  // const newDate = new Date(date.setMonth(date.getMonth() + 6));
+  // const testDate = new Date(
+  //   dateforminits.setMinutes(dateforminits.getMinutes() + 1)
+  // );
+  const getallticts = async (value) => {
+    let obj = {
+      userid: value,
+    };
 
+    let res = await PostToServer("ticketlist", obj);
+
+    changeticketlist(res);
+
+    return true;
+  };
   const onFinish = async (values) => {
     setfult(" ");
     let res = await Loginfunction(values);
@@ -51,6 +61,7 @@ const Login = (props) => {
     if (res.error === "1") {
       setfult(res.message);
     } else {
+      await getallticts(res.changloginstatus.userid);
       changmasof(res.changmasof);
 
       changloginstatus(res.changloginstatus);
