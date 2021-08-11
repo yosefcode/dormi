@@ -92,11 +92,11 @@ const HaderMenu = (props) => {
 
           {/*  "מטלות מתוזמנות" */}
 
-          {userlevelid === "10" || userlevelid === "5" || userlevelid === "13" ? (
+          {/* {userlevelid === "10" || userlevelid === "5" || userlevelid === "13" ? ( */}
           <Menu.Item key="6">
             <Link to="/Repeatedtask">{lang?.lang285} </Link>
           </Menu.Item>
-           ) : null} 
+          {/* ) : null}  */}
           <Menu.Item key="7">
             {/*  "רשימת פניות" */}
             <Link to="/ListOfreq">
@@ -108,7 +108,7 @@ const HaderMenu = (props) => {
           </Menu.Item>
 
           {/* "הגדרות" */}
-          {userlevelid === "10" || userlevelid === "5" || userlevelid === "13" ? (
+          {/* {userlevelid === "10" || userlevelid === "5" || userlevelid === "13" ? ( */}
           <SubMenu key="sub1-3" title={lang?.lang167}>
             <Menu.Item key="8">
               {/* "משתמשים" */}
@@ -128,11 +128,11 @@ const HaderMenu = (props) => {
               <Link to="setings">{lang?.lang167}</Link>
             </Menu.Item>
           </SubMenu>
-           ) : null} 
+          {/* ) : null}  */}
           {/* סטטיסטיקות */}
-          {userlevelid === "10" || userlevelid === "13" ? (
+          {/* {userlevelid === "10" || userlevelid === "13" ? ( */}
           <Menu.Item key="12">{lang?.lang105}</Menu.Item>
-           ) : null} 
+          {/* ) : null}  */}
           <SubMenu key="sub1-4" icon={<VscAccount />}>
             <Menu.Item key="13">
               {" "}

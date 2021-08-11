@@ -1,5 +1,15 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { Tag, Form, Menu, Dropdown, Select, Button, Input, Badge } from "antd";
+import {
+  Tag,
+  Form,
+  Menu,
+  Dropdown,
+  Select,
+  Button,
+  Input,
+  Badge,
+  TreeSelect,
+} from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import {
@@ -10,19 +20,29 @@ import {
   StyelsDropdown,
 } from "../styelscomponents/styeldListReq";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
-
-import ModaelGeneric from "./ModaelGeneric";
+import {
+  Filterforcareguris,
+  FilterUrgency,
+  FilterAllOpenCategoris,
+  FilterlocationName,
+} from "../components/Listofreqfilters";
+import ModaelGeneric from "../components/ModaelGeneric";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
 import { FaFilter } from "react-icons/fa";
 import { GiPresent } from "react-icons/gi";
 import { listoftascs } from "../fackarrylisofreq";
-
+import {
+  SendmasegeTask,
+  Sentostaf,
+  Carddata,
+  FiltersForsort,
+} from "../components/SendmasegeTask";
 import DataContext from "../DataContext";
 
 const { Option } = Select;
-const { TextArea } = Input;
 
+const { SHOW_PARENT } = TreeSelect;
 const Checkform = (props) => {
   document.body.style.backgroundColor = "white";
   const data = useContext(DataContext);
@@ -38,54 +58,23 @@ const Checkform = (props) => {
   const lang = defoltlang?.lang;
 
   const Repeatedtask = props.Repeatedtask;
-
+  /// סטייטס לכל הסינונים
   const [fackearry, setfackearry] = useState([]);
-
   const [filter, setfilter] = useState(false);
   const [filterarry, setfilterarry] = useState();
-  const problomtypearry = [
-    {
-      maincategorys: [
-        { maincategory: "חשמל", id: "חשמל" },
-        { maincategory: "אינסטלציה", id: "אינסטלציה" },
-      ],
-
-      urgency: [
-        { urgency: "נמוך", urgencyid: "1" },
-        { urgency: "בינוני", urgencyid: "2" },
-        { urgency: "גבוהה", urgencyid: "3" },
-      ],
-    },
-  ];
-
   const [AllOpenCategoris, setAllOpenCategoris] = useState();
   const [filterallUrgency, setfilterallUrgency] = useState();
-
-  function filterAllOpenCategoris(arry) {
-    if (AllOpenCategoris) {
-      return arry.filter((el) => {
-        return el.breadcrumb === AllOpenCategoris;
-      });
-    } else {
-      return arry;
-    }
-  }
-  function filterUrgency(arry) {
-    if (filterallUrgency) {
-      return arry.filter((el) => {
-        return el.urgencyadmin === filterallUrgency;
-      });
-    } else {
-      return arry;
-    }
-  }
-
   const [locallist, setlocallist] = useState();
   const [firstlode, setlfirstlode] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
+  // רשימת חדרים ומיכומים
+
+  // עדכון שינוי סטטוס פנייה
   function findChangeurgency(value) {
-    let requst = listoftascs.findIndex((Item) => Item.id === value[1]);
-    ticketlist[requst].urgency = value[2];
+    let requst = ticketlist.findIndex((Item) => Item.ticketid === value[1]);
+
+    ticketlist[requst].urgencyadmin = value[2];
+
     setchingeurgency(!chingeurgency);
     setlocallist(ticketlist);
   }
@@ -95,34 +84,24 @@ const Checkform = (props) => {
     setnolist(value);
   };
 
-  const filterforcareguris = (data) => {
-    let arryofprojects = [];
-
-    const uniqueArray = data.filter((item, index) => {
-      return data.indexOf(item) === index;
-    });
-
-    for (let i = 0; i < uniqueArray.length; i++) {
-      const breadcrumb = data.filter((item) => item === uniqueArray[i]);
-      arryofprojects.push({ breadcrumb });
-    }
-
-    return arryofprojects;
-  };
   useEffect(() => {
     if (!firstlode) {
       setlocallist(ticketlist);
       let breadcrumb = [];
-      let urgencyadmin = [];
+
+      let locationName = [];
+
       for (let i = 0; ticketlist?.length > i; i++) {
         breadcrumb.push(ticketlist[i].breadcrumb);
 
-        urgencyadmin.push(ticketlist[i].urgencyadmin);
+        locationName.push(ticketlist[i].locationName);
       }
-      let resultcategoris = filterforcareguris(breadcrumb);
+      let resultcategoris = Filterforcareguris(breadcrumb);
+      let resultkocation = FilterlocationName(locationName, ticketlist);
 
       let allcategoristofilter = {
         breadcrumb: resultcategoris,
+        locationName: resultkocation,
       };
 
       setfilterarry(allcategoristofilter);
@@ -131,12 +110,10 @@ const Checkform = (props) => {
       setfackearry(ticketlist);
     } else {
       let result = locallist;
-
-      result = filterAllOpenCategoris(result);
-
-      result = filterUrgency(result);
-
-      // result = findChangeurgency(result);
+      // פילטר לפי קטגוריות
+      result = FilterAllOpenCategoris(result, AllOpenCategoris);
+      // פילטר לפי דחיפות
+      result = FilterUrgency(result, filterallUrgency);
 
       // debugger;
 
@@ -151,13 +128,12 @@ const Checkform = (props) => {
   }, [AllOpenCategoris, filterallUrgency, chingeurgency, nolist]);
 
   // רשימת פקודות לשיונוי כרטיס
-  const [form] = Form.useForm();
+
   const [Sendmassege, setSendmassege] = useState(false);
   const [problemid, setproblemid] = useState();
   const onsendmassege = (value, id) => {
     setSendmassege(false);
     console.log(value, problemid);
-    form.resetFields();
   };
 
   const [Referraltostaff, setReferraltostaff] = useState(false);
@@ -165,7 +141,14 @@ const Checkform = (props) => {
   const onReferr = (value, id) => {
     setSendmassege(false);
     console.log(value, problemid);
-    form.resetFields();
+  };
+
+  const setingAllOpenCategoris = (value) => {
+    setAllOpenCategoris(value);
+  };
+
+  const setingfilterallUrgency = (value) => {
+    setfilterallUrgency(value);
   };
   return (
     <Contener>
@@ -177,17 +160,7 @@ const Checkform = (props) => {
         }}
         footer={false}
       >
-        <Form name="masseg" onFinish={onsendmassege} form={form}>
-          <Form.Item name="comments" placeholder={lang?.lang266}>
-            <TextArea rows={4} />
-          </Form.Item>
-
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {lang?.lang265}
-            </Button>
-          </Form.Item>
-        </Form>
+        <SendmasegeTask onsendmassege={onsendmassege} />
       </ModalStyeld>
       <ModalStyeld
         title={lang?.lang240}
@@ -197,21 +170,7 @@ const Checkform = (props) => {
         }}
         footer={false}
       >
-        <Form name="masseg" onFinish={onReferr} form={form}>
-          <Form.Item name="comments">
-            <Select showSearch placeholder="בחר איש צוות">
-              <Option value={1}>אביתר </Option>
-
-              <Option value={2}>בעז</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {lang?.lang265}
-            </Button>
-          </Form.Item>
-        </Form>
+        <Sentostaf onReferr={onReferr} />
       </ModalStyeld>
 
       <div className="top_icon">
@@ -238,50 +197,11 @@ const Checkform = (props) => {
       </div>
 
       {filter ? (
-        <div className="filteroption">
-          <div className="selcts">
-            <Select
-              showSearch
-              placeholder={lang?.lang354}
-              onChange={(value) => {
-                setAllOpenCategoris(value);
-              }}
-            >
-              <Option value={false}>{lang.lang354}</Option>
-
-              {filterarry
-                ? filterarry.breadcrumb.map((el) => (
-                    <Option value={el?.breadcrumb[0]}>
-                      {el?.breadcrumb[0]}{" "}
-                      <Badge
-                        dir="tlr"
-                        overflowCount={999}
-                        count={el?.breadcrumb?.length}
-                      />
-                    </Option>
-                  ))
-                : null}
-              {/* {problomtypearry[0]?.maincategorys.map((el) => (
-                <Option value={el.id}>{el.maincategory} </Option>
-              ))} */}
-            </Select>
-          </div>
-          <div className="selcts">
-            <Select
-              showSearch
-              placeholder={lang?.lang353}
-              onChange={(value) => {
-                setfilterallUrgency(value);
-              }}
-            >
-              <Option value={false}>{lang?.lang353}</Option>
-
-              {problomtypearry[0]?.urgency.map((el) => (
-                <Option value={el.urgencyid}>{el.urgency} </Option>
-              ))}
-            </Select>
-          </div>
-        </div>
+        <FiltersForsort
+          filterarry={filterarry}
+          setingAllOpenCategoris={setingAllOpenCategoris}
+          setingfilterallUrgency={setingfilterallUrgency}
+        />
       ) : null}
 
       {!nolist ? (
@@ -293,7 +213,7 @@ const Checkform = (props) => {
               <Menu.Item
                 onClick={() => {
                   setSendmassege(true);
-                  setproblemid(el.id);
+                  setproblemid(el.ticketid);
                 }}
               >
                 {lang?.lang263}
@@ -301,7 +221,7 @@ const Checkform = (props) => {
               <Menu.Item
                 onClick={() => {
                   setReferraltostaff(true);
-                  setproblemid(el.id);
+                  setproblemid(el.ticketid);
                 }}
               >
                 {lang?.lang240}
@@ -380,15 +300,15 @@ const Checkform = (props) => {
                       onChange={findChangeurgency}
                       dropdownClassName="dropdownClassName"
                     >
-                      <Option value={[lang?.lang122, el.id, 1]}>
+                      <Option value={[lang?.lang122, el.ticketid, "1"]}>
                         {" "}
                         <StyeldTag color="success">{lang?.lang122}</StyeldTag>
                       </Option>
-                      <Option value={[lang?.lang121, el.id, 2]}>
+                      <Option value={[lang?.lang121, el.ticketid, "2"]}>
                         {" "}
                         <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
                       </Option>
-                      <Option value={[lang?.lang120, el.id, 3]}>
+                      <Option value={[lang?.lang120, el.ticketid, "3"]}>
                         {" "}
                         <StyeldTag color="red">{lang?.lang120}</StyeldTag>
                       </Option>
@@ -397,19 +317,8 @@ const Checkform = (props) => {
                   style={{ width: 300 }}
                   extra={<div>מיקום: {el.locationName}</div>}
                 >
-                  <span className="card-body-spen"> {`#${el.ticketid}`}</span>
-                  <span className="card-body-spen"> {el.dateopened}</span>
-                  <span className="card-body-spen">
-                    <span>
-                      <span className="cardname">
-                        {el.firstname},{el.lastname}
-                      </span>
-                    </span>
+                  <Carddata element={el} />
 
-                    <span className="card-body-spen">
-                      <span className="cardphone"> {el.phone}</span>
-                    </span>
-                  </span>
                   {Repeatedtask ? (
                     <span className="card-body-spen">
                       {/* <Tag color={status}>{statustext}</Tag>
@@ -430,19 +339,7 @@ const Checkform = (props) => {
                   style={{ width: 300 }}
                   extra={<div>מיקום: {el.locationName}</div>}
                 >
-                  <span className="card-body-spen"> {`#${el.ticketid}`}</span>
-                  <span className="card-body-spen"> {el.dateopened}</span>
-                  <span className="card-body-spen">
-                    <span>
-                      <span className="cardname">
-                        {el.firstname},{el.lastname}
-                      </span>
-                    </span>
-
-                    <span className="card-body-spen">
-                      <span className="cardphone"> {el.phone}</span>
-                    </span>
-                  </span>
+                  <Carddata element={el} />
                   {Repeatedtask ? (
                     <span className="card-body-spen">{el.Repeatedtask}</span>
                   ) : (

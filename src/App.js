@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import Login from "./components/login";
-import ContrulScreen from "./components/ContrulScreen";
+import ContrulScreen from "./screens/ContrulScreen";
 import { Language } from "./styelscomponents/Language";
 
-import Menu from "./components/Menu";
+import Menu from "./screens/Menu";
 import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
 import { Loginfunction } from "./components/Loginfanction";
