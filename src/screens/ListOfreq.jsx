@@ -26,7 +26,7 @@ import {
   FilterAllOpenCategoris,
   FilterlocationName,
 } from "../components/Listofreqfilters";
-import ModaelGeneric from "../components/ModaelGeneric";
+
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
 import { FaFilter } from "react-icons/fa";
@@ -37,23 +37,19 @@ import {
   Sentostaf,
   Carddata,
   FiltersForsort,
-} from "../components/SendmasegeTask";
+} from "../components/Listofreqcomponent";
 import DataContext from "../DataContext";
 
 const { Option } = Select;
 
-const { SHOW_PARENT } = TreeSelect;
 const Checkform = (props) => {
   document.body.style.backgroundColor = "white";
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
+
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketlist;
   let userlevelid = loginstatus?.levelid;
-
-  let locationarry = masof?.locations;
 
   const lang = defoltlang?.lang;
 
@@ -150,6 +146,20 @@ const Checkform = (props) => {
   const setingfilterallUrgency = (value) => {
     setfilterallUrgency(value);
   };
+
+  // פונקציות עדכון סטטוס פנייה
+
+  let rclose = "";
+  let rpending = "";
+  let rsendmasege = "";
+  let rRefertostaff = "";
+  let rapruchclose = "";
+  let rdelet = "";
+  // ticetidguid
+  let obj = {
+    ticetidguid: 1111,
+    task: "ffff",
+  };
   return (
     <Contener>
       <ModalStyeld
@@ -206,6 +216,7 @@ const Checkform = (props) => {
 
       {!nolist ? (
         fackearry.map((el) => {
+          // משימות עריכה
           const menu = (
             <Menu>
               <Menu.Item>{lang?.lang145}</Menu.Item>
@@ -226,7 +237,7 @@ const Checkform = (props) => {
               >
                 {lang?.lang240}
               </Menu.Item>
-              <Menu.Item>{lang?.lang190}</Menu.Item>
+              <Menu.Item>{lang?.lang195}</Menu.Item>
               <Menu.Item>{lang?.lang208}</Menu.Item>
               <Menu.Item>{lang?.lang243}</Menu.Item>
               <Menu.Item>{lang?.lang147}</Menu.Item>
@@ -279,76 +290,74 @@ const Checkform = (props) => {
 
           return (
             <div>
-              {userlevelid === "10" ||
+              {/* {userlevelid === "10" ||
               userlevelid === "5" ||
-              userlevelid === "13" ? (
-                <StyelsCard
-                  title={`${el.breadcrumb} / ${el.categoryname}`}
-                  primary={urgency}
-                  actions={[
-                    <StyelsDropdown
-                      trigger={["click"]}
-                      overlay={menu}
-                      className="dotsDropdown"
-                    >
-                      <HiOutlineDotsHorizontal />
-                    </StyelsDropdown>,
-                    <StyeldSelect
-                      primary={urgency}
-                      defaultValue={urgencytext}
-                      value={urgencytext}
-                      onChange={findChangeurgency}
-                      dropdownClassName="dropdownClassName"
-                    >
-                      <Option value={[lang?.lang122, el.ticketid, "1"]}>
-                        {" "}
-                        <StyeldTag color="success">{lang?.lang122}</StyeldTag>
-                      </Option>
-                      <Option value={[lang?.lang121, el.ticketid, "2"]}>
-                        {" "}
-                        <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
-                      </Option>
-                      <Option value={[lang?.lang120, el.ticketid, "3"]}>
-                        {" "}
-                        <StyeldTag color="red">{lang?.lang120}</StyeldTag>
-                      </Option>
-                    </StyeldSelect>,
-                  ]}
-                  style={{ width: 300 }}
-                  extra={<div>מיקום: {el.locationName}</div>}
-                >
-                  <Carddata element={el} />
+              userlevelid === "13" ? ( */}
+              <StyelsCard
+                title={`${el.breadcrumb} / ${el.categoryname}`}
+                primary={urgency}
+                actions={[
+                  <StyelsDropdown
+                    trigger={["click"]}
+                    overlay={menu}
+                    className="dotsDropdown"
+                  >
+                    <HiOutlineDotsHorizontal />
+                  </StyelsDropdown>,
+                  <StyeldSelect
+                    primary={urgency}
+                    defaultValue={urgencytext}
+                    value={urgencytext}
+                    onChange={findChangeurgency}
+                    dropdownClassName="dropdownClassName"
+                  >
+                    <Option value={[lang?.lang122, el.ticketid, "1"]}>
+                      {" "}
+                      <StyeldTag color="success">{lang?.lang122}</StyeldTag>
+                    </Option>
+                    <Option value={[lang?.lang121, el.ticketid, "2"]}>
+                      {" "}
+                      <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
+                    </Option>
+                    <Option value={[lang?.lang120, el.ticketid, "3"]}>
+                      {" "}
+                      <StyeldTag color="red">{lang?.lang120}</StyeldTag>
+                    </Option>
+                  </StyeldSelect>,
+                ]}
+                style={{ width: 300 }}
+                extra={<div>מיקום: {el.locationName}</div>}
+              >
+                <Carddata element={el} />
 
-                  {Repeatedtask ? (
-                    <span className="card-body-spen">
-                      {/* <Tag color={status}>{statustext}</Tag>
-                       */}
-                      תדירות כל:
-                      {el.ticketPlanID}
-                    </span>
-                  ) : (
-                    <span className="card-body-spen">
-                      <Tag color={status}>{statustext}</Tag>
-                    </span>
-                  )}
-                </StyelsCard>
+                {Repeatedtask ? (
+                  <span className="card-body-spen">
+                    תדירות כל:
+                    {el.ticketPlanID}
+                  </span>
+                ) : (
+                  <span className="card-body-spen">
+                    <Tag color={status}>{statustext}</Tag>
+                  </span>
+                )}
+              </StyelsCard>
               ) : (
-                <StyelsCard
-                  title={`${el.breadcrumb} / ${el.categoryname}`}
-                  primary={urgency}
-                  style={{ width: 300 }}
-                  extra={<div>מיקום: {el.locationName}</div>}
-                >
-                  <Carddata element={el} />
-                  {Repeatedtask ? (
-                    <span className="card-body-spen">{el.Repeatedtask}</span>
-                  ) : (
-                    <span className="card-body-spen">
-                      <Tag color={status}>{statustext}</Tag>
-                    </span>
-                  )}
-                </StyelsCard>
-              )}
+              <StyelsCard
+                title={`${el.breadcrumb} / ${el.categoryname}`}
+                primary={urgency}
+                style={{ width: 300 }}
+                extra={<div>מיקום: {el.locationName}</div>}
+              >
+                <Carddata element={el} />
+                {Repeatedtask ? (
+                  <span className="card-body-spen">{el.Repeatedtask}</span>
+                ) : (
+                  <span className="card-body-spen">
+                    <Tag color={status}>{statustext}</Tag>
+                  </span>
+                )}
+              </StyelsCard>
+              {/* )} */}
             </div>
           );
         })

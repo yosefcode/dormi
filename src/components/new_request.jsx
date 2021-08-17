@@ -8,7 +8,7 @@ import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
 import { PoweroffOutlined } from "@ant-design/icons";
-import { PostToServer } from "../serveses";
+import { PostToServer, PostToServerUplodeImage } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { Arryoficons } from "../Icons";
 function getBase64(file) {
@@ -70,7 +70,7 @@ const Nwerequest = (props) => {
     } else {
       setticketid(null);
     }
-    debugger;
+
     let userid = loginstatus.userid;
     let locationid = value.locationid[1];
     let roomid = parseInt(value.roomid[1]);
@@ -102,7 +102,7 @@ const Nwerequest = (props) => {
       seterrmassege(true);
       setticketid(res.ticketid);
       seterrmassegetext(res.message);
-      debugger;
+
       setTimeout(() => {
         setuplodeimagescreen(true);
         seterrmassege(false);
@@ -141,16 +141,17 @@ const Nwerequest = (props) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-
+    debugger;
     setuplodeimage({
       previewImage: file.url || file.preview,
       previewVisible: true,
       previewTitle:
         file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
     });
+    debugger;
   };
 
-  const handleChange = ({ fileList }) => setuplodeimage({ fileList });
+  const upludeimage = ({ fileList }) => setuplodeimage({ fileList });
 
   const { previewVisible, previewImage, fileList, previewTitle } = uplodeimage;
   const uploadButton = (
@@ -162,10 +163,10 @@ const Nwerequest = (props) => {
   );
 
   const sendimage = async () => {
-    let task = "edit";
-    let img = "img";
+    let task = "picture";
+    let img = fileList;
     let userid = loginstatus.userid;
-    let reqruter = "newticket";
+    let reqruter = "ticketpicture";
     let obj = {
       task,
       ticketid,
@@ -173,28 +174,14 @@ const Nwerequest = (props) => {
       img,
     };
 
-    let res = await PostToServer(reqruter, obj);
     debugger;
+
+    let res = await PostToServer(reqruter, obj);
+
+    debugger;
+
     console.log("state", res);
-
-    // console.log("state", uplodeimage);
   };
-  const onFormSubmit = (value) => {
-    // e.preventDefault();
-
-    console.log("imag", value);
-    const formData = new FormData();
-    formData.append("file", value.file);
-    // formData.append("phonenumber", phonenumber);
-    // formData.append("s3path", `${phonenumber}/`);
-  };
-
-  // const handleChange = async (e) => {
-  //   let myPromise = await new Promise((resolve, reject) => {
-  //     resolve({ file: e.target.files[0] });
-  //   });
-  //   onFormSubmit(myPromise);
-  // };
 
   return (
     <div>
@@ -408,7 +395,7 @@ const Nwerequest = (props) => {
                     listType="picture-card"
                     // fileList={fileList}
                     onPreview={handlePreview}
-                    onChange={handleChange}
+                    onChange={upludeimage}
                   >
                     {uploadButton}
                   </Upload>

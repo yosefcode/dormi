@@ -30,3 +30,10 @@ export const GettfromServer = async (ruter) => {
   });
   return myPromis;
 };
+export const PostToServerUplodeImage = async (ruter, formData) => {
+  debugger;
+  return fetch(`${posturl}/${ruter}`, {
+    method: "post",
+    body: formData,
+  }).then((res) => res.json());
+};
