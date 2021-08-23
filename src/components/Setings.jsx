@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 
 function Setings() {
   document.body.style.backgroundColor = "white";
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
+
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;

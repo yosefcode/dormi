@@ -1,15 +1,11 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import {
-  Tag,
-  Form,
-  Menu,
-  Dropdown,
-  Select,
-  Button,
-  Input,
-  Badge,
-  TreeSelect,
-} from "antd";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  createRef,
+} from "react";
+import { Tag, Menu, Select, Checkbox } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import {
@@ -25,7 +21,8 @@ import {
   FilterUrgency,
   FilterAllOpenCategoris,
   FilterlocationName,
-} from "../components/Listofreqfilters";
+  Filterdelittask,
+} from "../components/lissofreqhelpers/Listofreqfilters";
 
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
@@ -37,8 +34,14 @@ import {
   Sentostaf,
   Carddata,
   FiltersForsort,
-} from "../components/Listofreqcomponent";
+} from "../components/lissofreqhelpers/Listofreqcomponent";
+import {
+  Apruchclose,
+  Posteditofticket,
+  Closetask,
+} from "../components/lissofreqhelpers/Ticeteditmenu";
 import DataContext from "../DataContext";
+import Item from "antd/lib/list/Item";
 
 const { Option } = Select;
 
@@ -65,7 +68,7 @@ const Checkform = (props) => {
   const [chingeurgency, setchingeurgency] = useState(false);
   // רשימת חדרים ומיכומים
 
-  // עדכון שינוי סטטוס פנייה
+  // עדכון שינוי סטטוס דחיפות  פנייה
   function findChangeurgency(value) {
     let requst = ticketlist.findIndex((Item) => Item.ticketid === value[1]);
 
@@ -74,10 +77,74 @@ const Checkform = (props) => {
     setchingeurgency(!chingeurgency);
     setlocallist(ticketlist);
   }
+  // עדכון שינוי סטטוס טיפול פנייה
+
+  function findChangstatus(value) {
+    let requst = ticketlist.findIndex((Item) => Item.ticketid === value[1]);
+
+    ticketlist[requst].statusname = value[2];
+
+    setchingeurgency(!chingeurgency);
+    setlocallist(ticketlist);
+  }
+
   const [nolist, setnolist] = useState(false);
 
   const Checkstatuslist = (value) => {
     setnolist(value);
+  };
+
+  // רשימת פקודות לשיונוי כרטיס
+
+  const [Sendmassege, setSendmassege] = useState(false);
+  const [problemid, setproblemid] = useState();
+  const onsendmassege = (value, id) => {
+    setSendmassege(false);
+    console.log(value, problemid);
+  };
+
+  const [Referraltostaff, setReferraltostaff] = useState(false);
+
+  const onReferr = (value, id) => {
+    setSendmassege(false);
+    console.log(value, problemid);
+  };
+
+  const setingAllOpenCategoris = (value) => {
+    setAllOpenCategoris(value);
+  };
+
+  const setingfilterallUrgency = (value) => {
+    setfilterallUrgency(value);
+  };
+
+  const [openaptuchclosemodal, setopenaptuchclosemodal] = useState(false);
+  const closeopenaptuchclosemoda = () => {
+    setopenaptuchclosemodal(false);
+  };
+
+  // צקבוקס סגירת פנייה
+  const [arrytaskforclose, setarrytaskforclose] = useState([]);
+  const [arresticets, setarresticets] = useState(false);
+  const Delettask = async () => {
+    console.log("Delettask", arrytaskforclose);
+
+    setarresticets(true);
+  };
+  let arr = [];
+  const closetask = (e) => {
+    if (e.target.checked) {
+      arr.push(...arrytaskforclose);
+
+      let obj = { id: e.target.value };
+      arr.push(obj);
+      setarrytaskforclose(arr);
+    } else {
+      const result = arrytaskforclose.filter(
+        (Item) => Item.id !== e.target.value
+      );
+      setarrytaskforclose(result);
+    }
   };
 
   useEffect(() => {
@@ -110,7 +177,18 @@ const Checkform = (props) => {
       result = FilterAllOpenCategoris(result, AllOpenCategoris);
       // פילטר לפי דחיפות
       result = FilterUrgency(result, filterallUrgency);
+      //
+      debugger;
 
+      if (arresticets) {
+        result = Filterdelittask(result, arrytaskforclose);
+        debugger;
+        setarrytaskforclose([]);
+
+        setarresticets(false);
+      }
+
+      // result = Filterdelittask(result, arrytaskforclose);
       // debugger;
 
       if (result.length >= 1) {
@@ -121,47 +199,23 @@ const Checkform = (props) => {
 
       setfackearry(result);
     }
-  }, [AllOpenCategoris, filterallUrgency, chingeurgency, nolist]);
-
-  // רשימת פקודות לשיונוי כרטיס
-
-  const [Sendmassege, setSendmassege] = useState(false);
-  const [problemid, setproblemid] = useState();
-  const onsendmassege = (value, id) => {
-    setSendmassege(false);
-    console.log(value, problemid);
-  };
-
-  const [Referraltostaff, setReferraltostaff] = useState(false);
-
-  const onReferr = (value, id) => {
-    setSendmassege(false);
-    console.log(value, problemid);
-  };
-
-  const setingAllOpenCategoris = (value) => {
-    setAllOpenCategoris(value);
-  };
-
-  const setingfilterallUrgency = (value) => {
-    setfilterallUrgency(value);
-  };
-
-  // פונקציות עדכון סטטוס פנייה
-
-  let rclose = "";
-  let rpending = "";
-  let rsendmasege = "";
-  let rRefertostaff = "";
-  let rapruchclose = "";
-  let rdelet = "";
-  // ticetidguid
-  let obj = {
-    ticetidguid: 1111,
-    task: "ffff",
-  };
+  }, [AllOpenCategoris, filterallUrgency, chingeurgency, nolist, arresticets]);
   return (
     <Contener>
+      <ModalStyeld
+        title={lang?.lang263}
+        visible={openaptuchclosemodal}
+        onCancel={() => {
+          setopenaptuchclosemodal(false);
+        }}
+        footer={false}
+      >
+        <Apruchclose
+          ticketguid={problemid}
+          Closemodal={closeopenaptuchclosemoda}
+        />
+      </ModalStyeld>
+
       <ModalStyeld
         title={lang?.lang263}
         visible={Sendmassege}
@@ -219,8 +273,7 @@ const Checkform = (props) => {
           // משימות עריכה
           const menu = (
             <Menu>
-              <Menu.Item>{lang?.lang145}</Menu.Item>
-              <Menu.Item>{lang?.lang190}</Menu.Item>
+              {/* שלח הודעה */}
               <Menu.Item
                 onClick={() => {
                   setSendmassege(true);
@@ -229,6 +282,7 @@ const Checkform = (props) => {
               >
                 {lang?.lang263}
               </Menu.Item>
+              {/* הפנה לאיש צוות */}
               <Menu.Item
                 onClick={() => {
                   setReferraltostaff(true);
@@ -237,10 +291,25 @@ const Checkform = (props) => {
               >
                 {lang?.lang240}
               </Menu.Item>
-              <Menu.Item>{lang?.lang195}</Menu.Item>
-              <Menu.Item>{lang?.lang208}</Menu.Item>
+
+              {/* סגירה מתקדמת */}
+              <Menu.Item
+                onClick={() => {
+                  setopenaptuchclosemodal(true);
+
+                  setproblemid(el.ticketid);
+                }}
+              >
+                {lang?.lang208}
+              </Menu.Item>
+              {/* עריכה */}
               <Menu.Item>{lang?.lang243}</Menu.Item>
-              <Menu.Item>{lang?.lang147}</Menu.Item>
+              {/* מחיקה */}
+              <Menu.Item
+                onClick={() => Posteditofticket("Delet", el.ticketguid)}
+              >
+                {lang?.lang147}
+              </Menu.Item>
             </Menu>
           );
           let urgency;
@@ -276,94 +345,134 @@ const Checkform = (props) => {
 
           let status;
           let statustext;
-
           switch (el.statusname) {
             case "פנייה חדשה":
-              status = "#108ee9";
+              status = {
+                color: "white",
+                backgroundcoler: "#108ee9",
+                border: "#1410e9",
+              };
               statustext = lang?.lang162;
               break;
             case "בטיפול":
-              status = "#87d068";
+              status = {
+                color: "white",
+                backgroundcoler: "#87d068",
+                border: "#68d082",
+              };
               statustext = lang?.lang174;
               break;
           }
 
           return (
             <div>
-              {/* {userlevelid === "10" ||
+              {userlevelid === "10" ||
               userlevelid === "5" ||
-              userlevelid === "13" ? ( */}
-              <StyelsCard
-                title={`${el.breadcrumb} / ${el.categoryname}`}
-                primary={urgency}
-                actions={[
-                  <StyelsDropdown
-                    trigger={["click"]}
-                    overlay={menu}
-                    className="dotsDropdown"
-                  >
-                    <HiOutlineDotsHorizontal />
-                  </StyelsDropdown>,
-                  <StyeldSelect
-                    primary={urgency}
-                    defaultValue={urgencytext}
-                    value={urgencytext}
-                    onChange={findChangeurgency}
-                    dropdownClassName="dropdownClassName"
-                  >
-                    <Option value={[lang?.lang122, el.ticketid, "1"]}>
-                      {" "}
-                      <StyeldTag color="success">{lang?.lang122}</StyeldTag>
-                    </Option>
-                    <Option value={[lang?.lang121, el.ticketid, "2"]}>
-                      {" "}
-                      <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
-                    </Option>
-                    <Option value={[lang?.lang120, el.ticketid, "3"]}>
-                      {" "}
-                      <StyeldTag color="red">{lang?.lang120}</StyeldTag>
-                    </Option>
-                  </StyeldSelect>,
-                ]}
-                style={{ width: 300 }}
-                extra={<div>מיקום: {el.locationName}</div>}
-              >
-                <Carddata element={el} />
+              userlevelid === "13" ? (
+                <StyelsCard
+                  title={`${el.breadcrumb} / ${el.categoryname}`}
+                  primary={urgency}
+                  actions={[
+                    <StyelsDropdown
+                      trigger={["click"]}
+                      overlay={menu}
+                      className="dotsDropdown"
+                    >
+                      <HiOutlineDotsHorizontal />
+                    </StyelsDropdown>,
+                    <StyeldSelect
+                      primary={urgency}
+                      defaultValue={urgencytext}
+                      value={urgencytext}
+                      onChange={findChangeurgency}
+                      dropdownClassName="dropdownClassName"
+                    >
+                      <Option value={[lang?.lang122, el.ticketid, "1"]}>
+                        {" "}
+                        <StyeldTag color="success">{lang?.lang122}</StyeldTag>
+                      </Option>
+                      <Option value={[lang?.lang121, el.ticketid, "2"]}>
+                        {" "}
+                        <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
+                      </Option>
+                      <Option value={[lang?.lang120, el.ticketid, "3"]}>
+                        {" "}
+                        <StyeldTag color="red">{lang?.lang120}</StyeldTag>
+                      </Option>
+                    </StyeldSelect>,
 
-                {Repeatedtask ? (
-                  <span className="card-body-spen">
-                    תדירות כל:
-                    {el.ticketPlanID}
-                  </span>
-                ) : (
-                  <span className="card-body-spen">
-                    <Tag color={status}>{statustext}</Tag>
-                  </span>
-                )}
-              </StyelsCard>
+                    <div>
+                      <input
+                        onChange={closetask}
+                        type="checkbox"
+                        id="horns"
+                        name="horns"
+                        value={el.ticketid}
+                      />
+                      <label for="horns">{lang?.lang145}</label>
+                    </div>,
+                  ]}
+                  style={{ width: 300 }}
+                  extra={<div>מיקום: {el.locationName}</div>}
+                >
+                  <Carddata element={el} />
+
+                  {Repeatedtask ? (
+                    <span className="card-body-spen">
+                      תדירות כל:
+                      {el.ticketPlanID}
+                    </span>
+                  ) : (
+                    <span className="card-body-spen">
+                      {/* סטטוס פנייה */}
+                      <StyeldSelect
+                        primary={status}
+                        defaultValue={statustext}
+                        value={statustext}
+                        onChange={findChangstatus}
+                        dropdownClassName="dropdownClassName"
+                      >
+                        <Option
+                          value={[lang?.lang162, el.ticketid, "פנייה חדשה"]}
+                        >
+                          {" "}
+                          <Tag color={"#108ee9"}>{lang?.lang162}</Tag>
+                        </Option>
+                        <Option value={[lang?.lang174, el.ticketid, "בטיפול"]}>
+                          {" "}
+                          <Tag color={"#87d068"}>{lang?.lang174}</Tag>
+                        </Option>
+                      </StyeldSelect>
+                      {/* ,<Tag color={status}>{statustext}</Tag> */}
+                    </span>
+                  )}
+                </StyelsCard>
               ) : (
-              <StyelsCard
-                title={`${el.breadcrumb} / ${el.categoryname}`}
-                primary={urgency}
-                style={{ width: 300 }}
-                extra={<div>מיקום: {el.locationName}</div>}
-              >
-                <Carddata element={el} />
-                {Repeatedtask ? (
-                  <span className="card-body-spen">{el.Repeatedtask}</span>
-                ) : (
-                  <span className="card-body-spen">
-                    <Tag color={status}>{statustext}</Tag>
-                  </span>
-                )}
-              </StyelsCard>
-              {/* )} */}
+                <StyelsCard
+                  title={`${el.breadcrumb} / ${el.categoryname}`}
+                  primary={urgency}
+                  style={{ width: 300 }}
+                  extra={<div>מיקום: {el.locationName}</div>}
+                >
+                  <Carddata element={el} />
+                  {Repeatedtask ? (
+                    <span className="card-body-spen">{el.Repeatedtask}</span>
+                  ) : (
+                    <span className="card-body-spen">
+                      <Tag color={status?.backgroundcoler}>{statustext}</Tag>
+                    </span>
+                  )}
+                </StyelsCard>
+              )}
             </div>
           );
         })
       ) : (
         <div>{lang?.lang181}</div>
       )}
+      {arrytaskforclose.length > 0 ? (
+        <Closetask data={arrytaskforclose} submit={Delettask} />
+      ) : null}
       <Link to="Affiliation" className="Affiliationbutton">
         <GiPresent className="Affiliationicon" />
       </Link>

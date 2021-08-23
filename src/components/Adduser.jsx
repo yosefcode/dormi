@@ -1,14 +1,13 @@
-import React, { useState, useContext, useHistory } from "react";
+import React, { useContext } from "react";
 import DataContext from "../DataContext";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox, Select, Switch } from "antd";
+import { Form, Input, Button, Select, Switch } from "antd";
 import { Container } from "../styelscomponents/Adduserstyel";
 
 import { IoCaretBackSharp } from "react-icons/io5";
 const Adduser = () => {
   document.body.style.backgroundColor = "white";
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
+
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;

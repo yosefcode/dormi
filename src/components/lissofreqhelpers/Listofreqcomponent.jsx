@@ -1,14 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Form, Button, Select, Input, Badge } from "antd";
+// import SignaturePad from "react-signature-canvas";
+import DataContext from "../../DataContext";
+// import { BsCloudUpload } from "react-icons/bs";
+// import { PostToServer } from "../../serveses";
 
-import DataContext from "../DataContext";
-
+// import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 const { Option } = Select;
 
 export function SendmasegeTask({ onsendmassege }) {
   const defoltlang = useContext(DataContext).lang;
-
   const [form] = Form.useForm();
 
   const lang = defoltlang?.lang;

@@ -4,13 +4,12 @@ import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Menu, Dropdown, Form, Input } from "antd";
-import { FiChrome } from "react-icons/fi";
+
 import DataContext from "../DataContext";
 
 function Categoris() {
   document.body.style.backgroundColor = "white";
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
+
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;

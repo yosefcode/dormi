@@ -57,8 +57,7 @@ function App() {
     let obj = { lang: res, langid: 1 };
     setlang(obj);
   };
-
-  useEffect(async () => {
+  const Logincheckstatus = async () => {
     if (cookies.get("aut")) {
       setloginstatus({ logde: true });
       let values = {
@@ -86,6 +85,36 @@ function App() {
     } else {
       defultlang();
     }
+  };
+  useEffect(() => {
+    Logincheckstatus();
+    // if (cookies.get("aut")) {
+    //   setloginstatus({ logde: true });
+    //   let values = {
+    //     email: getemailcookies,
+    //     pass: getpascookies,
+    //   };
+
+    //   let res = await Loginfunction(values);
+    //   if (res.error === "1") {
+    //     setloginstatus({ logde: false });
+    //     defultlang();
+    //   } else {
+    //     let obj = {
+    //       userid: res.changloginstatus.userid,
+    //     };
+
+    //     let ressult = await PostToServer("ticketlist", obj);
+
+    //     setticketlist(ressult);
+
+    //     setloginstatus(res.changloginstatus);
+    //     setlang(res.changlang);
+    //     setmasof(res.changmasof);
+    //   }
+    // } else {
+    //   defultlang();
+    // }
   }, []);
 
   return (

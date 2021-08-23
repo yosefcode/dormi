@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { message, Button, Space } from "antd";
+import React from "react";
+import { message } from "antd";
 import { Contener } from "../styelscomponents/AffiliatStayels";
 import { BiCopy, BiWinkSmile } from "react-icons/bi";
 
 const Affiliation = () => {
-  const [link, setlink] = useState("https://www.dormi.co.il/trial/?r=6an417");
+  const link = "https://www.dormi.co.il/trial/?r=6an417";
   const success = () => {
     message.success(`הלינק הועתק ${link}`);
   };

@@ -8,9 +8,20 @@ import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
 import { PoweroffOutlined } from "@ant-design/icons";
-import { PostToServer, PostToServerUplodeImage } from "../serveses";
+import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { Arryoficons } from "../Icons";
+import { GoTools } from "react-icons/go";
+import { RiComputerLine } from "react-icons/ri";
+import {
+  AiOutlineCluster,
+  AiFillFormatPainter,
+  AiFillThunderbolt,
+} from "react-icons/ai";
+import { BsBuilding, BsGearFill } from "react-icons/bs";
+
+import { GiBroom } from "react-icons/gi";
+import { BsFillDropletFill, BsFillAlarmFill } from "react-icons/bs";
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -41,6 +52,7 @@ const Nwerequest = (props) => {
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
   let categorynames = masof?.categorynames;
+  console.log(categorynames);
   let [rommarry, setrommarry] = useState();
   const onChange = (value) => {
     let listofrooms = locationarry.filter((el) => {
@@ -60,6 +72,8 @@ const Nwerequest = (props) => {
   ];
   const [errmassege, seterrmassege] = useState(false);
   const [errmassegetext, seterrmassegetext] = useState();
+
+  //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
   const onFinish = async (value) => {
     enterLoading(2);
@@ -141,7 +155,7 @@ const Nwerequest = (props) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-    debugger;
+
     setuplodeimage({
       previewImage: file.url || file.preview,
       previewVisible: true,
@@ -174,11 +188,7 @@ const Nwerequest = (props) => {
       img,
     };
 
-    debugger;
-
     let res = await PostToServer(reqruter, obj);
-
-    debugger;
 
     console.log("state", res);
   };
@@ -195,11 +205,23 @@ const Nwerequest = (props) => {
               <p id="hadep">{lang?.lang337}</p>
               <p>{lang?.lang338}</p>
               <div>
+                {/* <div>
+                  <BsFillAlarmFill />
+                  <GoTools />
+                  <RiComputerLine />
+                  <AiOutlineCluster />,
+                  <AiFillFormatPainter />,
+                  <AiFillThunderbolt />
+                  <BsBuilding />
+                  <BsGearFill />
+                  <GiBroom />
+                  <BsFillDropletFill />
+                </div> */}
                 <div className="listofproblom">
                   {categorynames
                     ? categorynames.map((el) => {
                         let finicon = Arryoficons.find((ic) => {
-                          if (el.id === ic.iconid) {
+                          if (el.icon === ic.iconname) {
                             return ic;
                           }
                         });

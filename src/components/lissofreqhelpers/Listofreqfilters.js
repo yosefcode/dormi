@@ -32,7 +32,19 @@ export const FilterlocationName = (data, alltikets) => {
 
   return arryofprojects;
 };
+// מחיקת משימות שהוסרו ע"י מנהל
+export const Filterdelittask = (data, alldelettask) => {
+  let arryofprojects = [];
+  debugger;
+  for (let i = 0; i < alldelettask.length; i++) {
+    let id = parseInt(alldelettask[i].id);
+    const alldata = data.filter((item) => item.ticketid !== id);
+    debugger;
+    arryofprojects.push(alldata);
+  }
 
+  return arryofprojects[0];
+};
 // פילטר לפי קטגוריות
 
 export function FilterUrgency(arry, filterallUrgency) {

@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Cardstyeld, Contener } from "../styelscomponents/UsersStyeld";
-import { Input, Space } from "antd";
+import { Input } from "antd";
 import DataContext from "../DataContext";
 import { Link } from "react-router-dom";
 
 function Users() {
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;

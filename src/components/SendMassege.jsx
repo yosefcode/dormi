@@ -11,8 +11,6 @@ import {
 import { Catalogues } from "./mock";
 import Checkboxgrop from "./Checkbox";
 const SendMassege = () => {
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;

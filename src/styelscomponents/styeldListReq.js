@@ -119,7 +119,7 @@ export const StyeldSelect = styled(Select)`
     background-color: ${(props) => props.primary.backgroundcoler}!important;
     color: ${(props) => props.primary.color}!important;
     border-color: ${(props) => props.primary.border}!important;
-    /* font-size: 7px; */
+    font-size: 12px;
     /* left: 16px; */
   }
   .ant-select-arrow {

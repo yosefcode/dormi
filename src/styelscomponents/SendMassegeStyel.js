@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Input, Button, Checkbox, Divider, Card } from "antd";
+import { Card } from "antd";
 export const Card1 = styled(Card)`
   margin-top: 40px;
   width: 283px;

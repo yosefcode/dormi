@@ -19,6 +19,13 @@
   width: 47px;
   height: 47px;
 }
+
+.Closepopup {
+  position: fixed;
+  left: 10%;
+  top: 12%;
+}
+
 .Affiliationicon {
   margin: 10px;
   font-size: 25px;
