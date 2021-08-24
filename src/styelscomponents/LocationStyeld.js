@@ -3,6 +3,20 @@ import { Card } from "antd";
 import styled from "styled-components";
 
 export const Contener = styled.div`
+  .categoriicon {
+    border: 1px solid #fff;
+    border-radius: 10px;
+
+    height: 90px;
+
+    width: 90px;
+    text-align: center;
+
+    margin-inline-start: 30%;
+    color: gainsboro;
+    position: absolute;
+    color: rgba(0, 0, 0, 0.2);
+  }
   .listofcards {
     display: flex;
     flex-wrap: wrap;

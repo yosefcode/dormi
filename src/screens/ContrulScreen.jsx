@@ -23,7 +23,7 @@ const ContrulScreen = () => {
   const defullang = useContext(DataContext).lang;
   const changlang = useContext(DataContext).changlang;
   const ticketlist = useContext(DataContext).ticketlist;
-
+  const masof = useContext(DataContext).masof;
   const changdata = useContext(DataContext).changdata;
   const [dir, setsir] = useState("tlr");
   const DirectionOfLang = (languigtype) => {
@@ -66,14 +66,14 @@ const ContrulScreen = () => {
             <Nwerequest />
           </Route>
           <Route path="/ListOfreq">
-            {ticketlist ? (
+            {ticketlist && defullang ? (
               <ListOfreq repeatedtask={false} />
             ) : (
               <Spin size="large" />
             )}
           </Route>
           <Route path="/Repeatedtask">
-            {ticketlist ? (
+            {ticketlist && defullang ? (
               <ListOfreq Repeatedtask={true} />
             ) : (
               <Spin size="large" />
@@ -88,9 +88,14 @@ const ContrulScreen = () => {
           <Route path="/list_users">
             <Users />
           </Route>
-          <Route path="/categoris">
-            <Categoris />
-          </Route>
+          {masof ? (
+            <Route path="/categoris">
+              <Categoris />
+            </Route>
+          ) : (
+            <Spin size="large" />
+          )}
+
           <Route path="/setings">
             <Setings />
           </Route>

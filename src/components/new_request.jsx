@@ -220,6 +220,7 @@ const Nwerequest = (props) => {
                 <div className="listofproblom">
                   {categorynames
                     ? categorynames.map((el) => {
+                        debugger;
                         let finicon = Arryoficons.find((ic) => {
                           if (el.icon === ic.iconname) {
                             return ic;

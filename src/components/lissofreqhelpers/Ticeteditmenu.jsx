@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
-import { Select, Input, Upload, Card, Button } from "antd";
+import { Select, Input, Upload, Card, Button, Tag } from "antd";
 import SignaturePad from "react-signature-canvas";
 import DataContext from "../../DataContext";
 import { BsCloudUpload } from "react-icons/bs";
@@ -158,3 +158,64 @@ const CardStyeld = styled.div`
     justify-content: space-between;
   }
 `;
+export const Switchurgency = (urgencyadmin, lang122, lang121, lang120) => {
+  let urgencytext;
+  let urgency;
+
+  switch (urgencyadmin) {
+    case "1":
+      urgencytext = lang122;
+      urgency = {
+        color: "#389e0d",
+        backgroundcoler: "#f6ffed",
+        border: "#b7eb8f",
+      };
+
+      return { urgencytext, urgency };
+      break;
+    case "2":
+      urgencytext = lang121;
+      urgency = {
+        color: "#fa8c16",
+        backgroundcoler: "#fff7e6",
+        border: "#ffd591;",
+      };
+      return { urgencytext, urgency };
+      break;
+    case "3":
+      urgencytext = lang120;
+      urgency = {
+        color: "#cf1322",
+        backgroundcoler: "#fff1f0",
+        border: "#ffa39e",
+      };
+      return { urgencytext, urgency };
+      break;
+  }
+};
+
+export const Switcstatus = (statusname, lang162, lang174) => {
+  let status;
+  let statustext;
+  switch (statusname) {
+    case "פנייה חדשה":
+      status = {
+        color: "white",
+        backgroundcoler: "#108ee9",
+        border: "#1410e9",
+      };
+      statustext = lang162;
+      return { status, statustext };
+      break;
+    case "בטיפול":
+      status = {
+        color: "white",
+        backgroundcoler: "#87d068",
+        border: "#68d082",
+      };
+      statustext = lang174;
+      return { status, statustext };
+
+      break;
+  }
+};

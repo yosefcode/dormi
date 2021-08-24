@@ -1,21 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Menu, Dropdown, Form, Input } from "antd";
+import { Arryoficons } from "../Icons";
+import { PoweroffOutlined } from "@ant-design/icons";
 
 import DataContext from "../DataContext";
-
 function Categoris() {
+  const { SubMenu } = Menu;
   document.body.style.backgroundColor = "white";
 
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
+  let categoryarry = masof.categorynames;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [chusencategori, setchusencategori] = useState();
+  const [firstlode, setlfirstlode] = useState();
+  const [localarry, setlocalarry] = useState();
+  const [chingeurgency, setchingeurgency] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -29,11 +35,42 @@ function Categoris() {
     setIsModalVisible(false);
   };
 
+  const chuseicon = (value) => {
+    let requst = categoryarry.findIndex(
+      (Item) => Item.maincategoryname === chusencategori
+    );
+    categoryarry[requst].icon = value;
+    setchingeurgency(!chingeurgency);
+   
+    setlocalarry(categoryarry);
+  };
+
+  useEffect(() => {
+    if (!firstlode) {
+      setlocalarry(categoryarry);
+      setlfirstlode(true);
+    }
+  }, [chingeurgency]);
   const menuofproject = (
     <Menu>
       <Menu.Item>{lang?.lang291} </Menu.Item>
       <Menu.Item>{lang?.lang294}</Menu.Item>
       <Menu.Item>{lang?.lang147}</Menu.Item>
+      <SubMenu key="sub1" title="הוספת איכון" dir="tlr">
+        {Arryoficons?.map((ic) => {
+          return (
+            <Menu.Item key={ic.iconid}>
+              <span
+                onClick={() => {
+                  chuseicon(ic.iconname);
+                }}
+              >
+                <ic.icon />
+              </span>
+            </Menu.Item>
+          );
+        })}
+      </SubMenu>
     </Menu>
   );
 
@@ -45,8 +82,6 @@ function Categoris() {
     </Menu>
   );
 
-  let categoryarry = masof?.categorynames;
-
   return (
     <Contener>
       <div className="hader">
@@ -55,49 +90,70 @@ function Categoris() {
         <button onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
-        {categoryarry
-          ? categoryarry.map((el) => {
+        {localarry
+          ? localarry.map((el) => {
+              let finicon = Arryoficons.find((ic) => {
+                if (el.icon === ic.iconname) {
+                  return ic;
+                }
+              });
+              let icon;
+
+              if (finicon?.icon) {
+                icon = finicon.icon;
+              } else {
+                icon = false;
+              }
+              //
+
               return (
-                <CardStyeld
-                  hoverable
-                  title={el.maincategoryname}
-                  extra={
-                    <Dropdown
-                      overlay={menuofproject}
-                      trigger={["click"]}
-                      // icon={}
-                    >
-                      <HiOutlineDotsHorizontal />
-                    </Dropdown>
-                  }
-                >
-                  <div className="listodors">
-                    {el.subcategory ? (
-                      el.subcategory.map((item) => {
-                        return (
-                          <div className="singellocation">
-                            <div>{item.subname}</div>
-                            <div>
-                              <Dropdown
-                                overlay={menuoflocation}
-                                trigger={["click"]}
-                                // icon={
-                                //
-                                // }
-                              >
-                                <HiOutlineDotsHorizontal className="internaldots" />
-                              </Dropdown>
+                <div>
+                  <CardStyeld
+                    hoverable
+                    title={el.maincategoryname}
+                    extra={
+                      <Dropdown
+                        overlay={menuofproject}
+                        trigger={["click"]}
+                        onClick={() => {
+                          setchusencategori(el.maincategoryname);
+                        }}
+                      >
+                        <HiOutlineDotsHorizontal />
+                      </Dropdown>
+                    }
+                  >
+                    <div>
+                      <finicon.icon className="categoriicon" />
+                    </div>
+                    <div className="listodors">
+                      {el.subcategory ? (
+                        el.subcategory.map((item) => {
+                          return (
+                            <div className="singellocation">
+                              <div>{item.subname}</div>
+                              <div>
+                                <Dropdown
+                                  overlay={menuoflocation}
+                                  trigger={["click"]}
+                                  // icon={
+                                  //
+                                  // }
+                                >
+                                  <HiOutlineDotsHorizontal className="internaldots" />
+                                </Dropdown>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <div>
-                        <p className="noroms">{lang?.lang225} </p>
-                      </div>
-                    )}
-                  </div>
-                </CardStyeld>
+                          );
+                        })
+                      ) : (
+                        <div>
+                          <p className="noroms">{lang?.lang225} </p>
+                        </div>
+                      )}
+                    </div>
+                  </CardStyeld>
+                </div>
               );
             })
           : null}

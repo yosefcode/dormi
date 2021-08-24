@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Tag, Menu, Select, Checkbox } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, Switch } from "react-router-dom";
 import {
   Contener,
   StyeldSelect,
@@ -28,7 +28,7 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
 import { FaFilter } from "react-icons/fa";
 import { GiPresent } from "react-icons/gi";
-import { listoftascs } from "../fackarrylisofreq";
+
 import {
   SendmasegeTask,
   Sentostaf,
@@ -39,9 +39,10 @@ import {
   Apruchclose,
   Posteditofticket,
   Closetask,
+  Switchurgency,
+  Switcstatus,
 } from "../components/lissofreqhelpers/Ticeteditmenu";
 import DataContext from "../DataContext";
-import Item from "antd/lib/list/Item";
 
 const { Option } = Select;
 
@@ -178,11 +179,12 @@ const Checkform = (props) => {
       // פילטר לפי דחיפות
       result = FilterUrgency(result, filterallUrgency);
       //
-      debugger;
 
       if (arresticets) {
         result = Filterdelittask(result, arrytaskforclose);
-        debugger;
+        document
+          .querySelectorAll("input[type=checkbox]")
+          .forEach((el) => (el.checked = false));
         setarrytaskforclose([]);
 
         setarresticets(false);
@@ -312,167 +314,144 @@ const Checkform = (props) => {
               </Menu.Item>
             </Menu>
           );
-          let urgency;
-          let urgencytext;
 
-          switch (el.urgencyadmin) {
-            case "1":
-              urgencytext = lang?.lang122;
-              urgency = {
-                color: "#389e0d",
-                backgroundcoler: "#f6ffed",
-                border: "#b7eb8f",
-              };
-              break;
-            case "2":
-              urgencytext = lang?.lang121;
-              urgency = {
-                color: "#fa8c16",
-                backgroundcoler: "#fff7e6",
-                border: "#ffd591;",
-              };
-              break;
-            case "3":
-              urgencytext = lang?.lang120;
-              urgency = {
-                color: "#cf1322",
-                backgroundcoler: "#fff1f0",
-                border: "#ffa39e",
-              };
+          /// הגדרת סטטוס בקשה ודחיפות לכל כרטיס
+          let resulturgency = Switchurgency(
+            el.urgencyadmin,
+            lang?.lang122,
+            lang?.lang121,
+            lang?.lang120
+          );
 
-              break;
-          }
+          let urgency = resulturgency.urgency;
+          let urgencytext = resulturgency.urgencytext;
 
-          let status;
-          let statustext;
-          switch (el.statusname) {
-            case "פנייה חדשה":
-              status = {
-                color: "white",
-                backgroundcoler: "#108ee9",
-                border: "#1410e9",
-              };
-              statustext = lang?.lang162;
-              break;
-            case "בטיפול":
-              status = {
-                color: "white",
-                backgroundcoler: "#87d068",
-                border: "#68d082",
-              };
-              statustext = lang?.lang174;
-              break;
-          }
+          let resultstatus = Switcstatus(
+            el.statusname,
+            lang?.lang162,
+            lang?.lang174
+          );
+
+          let status = resultstatus.status;
+          let statustext = resultstatus.statustext;
 
           return (
             <div>
-              {userlevelid === "10" ||
-              userlevelid === "5" ||
-              userlevelid === "13" ? (
-                <StyelsCard
-                  title={`${el.breadcrumb} / ${el.categoryname}`}
-                  primary={urgency}
-                  actions={[
-                    <StyelsDropdown
-                      trigger={["click"]}
-                      overlay={menu}
-                      className="dotsDropdown"
-                    >
-                      <HiOutlineDotsHorizontal />
-                    </StyelsDropdown>,
-                    <StyeldSelect
-                      primary={urgency}
-                      defaultValue={urgencytext}
-                      value={urgencytext}
-                      onChange={findChangeurgency}
-                      dropdownClassName="dropdownClassName"
-                    >
-                      <Option value={[lang?.lang122, el.ticketid, "1"]}>
-                        {" "}
-                        <StyeldTag color="success">{lang?.lang122}</StyeldTag>
-                      </Option>
-                      <Option value={[lang?.lang121, el.ticketid, "2"]}>
-                        {" "}
-                        <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
-                      </Option>
-                      <Option value={[lang?.lang120, el.ticketid, "3"]}>
-                        {" "}
-                        <StyeldTag color="red">{lang?.lang120}</StyeldTag>
-                      </Option>
-                    </StyeldSelect>,
+              {
+                // userlevelid === "10" ||
+                // userlevelid === "5" ||
+                // userlevelid === "13"
 
-                    <div>
-                      <input
-                        onChange={closetask}
-                        type="checkbox"
-                        id="horns"
-                        name="horns"
-                        value={el.ticketid}
-                      />
-                      <label for="horns">{lang?.lang145}</label>
-                    </div>,
-                  ]}
-                  style={{ width: 300 }}
-                  extra={<div>מיקום: {el.locationName}</div>}
-                >
-                  <Carddata element={el} />
-
-                  {Repeatedtask ? (
-                    <span className="card-body-spen">
-                      תדירות כל:
-                      {el.ticketPlanID}
-                    </span>
-                  ) : (
-                    <span className="card-body-spen">
-                      {/* סטטוס פנייה */}
+                el.breadcrumb ? (
+                  <StyelsCard
+                    title={`${el.breadcrumb} / ${el.categoryname}`}
+                    primary={urgency}
+                    actions={[
+                      <StyelsDropdown
+                        trigger={["click"]}
+                        overlay={menu}
+                        className="dotsDropdown"
+                      >
+                        <HiOutlineDotsHorizontal />
+                      </StyelsDropdown>,
                       <StyeldSelect
-                        primary={status}
-                        defaultValue={statustext}
-                        value={statustext}
-                        onChange={findChangstatus}
+                        primary={urgency}
+                        defaultValue={urgencytext}
+                        value={urgencytext}
+                        onChange={findChangeurgency}
                         dropdownClassName="dropdownClassName"
                       >
-                        <Option
-                          value={[lang?.lang162, el.ticketid, "פנייה חדשה"]}
+                        <Option value={[lang?.lang122, el.ticketid, "1"]}>
+                          {" "}
+                          <StyeldTag color="success">{lang?.lang122}</StyeldTag>
+                        </Option>
+                        <Option value={[lang?.lang121, el.ticketid, "2"]}>
+                          {" "}
+                          <StyeldTag color="warning">{lang?.lang121}</StyeldTag>
+                        </Option>
+                        <Option value={[lang?.lang120, el.ticketid, "3"]}>
+                          {" "}
+                          <StyeldTag color="red">{lang?.lang120}</StyeldTag>
+                        </Option>
+                      </StyeldSelect>,
+
+                      <div>
+                        <input
+                          onChange={closetask}
+                          type="checkbox"
+                          id="horns"
+                          name="horns"
+                          value={el.ticketid}
+                        />
+                        <label for="horns">{lang?.lang145}</label>
+                      </div>,
+                    ]}
+                    style={{ width: 300 }}
+                    extra={<div>מיקום: {el.locationName}</div>}
+                  >
+                    <Carddata element={el} />
+
+                    {Repeatedtask ? (
+                      <span className="card-body-spen">
+                        תדירות כל:
+                        {el.ticketPlanID}
+                      </span>
+                    ) : (
+                      <span className="card-body-spen">
+                        {/* סטטוס פנייה */}
+                        <StyeldSelect
+                          primary={status}
+                          defaultValue={statustext}
+                          value={statustext}
+                          onChange={findChangstatus}
+                          dropdownClassName="dropdownClassName"
                         >
-                          {" "}
-                          <Tag color={"#108ee9"}>{lang?.lang162}</Tag>
-                        </Option>
-                        <Option value={[lang?.lang174, el.ticketid, "בטיפול"]}>
-                          {" "}
-                          <Tag color={"#87d068"}>{lang?.lang174}</Tag>
-                        </Option>
-                      </StyeldSelect>
-                      {/* ,<Tag color={status}>{statustext}</Tag> */}
-                    </span>
-                  )}
-                </StyelsCard>
-              ) : (
-                <StyelsCard
-                  title={`${el.breadcrumb} / ${el.categoryname}`}
-                  primary={urgency}
-                  style={{ width: 300 }}
-                  extra={<div>מיקום: {el.locationName}</div>}
-                >
-                  <Carddata element={el} />
-                  {Repeatedtask ? (
-                    <span className="card-body-spen">{el.Repeatedtask}</span>
-                  ) : (
-                    <span className="card-body-spen">
-                      <Tag color={status?.backgroundcoler}>{statustext}</Tag>
-                    </span>
-                  )}
-                </StyelsCard>
-              )}
+                          <Option
+                            value={[lang?.lang162, el.ticketid, "פנייה חדשה"]}
+                          >
+                            {" "}
+                            <Tag color={"#108ee9"}>{lang?.lang162}</Tag>
+                          </Option>
+                          <Option
+                            value={[lang?.lang174, el.ticketid, "בטיפול"]}
+                          >
+                            {" "}
+                            <Tag color={"#87d068"}>{lang?.lang174}</Tag>
+                          </Option>
+                        </StyeldSelect>
+                      </span>
+                    )}
+                  </StyelsCard>
+                ) : (
+                  <StyelsCard
+                    title={`${el.breadcrumb} / ${el.categoryname}`}
+                    primary={urgency}
+                    style={{ width: 300 }}
+                    extra={<div>מיקום: {el.locationName}</div>}
+                  >
+                    <Carddata element={el} />
+                    {Repeatedtask ? (
+                      <span className="card-body-spen">{el.Repeatedtask}</span>
+                    ) : (
+                      <span className="card-body-spen">
+                        <Tag color={status?.backgroundcoler}>{statustext}</Tag>
+                      </span>
+                    )}
+                  </StyelsCard>
+                )
+              }
             </div>
           );
         })
       ) : (
         <div>{lang?.lang181}</div>
       )}
+
       {arrytaskforclose.length > 0 ? (
+        // פופ אפ למחיקות מרובה של כרטיסים
         <Closetask data={arrytaskforclose} submit={Delettask} />
       ) : null}
+
       <Link to="Affiliation" className="Affiliationbutton">
         <GiPresent className="Affiliationicon" />
       </Link>

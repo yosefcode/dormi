@@ -6,6 +6,7 @@ import {
   AiFillThunderbolt,
 } from "react-icons/ai";
 import { BsBuilding, BsGearFill } from "react-icons/bs";
+import { PoweroffOutlined } from "@ant-design/icons";
 
 import { GiBroom } from "react-icons/gi";
 import { BsFillDropletFill, BsFillAlarmFill } from "react-icons/bs";
@@ -19,5 +20,6 @@ export const Arryoficons = [
   { icon: GiBroom, iconid: 8, iconname: "t" },
   { icon: BsFillDropletFill, iconid: 9, iconname: "fa fa-shower" },
   { icon: BsFillAlarmFill, iconid: 10, iconname: "v" },
-  { icon: BsBuilding, iconid: 10, iconname: "pe-7s-light" },
+  { icon: BsBuilding, iconid: 11, iconname: "pe-7s-light" },
+  { icon: PoweroffOutlined, iconid: 12, iconname: "" },
 ];
