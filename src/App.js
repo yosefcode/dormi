@@ -16,6 +16,7 @@ function App() {
   // context DataProvider
   const [data, setdata] = useState();
   const [lang, setlang] = useState();
+
   const [loginstatus, setloginstatus] = useState();
   const [masof, setmasof] = useState();
   const [ticketlist, setticketlist] = useState();
@@ -57,6 +58,21 @@ function App() {
     let obj = { lang: res, langid: 1 };
     setlang(obj);
   };
+
+  const [dir, setsir] = useState("tlr");
+  const DirectionOfLang = (languigtype) => {
+    switch (languigtype) {
+      case 2:
+        setsir("rtl");
+        break;
+      case 5:
+        setsir("rtl");
+        break;
+      default:
+        setsir("tlr");
+    }
+  };
+
   const Logincheckstatus = async () => {
     if (cookies.get("aut")) {
       setloginstatus({ logde: true });
@@ -79,6 +95,8 @@ function App() {
         setticketlist(ressult);
 
         setloginstatus(res.changloginstatus);
+        DirectionOfLang(res.changlang.langid);
+
         setlang(res.changlang);
         setmasof(res.changmasof);
       }
@@ -86,52 +104,27 @@ function App() {
       defultlang();
     }
   };
+
   useEffect(() => {
     Logincheckstatus();
-    // if (cookies.get("aut")) {
-    //   setloginstatus({ logde: true });
-    //   let values = {
-    //     email: getemailcookies,
-    //     pass: getpascookies,
-    //   };
-
-    //   let res = await Loginfunction(values);
-    //   if (res.error === "1") {
-    //     setloginstatus({ logde: false });
-    //     defultlang();
-    //   } else {
-    //     let obj = {
-    //       userid: res.changloginstatus.userid,
-    //     };
-
-    //     let ressult = await PostToServer("ticketlist", obj);
-
-    //     setticketlist(ressult);
-
-    //     setloginstatus(res.changloginstatus);
-    //     setlang(res.changlang);
-    //     setmasof(res.changmasof);
-    //   }
-    // } else {
-    //   defultlang();
-    // }
   }, []);
 
   return (
     <div>
       <DataProvider value={providerOptions}>
-        {!loginstatus?.logde ? (
-          <div>
-            <Language Language={"tlr"}>
+        <Language Language={dir}>
+          {!loginstatus?.logde ? (
+            <div>
               <Menu LoginScreen={true} />
               <Login />
-            </Language>
-          </div>
-        ) : (
-          <div>
-            <ContrulScreen />
-          </div>
-        )}
+              {/* </Language> */}
+            </div>
+          ) : (
+            <div>
+              <ContrulScreen />
+            </div>
+          )}
+        </Language>
       </DataProvider>
     </div>
   );
