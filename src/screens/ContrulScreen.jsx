@@ -3,7 +3,7 @@ import { Spin } from "antd";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Checkform from "../components/checkform";
-import Nwerequest from "../components/new_request";
+import Nwerequest from "../screens/new_request";
 import User from "../components/user";
 import Menu from "./Menu";
 import ListOfreq from "./ListOfreq";
