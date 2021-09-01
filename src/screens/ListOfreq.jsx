@@ -209,21 +209,25 @@ const Checkform = (props) => {
   const Goback = () => {
     setedittask(true);
   };
+  const [claerapruchform, setclaerapruchform] = useState(false);
+
   return (
     <div>
       {edittask ? (
         <Contener>
           <ModalStyeld
-            title={lang?.lang263}
+            title={`${lang?.lang208} - ${problemid}`}
             visible={openaptuchclosemodal}
             onCancel={() => {
               setopenaptuchclosemodal(false);
+              setclaerapruchform(true);
             }}
             footer={false}
           >
             <Apruchclose
               ticketguid={problemid}
               Closemodal={closeopenaptuchclosemoda}
+              Clearform={claerapruchform}
             />
           </ModalStyeld>
 

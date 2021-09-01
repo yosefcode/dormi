@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
-import { Select, Input, Upload, Card, Button, Tag } from "antd";
+import { Select, Input, Upload, Card, Button, Tag, Form } from "antd";
 import SignaturePad from "react-signature-canvas";
 import DataContext from "../../DataContext";
 import { BsCloudUpload } from "react-icons/bs";
@@ -16,17 +16,19 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-export const Apruchclose = ({ Closemodal }) => {
+export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
   const defoltlang = useContext(DataContext).lang;
   const loginstatus = useContext(DataContext).loginstatus;
-
+  const [form] = Form.useForm();
   const lang = defoltlang?.lang;
   const [uplodeimage, setuplodeimage] = useState({
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
   });
-
+  if (Clearform) {
+    form.resetFields();
+  }
   const sigCanvas = useRef({});
   const upludeimage = ({ fileList }) => setuplodeimage({ fileList });
   const handlePreview = async (file) => {
@@ -46,7 +48,7 @@ export const Apruchclose = ({ Closemodal }) => {
   const clear = () => {
     sigCanvas.current.clear();
   };
-  const onfinish = async () => {
+  const onFinish = async (value) => {
     const hiddensignature = sigCanvas.current
       .getTrimmedCanvas()
       .toDataURL("image/png");
@@ -54,20 +56,25 @@ export const Apruchclose = ({ Closemodal }) => {
     let closingPic = fileList;
 
     let userid = loginstatus.userid;
+
+    // let y = ticketguid;
+    // let x = value;
     let task = "cost";
-    let ticketguid = "82557424-473F-44D2-8718-8151243D9B91";
+    // let ticketguid = "82557424-473F-44D2-8718-8151243D9B91";
     let obj = {
       task,
       userid,
       ticketguid,
+      ...value,
       closingPic,
       hiddensignature,
     };
+    debugger;
     console.log(obj);
     let ruter = "ticket";
     let res = await PostToServer(ruter, obj);
-    // debugger;
     sigCanvas.current.clear();
+    // debugger;
 
     Closemodal();
     setuplodeimage({
@@ -83,23 +90,72 @@ export const Apruchclose = ({ Closemodal }) => {
       <div className="uplodeimage">{"העלאה"}</div>
     </div>
   );
+  let stafarry = ["אביתר", "בעז", "משה"];
   return (
     <div>
-      <Upload
-        listType="picture-card"
-        // fileList={fileList}
-        onPreview={handlePreview}
-        onChange={upludeimage}
-      >
-        {uploadButton}
-      </Upload>
+      <div className="edittask">
+        <Form name="basic" onFinish={onFinish} form={form}>
+          <div className="formedittask">
+            {/* נסגר עי */}
+            <div className="taskright">
+              <Form.Item name="closdbi" label={lang?.lang197}>
+                <Select placeholder="איש צוות" allowClear>
+                  {stafarry.map((el) => {
+                    return <Option value={el}>{el}</Option>;
+                  })}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                name="price"
+                label={`${lang?.lang149}(${lang?.lang204})`}
+              >
+                <Input type="bunber" inputmode="numeric" />
+              </Form.Item>
+              <Form.Item name="anbsuertostudent" label={lang?.lang205}>
+                <TextArea allowClear rows={4} />
+              </Form.Item>
+              <Form.Item name="uplodeinag" allowClear label="בלבלבלב">
+                <Upload
+                  listType="picture-card"
+                  // fileList={fileList}
+                  onPreview={handlePreview}
+                  onChange={upludeimage}
+                >
+                  {uploadButton}
+                </Upload>
+              </Form.Item>
+            </div>
+            <div className="taskleft">
+              <Form.Item name="insidetext" label={lang?.lang206}>
+                <TextArea allowClear rows={4} />
+              </Form.Item>
+              <Form.Item label="בלבלבלב">
+                <div className="canvas_wrapper">
+                  <SignaturePad
+                    ref={sigCanvas}
+                    canvasProps={{ className: "SignaturCanvas" }}
+                  />
+                  <a className="clear_button" onClick={clear}>
+                    ניקוי חתימה
+                  </a>
+                </div>
 
-      <SignaturePad
-        ref={sigCanvas}
-        canvasProps={{ className: "SignaturCanvas" }}
-      />
-      <button onClick={clear}>cler</button>
-      <button onClick={onfinish}>send</button>
+                {/* <SignaturePad
+                  ref={sigCanvas}
+                  canva
+                  sProps={{ className: "SignaturCanvas" }}
+                />
+                <button onClick={clear}>cler</button> */}
+              </Form.Item>
+            </div>
+
+            <br />
+          </div>
+          <Button type="primary" htmlType="submit">
+            send
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };

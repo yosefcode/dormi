@@ -150,20 +150,8 @@ const Formtaslfromlist = ({
             >
               <FiArrowRight />
             </div>
-            <Form.Item
-              name="categoryid"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              // defaultValue={data.categoryname}
-            >
-              <Select
-                showSearch
-                defaultValue={data.categoryname}
-                placeholder={lang?.lang110}
-              >
+            <Form.Item name="categoryid" initialValue={data.categoryname}>
+              <Select showSearch placeholder={lang?.lang110}>
                 {Subcategory
                   ? Subcategory.subcategory.map((el) => {
                       return (
@@ -176,18 +164,10 @@ const Formtaslfromlist = ({
               </Select>
             </Form.Item>
 
-            <Form.Item
-              name="locationid"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
+            <Form.Item name="locationid" initialValue={data.locationName}>
               <Select
                 showSearch
                 placeholder={lang?.lang340}
-                defaultValue={data.locationName}
                 onChange={onChange}
               >
                 {locationarry
@@ -202,19 +182,8 @@ const Formtaslfromlist = ({
               </Select>
             </Form.Item>
 
-            <Form.Item
-              name="roomid"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Select
-                showSearch
-                defaultValue={data.roomName}
-                placeholder={lang?.lang341}
-              >
+            <Form.Item name="roomid" initialValue={data.roomName}>
+              <Select showSearch placeholder={lang?.lang341}>
                 {rommarry
                   ? rommarry.map((el) => {
                       return (
@@ -227,11 +196,18 @@ const Formtaslfromlist = ({
               </Select>
             </Form.Item>
 
-            <Form.Item label={lang?.lang123} name="comments">
-              <TextArea defaultValue={data.comments} rows={4} />
+            <Form.Item
+              label={lang?.lang123}
+              name="comments"
+              initialValue={data.comments}
+            >
+              <TextArea rows={4} />
             </Form.Item>
-            <Form.Item name="urgencyid">
-              <Radio.Group defaultValue={parseInt(data.urgencyadmin)}>
+            <Form.Item
+              name="urgencyid"
+              initialValue={parseInt(data.urgencyadmin)}
+            >
+              <Radio.Group>
                 <Space direction="vertical">
                   <Radio className="Radio1" value={1}>
                     {lang?.lang120}
@@ -249,15 +225,7 @@ const Formtaslfromlist = ({
             </Form.Item>
             {Temmembertask ? (
               <div className="frequency">
-                <Form.Item
-                  name="frequency"
-                  label={lang?.lang269}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
+                <Form.Item name="frequency" label={lang?.lang269}>
                   <Select showSearch>
                     {locationarry.map((el) => {
                       return (
