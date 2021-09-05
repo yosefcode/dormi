@@ -50,6 +50,7 @@ export const Contener = styled.div`
       width: 500px;
     }
   }
+
   .export_exel {
     background-color: #00c851;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
@@ -84,14 +85,24 @@ export const Contener = styled.div`
     }
   }
 
-  .top_icon button {
+  .buttonnewtask {
+    background-color: #2196f3;
+    width: 200px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
+    padding: 0.84rem 2.14rem;
+    font-size: 0.81rem;
+    border-radius: 100px;
+    margin-inline-end: 3%;
+    margin-inline-start: 3%;
+  }
+  /* .top_icon button {
     background-color: blue;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
     padding: 0.84rem 2.14rem;
     font-size: 0.81rem;
     border-radius: 100px;
     color: white;
-  }
+  } */
 `;
 
 export const StyelsDropdown = styled(Dropdown)``;

@@ -16,8 +16,22 @@ const Login = (props) => {
   const changlang = useContext(DataContext).changlang;
   const changmasof = useContext(DataContext).changmasof;
   const changeticketlist = useContext(DataContext).changeticketlist;
+  const changedir = useContext(DataContext).changedir;
   const lang = defoltlang?.lang;
 
+  // const [dir, setsir] = useState("tlr");
+  const DirectionOfLang = (languigtype) => {
+    switch (languigtype) {
+      case 2:
+        changedir("rtl");
+        break;
+      case 5:
+        changedir("rtl");
+        break;
+      default:
+        changedir("tlr");
+    }
+  };
   const cookies = new Cookies();
   // cookies.remove("pas");
   // cookies.remove("email");
@@ -63,6 +77,7 @@ const Login = (props) => {
     } else {
       await getallticts(res.changloginstatus.userid);
       changmasof(res.changmasof);
+      DirectionOfLang(res.changlang.langid);
 
       changloginstatus(res.changloginstatus);
       changlang(res.changlang);

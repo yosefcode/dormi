@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Select } from "antd";
 
 export const Problemcontener = styled.div`
   color: white;
@@ -56,11 +57,18 @@ export const Problemcontener = styled.div`
     }
   }
 `;
+
 export const FormContener = styled.div`
   display: flex;
   justify-content: start;
-  /* flex-grow: 0; */
-  /* margin-inline-start: 90%; */
+  /* .ant-select-item-option-content {
+    text-align: center !important;
+  } */
+
+  .ant-select.ant-select-item-option-content {
+    text-align: center !important;
+    background-color: blue !important;
+  }
   button.ant-btn.ant-btn-primary {
     background-color: #f5a623;
     border-radius: 10px;
@@ -244,7 +252,7 @@ export const FormContener = styled.div`
 
       width: 267px;
       margin-left: 5%;
-      text-align: center;
+      text-align: center !important;
       padding-left: 7%;
       padding-right: 7%;
     }

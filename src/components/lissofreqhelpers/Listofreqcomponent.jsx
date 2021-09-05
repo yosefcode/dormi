@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
-import { Form, Button, Select, Input, Badge } from "antd";
+import React, { useContext, useState } from "react";
+import { Form, Button, Select, Input, Badge, TreeSelect } from "antd";
 // import SignaturePad from "react-signature-canvas";
 import DataContext from "../../DataContext";
+import Item from "antd/lib/list/Item";
 // import { BsCloudUpload } from "react-icons/bs";
 // import { PostToServer } from "../../serveses";
 
@@ -9,6 +10,8 @@ import DataContext from "../../DataContext";
 const { TextArea } = Input;
 const { Option } = Select;
 
+const { TreeNode } = TreeSelect;
+const { SHOW_PARENT } = TreeSelect;
 export function SendmasegeTask({ onsendmassege }) {
   const defoltlang = useContext(DataContext).lang;
   const [form] = Form.useForm();
@@ -85,10 +88,12 @@ export function Carddata({ element }) {
 }
 
 /// כל סוגי הפילטרים
+
 export function FiltersForsort({
   filterarry,
   setingAllOpenCategoris,
   setingfilterallUrgency,
+  setlocationsort,
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
@@ -100,8 +105,63 @@ export function FiltersForsort({
     setingfilterallUrgency(value);
   };
   function handleChange(value) {
+    // setlocationsort(value);
+    console.log(filterarry.locationName);
     console.log(`Selected: ${value}`);
   }
+
+  const treeData = [
+    {
+      title: "Node1",
+      value: "0-0",
+      key: "0-0",
+      children: [
+        {
+          title: "Child Node1",
+          value: "0-0-0",
+          key: "0-0-0",
+        },
+      ],
+    },
+    {
+      title: "Node2",
+      value: "0-1",
+      key: "0-1",
+      children: [
+        {
+          title: "Child Node3",
+          value: "0-1-0",
+          key: "0-1-0",
+        },
+        {
+          title: "Child Node4",
+          value: "0-1-1",
+          key: "0-1-1",
+        },
+        {
+          title: "Child Node5",
+          value: "0-1-2",
+          key: "0-1-2",
+        },
+      ],
+    },
+  ];
+  const [value, setvalue] = useState();
+  const onChange = (value) => {
+    console.log("onChange ", value);
+  };
+
+  const tProps = {
+    treeData,
+    value: value,
+    onChange: onChange,
+    treeCheckable: true,
+    showCheckedStrategy: SHOW_PARENT,
+    placeholder: "Please select",
+    style: {
+      width: "100%",
+    },
+  };
 
   return (
     <div className="filteroption">
@@ -139,7 +199,7 @@ export function FiltersForsort({
           <Option value={"1"}>{lang?.lang122}</Option>
         </Select>
       </div>
-
+      {/* 
       <Select
         mode="tags"
         size={"default"}
@@ -154,7 +214,58 @@ export function FiltersForsort({
               );
             })
           : null}
-      </Select>
+      </Select> */}
+      <TreeSelect {...tProps} />
+
+      <TreeSelect
+        showSearch
+        style={{ width: "100%" }}
+        dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+        placeholder="Please select"
+        allowClear
+        multiple
+        treeDefaultExpandAll
+        onChange={handleChange}
+      >
+        {filterarry
+          ? filterarry.locationName.map((el, index) => {
+              return (
+                <TreeNode
+                  key={index}
+                  value={el.locationName[0].locationName}
+                  title={el.locationName[0].locationName}
+                >
+                  {/* <TreeNode value="leaf1" title="my leaf" />
+                  <TreeNode value="leaf2" title="your leaf" /> */}
+                  {/* {el.locationName
+                    ? el.locationName.map((Item, index1) => {
+                        return (
+                          <TreeNode
+                            key={index1}
+                            value={Item.roomName}
+                            title={Item.roomName}
+                          />
+                        );
+                      })
+                    : null} */}
+                </TreeNode>
+              );
+            })
+          : null}
+
+        {/* <TreeNode value="parent 1" title="parent 1">
+          <TreeNode value="parent 1-0" title="parent 1-0">
+            <TreeNode value="leaf1" title="my leaf" />
+            <TreeNode value="leaf2" title="your leaf" />
+          </TreeNode>
+          <TreeNode value="parent 1-1" title="parent 1-1">
+            <TreeNode
+              value="sss"
+              title={<b style={{ color: "#08c" }}>sss</b>}
+            />
+          </TreeNode>
+        </TreeNode> */}
+      </TreeSelect>
     </div>
   );
 }

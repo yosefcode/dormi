@@ -44,9 +44,52 @@ import {
 } from "../components/lissofreqhelpers/Ticeteditmenu";
 import Formtaskfromlist from "../components/Formtaskfromlist";
 import DataContext from "../DataContext";
+// import { Download } from "../components/lissofreqhelpers/Exelexport";
+import ReactExport from "react-export-excel";
 
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 const { Option } = Select;
+const dataSet1 = [
+  {
+    name: "Johson",
+    amount: 30000,
+    sex: "M",
+    is_married: true,
+  },
+  {
+    name: "Monika",
+    amount: 355000,
+    sex: "F",
+    is_married: false,
+  },
+  {
+    name: "John",
+    amount: 250000,
+    sex: "M",
+    is_married: false,
+  },
+  {
+    name: "Josef",
+    amount: 450500,
+    sex: "M",
+    is_married: true,
+  },
+];
 
+const dataSet2 = [
+  {
+    name: "Johnson",
+    total: 25,
+    remainig: 16,
+  },
+  {
+    name: "Josef",
+    total: 25,
+    remainig: 7,
+  },
+];
 const Checkform = (props) => {
   document.body.style.backgroundColor = "white";
 
@@ -191,9 +234,6 @@ const Checkform = (props) => {
         setarresticets(false);
       }
 
-      // result = Filterdelittask(result, arrytaskforclose);
-      // debugger;
-
       if (result.length >= 1) {
         Checkstatuslist(false);
       } else {
@@ -253,16 +293,51 @@ const Checkform = (props) => {
           </ModalStyeld>
 
           <div className="top_icon">
-            <span className="export_exel">
-              <ImCloudDownload />
-            </span>
+            <ExcelFile
+              element={
+                <span className="export_exel">
+                  <ImCloudDownload />
+                </span>
+              }
+            >
+              <ExcelSheet data={fackearry} name="Dormitask">
+                <ExcelColumn label="breadcrumb" value="breadcrumb" />
+                <ExcelColumn label="categoryname" value="categoryname" />
+                <ExcelColumn label="closebyuserid" value="closebyuserid" />
+                <ExcelColumn
+                  label="allowAccessToRoom"
+                  value="allowAccessToRoom"
+                />
+                <ExcelColumn
+                  label="closecommentstouser"
+                  value="closecommentstouser"
+                />
+                <ExcelColumn label="closecost" value="closecost" />
+                <ExcelColumn label="closedate" value="closedate" />
+                <ExcelColumn label="comments" value="comments" />
+                <ExcelColumn label="dateopened" value="dateopened" />
+                <ExcelColumn label="firstname" value="firstname" />
+                <ExcelColumn label="lastname" value="lastname" />
+                <ExcelColumn label="locationName" value="locationName" />
+                <ExcelColumn label="phone" value="phone" />
+                <ExcelColumn label="roomName" value="roomName" />
+                <ExcelColumn label="locationName" value="locationName" />
+
+                <ExcelColumn label="senttouserid" value="senttouserid" />
+                <ExcelColumn label="statusname" value="statusname" />
+                <ExcelColumn label="ticketPlanID" value="ticketPlanID" />
+                <ExcelColumn label="ticketguid" value="ticketguid" />
+                <ExcelColumn label="urgencyadmin" value="urgencyadmin" />
+              </ExcelSheet>
+            </ExcelFile>
+
             {Repeatedtask ? (
-              <button>
+              <span className="buttonnewtask">
                 {" "}
                 <Link style={{ color: "#FFF" }} to="/temmembertask">
                   {lang?.lang100}
                 </Link>
-              </button>
+              </span>
             ) : null}
             <span className="text">{lang?.lang196}</span>
             <span
@@ -274,6 +349,7 @@ const Checkform = (props) => {
               <FaFilter />
             </span>
           </div>
+          {/* /// כל סוגי הפילטרים */}
 
           {filter ? (
             <FiltersForsort

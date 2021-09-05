@@ -3,7 +3,17 @@ import DataContext from "../DataContext";
 
 import { Link } from "react-router-dom";
 
-import { Form, Input, Button, Modal, Radio, Space, Select, Upload } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Modal,
+  Radio,
+  Space,
+  Select,
+  Upload,
+  DatePicker,
+} from "antd";
 import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
@@ -14,10 +24,10 @@ import Uplodetaskimage from "./uplodetaskimage";
 
 const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
   document.body.style.backgroundColor = "#3286F9";
-  console.log(Subcategory);
+
   const { Option } = Select;
   const { TextArea } = Input;
-  // const Temmembertask = props.Temmembertask;
+
   const loginstatus = useContext(DataContext).loginstatus;
 
   const defoltlang = useContext(DataContext).lang;
@@ -48,6 +58,7 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
   const onFinish = async (value) => {
+    debugger;
     enterLoading(2);
     let task = "save";
 
@@ -118,6 +129,93 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
   const Goeinfbacktopage = () => {
     Goback();
   };
+  const frequencyarry = [
+    { value: "week", text: lang.lang275 },
+    { value: "month", text: lang.lang276 },
+    { value: "three_month", text: lang.lang363 },
+    { value: "half_year", text: lang.lang361 },
+    { value: "year", text: lang.lang277 },
+  ];
+
+  const [datetype, setdatetype] = useState(false);
+  const [datetypepiker, setdatetypepiker] = useState(false);
+  const Selectfreqtipe = (value) => {
+    switch (value) {
+      case "week":
+        setdatetype(week);
+        setdatetypepiker(false);
+
+        break;
+      case "month":
+        setdatetype(month);
+        setdatetypepiker(false);
+
+        break;
+      // case "three_month":
+      //   setdatetype(false);
+      //   setdatetypepiker(true);
+
+      //   break;
+      default:
+        setdatetype(false);
+        setdatetypepiker(true);
+        break;
+    }
+  };
+  const week = [
+    { date: "יום א" },
+    { date: "יום ב" },
+    { date: "יום ג" },
+    { date: "יום ד" },
+    { date: "יום ה" },
+    { date: "יום ו" },
+  ];
+  const month = [
+    { date: "כל ה 1 לחודש" },
+    { date: "כל ה 2 לחודש" },
+    { date: "כל ה 3 לחודש" },
+    { date: "כל ה 4 לחודש" },
+    { date: "כל ה 5 לחודש" },
+    { date: "כל ה 6 לחודש" },
+
+    { date: "כל ה 7 לחודש" },
+
+    { date: "כל ה 8 לחודש" },
+
+    { date: "כל ה 9 לחודש" },
+
+    { date: "כל ה 10 לחודש" },
+
+    { date: "כל ה 11 לחודש" },
+
+    { date: "כל ה 12 לחודש" },
+
+    { date: "כל ה 13 לחודש" },
+
+    { date: "כל ה 14 לחודש" },
+
+    { date: "כל ה 15 לחודש" },
+
+    { date: "כל ה 16 לחודש" },
+
+    { date: "כל ה 17 לחודש" },
+
+    { date: "כל ה 18 לחודש" },
+    { date: "כל ה 19 לחודש" },
+    { date: "כל ה 20 לחודש" },
+    { date: "כל ה 21 לחודש" },
+    { date: "כל ה 22 לחודש" },
+    { date: "כל ה 23 לחודש" },
+    { date: "כל ה 24 לחודש" },
+    { date: "כל ה 25 לחודש" },
+    { date: "כל ה 26 לחודש" },
+    { date: "כל ה 27 לחודש" },
+    { date: "כל ה 28 לחודש" },
+    { date: "כל ה 29 לחודש" },
+    { date: "כל ה 30 לחודש" },
+    { date: "כל ה 31 לחודש" },
+  ];
+
   return (
     <div>
       <FormContener>
@@ -138,14 +236,8 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
             >
               <FiArrowRight />
             </div>
-            <Form.Item
-              name="categoryid"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
+            {/* קטגוריה משנית  */}
+            <Form.Item name="categoryid">
               <Select showSearch placeholder={lang?.lang110}>
                 {Subcategory
                   ? Subcategory.map((el) => {
@@ -159,14 +251,8 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
               </Select>
             </Form.Item>
 
-            <Form.Item
-              name="locationid"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
+            {/* מיקום */}
+            <Form.Item name="locationid">
               <Select
                 showSearch
                 placeholder={lang?.lang340}
@@ -183,15 +269,9 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
                   : null}
               </Select>
             </Form.Item>
+            {/* בחר חדר */}
             {selectromm ? (
-              <Form.Item
-                name="roomid"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
+              <Form.Item name="roomid">
                 <Select showSearch placeholder={lang?.lang341}>
                   {rommarry
                     ? rommarry.map((el) => {
@@ -205,10 +285,14 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
                 </Select>
               </Form.Item>
             ) : null}
+            {/* הערות */}
             <Form.Item label={lang?.lang123} name="comments">
               <TextArea rows={4} />
             </Form.Item>
+            {/* דחיפות  */}
             <Form.Item name="urgencyid">
+              {/* <div> */}
+
               <Radio.Group defaultValue={2}>
                 <Space direction="vertical">
                   <Radio className="Radio1" value={1}>
@@ -224,28 +308,35 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
                   </Radio>
                 </Space>
               </Radio.Group>
+              {/* </div> */}
             </Form.Item>
             {Temmembertask ? (
+              // תדירות
               <div className="frequency">
-                <Form.Item
-                  name="frequency"
-                  label={lang?.lang269}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Select showSearch>
-                    {locationarry.map((el) => {
-                      return (
-                        <Option value={[el.type, el.id]}>{el.type}</Option>
-                      );
+                <Form.Item name="frequencytyep" label={lang?.lang269}>
+                  <Select style={{ width: 200 }} onSelect={Selectfreqtipe}>
+                    {frequencyarry.map((el) => {
+                      return <option value={el.value}>{el.text}</option>;
                     })}
                   </Select>
                 </Form.Item>
+                {datetype ? (
+                  <Form.Item name="frequencydate" label={lang?.lang269}>
+                    <Select>
+                      {datetype.map((el) => {
+                        return <option value={el.date}>{el.date}</option>;
+                      })}
+                    </Select>
+                  </Form.Item>
+                ) : null}
+                {datetypepiker ? (
+                  <Form.Item name="frequencydate" label={lang?.lang269}>
+                    <DatePicker />
+                  </Form.Item>
+                ) : null}
               </div>
             ) : null}
+
             <Form.Item>
               <Button type="primary" htmlType="submit" loading={loadings[2]}>
                 {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}
@@ -270,32 +361,3 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
 };
 
 export default Formtask;
-// userid, ticketid
-//   <div className="textbloon">
-//     <p>{lang?.lang131}</p>
-//     <p>{lang?.lang132}</p>
-
-//     <Link to="/ListOfreq">{lang?.lang283}</Link>
-//     <div className="avaterpopup"></div>
-//     <div className="uploadimage">
-//       <Upload
-//         listType="picture-card"
-//         // fileList={fileList}
-//         onPreview={handlePreview}
-//         onChange={upludeimage}
-//       >
-//         {uploadButton}
-//       </Upload>
-//       {uplodeimage?.fileList?.length >= 1 ? (
-//         <button onClick={sendimage}>{lang?.lang265}</button>
-//       ) : null}
-//     </div>
-//     <Modal
-//       visible={previewVisible}
-//       title={previewTitle}
-//       footer={null}
-//       onCancel={handleCancel}
-//     >
-//       <img alt="example" style={{ width: "100%" }} src={previewImage} />
-//     </Modal>
-//   </div>

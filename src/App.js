@@ -20,6 +20,7 @@ function App() {
   const [loginstatus, setloginstatus] = useState();
   const [masof, setmasof] = useState();
   const [ticketlist, setticketlist] = useState();
+  const [dir, setsir] = useState("tlr");
   const providerOptions = {
     data,
     changdata: (value) => {
@@ -41,6 +42,10 @@ function App() {
     changeticketlist: (value) => {
       setticketlist(value);
     },
+    dir,
+    changedir: (value) => {
+      setsir(value);
+    },
   };
   const cookies = new Cookies();
   console.log({ masof: masof, loginstatus: loginstatus, data: data });
@@ -59,7 +64,6 @@ function App() {
     setlang(obj);
   };
 
-  const [dir, setsir] = useState("tlr");
   const DirectionOfLang = (languigtype) => {
     switch (languigtype) {
       case 2:
