@@ -4,7 +4,7 @@ import "./App.css";
 import Login from "./components/login";
 import ContrulScreen from "./screens/ContrulScreen";
 import { Language } from "./styelscomponents/Language";
-
+import { ConfigProvider } from "antd";
 import Menu from "./screens/Menu";
 import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
@@ -48,7 +48,7 @@ function App() {
     },
   };
   const cookies = new Cookies();
-  console.log({ masof: masof, loginstatus: loginstatus, data: data });
+
   let getemailcookies = cookies.get("email");
   let getpascookies = cookies.get("pas");
 
@@ -117,17 +117,19 @@ function App() {
     <div>
       <DataProvider value={providerOptions}>
         <Language Language={dir}>
-          {!loginstatus?.logde ? (
-            <div>
-              <Menu LoginScreen={true} />
-              <Login />
-              {/* </Language> */}
-            </div>
-          ) : (
-            <div>
-              <ContrulScreen />
-            </div>
-          )}
+          <ConfigProvider direction={dir}>
+            {!loginstatus?.logde ? (
+              <div>
+                <Menu LoginScreen={true} />
+                <Login />
+                {/* </Language> */}
+              </div>
+            ) : (
+              <div>
+                <ContrulScreen />
+              </div>
+            )}
+          </ConfigProvider>
         </Language>
       </DataProvider>
     </div>

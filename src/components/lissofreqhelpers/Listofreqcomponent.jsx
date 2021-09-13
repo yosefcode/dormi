@@ -1,12 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Form, Button, Select, Input, Badge, TreeSelect } from "antd";
-// import SignaturePad from "react-signature-canvas";
-import DataContext from "../../DataContext";
-import Item from "antd/lib/list/Item";
-// import { BsCloudUpload } from "react-icons/bs";
-// import { PostToServer } from "../../serveses";
 
-// import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import DataContext from "../../DataContext";
+
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -97,6 +93,7 @@ export function FiltersForsort({
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
+  const [locationvalue, setlocationvalue] = useState();
 
   const AllOpenCategoris = (value) => {
     setingAllOpenCategoris(value);
@@ -104,65 +101,61 @@ export function FiltersForsort({
   const filterallUrgency = (value) => {
     setingfilterallUrgency(value);
   };
-  function handleChange(value) {
-    // setlocationsort(value);
-    console.log(filterarry.locationName);
-    console.log(`Selected: ${value}`);
-  }
-
-  const treeData = [
-    {
-      title: "Node1",
-      value: "0-0",
-      key: "0-0",
-      children: [
-        {
-          title: "Child Node1",
-          value: "0-0-0",
-          key: "0-0-0",
-        },
-      ],
-    },
-    {
-      title: "Node2",
-      value: "0-1",
-      key: "0-1",
-      children: [
-        {
-          title: "Child Node3",
-          value: "0-1-0",
-          key: "0-1-0",
-        },
-        {
-          title: "Child Node4",
-          value: "0-1-1",
-          key: "0-1-1",
-        },
-        {
-          title: "Child Node5",
-          value: "0-1-2",
-          key: "0-1-2",
-        },
-      ],
-    },
-  ];
-  const [value, setvalue] = useState();
-  const onChange = (value) => {
+  const locationfilter = (value) => {
+    setlocationsort(value);
     console.log("onChange ", value);
   };
 
+  // data לבחירת סינון על פי מיקום
+  const treeData = filterarry.locationName.map((Item, index) => {
+    function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
+
+    let onlyroms = Item.locationName.map((el) => {
+      return el.roomName;
+    });
+
+    let unique = onlyroms.filter(onlyUnique);
+
+    let childrenobj = unique.map((obj) => {
+      if (Item.locationName[0].locationName !== obj) {
+        return {
+          title: obj,
+          value: `${Item.locationName[0].locationName} room:${obj}`,
+          key: `${Item.locationName[0].locationName} room:${obj}`,
+        };
+      } else {
+        return {
+          title: `room ${obj}`,
+          value: `${Item.locationName[0].locationName} room:${obj}`,
+          key: `${Item.locationName[0].locationName} room:${obj}`,
+        };
+      }
+    });
+    // debugger;
+    let obj = {
+      title: Item.locationName[0].locationName,
+      value: Item.locationName[0].locationName,
+      key: Item.locationName[0].locationName,
+      children: childrenobj,
+    };
+    return obj;
+  });
+
   const tProps = {
     treeData,
-    value: value,
-    onChange: onChange,
+
+    value: locationvalue,
+    onChange: locationfilter,
     treeCheckable: true,
     showCheckedStrategy: SHOW_PARENT,
-    placeholder: "Please select",
+    placeholder: "rooms",
     style: {
       width: "100%",
     },
   };
-
+  // debugger;
   return (
     <div className="filteroption">
       <div className="selcts">
@@ -199,73 +192,45 @@ export function FiltersForsort({
           <Option value={"1"}>{lang?.lang122}</Option>
         </Select>
       </div>
-      {/* 
-      <Select
-        mode="tags"
-        size={"default"}
-        placeholder={lang?.lang355}
-        onChange={handleChange}
-        style={{ width: "100%" }}
-      >
-        {filterarry
-          ? filterarry.locationName.map((el, index) => {
-              return (
-                <Option key={index}>{el.locationName[0].locationName}</Option>
-              );
-            })
-          : null}
-      </Select> */}
+
       <TreeSelect {...tProps} />
-
-      <TreeSelect
-        showSearch
-        style={{ width: "100%" }}
-        dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-        placeholder="Please select"
-        allowClear
-        multiple
-        treeDefaultExpandAll
-        onChange={handleChange}
-      >
-        {filterarry
-          ? filterarry.locationName.map((el, index) => {
-              return (
-                <TreeNode
-                  key={index}
-                  value={el.locationName[0].locationName}
-                  title={el.locationName[0].locationName}
-                >
-                  {/* <TreeNode value="leaf1" title="my leaf" />
-                  <TreeNode value="leaf2" title="your leaf" /> */}
-                  {/* {el.locationName
-                    ? el.locationName.map((Item, index1) => {
-                        return (
-                          <TreeNode
-                            key={index1}
-                            value={Item.roomName}
-                            title={Item.roomName}
-                          />
-                        );
-                      })
-                    : null} */}
-                </TreeNode>
-              );
-            })
-          : null}
-
-        {/* <TreeNode value="parent 1" title="parent 1">
-          <TreeNode value="parent 1-0" title="parent 1-0">
-            <TreeNode value="leaf1" title="my leaf" />
-            <TreeNode value="leaf2" title="your leaf" />
-          </TreeNode>
-          <TreeNode value="parent 1-1" title="parent 1-1">
-            <TreeNode
-              value="sss"
-              title={<b style={{ color: "#08c" }}>sss</b>}
-            />
-          </TreeNode>
-        </TreeNode> */}
-      </TreeSelect>
     </div>
   );
 }
+
+// const arryofloction = [
+//   {
+//     title: "בעז",
+//     value: 0,
+//     key: 0,
+//     children: [
+//       {
+//         title: "Child Node1",
+//         value: "0-0-0",
+//         key: "0-0-0",
+//       },
+//     ],
+//   },
+//   {
+//     title: "Node2",
+//     value: "0-1",
+//     key: "0-1",
+//     children: [
+//       {
+//         title: "Child Node3",
+//         value: "0-1-0",
+//         key: "0-1-0",
+//       },
+//       {
+//         title: "Child Node4",
+//         value: "0-1-1",
+//         key: "0-1-1",
+//       },
+//       {
+//         title: "Child Node5",
+//         value: "0-1-2",
+//         key: "0-1-2",
+//       },
+//     ],
+//   },
+// ];

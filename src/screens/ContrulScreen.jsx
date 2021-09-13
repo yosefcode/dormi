@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Spin } from "antd";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Checkform from "../components/checkform";
 import Nwerequest from "../screens/new_request";
 import User from "../components/user";
@@ -14,8 +14,7 @@ import Setings from "../components/Setings";
 import Affiliation from "../components/Affiliation";
 import SendMassege from "../components/SendMassege";
 import Adduser from "../components/Adduser";
-import { Language } from "../styelscomponents/Language";
-import { PostToServer } from "../serveses";
+
 import DataContext from "../DataContext";
 
 const ContrulScreen = () => {

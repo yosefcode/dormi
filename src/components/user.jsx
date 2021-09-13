@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   Contener,
   Styeldformitem,
@@ -16,8 +16,6 @@ const tailLayout = {
   },
 };
 const User = () => {
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
   const loginstatus = useContext(DataContext).loginstatus;
   // let userdata = loginstatus;

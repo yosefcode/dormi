@@ -1,23 +1,18 @@
 import React, { useState, useContext } from "react";
 
 import { Menu, Badge } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+
 import { Contyner } from "../styelscomponents/menustild";
 import { VscAccount } from "react-icons/vsc";
-// import logo from "/images/sopergas.logo";
-import { useHistory } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import DataContext from "../DataContext";
 import Cookies from "universal-cookie";
 
+import { AiOutlineMenu } from "react-icons/ai";
+
 const { SubMenu } = Menu;
 const HaderMenu = (props) => {
-  const data = useContext(DataContext);
-  const changdata = useContext(DataContext).changdata;
   const defoltlang = useContext(DataContext).lang;
   const changloginstatus = useContext(DataContext).changloginstatus;
   const loginstatus = useContext(DataContext).loginstatus;
@@ -70,6 +65,7 @@ const HaderMenu = (props) => {
           selectedKeys={current}
           mode="horizontal"
           triggerSubMenuAction="click"
+          overflowedIndicator={<AiOutlineMenu />}
         >
           <Menu.Item key="2">
             <img
@@ -101,7 +97,7 @@ const HaderMenu = (props) => {
             {/*  "רשימת פניות" */}
             <Link to="/ListOfreq">
               {" "}
-              <Badge dir="tlr" overflowCount={999} count={chors.chors}>
+              <Badge overflowCount={999} count={chors.chors}>
                 {lang?.lang196}
               </Badge>
             </Link>

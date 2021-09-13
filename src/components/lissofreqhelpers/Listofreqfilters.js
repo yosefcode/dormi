@@ -1,3 +1,5 @@
+import { HiLockOpen } from "react-icons/hi";
+
 // מערך קטגוריות לפי כמות פניות
 export const Filterforcareguris = (data) => {
   let arryofprojects = [];
@@ -15,7 +17,7 @@ export const Filterforcareguris = (data) => {
 };
 // מערך מיקום לפי כמות פניות
 
-export const FilterlocationName = (data, alltikets) => {
+export const FilterlocationNum = (data, alltikets) => {
   let arryofprojects = [];
 
   const uniqueArray = data.filter((item, index) => {
@@ -67,3 +69,34 @@ export function FilterAllOpenCategoris(arry, AllOpenCategoris) {
     return arry;
   }
 }
+/// פילטר לפי מיקום וחדקים
+export const Filterlocation = (arry, location) => {
+  if (location.length > 0) {
+    let arryofres = [];
+    location.map((loction) => {
+      let chckeroom = loction.indexOf("room:");
+
+      if (chckeroom >= 1) {
+        let room = loction.slice(chckeroom + 5, loction.length);
+
+        let locationName = loction.slice(0, chckeroom - 1);
+
+        arry.filter((el) => {
+          if (el.locationName === locationName && el.roomName === room) {
+            arryofres.push(el);
+          }
+        });
+      } else {
+        arry.filter((el) => {
+          if (el.locationName === loction) {
+            arryofres.push(el);
+          }
+        });
+      }
+    });
+
+    return arryofres;
+  } else {
+    return arry;
+  }
+};

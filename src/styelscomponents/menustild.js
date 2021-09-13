@@ -41,7 +41,7 @@ export const Contyner = styled.div`
   }
 
   .ant-badge {
-    direction: ltr !important;
+    /* direction: ltr !important; */
     color: white;
   }
 
@@ -50,10 +50,16 @@ export const Contyner = styled.div`
   .ant-badge .ant-scroll-number-custom-component {
     position: absolute;
     top: 0;
-    right: 0;
+
+    /* right: 97px; */
+    inset-inline-end: 130%;
+    /* inset-inline-end: 5; */
     transform: translate(100%, -66%);
     transform-origin: 84% 17%;
+    width: 15%;
+    padding: 1%;
   }
+  /* .ant-scroll-number.ant-badge-count.ant-badge-multiple-words {} */
   /* .ant-menu-item-selected {
     color: red !important;
   } */

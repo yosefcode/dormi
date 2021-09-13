@@ -1,5 +1,9 @@
 @import "~antd/dist/antd.css";
 
+/* .ant-select-tree .ant-select-tree-treenode {
+
+} */
+
 .Affiliationbutton {
   background-color: red;
   position: fixed;

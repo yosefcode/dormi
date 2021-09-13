@@ -45,7 +45,7 @@ const Nwerequest = ({ Temmembertask }) => {
               <div>
                 <div className="listofproblom">
                   {categorynames
-                    ? categorynames.map((el) => {
+                    ? categorynames.map((el, index) => {
                         let finicon = Arryoficons.find((ic) => {
                           if (el.icon === ic.iconname) {
                             return ic;
@@ -60,7 +60,7 @@ const Nwerequest = ({ Temmembertask }) => {
                         }
 
                         return (
-                          <div className="problome">
+                          <div className="problome" key={index}>
                             <p
                               onClick={() => {
                                 chosentyp(el);

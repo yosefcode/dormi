@@ -1,13 +1,7 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-  createRef,
-} from "react";
-import { Tag, Menu, Select, Checkbox } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import { Link, Switch } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Tag, Menu, Select } from "antd";
+
+import { Link } from "react-router-dom";
 import {
   Contener,
   StyeldSelect,
@@ -20,7 +14,8 @@ import {
   Filterforcareguris,
   FilterUrgency,
   FilterAllOpenCategoris,
-  FilterlocationName,
+  FilterlocationNum,
+  Filterlocation,
   Filterdelittask,
 } from "../components/lissofreqhelpers/Listofreqfilters";
 
@@ -51,45 +46,7 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 const { Option } = Select;
-const dataSet1 = [
-  {
-    name: "Johson",
-    amount: 30000,
-    sex: "M",
-    is_married: true,
-  },
-  {
-    name: "Monika",
-    amount: 355000,
-    sex: "F",
-    is_married: false,
-  },
-  {
-    name: "John",
-    amount: 250000,
-    sex: "M",
-    is_married: false,
-  },
-  {
-    name: "Josef",
-    amount: 450500,
-    sex: "M",
-    is_married: true,
-  },
-];
 
-const dataSet2 = [
-  {
-    name: "Johnson",
-    total: 25,
-    remainig: 16,
-  },
-  {
-    name: "Josef",
-    total: 25,
-    remainig: 7,
-  },
-];
 const Checkform = (props) => {
   document.body.style.backgroundColor = "white";
 
@@ -110,6 +67,7 @@ const Checkform = (props) => {
   const [filterallUrgency, setfilterallUrgency] = useState();
   const [locallist, setlocallist] = useState();
   const [firstlode, setlfirstlode] = useState();
+  const [locationfilter, setlocationfilter] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
   // רשימת חדרים ומיכומים
 
@@ -162,7 +120,9 @@ const Checkform = (props) => {
   const setingfilterallUrgency = (value) => {
     setfilterallUrgency(value);
   };
-
+  const Locationfilter = (value) => {
+    setlocationfilter(value);
+  };
   const [openaptuchclosemodal, setopenaptuchclosemodal] = useState(false);
   const closeopenaptuchclosemoda = () => {
     setopenaptuchclosemodal(false);
@@ -195,6 +155,7 @@ const Checkform = (props) => {
   useEffect(() => {
     if (!firstlode) {
       setlocallist(ticketlist);
+
       let breadcrumb = [];
 
       let locationName = [];
@@ -205,7 +166,7 @@ const Checkform = (props) => {
         locationName.push(ticketlist[i].locationName);
       }
       let resultcategoris = Filterforcareguris(breadcrumb);
-      let resultkocation = FilterlocationName(locationName, ticketlist);
+      let resultkocation = FilterlocationNum(locationName, ticketlist);
 
       let allcategoristofilter = {
         breadcrumb: resultcategoris,
@@ -222,7 +183,9 @@ const Checkform = (props) => {
       result = FilterAllOpenCategoris(result, AllOpenCategoris);
       // פילטר לפי דחיפות
       result = FilterUrgency(result, filterallUrgency);
-      //
+
+      //פילטר לפי מיקום
+      result = Filterlocation(result, locationfilter);
 
       if (arresticets) {
         result = Filterdelittask(result, arrytaskforclose);
@@ -242,7 +205,14 @@ const Checkform = (props) => {
 
       setfackearry(result);
     }
-  }, [AllOpenCategoris, filterallUrgency, chingeurgency, nolist, arresticets]);
+  }, [
+    AllOpenCategoris,
+    filterallUrgency,
+    chingeurgency,
+    nolist,
+    arresticets,
+    locationfilter,
+  ]);
 
   const [edittask, setedittask] = useState(true);
   const [dataforedit, setdataforedit] = useState();
@@ -356,6 +326,7 @@ const Checkform = (props) => {
               filterarry={filterarry}
               setingAllOpenCategoris={setingAllOpenCategoris}
               setingfilterallUrgency={setingfilterallUrgency}
+              setlocationsort={Locationfilter}
             />
           ) : null}
 
@@ -419,8 +390,8 @@ const Checkform = (props) => {
                 lang?.lang120
               );
 
-              let urgency = resulturgency.urgency;
-              let urgencytext = resulturgency.urgencytext;
+              let urgency = resulturgency?.urgency;
+              let urgencytext = resulturgency?.urgencytext;
 
               let resultstatus = Switcstatus(
                 el.statusname,
@@ -428,8 +399,8 @@ const Checkform = (props) => {
                 lang?.lang174
               );
 
-              let status = resultstatus.status;
-              let statustext = resultstatus.statustext;
+              let status = resultstatus?.status;
+              let statustext = resultstatus?.statustext;
 
               return (
                 <div>

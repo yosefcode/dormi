@@ -36,7 +36,6 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
 
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
 
-  useEffect(async () => {}, []);
   //   setsubcategory(Typeofreq.maincategory);
 
   const [selectromm, setselectromm] = useState(false);
@@ -274,9 +273,9 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
               <Form.Item name="roomid">
                 <Select showSearch placeholder={lang?.lang341}>
                   {rommarry
-                    ? rommarry.map((el) => {
+                    ? rommarry.map((el, index) => {
                         return (
-                          <Option value={[el.roomname, el.roomid]}>
+                          <Option key={index} value={[el.roomname, el.roomid]}>
                             {el.roomname}
                           </Option>
                         );
@@ -315,16 +314,24 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
               <div className="frequency">
                 <Form.Item name="frequencytyep" label={lang?.lang269}>
                   <Select style={{ width: 200 }} onSelect={Selectfreqtipe}>
-                    {frequencyarry.map((el) => {
-                      return <option value={el.value}>{el.text}</option>;
+                    {frequencyarry.map((el, index) => {
+                      return (
+                        <option ley={index} value={el.value}>
+                          {el.text}
+                        </option>
+                      );
                     })}
                   </Select>
                 </Form.Item>
                 {datetype ? (
                   <Form.Item name="frequencydate" label={lang?.lang269}>
                     <Select>
-                      {datetype.map((el) => {
-                        return <option value={el.date}>{el.date}</option>;
+                      {datetype.map((el, index) => {
+                        return (
+                          <option key={index} value={el.date}>
+                            {el.date}
+                          </option>
+                        );
                       })}
                     </Select>
                   </Form.Item>

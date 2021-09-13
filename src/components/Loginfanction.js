@@ -27,7 +27,7 @@ export const Loginfunction = async (value) => {
       let masof = await PostToServer(ruteruserid, userid);
 
       // changmasof(masof);
-      console.log("masof", masof);
+
       cookies.set("email", uservalue.email, {
         path: "/",
       });

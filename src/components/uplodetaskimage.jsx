@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import DataContext from "../DataContext";
 
 import { Link } from "react-router-dom";
 
-import { Form, Input, Button, Modal, Radio, Space, Select, Upload } from "antd";
+import { Modal, Upload } from "antd";
 import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
-import { FiArrowRight } from "react-icons/fi";
+
 import { BsCloudUpload } from "react-icons/bs";
 
 import { PostToServer } from "../serveses";

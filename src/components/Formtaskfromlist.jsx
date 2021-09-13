@@ -33,13 +33,24 @@ const Formtaslfromlist = ({
   const [Subcategory, setSubcategory] = useState();
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
   console.log(data);
-  useEffect(async () => {
+  const useefctasync = async () => {
     let res = categorynames.filter(
       (item) => item.maincategoryname === data.breadcrumb
     );
 
     setSubcategory(res[0]);
+  };
+
+  useEffect(() => {
+    useefctasync();
   }, []);
+  // useEffect(async () => {
+  //   let res = categorynames.filter(
+  //     (item) => item.maincategoryname === data.breadcrumb
+  //   );
+
+  //   setSubcategory(res[0]);
+  // }, []);
 
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
