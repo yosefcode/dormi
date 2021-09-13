@@ -15,6 +15,7 @@ import {
   FilterUrgency,
   FilterAllOpenCategoris,
   FilterlocationNum,
+  FilterUserNum,
   Filterlocation,
   Filterdelittask,
 } from "../components/lissofreqhelpers/Listofreqfilters";
@@ -159,18 +160,24 @@ const Checkform = (props) => {
       let breadcrumb = [];
 
       let locationName = [];
-
+      let users = [];
       for (let i = 0; ticketlist?.length > i; i++) {
         breadcrumb.push(ticketlist[i].breadcrumb);
 
+        let user = ticketlist[i].firstname + " " + ticketlist[i].lastname;
+
+        users.push(user);
         locationName.push(ticketlist[i].locationName);
       }
       let resultcategoris = Filterforcareguris(breadcrumb);
       let resultkocation = FilterlocationNum(locationName, ticketlist);
+      let resultusers = FilterUserNum(users);
 
       let allcategoristofilter = {
         breadcrumb: resultcategoris,
         locationName: resultkocation,
+        ticketlist: ticketlist,
+        users: resultusers,
       };
 
       setfilterarry(allcategoristofilter);

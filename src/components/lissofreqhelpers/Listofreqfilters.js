@@ -34,6 +34,22 @@ export const FilterlocationNum = (data, alltikets) => {
 
   return arryofprojects;
 };
+// מערך משתמשים
+
+export const FilterUserNum = (data) => {
+  let arryofprojects = [];
+
+  const uniqueArray = data.filter((item, index) => {
+    return data.indexOf(item) === index;
+  });
+
+  for (let i = 0; i < uniqueArray.length; i++) {
+    const users = data.filter((item) => item === uniqueArray[i]);
+    arryofprojects.push({ users });
+  }
+
+  return arryofprojects;
+};
 // מחיקת משימות שהוסרו ע"י מנהל
 export const Filterdelittask = (data, alldelettask) => {
   let arryofprojects = [];
@@ -71,31 +87,35 @@ export function FilterAllOpenCategoris(arry, AllOpenCategoris) {
 }
 /// פילטר לפי מיקום וחדקים
 export const Filterlocation = (arry, location) => {
-  if (location.length > 0) {
-    let arryofres = [];
-    location.map((loction) => {
-      let chckeroom = loction.indexOf("room:");
+  if (location) {
+    if (location?.length > 0) {
+      let arryofres = [];
+      location.map((loction) => {
+        let chckeroom = loction.indexOf("room:");
 
-      if (chckeroom >= 1) {
-        let room = loction.slice(chckeroom + 5, loction.length);
+        if (chckeroom >= 1) {
+          let room = loction.slice(chckeroom + 5, loction.length);
 
-        let locationName = loction.slice(0, chckeroom - 1);
+          let locationName = loction.slice(0, chckeroom - 1);
 
-        arry.filter((el) => {
-          if (el.locationName === locationName && el.roomName === room) {
-            arryofres.push(el);
-          }
-        });
-      } else {
-        arry.filter((el) => {
-          if (el.locationName === loction) {
-            arryofres.push(el);
-          }
-        });
-      }
-    });
+          arry.filter((el) => {
+            if (el.locationName === locationName && el.roomName === room) {
+              arryofres.push(el);
+            }
+          });
+        } else {
+          arry.filter((el) => {
+            if (el.locationName === loction) {
+              arryofres.push(el);
+            }
+          });
+        }
+      });
 
-    return arryofres;
+      return arryofres;
+    } else {
+      return arry;
+    }
   } else {
     return arry;
   }

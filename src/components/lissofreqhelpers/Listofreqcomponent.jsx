@@ -8,6 +8,7 @@ const { Option } = Select;
 
 const { TreeNode } = TreeSelect;
 const { SHOW_PARENT } = TreeSelect;
+
 export function SendmasegeTask({ onsendmassege }) {
   const defoltlang = useContext(DataContext).lang;
   const [form] = Form.useForm();
@@ -35,6 +36,8 @@ export function SendmasegeTask({ onsendmassege }) {
     </div>
   );
 }
+/// שלח הודעה לאיש צוות
+
 export function Sentostaf({ onReferr }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
@@ -63,6 +66,7 @@ export function Sentostaf({ onReferr }) {
     </Form>
   );
 }
+//  נתוני כרטיס
 export function Carddata({ element }) {
   return (
     <>
@@ -150,14 +154,24 @@ export function FiltersForsort({
     onChange: locationfilter,
     treeCheckable: true,
     showCheckedStrategy: SHOW_PARENT,
-    placeholder: "rooms",
+    placeholder: lang.lang355,
     style: {
       width: "100%",
     },
   };
-  // debugger;
+  console.log(filterarry);
   return (
     <div className="filteroption">
+      <div className="selcts">
+        <Select
+          showSearch
+          placeholder={lang?.lang172}
+          // onChange={AllOpenCategoris}
+        >
+          <Option value={false}>{lang.lang172}</Option>
+        </Select>
+      </div>
+
       <div className="selcts">
         <Select
           showSearch
@@ -194,6 +208,39 @@ export function FiltersForsort({
       </div>
 
       <TreeSelect {...tProps} />
+
+      {/*  כל המשתמשים  */}
+      <div className="selcts">
+        <Select
+          showSearch
+          placeholder={lang?.lang352}
+          // onChange={AllOpenCategoris}
+        >
+          <Option value={false}>{lang.lang352}</Option>
+          {filterarry
+            ? filterarry.users.map((el) => (
+                <Option value={el?.users[0]}>
+                  {el?.users[0]}{" "}
+                  <Badge
+                    dir="tlr"
+                    overflowCount={999}
+                    count={el?.users?.length}
+                  />
+                </Option>
+              ))
+            : null}
+        </Select>
+      </div>
+      {/* הועבר לטיפול */}
+      <div className="selcts">
+        <Select
+          showSearch
+          placeholder={lang?.lang358}
+          // onChange={AllOpenCategoris}
+        >
+          <Option value={false}>{lang.lang358}</Option>
+        </Select>
+      </div>
     </div>
   );
 }
