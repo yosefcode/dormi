@@ -8,7 +8,7 @@ const Checkform = () => {
   };
 
   return (
-    <div dir="rtl">
+    <div>
       <Form
         name="basic"
         initialValues={{

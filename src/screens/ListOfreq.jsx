@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Tag, Menu, Select } from "antd";
-
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { ImCloudDownload } from "react-icons/im";
+import { FaFilter } from "react-icons/fa";
+import { GiPresent } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import Formtaskfromlist from "../components/Formtaskfromlist";
+import DataContext from "../DataContext";
+
+import ReactExport from "react-export-excel";
+import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import {
   Contener,
   StyeldSelect,
@@ -9,28 +17,28 @@ import {
   StyelsCard,
   StyelsDropdown,
 } from "../styelscomponents/styeldListReq";
-import { ModalStyeld } from "../styelscomponents/modaldtyeld";
+
 import {
-  Filterforcareguris,
+  Ordercareguris,
+  Orderlocation,
+  OrderUser,
+  Orderstatusname,
+} from "../components/lissofreqhelpers/Orderdata";
+import {
   FilterUrgency,
   FilterAllOpenCategoris,
-  FilterlocationNum,
-  FilterUserNum,
+  FilterAllusers,
   Filterlocation,
   Filterdelittask,
-} from "../components/lissofreqhelpers/Listofreqfilters";
+  FilterAllstatus,
+} from "../components/lissofreqhelpers/FilteringFunction";
 
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { ImCloudDownload } from "react-icons/im";
-import { FaFilter } from "react-icons/fa";
-import { GiPresent } from "react-icons/gi";
-
+import { FiltersForsort } from "../components/lissofreqhelpers/FilterInputs";
 import {
   SendmasegeTask,
   Sentostaf,
   Carddata,
-  FiltersForsort,
-} from "../components/lissofreqhelpers/Listofreqcomponent";
+} from "../components/lissofreqhelpers/Tasks";
 import {
   Apruchclose,
   Posteditofticket,
@@ -38,10 +46,6 @@ import {
   Switchurgency,
   Switcstatus,
 } from "../components/lissofreqhelpers/Ticeteditmenu";
-import Formtaskfromlist from "../components/Formtaskfromlist";
-import DataContext from "../DataContext";
-// import { Download } from "../components/lissofreqhelpers/Exelexport";
-import ReactExport from "react-export-excel";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -70,6 +74,9 @@ const Checkform = (props) => {
   const [firstlode, setlfirstlode] = useState();
   const [locationfilter, setlocationfilter] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
+  const [filteruser, setfilteruser] = useState();
+  const [selectedstatus, setselectedstatus] = useState();
+
   // רשימת חדרים ומיכומים
 
   // עדכון שינוי סטטוס דחיפות  פנייה
@@ -114,16 +121,6 @@ const Checkform = (props) => {
     console.log(value, problemid);
   };
 
-  const setingAllOpenCategoris = (value) => {
-    setAllOpenCategoris(value);
-  };
-
-  const setingfilterallUrgency = (value) => {
-    setfilterallUrgency(value);
-  };
-  const Locationfilter = (value) => {
-    setlocationfilter(value);
-  };
   const [openaptuchclosemodal, setopenaptuchclosemodal] = useState(false);
   const closeopenaptuchclosemoda = () => {
     setopenaptuchclosemodal(false);
@@ -161,23 +158,33 @@ const Checkform = (props) => {
 
       let locationName = [];
       let users = [];
+      let statusname = [];
+
       for (let i = 0; ticketlist?.length > i; i++) {
         breadcrumb.push(ticketlist[i].breadcrumb);
 
         let user = ticketlist[i].firstname + " " + ticketlist[i].lastname;
 
-        users.push(user);
+        users.push({
+          user: user,
+          firstname: ticketlist[i].firstname,
+          lastname: ticketlist[i].lastname,
+        });
         locationName.push(ticketlist[i].locationName);
+        statusname.push(ticketlist[i].statusname);
       }
-      let resultcategoris = Filterforcareguris(breadcrumb);
-      let resultkocation = FilterlocationNum(locationName, ticketlist);
-      let resultusers = FilterUserNum(users);
+
+      let resultcategoris = Ordercareguris(breadcrumb);
+      let resultkocation = Orderlocation(locationName, ticketlist);
+      let resultusers = OrderUser(users);
+      let resultstatusname = Orderstatusname(statusname);
 
       let allcategoristofilter = {
         breadcrumb: resultcategoris,
         locationName: resultkocation,
         ticketlist: ticketlist,
         users: resultusers,
+        statusname: resultstatusname,
       };
 
       setfilterarry(allcategoristofilter);
@@ -193,6 +200,10 @@ const Checkform = (props) => {
 
       //פילטר לפי מיקום
       result = Filterlocation(result, locationfilter);
+      // פילטר לפי משתמשים
+      result = FilterAllusers(result, filteruser);
+      // פילטר לפי סטטוס
+      result = FilterAllstatus(result, selectedstatus);
 
       if (arresticets) {
         result = Filterdelittask(result, arrytaskforclose);
@@ -219,6 +230,8 @@ const Checkform = (props) => {
     nolist,
     arresticets,
     locationfilter,
+    filteruser,
+    selectedstatus,
   ]);
 
   const [edittask, setedittask] = useState(true);
@@ -227,7 +240,7 @@ const Checkform = (props) => {
     setedittask(true);
   };
   const [claerapruchform, setclaerapruchform] = useState(false);
-
+  console.log(selectedstatus);
   return (
     <div>
       {edittask ? (
@@ -331,9 +344,21 @@ const Checkform = (props) => {
           {filter ? (
             <FiltersForsort
               filterarry={filterarry}
-              setingAllOpenCategoris={setingAllOpenCategoris}
-              setingfilterallUrgency={setingfilterallUrgency}
-              setlocationsort={Locationfilter}
+              setingAllOpenCategoris={(value) => {
+                setAllOpenCategoris(value);
+              }}
+              setingfilterallUrgency={(value) => {
+                setfilterallUrgency(value);
+              }}
+              setlocationsort={(value) => {
+                setlocationfilter(value);
+              }}
+              setUserFilter={(value) => {
+                setfilteruser(value);
+              }}
+              selectedstatus={(value) => {
+                setselectedstatus(value);
+              }}
             />
           ) : null}
 

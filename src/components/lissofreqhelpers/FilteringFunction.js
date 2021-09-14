@@ -1,56 +1,3 @@
-import { HiLockOpen } from "react-icons/hi";
-
-// מערך קטגוריות לפי כמות פניות
-export const Filterforcareguris = (data) => {
-  let arryofprojects = [];
-
-  const uniqueArray = data.filter((item, index) => {
-    return data.indexOf(item) === index;
-  });
-
-  for (let i = 0; i < uniqueArray.length; i++) {
-    const breadcrumb = data.filter((item) => item === uniqueArray[i]);
-    arryofprojects.push({ breadcrumb });
-  }
-
-  return arryofprojects;
-};
-// מערך מיקום לפי כמות פניות
-
-export const FilterlocationNum = (data, alltikets) => {
-  let arryofprojects = [];
-
-  const uniqueArray = data.filter((item, index) => {
-    return data.indexOf(item) === index;
-  });
-
-  for (let i = 0; i < uniqueArray.length; i++) {
-    const locationName = alltikets.filter(
-      (item) => item.locationName === uniqueArray[i]
-    );
-
-    arryofprojects.push({ locationName });
-  }
-
-  return arryofprojects;
-};
-// מערך משתמשים
-
-export const FilterUserNum = (data) => {
-  let arryofprojects = [];
-
-  const uniqueArray = data.filter((item, index) => {
-    return data.indexOf(item) === index;
-  });
-
-  for (let i = 0; i < uniqueArray.length; i++) {
-    const users = data.filter((item) => item === uniqueArray[i]);
-    arryofprojects.push({ users });
-  }
-
-  return arryofprojects;
-};
-// מחיקת משימות שהוסרו ע"י מנהל
 export const Filterdelittask = (data, alldelettask) => {
   let arryofprojects = [];
 
@@ -120,3 +67,24 @@ export const Filterlocation = (arry, location) => {
     return arry;
   }
 };
+
+//  פילטר לפי משתמשים
+export function FilterAllusers(arry, user) {
+  if (user) {
+    return arry.filter((el) => {
+      return el.firstname === user[1] && el.lastname === user[2];
+    });
+  } else {
+    return arry;
+  }
+}
+
+export function FilterAllstatus(arry, statusname) {
+  if (statusname) {
+    return arry.filter((el) => {
+      return el.statusname === statusname;
+    });
+  } else {
+    return arry;
+  }
+}

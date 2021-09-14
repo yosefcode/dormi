@@ -1,99 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Form, Button, Select, Input, Badge, TreeSelect } from "antd";
+import React, { useContext, useState } from "react";
+import { Select, Badge, TreeSelect } from "antd";
 
 import DataContext from "../../DataContext";
 
-const { TextArea } = Input;
 const { Option } = Select;
 
-const { TreeNode } = TreeSelect;
 const { SHOW_PARENT } = TreeSelect;
-
-export function SendmasegeTask({ onsendmassege }) {
-  const defoltlang = useContext(DataContext).lang;
-  const [form] = Form.useForm();
-
-  const lang = defoltlang?.lang;
-
-  const sendmassege = (value) => {
-    onsendmassege(value);
-    form.resetFields();
-  };
-
-  return (
-    <div>
-      <Form name="masseg" onFinish={sendmassege} form={form}>
-        <Form.Item name="comments" placeholder={lang?.lang266}>
-          <TextArea rows={4} />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            {lang?.lang265}
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
-  );
-}
-/// שלח הודעה לאיש צוות
-
-export function Sentostaf({ onReferr }) {
-  const defoltlang = useContext(DataContext).lang;
-  const lang = defoltlang?.lang;
-  const [form] = Form.useForm();
-
-  const sendmassege = (value) => {
-    onReferr(value);
-    form.resetFields();
-  };
-
-  return (
-    <Form name="masseg" onFinish={sendmassege} form={form}>
-      <Form.Item name="stafmember">
-        <Select showSearch placeholder="בחר איש צוות">
-          <Option value={"אביתר"}>אביתר </Option>
-
-          <Option value={"בעז"}>בעז</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          {lang?.lang265}
-        </Button>
-      </Form.Item>
-    </Form>
-  );
-}
-//  נתוני כרטיס
-export function Carddata({ element }) {
-  return (
-    <>
-      <span className="card-body-spen"> {`#${element?.ticketid}`}</span>
-      <span className="card-body-spen"> {element?.dateopened}</span>
-      <span className="card-body-spen">
-        <span>
-          <span className="cardname">
-            {element?.firstname},{element?.lastname}
-          </span>
-        </span>
-
-        <span className="card-body-spen">
-          <span className="cardphone"> {element?.phone}</span>
-        </span>
-      </span>
-    </>
-  );
-}
-
 /// כל סוגי הפילטרים
-
 export function FiltersForsort({
   filterarry,
   setingAllOpenCategoris,
   setingfilterallUrgency,
   setlocationsort,
+  setUserFilter,
+  selectedstatus,
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
@@ -107,7 +27,12 @@ export function FiltersForsort({
   };
   const locationfilter = (value) => {
     setlocationsort(value);
-    console.log("onChange ", value);
+  };
+  const filterofuser = (value) => {
+    setUserFilter(value);
+  };
+  const selectedstatusfilter = (value) => {
+    selectedstatus(value);
   };
 
   // data לבחירת סינון על פי מיקום
@@ -139,7 +64,7 @@ export function FiltersForsort({
     });
     // debugger;
     let obj = {
-      title: Item.locationName[0].locationName,
+      title: `${Item.locationName[0].locationName}  (${Item.locationName.length})`,
       value: Item.locationName[0].locationName,
       key: Item.locationName[0].locationName,
       children: childrenobj,
@@ -153,6 +78,7 @@ export function FiltersForsort({
     value: locationvalue,
     onChange: locationfilter,
     treeCheckable: true,
+
     showCheckedStrategy: SHOW_PARENT,
     placeholder: lang.lang355,
     style: {
@@ -160,15 +86,75 @@ export function FiltersForsort({
     },
   };
   console.log(filterarry);
+  let numofopen;
+  let numotrintment;
+  let numoprofessional;
+  let numclose;
+  let numdelet;
+  for (let i = 0; filterarry.statusname.length > i; i++) {
+    switch (filterarry.statusname[i].statusname[0]) {
+      case lang.lang194:
+        numofopen = filterarry.statusname[i].statusname.length;
+
+        break;
+      case lang.lang174:
+        numotrintment = filterarry.statusname[i].statusname.length;
+
+        break;
+      case lang.lang175:
+        numoprofessional = filterarry.statusname[i].statusname.length;
+
+        break;
+      case lang.lang176:
+        numclose = filterarry.statusname[i].statusname.length;
+
+        break;
+      case lang.lang177:
+        numdelet = filterarry.statusname[i].statusname.length;
+
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <div className="filteroption">
       <div className="selcts">
         <Select
           showSearch
-          placeholder={lang?.lang172}
-          // onChange={AllOpenCategoris}
+          placeholder={lang?.lang178}
+          onChange={selectedstatusfilter}
         >
-          <Option value={false}>{lang.lang172}</Option>
+          <Option key={"status1"} value={false}>
+            {lang.lang178}
+          </Option>
+          {/*  פנייה חדשה */}
+          <Option key={"status2"} value={lang.lang194}>
+            {lang.lang173}
+
+            <Badge dir="tlr" overflowCount={999} count={numofopen} />
+          </Option>
+          {/* בטיפול */}
+          <Option key={"status3"} value={lang.lang174}>
+            {lang.lang174}
+            <Badge dir="tlr" overflowCount={999} count={numotrintment} />
+          </Option>
+          {/* בטיפול ספק חיצוני */}
+          <Option key={"status4"} value={lang.lang175}>
+            {lang.lang175}
+            <Badge dir="tlr" overflowCount={999} count={numoprofessional} />
+          </Option>
+          {/* סגור */}
+          <Option key={"status5"} value={lang.lang176}>
+            {lang.lang176}
+            <Badge dir="tlr" overflowCount={999} count={numclose} />
+          </Option>
+          {/* נמחק */}
+          <Option key={"status6"} value={lang.lang177}>
+            {lang.lang177}
+            <Badge dir="tlr" overflowCount={999} count={numdelet} />
+          </Option>
         </Select>
       </div>
 
@@ -211,16 +197,19 @@ export function FiltersForsort({
 
       {/*  כל המשתמשים  */}
       <div className="selcts">
-        <Select
-          showSearch
-          placeholder={lang?.lang352}
-          // onChange={AllOpenCategoris}
-        >
+        <Select showSearch placeholder={lang?.lang352} onChange={filterofuser}>
           <Option value={false}>{lang.lang352}</Option>
           {filterarry
-            ? filterarry.users.map((el) => (
-                <Option value={el?.users[0]}>
-                  {el?.users[0]}{" "}
+            ? filterarry.users.map((el, index) => (
+                <Option
+                  key={index}
+                  value={[
+                    el.users[0].user,
+                    el.users[0].firstname,
+                    el.users[0].lastname,
+                  ]}
+                >
+                  {el.users[0].user}{" "}
                   <Badge
                     dir="tlr"
                     overflowCount={999}
