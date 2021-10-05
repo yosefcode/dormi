@@ -129,7 +129,7 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
               <Form.Item name="insidetext" label={lang?.lang206}>
                 <TextArea allowClear rows={4} />
               </Form.Item>
-              <Form.Item label="בלבלבלב">
+              <Form.Item label="signiture">
                 <div className="canvas_wrapper">
                   <SignaturePad
                     ref={sigCanvas}

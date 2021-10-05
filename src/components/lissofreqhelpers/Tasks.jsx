@@ -77,7 +77,15 @@ export function Carddata({ element }) {
         </span>
 
         <span className="card-body-spen">
-          <span className="cardphone"> {element?.phone}</span>
+          <span
+            className="cardphone"
+            onClick={() => {
+              window.open(`tel:${element?.phone}`);
+            }}
+          >
+            {" "}
+            {element?.phone}
+          </span>
         </span>
       </span>
     </>
