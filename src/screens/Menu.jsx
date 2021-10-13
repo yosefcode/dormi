@@ -10,6 +10,7 @@ import DataContext from "../DataContext";
 import Cookies from "universal-cookie";
 
 import { AiOutlineMenu } from "react-icons/ai";
+import { ImEdge } from "react-icons/im";
 
 const { SubMenu } = Menu;
 const HaderMenu = (props) => {
@@ -52,7 +53,7 @@ const HaderMenu = (props) => {
           triggerSubMenuAction="click"
         >
           <Menu.Item key="1">
-            <img
+            <imag
               src="/images/logo_dormi.png"
               alt="Image"
               className="imagelogo"

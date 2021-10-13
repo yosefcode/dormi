@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "./App.css";
-import Login from "./components/login";
+import Login from "./screens/login";
 import ContrulScreen from "./screens/ContrulScreen";
 import { Language } from "./styelscomponents/Language";
 import { ConfigProvider } from "antd";

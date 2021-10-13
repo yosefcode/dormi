@@ -14,7 +14,6 @@ export const Contyner = styled.div`
   .ant-menu-horizontal {
     background-color: #4285f4;
     box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
-    /* color: white; */
   }
   svg {
     color: white;
@@ -41,7 +40,6 @@ export const Contyner = styled.div`
   }
 
   .ant-badge {
-    /* direction: ltr !important; */
     color: white;
   }
 
@@ -51,16 +49,11 @@ export const Contyner = styled.div`
     position: absolute;
     top: 0;
 
-    /* right: 97px; */
     inset-inline-end: 130%;
-    /* inset-inline-end: 5; */
+
     transform: translate(100%, -66%);
     transform-origin: 84% 17%;
     width: 15%;
     padding: 1%;
   }
-  /* .ant-scroll-number.ant-badge-count.ant-badge-multiple-words {} */
-  /* .ant-menu-item-selected {
-    color: red !important;
-  } */
 `;

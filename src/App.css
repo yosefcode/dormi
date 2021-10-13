@@ -3,6 +3,11 @@
 /* .ant-select-tree .ant-select-tree-treenode {
 
 } */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+}
 
 .Affiliationbutton {
   background-color: red;

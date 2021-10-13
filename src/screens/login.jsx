@@ -5,7 +5,7 @@ import QRCode from "qrcode.react";
 import { Contener } from "../styelscomponents/Loginstyels";
 import DataContext from "../DataContext";
 import Cookies from "universal-cookie";
-import { Loginfunction } from "./Loginfanction";
+import { Loginfunction } from "../components/Loginfanction";
 const Login = (props) => {
   document.body.style.backgroundColor = "white";
 
@@ -50,13 +50,6 @@ const Login = (props) => {
     loadProfile();
   }, []);
 
-  // const date = new Date();
-  // const dateforminits = new Date();
-
-  // const newDate = new Date(date.setMonth(date.getMonth() + 6));
-  // const testDate = new Date(
-  //   dateforminits.setMinutes(dateforminits.getMinutes() + 1)
-  // );
   const getallticts = async (value) => {
     let obj = {
       userid: value,

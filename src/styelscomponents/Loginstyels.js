@@ -4,7 +4,9 @@ export const Contener = styled.div`
   display: flex;
   text-align: start;
   margin-top: 70px;
-  margin-inline-start: 327px;
+
+  justify-content: space-evenly;
+
   .info {
     margin-inline-start: 40px;
   }
@@ -44,6 +46,7 @@ export const Contener = styled.div`
     margin-bottom: -3px;
     align-items: center;
   }
+
   .ant-form-item-control-input {
     width: 215px;
   }
@@ -54,13 +57,26 @@ export const Contener = styled.div`
     .bg-info {
       display: none;
     }
+
     .ant-form-item-label > label {
       position: static;
       width: 332px;
       height: 19px;
       text-align: right;
+    }
+    .ant-form {
+      margin-inline-start: -11%;
+    }
 
-      /* margin: 5px 0px; */
+    .ant-form {
+      position: absolute;
+      padding: 28%;
+      width: 267px;
+      margin-left: 5%;
+      text-align: center;
+      padding-left: 7%;
+      padding-right: 7%;
+      margin-inline-start: -5%;
     }
     .ant-form {
       position: absolute;
@@ -70,6 +86,7 @@ export const Contener = styled.div`
       text-align: center;
       padding-left: 7%;
       padding-right: 7%;
+      margin-inline-start: -11%;
     }
   }
 `;

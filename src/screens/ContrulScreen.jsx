@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Spin } from "antd";
+import ReactToPrint from "react-to-print";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Checkform from "../components/checkform";
@@ -21,6 +22,7 @@ const ContrulScreen = () => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
   const masof = useContext(DataContext).masof;
+  const componentRef = useRef();
 
   return (
     <Router>
@@ -80,7 +82,11 @@ const ContrulScreen = () => {
           <Adduser />
         </Route>
         <Route path="/Statistics">
-          <Statistics />
+          <ReactToPrint
+            trigger={() => <button>Print this out!</button>}
+            content={() => componentRef.current}
+          />
+          <Statistics ref={componentRef} />
         </Route>
       </Switch>
     </Router>
