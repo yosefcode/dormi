@@ -18,9 +18,7 @@ import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
 
 const ContrulScreen = () => {
-  const data = useContext(DataContext).data;
   const defullang = useContext(DataContext).lang;
-  const changlang = useContext(DataContext).changlang;
   const ticketlist = useContext(DataContext).ticketlist;
   const masof = useContext(DataContext).masof;
 
