@@ -99,7 +99,9 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
               {uploadButton}
             </Upload>
             {uplodeimage?.fileList?.length >= 1 ? (
-              <button onClick={sendimage}>{lang?.lang265}</button>
+              <button className="uploadimage-send" onClick={sendimage}>
+                {lang?.lang265}
+              </button>
             ) : null}
           </div>
           <Modal

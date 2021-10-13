@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
-import { Select, Input, Upload, Card, Button, Tag, Form } from "antd";
+import { Select, Input, Upload, Button, Form } from "antd";
 import SignaturePad from "react-signature-canvas";
 import DataContext from "../../DataContext";
 import { BsCloudUpload } from "react-icons/bs";

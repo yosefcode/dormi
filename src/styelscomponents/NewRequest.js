@@ -120,7 +120,7 @@ export const FormContener = styled.div`
     inset-inline-start: 96%;
   }
   svg {
-    width: 32%;
+    width: 100%;
     height: 15px;
     color: white;
   }
@@ -149,7 +149,7 @@ export const FormContener = styled.div`
   .uploadimage {
     margin-top: 5%;
   }
-  .uploadimage button {
+  .uploadimage-send {
     width: 217px;
     height: 45px;
     color: white;
@@ -157,6 +157,10 @@ export const FormContener = styled.div`
     margin-top: 6px;
     border-radius: 100px;
   }
+  .ant-tooltip-inner {
+    display: none;
+  }
+
   .ant-upload-list-picture .ant-upload-list-item-error,
   .ant-upload-list-picture-card .ant-upload-list-item-error {
     border-color: #f3a40c;

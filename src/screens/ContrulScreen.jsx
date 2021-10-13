@@ -14,7 +14,7 @@ import Setings from "../components/Setings";
 import Affiliation from "../components/Affiliation";
 import SendMassege from "../components/SendMassege";
 import Adduser from "../components/Adduser";
-
+import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
 
 const ContrulScreen = () => {
@@ -80,6 +80,9 @@ const ContrulScreen = () => {
 
         <Route path="/Adduser">
           <Adduser />
+        </Route>
+        <Route path="/Statistics">
+          <Statistics />
         </Route>
       </Switch>
     </Router>

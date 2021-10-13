@@ -127,7 +127,9 @@ const HaderMenu = (props) => {
           {/* ) : null}  */}
           {/* סטטיסטיקות */}
           {/* {userlevelid === "10" || userlevelid === "13" ? ( */}
-          <Menu.Item key="12">{lang?.lang105}</Menu.Item>
+          <Menu.Item key="12">
+            <Link to="/Statistics">{lang?.lang105}</Link>
+          </Menu.Item>
           {/* ) : null}  */}
           <SubMenu key="sub1-4" icon={<VscAccount />}>
             <Menu.Item key="13">

@@ -1,0 +1,43 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+.column {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  height: 300px;
+  background-color: sandybrown;
+  margin-bottom: 12px;
+  justify-content: space-around;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .column {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 300px;
+    background-color: sandybrown;
+
+    /* align-items: center; */
+  }
+}
+/* .casuomchart {
+} */
+.item {
+  margin-top: 10px;
+}
+.item1 {
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+}
+
+.item3 {
+  background-color: yellow;
+  width: 100px;
+  height: 100px;
+}
