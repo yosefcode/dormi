@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { Spin } from "antd";
 import ReactToPrint from "react-to-print";
-
+import { AiOutlineFilePdf } from "react-icons/ai";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Checkform from "../components/checkform";
 import Nwerequest from "../screens/new_request";
@@ -83,7 +83,11 @@ const ContrulScreen = () => {
         </Route>
         <Route path="/Statistics">
           <ReactToPrint
-            trigger={() => <button>Print this out!</button>}
+            trigger={() => (
+              <button className="pribtpdf">
+                <AiOutlineFilePdf />
+              </button>
+            )}
             content={() => componentRef.current}
           />
           <Statistics ref={componentRef} />

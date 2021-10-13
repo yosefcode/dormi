@@ -8,7 +8,15 @@
     -webkit-print-color-adjust: exact;
   }
 }
-
+.pribtpdf {
+  background-color: #00c851;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
+  padding: 0.84rem 2.14rem;
+  font-size: 0.81rem;
+  border-radius: 100px;
+  color: white;
+  margin-inline-start: 35%;
+}
 .Affiliationbutton {
   background-color: red;
   position: fixed;
