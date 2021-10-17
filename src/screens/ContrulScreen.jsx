@@ -9,7 +9,7 @@ import User from "../components/user";
 import Menu from "./Menu";
 import ListOfreq from "./ListOfreq";
 import Location from "../components/Location";
-import Users from "../components/ListOfUsers";
+import Users from "./ListOfUsers";
 import Categoris from "../components/Categoris";
 import Setings from "../components/Setings";
 import Affiliation from "../components/Affiliation";

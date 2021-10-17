@@ -1,32 +1,40 @@
 import styled from "styled-components";
-import { Card } from "antd";
+import { Card, Table } from "antd";
 
-export const Contener = styled(Card)`
+export const Contener = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  .test {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    color: red;
+  }
+  .usecard {
+    background-color: red;
+    width: 100px;
+    height: 10px;
+  }
   .serch {
     width: 170px;
   }
   .sendmail {
     color: #fff;
-
     background-color: #000;
     border-radius: 17px;
     height: 36px;
-
+    padding: 1%;
     border: none;
   }
 
   .adduser {
     color: #fff;
-
     background-color: #00c851;
-
     height: 36px;
     border-radius: 17px;
     border: none;
+    padding: 1%;
   }
   @media only screen and (max-width: 600px) {
     .adduser {
@@ -60,22 +68,8 @@ export const Contener = styled(Card)`
   }
 `;
 
-export const Cardstyeld = styled(Card)`
-  @media only screen and (max-width: 600px) {
-    width: 298px;
-    span {
-      margin: 5px;
-    }
-  }
-
-  @media only screen and (min-width: 600px) {
-    span {
-      margin: 40px;
-    }
-  }
-  width: 750px;
-
-  height: 49px;
-  text-align: center;
-  margin-top: 10px;
+export const Tablestyel = styled(Table)`
+  /* @media only screen and (max-width: 600px) {
+  
+  } */
 `;

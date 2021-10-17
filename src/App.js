@@ -9,11 +9,10 @@ import Menu from "./screens/Menu";
 import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
 import { Loginfunction } from "./components/Loginfanction";
-
+import Notifcation from "../src/components/Notifcation";
 import Cookies from "universal-cookie";
 
 function App() {
-  // context DataProvider
   const [data, setdata] = useState();
   const [lang, setlang] = useState();
 
@@ -78,7 +77,7 @@ function App() {
   };
 
   const Logincheckstatus = async () => {
-    if (cookies.get("aut")) {
+    if (cookies.get("aut") && getemailcookies) {
       setloginstatus({ logde: true });
       let values = {
         email: getemailcookies,
@@ -112,10 +111,11 @@ function App() {
   useEffect(() => {
     Logincheckstatus();
   }, []);
-
+  console.log(loginstatus);
   return (
     <div>
       <DataProvider value={providerOptions}>
+        <Notifcation />
         <Language Language={dir}>
           <ConfigProvider direction={dir}>
             {!loginstatus?.logde ? (

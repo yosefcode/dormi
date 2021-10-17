@@ -1,4 +1,5 @@
 import { PostToServer } from "../serveses";
+import { getToken } from "../firebase";
 
 import Cookies from "universal-cookie";
 
@@ -9,6 +10,7 @@ export const Loginfunction = async (value) => {
   const testDate = new Date(
     dateforminits.setMinutes(dateforminits.getMinutes() + 10)
   );
+
   let uservalue = {
     email: value.email.replace(/[<>${}]/g, "danger$&"),
     pass: value.pass.replace(/[<>${}]/g, "danger$&"),
@@ -50,7 +52,14 @@ export const Loginfunction = async (value) => {
         changlang: objlang,
         changmasof: masof,
       };
-
+      //get tokeb for fierbase
+      getToken()
+        .then((res) => {
+          console.log("res in logd", res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       resolve(resulotloginfunction);
     }
   });
