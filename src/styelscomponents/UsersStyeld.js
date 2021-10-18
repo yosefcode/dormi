@@ -1,10 +1,33 @@
 import styled from "styled-components";
 import { Card, Table } from "antd";
 
+export const Cardstyeld = styled(Card)`
+  /* @media only screen and (max-width: 600px) {
+  } */
+  .ant-card-bordered {
+    width: 239px;
+    margin-top: 12px;
+  }
+  /* .ant-card.ant-card-bordered.ant-card-type-inner.ant-card-rtl {
+    /* .ant-card-bordered { */
+  /* width: 700px;
+    margin-top: 12px;
+  }  */
+`;
 export const Contener = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
+  .haderflex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  /* align-items: center; */
+
+  /*
   .test {
     width: 100px;
     height: 100px;
@@ -61,11 +84,7 @@ export const Contener = styled.div`
     }
   }
 
-  .haderflex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+ */
 `;
 
 export const Tablestyel = styled(Table)`

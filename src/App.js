@@ -115,7 +115,7 @@ function App() {
   return (
     <div>
       <DataProvider value={providerOptions}>
-        <Notifcation />
+        {/* <Notifcation /> */}
         <Language Language={dir}>
           <ConfigProvider direction={dir}>
             {!loginstatus?.logde ? (

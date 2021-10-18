@@ -1,5 +1,9 @@
 import React, { useContext } from "react";
-import { Contener, Tablestyel } from "../styelscomponents/UsersStyeld";
+import {
+  Contener,
+  Tablestyel,
+  Cardstyeld,
+} from "../styelscomponents/UsersStyeld";
 import { Input, Table, Space } from "antd";
 import DataContext from "../DataContext";
 import { Link } from "react-router-dom";
@@ -112,31 +116,31 @@ function Users() {
         <Link className="adduser" to="/Adduser">
           {lang?.lang244}{" "}
         </Link>
-      </div>
-      <Tablestyel
+        {/* <Tablestyel
         dataSource={fackarry}
         columns={columns}
         pagination={false}
         scroll={{ x: 1000 }}
         // size={"small"}
-      />
-      {/* {fackarry.map((user) => {
-        return (
-          <Cardstyeld>
-            <span>{user.Numberoftasks}</span>
-            <span>{user.location}</span>
-            <span>{user.phonnumber}</span>
-            <span>{user.email}</span>
-            <span>{user.userlevel}</span>
-            <span>{user.name}</span>
-            <BsTrash
-              onClick={() => {
-                console.log("BsTrash");
-              }}
-            />
-          </Cardstyeld>
-        );
-      })} */}
+      /> */}
+        {fackarry.map((user) => {
+          return (
+            <Cardstyeld type="inner">
+              <span>{user.Numberoftasks}</span>
+              <span>{user.location}</span>
+              <span>{user.phonnumber}</span>
+              <span>{user.email}</span>
+              <span>{user.userlevel}</span>
+              <span>{user.name}</span>
+              <BsTrash
+                onClick={() => {
+                  console.log("BsTrash");
+                }}
+              />
+            </Cardstyeld>
+          );
+        })}
+      </div>
     </Contener>
   );
 }
