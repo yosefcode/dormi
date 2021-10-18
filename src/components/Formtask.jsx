@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import DataContext from "../DataContext";
-
-import { Link } from "react-router-dom";
+import { PoweroffOutlined } from "@ant-design/icons";
 
 import {
   Form,
@@ -13,18 +12,18 @@ import {
   Select,
   Upload,
   DatePicker,
+  Badge,
 } from "antd";
 import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
-
+import { week, month } from "./Arrydaits";
 import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import Uplodetaskimage from "./uplodetaskimage";
+import { Arryoficons } from "../Icons";
 
-const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
-  document.body.style.backgroundColor = "#3286F9";
-
+const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
   const { Option } = Select;
   const { TextArea } = Input;
 
@@ -71,12 +70,7 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
     let locationid = value.locationid[1];
     let roomid = parseInt(value.roomid[1]);
     let categoryid = value.categoryid[1];
-    let urgencyid;
-    if (!value.urgencyid) {
-      urgencyid = 2;
-    } else {
-      urgencyid = value.urgencyid;
-    }
+    let urgencyid = value.urgencyid;
 
     let comments;
     if (value.comments) {
@@ -95,7 +89,6 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
       // ...typeofreq,
     };
 
-    console.log("Success:", obj);
     let reqruter = "newticket";
     let res = await PostToServer(reqruter, obj);
     if (res.error === 1) {
@@ -161,65 +154,19 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
         break;
     }
   };
-  const week = [
-    { date: "יום א" },
-    { date: "יום ב" },
-    { date: "יום ג" },
-    { date: "יום ד" },
-    { date: "יום ה" },
-    { date: "יום ו" },
-  ];
-  const month = [
-    { date: "כל ה 1 לחודש" },
-    { date: "כל ה 2 לחודש" },
-    { date: "כל ה 3 לחודש" },
-    { date: "כל ה 4 לחודש" },
-    { date: "כל ה 5 לחודש" },
-    { date: "כל ה 6 לחודש" },
 
-    { date: "כל ה 7 לחודש" },
-
-    { date: "כל ה 8 לחודש" },
-
-    { date: "כל ה 9 לחודש" },
-
-    { date: "כל ה 10 לחודש" },
-
-    { date: "כל ה 11 לחודש" },
-
-    { date: "כל ה 12 לחודש" },
-
-    { date: "כל ה 13 לחודש" },
-
-    { date: "כל ה 14 לחודש" },
-
-    { date: "כל ה 15 לחודש" },
-
-    { date: "כל ה 16 לחודש" },
-
-    { date: "כל ה 17 לחודש" },
-
-    { date: "כל ה 18 לחודש" },
-    { date: "כל ה 19 לחודש" },
-    { date: "כל ה 20 לחודש" },
-    { date: "כל ה 21 לחודש" },
-    { date: "כל ה 22 לחודש" },
-    { date: "כל ה 23 לחודש" },
-    { date: "כל ה 24 לחודש" },
-    { date: "כל ה 25 לחודש" },
-    { date: "כל ה 26 לחודש" },
-    { date: "כל ה 27 לחודש" },
-    { date: "כל ה 28 לחודש" },
-    { date: "כל ה 29 לחודש" },
-    { date: "כל ה 30 לחודש" },
-    { date: "כל ה 31 לחודש" },
-  ];
-
+  let Icon;
+  let findicon = Arryoficons.find((ic) => {
+    return Typeofreq.icon === ic.iconname;
+  });
+  if (findicon) {
+    Icon = findicon.icon;
+  }
   return (
     <div>
       <FormContener>
         {/* <div className="avatar"> */}
-        <img src="/images/man.png" className="avatar" alt="Image" />
+        {/* <img src="/images/man.png" className="avatar" alt="Image" /> */}
         {/* </div> */}
         {!uplodeimagescreen ? (
           <Form
@@ -235,11 +182,21 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
             >
               <FiArrowRight />
             </div>
+
+            <div className="theproblemis">
+              <p>הבעיה היא {Typeofreq.maincategoryname}</p>
+              {Icon ? (
+                <Icon className="iconproblem" />
+              ) : (
+                <PoweroffOutlined className="iconproblem" />
+              )}
+            </div>
+
             {/* קטגוריה משנית  */}
-            <Form.Item name="categoryid">
+            <Form.Item name="categoryid" labelAlign={"right"}>
               <Select showSearch placeholder={lang?.lang110}>
-                {Subcategory
-                  ? Subcategory.map((el) => {
+                {Typeofreq
+                  ? Typeofreq.subcategory.map((el) => {
                       return (
                         <Option value={[el.subname, el.subcategoryid]}>
                           {el.subname}
@@ -249,7 +206,26 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
                   : null}
               </Select>
             </Form.Item>
+            {/* הערות */}
+            <p className="Lable">{lang?.lang123}</p>
+            <Form.Item name="comments">
+              <TextArea rows={4} />
+            </Form.Item>
 
+            {/* דחיפות  */}
+            <Form.Item name="urgencyid" defaultValue={2}>
+              <Select defaultValue={2}>
+                <Option key={1} value={1}>
+                  <Badge color="#22E7B7" text={lang?.lang120} />
+                </Option>
+                <Option key={2} value={2}>
+                  <Badge color="orange" text={lang?.lang121} />
+                </Option>
+                <Option key={3} value={3}>
+                  <Badge color="#D91D61" text={lang?.lang122} />
+                </Option>
+              </Select>
+            </Form.Item>
             {/* מיקום */}
             <Form.Item name="locationid">
               <Select
@@ -284,31 +260,7 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
                 </Select>
               </Form.Item>
             ) : null}
-            {/* הערות */}
-            <Form.Item label={lang?.lang123} name="comments">
-              <TextArea rows={4} />
-            </Form.Item>
-            {/* דחיפות  */}
-            <Form.Item name="urgencyid">
-              {/* <div> */}
 
-              <Radio.Group defaultValue={2}>
-                <Space direction="vertical">
-                  <Radio className="Radio1" value={1}>
-                    {lang?.lang120}
-                  </Radio>
-
-                  <Radio className="Radio2" value={2}>
-                    {lang?.lang121}
-                  </Radio>
-
-                  <Radio className="Radio3" value={3}>
-                    {lang?.lang122}
-                  </Radio>
-                </Space>
-              </Radio.Group>
-              {/* </div> */}
-            </Form.Item>
             {Temmembertask ? (
               // תדירות
               <div className="frequency">
@@ -343,7 +295,6 @@ const Formtask = ({ Typeofreq, Goback, Subcategory, Temmembertask }) => {
                 ) : null}
               </div>
             ) : null}
-
             <Form.Item>
               <Button type="primary" htmlType="submit" loading={loadings[2]}>
                 {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}

@@ -1,59 +1,103 @@
 import styled from "styled-components";
+import { Drawer, Menu } from "antd";
+export const Drawerstyle = styled(Drawer)`
+  .ant-drawer-header {
+    color: rgba(228, 237, 237, 1);
+    background-color: #1c1547 !important;
+  }
+  .ant-drawer-body {
+    color: rgba(228, 237, 237, 1);
+    background-color: #1c1547 !important;
+  }
+  .ant-drawer-content {
+    border-radius: 0px 0px 24px 24px;
+  }
+  a {
+    color: inherit;
+  }
+  .ant-badge {
+    color: rgba(228, 237, 237, 1);
+  }
+  .ant-badge-rtl .ant-badge-count {
+    transform: translate(-116%, -30%);
+  }
+`;
 
 export const Contyner = styled.div`
-  @media only screen and (min-width: 600px) {
+  .Drawercontennet {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start; */
+  }
+
+  /* @media only screen and (min-width: 600px) {
     .imagelogo {
       width: 80px;
       margin-inline-start: 40%;
       margin-inline-end: 280px;
     }
-  }
+  } */
   .imagelogo {
     width: 80px;
-  }
-  .ant-menu-horizontal {
-    background-color: #4285f4;
-    box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
   }
   svg {
     color: white;
   }
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
-    color: white;
+
+  .haeder {
+    width: 100%;
+    height: 52px;
+    background-color: #1c1547;
+    color: #e5e5e5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
+    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 30%);
+  }
+`;
+
+export const Avaterdrwor = styled.div`
+  text-align: center;
+  color: rgba(228, 237, 237, 1);
+  /* background-color: #1c1547; */
+`;
+export const MenuStyel = styled(Menu)`
+  .ant-menu {
+    color: #e5e5e5;
+    background: #1c1547 !important;
+    border-left: none !important;
   }
 
-  .ant-menu-horizontal > .ant-menu-item a {
-    color: white;
+  .ant-menu-rtl {
+    background-color: #1c1547 !important;
+  }
+  .ant-menu-rtl.ant-menu-inline {
+    background-color: #1c1547 !important;
+  }
+  .ant-menu.ant-menu-rtl .ant-menu-rtl.ant-menu-inline,
+  .ant-menu-rtl.ant-menu-vertical {
+    background-color: #1c1547 !important;
+  }
+  .ant-menu-rtl.ant-menu-vertical {
+    background-color: #1c1547 !important;
+  }
+  .ant-menu-submenu {
+    color: #e5e5e5;
+    background-color: #1c1547 !important;
   }
   .ant-menu-title-content {
-    color: white;
+    color: #e5e5e5;
+    background-color: #1c1547 !important;
   }
   .ant-menu-submenu-arrow {
-    color: white;
+    color: #e5e5e5 !important;
+    background: #1c1547 !important;
   }
-
-  .ant-badge {
-    color: white;
-  }
-
-  .ant-badge-count,
-  .ant-badge-dot,
-  .ant-badge .ant-scroll-number-custom-component {
-    position: absolute;
-    top: 0;
-
-    inset-inline-end: 130%;
-
-    transform: translate(100%, -66%);
-    transform-origin: 84% 17%;
-    width: 15%;
-    padding: 1%;
+  .ant-menu-item-icon {
+    color: #e5e5e5 !important;
+    background: #1c1547 !important;
   }
 `;

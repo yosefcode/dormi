@@ -18,7 +18,7 @@ import Adduser from "../components/Adduser";
 import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
 
-const ContrulScreen = () => {
+const ContrulScreen = ({ dir }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
   const masof = useContext(DataContext).masof;
@@ -26,7 +26,7 @@ const ContrulScreen = () => {
 
   return (
     <Router>
-      <Menu />
+      <Menu dir={dir} />
       <Switch>
         <Route path="/Users">
           <User />

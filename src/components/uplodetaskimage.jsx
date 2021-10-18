@@ -19,8 +19,6 @@ function getBase64(file) {
   });
 }
 const Uplodetaskimage = ({ userid, ticketid }) => {
-  document.body.style.backgroundColor = "#3286F9";
-
   // const Temmembertask = props.Temmembertask;
   const loginstatus = useContext(DataContext).loginstatus;
 

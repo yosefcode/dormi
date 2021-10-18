@@ -4,9 +4,9 @@ import { onMessageListener } from "../firebase";
 import DataContext from "../DataContext";
 import { PostToServer } from "../serveses";
 const Notifcation = () => {
-  const [getmassege, setgetmassege] = useState();
   const loginstatus = useContext(DataContext).loginstatus;
   const changeticketlist = useContext(DataContext).changeticketlist;
+  const [getmassege, setgetmassege] = useState();
   onMessageListener()
     .then((message) => {
       setgetmassege(message);

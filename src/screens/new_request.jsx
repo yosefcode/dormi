@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import DataContext from "../DataContext";
 
 import { Problemcontener } from "../styelscomponents/NewRequest";
@@ -9,8 +9,6 @@ import { Arryoficons } from "../Icons";
 import Formtask from "../components/Formtask";
 
 const Nwerequest = ({ Temmembertask }) => {
-  document.body.style.backgroundColor = "#3286F9";
-
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
@@ -21,11 +19,10 @@ const Nwerequest = ({ Temmembertask }) => {
   let categorynames = masof?.categorynames;
 
   // כפתור טעינה
-  const [subcategory, setsubcategory] = useState();
+
   const chosentyp = (value) => {
     settyps(false);
-    settypeofreq({ maincategory: value.id });
-    setsubcategory(value.subcategory);
+    settypeofreq(value);
   };
 
   const Goback = () => {
@@ -38,7 +35,7 @@ const Nwerequest = ({ Temmembertask }) => {
       <div>
         {typs ? (
           <Problemcontener>
-            <img src="/images/man.png" className="avatar" alt="Image" />
+            {/* <img src="/images/man.png" className="avatar" alt="Image" /> */}
             <div className="icondisply">
               <p id="hadep">{lang?.lang337}</p>
               <p>{lang?.lang338}</p>
@@ -84,7 +81,6 @@ const Nwerequest = ({ Temmembertask }) => {
           <Formtask
             Typeofreq={typeofreq}
             Goback={Goback}
-            Subcategory={subcategory}
             Temmembertask={Temmembertask}
           />
         )}

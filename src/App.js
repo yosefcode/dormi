@@ -9,7 +9,8 @@ import Menu from "./screens/Menu";
 import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
 import { Loginfunction } from "./components/Loginfanction";
-import Notifcation from "../src/components/Notifcation";
+import { onMessageListener } from "./firebase";
+
 import Cookies from "universal-cookie";
 
 function App() {
@@ -107,15 +108,33 @@ function App() {
       defultlang();
     }
   };
+  const [getmassege, setgetmassege] = useState();
+  onMessageListener()
+    .then((message) => {
+      setgetmassege(message);
+      console.log("notification masege", message);
+    })
+    .catch((err) => console.log("failed: ", err));
 
+  const Updetdata = async () => {
+    // let obj = loginstatus;
+    // debugger;
+    let ressult = await PostToServer("ticketlist", {
+      userid: loginstatus?.userid,
+    });
+
+    setticketlist(ressult);
+  };
   useEffect(() => {
-    Logincheckstatus();
-  }, []);
-  console.log(loginstatus);
+    if (!loginstatus) {
+      Logincheckstatus();
+    }
+    Updetdata();
+  }, [getmassege]);
+
   return (
     <div>
       <DataProvider value={providerOptions}>
-        {/* <Notifcation /> */}
         <Language Language={dir}>
           <ConfigProvider direction={dir}>
             {!loginstatus?.logde ? (
@@ -126,7 +145,7 @@ function App() {
               </div>
             ) : (
               <div>
-                <ContrulScreen />
+                <ContrulScreen dir={dir} />
               </div>
             )}
           </ConfigProvider>

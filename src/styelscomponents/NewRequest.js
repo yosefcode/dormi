@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Select } from "antd";
 
 export const Problemcontener = styled.div`
-  color: white;
+  color: rgba(15, 7, 67, 1);
   display: flex;
   text-align: start;
   #hadep {
@@ -14,7 +14,6 @@ export const Problemcontener = styled.div`
   }
   .listofproblom {
     display: flex;
-
     flex-wrap: wrap;
   }
   .avatar {
@@ -22,24 +21,24 @@ export const Problemcontener = styled.div`
   }
 
   .uniqueproblem {
-    margin-inline-start: 23%;
+    text-align: center;
   }
-
-  .problome :hover {
-    color: black;
+  .problome {
+    background: #e5ebf3;
+    border-radius: 24px;
+    width: 133px;
+    height: 140px;
+    margin: 2%;
   }
 
   .iconproblem {
-    border: 1px solid #fff;
-    border-radius: 10px;
     font-size: 33px;
-    height: 90px;
+    /* height: 90px; */
     line-height: 6px;
-
-    padding: 30px;
-    width: 90px;
+    padding: 0px;
+    width: 60px;
     text-align: center;
-    margin: 7px;
+    margin: 34px;
   }
   @media only screen and (max-width: 600px) {
     .icondisply {
@@ -59,70 +58,66 @@ export const Problemcontener = styled.div`
 `;
 
 export const FormContener = styled.div`
+  margin-top: 10%;
+  text-align: center;
+
   display: flex;
-  justify-content: start;
-  /* .ant-select-item-option-content {
-    text-align: center !important;
-  } */
 
-  .ant-select.ant-select-item-option-content {
-    text-align: center !important;
-    background-color: blue !important;
-  }
+  flex-direction: column;
+  align-items: center;
   button.ant-btn.ant-btn-primary {
-    background-color: #f5a623;
-    border-radius: 10px;
-    margin-right: 50%;
-  }
-
-  .Radio1 {
-    background-color: #d0021b;
-    color: white;
-    border-radius: 10px;
-    width: 100px;
-  }
-  .Radio2 {
-    background-color: #f3a40c;
-    color: white;
-    border-radius: 10px;
-    width: 100px;
-  }
-  .Radio3 {
-    background-color: #42bd41;
-    color: white;
-    border-radius: 10px;
-    width: 100px;
-  }
-  .ant-input {
-    border-bottom-color: #ced4da;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    border-top-color: transparent !important;
-    background-color: blue !important;
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 269px;
+    height: 34px;
+    border-color: #ffd17e;
   }
 
   .ant-select-selector {
-    border-bottom-color: #ced4da !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    border-top-color: transparent !important;
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
   }
-  .goback {
-    background: #f5a623;
+
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+  }
+  .ant-form {
+    width: 267px;
+  }
+  .Lable {
+    color: #0f0743;
+    text-align: start;
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 10%;
     text-align: center;
-    color: white;
-    width: 47px;
-    height: 47px;
-    border-radius: 50%;
-    box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
-    position: relative;
-    padding: 8px;
-    inset-inline-start: 96%;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    .ant-form {
+      width: 267px;
+    }
   }
-  svg {
-    width: 100%;
+
+  .goback {
+    margin-inline-end: 100%;
+    margin-bottom: 12%;
+    font-size: 24px;
+  }
+
+  .theproblemis {
+    display: -webkit-box;
+  }
+  .iconproblem {
+    font-size: 100px;
+    color: black;
+    width: 54%;
     height: 15px;
-    color: white;
   }
   .textbloon {
     width: 274px;
@@ -158,107 +153,35 @@ export const FormContener = styled.div`
     border-radius: 100px;
   }
   .ant-tooltip-inner {
-    display: none;
+    /* display: none; */
   }
 
   .ant-upload-list-picture .ant-upload-list-item-error,
   .ant-upload-list-picture-card .ant-upload-list-item-error {
-    border-color: #f3a40c;
+    /* border-color: #f3a40c; */
   }
   .ant-upload.ant-upload-select-picture-card {
-    border: white !important;
+    /* border: white !important; */
   }
   .ant-upload.ant-upload-select.ant-upload-select-picture-card {
-    width: 217px;
+    /* width: 217px;
     height: 45px;
     left: calc(50% - 343px / 2);
     top: 334px;
     background-color: #00c851 !important;
 
-    border-radius: 100px;
+    border-radius: 100px; */
   }
   .uplodeimage {
     color: white;
   }
-  @media only screen and (min-width: 600px) {
-    margin-top: 10%;
-    .avatar {
-      width: 175px;
-      height: 500px;
-      margin-inline-start: 17%;
 
-      position: relative;
-    }
+  .frequency {
+    float: left;
+    margin-top: -106px;
+    width: 243px;
+    margin-inline-end: 25px;
+  }
 
-    .ant-form {
-      margin-inline-start: 32%;
-      position: absolute;
-      width: 600px;
-
-      text-align: center;
-      padding-left: 7%;
-      padding-right: 7%;
-    }
-    .frequency {
-      float: left;
-      margin-top: -106px;
-      width: 243px;
-      margin-inline-end: 25px;
-    }
-    .Radio1 {
-      margin-inline-start: -260px;
-    }
-    .Radio2 {
-      margin-inline-start: -260px;
-    }
-    .Radio3 {
-      margin-inline-start: -260px;
-    }
-  }
-  .ant-input {
-    border-bottom-color: #aaa;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    border-top-color: transparent !important;
-    background-color: white !important;
-  }
-  .ant-select-selector {
-    border-bottom-color: #aaa !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    border-top-color: transparent !important;
-    background-color: transparent !important;
-  }
   // iphune screen
-  @media only screen and (max-width: 600px) {
-    margin-top: 10%;
-
-    .ant-form-item-label > label {
-      position: static;
-      width: 332px;
-      height: 19px;
-      text-align: right;
-
-      /* margin: 5px 0px; */
-    }
-
-    .avatar {
-      /* background-color: gray; */
-      width: 175px;
-      height: 500px;
-      position: relative;
-      right: 20%;
-    }
-    /* .goback {
-    } */
-    .ant-form {
-      position: absolute;
-
-      width: 267px;
-      margin-left: 5%;
-      text-align: center !important;
-      padding-left: 7%;
-      padding-right: 7%;
-    }
-  }
 `;
