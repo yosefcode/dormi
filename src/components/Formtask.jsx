@@ -33,7 +33,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
 
-  const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
+  const [uplodeimagescreen, setuplodeimagescreen] = useState(true);
 
   //   setsubcategory(Typeofreq.maincategory);
 

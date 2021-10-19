@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 import { Menu, Badge, Avatar } from "antd";
 
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, CloseOutlined } from "@ant-design/icons";
 import {
   Contyner,
   Avaterdrwor,
@@ -85,24 +85,33 @@ const HaderMenu = ({ LoginScreen, dir }) => {
             onClose={closeMenue}
             visible={visible}
             height={500}
-            onClick={closeMenue}
+            closeIcon={<CloseOutlined style={{ color: "#e5e5e5" }} />}
           >
             <div className="Drawercontennet">
               {/* פתח פנייה חדשה */}
+              <hr />
 
-              <p>
+              <p onClick={closeMenue}>
                 <Link to="/"> {lang?.lang100}</Link>
               </p>
               {/*  "מטלות מתוזמנות" */}
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
-                <p>
+                <p onClick={closeMenue}>
                   <Link to="/Repeatedtask">{lang?.lang285} </Link>
                 </p>
               ) : null}
               {/*  "רשימת פניות" */}
-              <p>
+              <p onClick={closeMenue}>
                 <Link to="/ListOfreq">
-                  <Badge overflowCount={999} count={chors.chors}>
+                  <Badge
+                    style={{
+                      backgroundColor: "#EBBE74",
+                      color: "black",
+                      fontsize: "16px",
+                    }}
+                    overflowCount={999}
+                    count={chors.chors}
+                  >
                     {lang?.lang196}
                   </Badge>
                 </Link>
@@ -113,6 +122,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                   // defaultSelectedKeys={["1"]}
                   // defaultOpenKeys={["sub1"]}
 
+                  onClick={closeMenue}
                   mode="inline"
                 >
                   <SubMenu
@@ -122,16 +132,20 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                   >
                     <Menu.Item key="8">
                       {/* "משתמשים" */}
+
                       <Link to="list_users">{lang?.lang102} </Link>
                     </Menu.Item>
+                    <hr />
                     <Menu.Item key="9">
                       {/* מיקום */}
                       <Link to="location">{lang?.lang333} </Link>
                     </Menu.Item>
+                    <hr />
                     <Menu.Item key="10">
                       {/* קטגוריות */}
                       <Link to="categoris">{lang?.lang104} </Link>
                     </Menu.Item>
+                    <hr />
                     <Menu.Item key="11">
                       {" "}
                       {/* הגדרות */}
@@ -149,6 +163,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
               <MenuStyel
                 mode="inline"
                 style={{ background: "#1c1547", border: "#1c1547" }}
+                onClick={closeMenue}
               >
                 <SubMenu key="sub1-4" icon={<VscAccount />}>
                   <Menu.Item key="13">
@@ -161,6 +176,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
               </MenuStyel>
               {userlevelid === 10 ? (
                 <MenuStyel
+                  onClick={closeMenue}
                   mode="inline"
                   style={{ background: "#1c1547", border: "#1c1547" }}
                 >

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Select } from "antd";
+import { Button } from "antd";
 
 export const Problemcontener = styled.div`
   color: rgba(15, 7, 67, 1);
@@ -121,28 +121,80 @@ export const FormContener = styled.div`
   }
   .textbloon {
     width: 274px;
-    height: 146px;
-    background: white;
-    position: relative;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    text-align: center;
+    margin-top: -34px;
   }
 
+  @media only screen and (max-width: 600px) {
+    .GoBackLink {
+      color: black;
+      align-self: flex-start;
+    }
+    .Sendedmassege {
+      width: 180px;
+      height: 180px;
+    }
+  }
+  @media only screen and (min-width: 600px) {
+    .Sendedmassege {
+      width: 310px;
+      height: 310px;
+    }
+    .GoBackLink {
+      color: black;
+
+      align-self: flex-start;
+      margin-inline-start: -50%;
+
+      margin-top: -18%;
+    }
+  }
   .avaterpopup {
-    content: "";
-    position: absolute;
-    right: 100%;
-    top: 96px;
     width: 0;
     height: 0;
     border-top: 13px solid transparent;
     border-right: 26px solid white;
     border-bottom: 13px solid transparent;
+    display: contents;
   }
   .uploadimage {
-    margin-top: 5%;
+    margin-top: ${(props) => (props.Position >= 1 ? "0px" : "100px")};
+
+    width: 258px;
+    height: 63px;
+    left: 1px;
+    top: 661px;
+    height: 50px;
+    background: #ffd17e;
+    border-radius: 11px;
+    color: #0f0743;
+    font-weight: bold;
+    font-size: 17px;
+    border-color: white;
+  }
+  .camraicon {
+    color: #0f0743;
+    font-size: 17px;
+  }
+  .ant-upload-list {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .ant-upload-list-item-error {
+    border-color: white;
+  }
+  .ant-tooltip {
+    visibility: collapse;
+  }
+  .ant-tooltip-inner {
+    display: none;
+  }
+  .ant-upload-list-item-error {
+    border-color: #e5ebf3;
   }
   .uploadimage-send {
     width: 217px;
@@ -152,26 +204,10 @@ export const FormContener = styled.div`
     margin-top: 6px;
     border-radius: 100px;
   }
-  .ant-tooltip-inner {
-    /* display: none; */
+  .ant-upload.ant-upload-select.ant-upload-select-picture-card.ant-upload-rtl {
+    display: contents;
   }
 
-  .ant-upload-list-picture .ant-upload-list-item-error,
-  .ant-upload-list-picture-card .ant-upload-list-item-error {
-    /* border-color: #f3a40c; */
-  }
-  .ant-upload.ant-upload-select-picture-card {
-    /* border: white !important; */
-  }
-  .ant-upload.ant-upload-select.ant-upload-select-picture-card {
-    /* width: 217px;
-    height: 45px;
-    left: calc(50% - 343px / 2);
-    top: 334px;
-    background-color: #00c851 !important;
-
-    border-radius: 100px; */
-  }
   .uplodeimage {
     color: white;
   }
@@ -184,4 +220,24 @@ export const FormContener = styled.div`
   }
 
   // iphune screen
+`;
+
+export const Buttonsenimage = styled.div`
+  .ant-btn {
+    margin-top: 5%;
+    width: 258px;
+    height: 63px;
+    left: 1px;
+    top: -7px;
+    background: ${(props) => (props.Buttonsecses ? "white" : "#ffd17e")};
+
+    height: 50px;
+
+    border-radius: 11px;
+    color: #0f0743;
+
+    font-weight: bold;
+    font-size: 17px;
+    border-color: ${(props) => (props.Buttonsecses ? "#0f0743" : "#ffd17e")};
+  }
 `;

@@ -53,7 +53,7 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 const { Option } = Select;
 
 const Checkform = (props) => {
-  document.body.style.backgroundColor = "white";
+  // let intViewportWidth = window.innerWidth;
 
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;

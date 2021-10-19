@@ -4,6 +4,8 @@ export const Drawerstyle = styled(Drawer)`
   .ant-drawer-header {
     color: rgba(228, 237, 237, 1);
     background-color: #1c1547 !important;
+    border-bottom: none;
+    border-radius: 0px 0px 0 0;
   }
   .ant-drawer-body {
     color: rgba(228, 237, 237, 1);
@@ -65,12 +67,35 @@ export const Avaterdrwor = styled.div`
   /* background-color: #1c1547; */
 `;
 export const MenuStyel = styled(Menu)`
+  hr {
+    border: 1px solid #2c2a51;
+    transform: rotate(180deg);
+  }
   .ant-menu {
     color: #e5e5e5;
     background: #1c1547 !important;
     border-left: none !important;
   }
-
+  .ant-menu-item-selected a,
+  .ant-menu-item-selected a:hover {
+    background: repeat-x;
+    color: #e5e5e5;
+  }
+  .ant-menu-item:active {
+    background: repeat-x;
+  }
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background: repeat-x;
+  }
+  .ant-menu-item-selected::after {
+    color: repeat-x;
+  }
+  .ant-menu-submenu-title:active {
+    background: repeat-x;
+  }
+  .ant-menu-item-selected {
+    color: red;
+  }
   .ant-menu-rtl {
     background-color: #1c1547 !important;
   }
@@ -91,6 +116,7 @@ export const MenuStyel = styled(Menu)`
   .ant-menu-title-content {
     color: #e5e5e5;
     background-color: #1c1547 !important;
+    margin-inline-start: -21px;
   }
   .ant-menu-submenu-arrow {
     color: #e5e5e5 !important;
