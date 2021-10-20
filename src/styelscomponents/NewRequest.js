@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "antd";
 
 export const Problemcontener = styled.div`
   color: rgba(15, 7, 67, 1);
@@ -103,13 +102,23 @@ export const FormContener = styled.div`
       width: 267px;
     }
   }
-
-  .goback {
-    margin-inline-end: 100%;
-    margin-bottom: 12%;
-    font-size: 24px;
+  @media only screen and (max-width: 600px) {
+    .goback {
+      /* margin-inline-end: 100%;
+    margin-bottom: 12%; */
+      align-self: flex-start;
+      font-size: 24px;
+      margin-right: 31px;
+    }
   }
-
+  @media only screen and (min-width: 600px) {
+    .goback {
+      align-self: flex-start;
+      font-size: 47px;
+      margin-right: 17%;
+      margin-top: -3%;
+    }
+  }
   .theproblemis {
     display: -webkit-box;
   }
@@ -127,7 +136,9 @@ export const FormContener = styled.div`
   @media only screen and (max-width: 600px) {
     .GoBackLink {
       color: black;
+
       align-self: flex-start;
+      width: 100px;
     }
     .Sendedmassege {
       width: 180px;

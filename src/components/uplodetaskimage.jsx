@@ -1,17 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import DataContext from "../DataContext";
 
-import { Link } from "react-router-dom";
-import { CloseOutlined } from "@ant-design/icons";
 import { AiOutlineCamera } from "react-icons/ai";
 import { Modal, Upload, Button } from "antd";
-import {
-  FormContener,
-  Problemcontener,
-  Buttonsenimage,
-} from "../styelscomponents/NewRequest";
-import Sendedmassege from "../assets/Sendimag.svg";
-import { BsCloudUpload } from "react-icons/bs";
+import { FormContener, Buttonsenimage } from "../styelscomponents/NewRequest";
 
 import { PostToServer } from "../serveses";
 
@@ -24,30 +16,26 @@ function getBase64(file) {
   });
 }
 const Uplodetaskimage = ({ userid, ticketid }) => {
-  // const Temmembertask = props.Temmembertask;
-  let intViewportWidth = window.innerWidth;
-  let ScreenWidtPhone;
-  if (intViewportWidth > 600) {
-    ScreenWidtPhone = false;
-  } else {
-    ScreenWidtPhone = true;
-  }
-  const loginstatus = useContext(DataContext).loginstatus;
-
   const defoltlang = useContext(DataContext).lang;
-  const masof = useContext(DataContext).masof;
-  const lang = defoltlang?.lang;
 
+  const lang = defoltlang?.lang;
   // seng imge
   const [uplodeimage, setuplodeimage] = useState({
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
   });
+  useEffect(() => {
+    if (uplodeimage?.fileList?.length >= 1) {
+      setsendbutton(true);
+    } else {
+      setsendbutton(false);
+    }
+  }, [uplodeimage]);
   const [previewImage, setpreviewImage] = useState();
   const [previewVisible, setpreviewVisible] = useState(false);
   const [previewTitle, setpreviewTitle] = useState("");
-
+  const [sendbutton, setsendbutton] = useState(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -86,7 +74,7 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
       img,
     };
     let res = await PostToServer(reqruter, obj);
-    setuplodeimage([]);
+
     console.log("state", res);
     setButtonsecses(true);
     setloadings([0]);
@@ -95,17 +83,6 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
   return (
     <div>
       <FormContener Position={uplodeimage?.fileList?.length}>
-        <Link to="/ListOfreq" className="GoBackLink">
-          {ScreenWidtPhone ? (
-            <CloseOutlined
-              onClick={() => {
-                console.log("hi");
-              }}
-            />
-          ) : (
-            lang?.lang283
-          )}
-        </Link>
         <div className="textbloon">
           <img
             src="/images/Semdimag.png"
@@ -131,7 +108,7 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
               </button>
             </Upload>
 
-            {uplodeimage?.fileList?.length >= 1 ? (
+            {sendbutton ? (
               <Buttonsenimage Buttonsecses={Buttonsecses}>
                 <Button onClick={sendimage} loading={loadings[2]}>
                   {!Buttonsecses ? lang?.lang265 : "נשלח"}

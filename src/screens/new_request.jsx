@@ -57,13 +57,14 @@ const Nwerequest = ({ Temmembertask }) => {
                         }
 
                         return (
-                          <div className="problome" key={index}>
-                            <p
-                              onClick={() => {
-                                chosentyp(el);
-                              }}
-                              className="iconproblem"
-                            >
+                          <div
+                            className="problome"
+                            key={index}
+                            onClick={() => {
+                              chosentyp(el);
+                            }}
+                          >
+                            <p className="iconproblem">
                               {icon ? <finicon.icon /> : <PoweroffOutlined />}
                             </p>
                             <p className="uniqueproblem">

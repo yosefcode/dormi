@@ -56,7 +56,6 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
   const onFinish = async (value) => {
-    debugger;
     enterLoading(2);
     let task = "save";
 
@@ -67,11 +66,22 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
     }
 
     let userid = loginstatus.userid;
-    let locationid = value.locationid[1];
-    let roomid = parseInt(value.roomid[1]);
-    let categoryid = value.categoryid[1];
-    let urgencyid = value.urgencyid;
 
+    let locationid;
+    if (value?.locationid) {
+      locationid = value?.locationid[1];
+    }
+    let roomid;
+    if (value?.roomid) {
+      roomid = parseInt(value?.roomid[1]);
+    }
+    let categoryid;
+    if (value?.categoryid) {
+      categoryid = value?.categoryid[1];
+    }
+    let urgencyid = value?.urgencyid;
+
+    debugger;
     let comments;
     if (value.comments) {
       comments = value.comments.replace(/[<>${}]/g, "danger$&");
@@ -88,7 +98,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
       comments,
       // ...typeofreq,
     };
-
+    debugger;
     let reqruter = "newticket";
     let res = await PostToServer(reqruter, obj);
     if (res.error === 1) {
@@ -165,24 +175,20 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
   return (
     <div>
       <FormContener>
-        {/* <div className="avatar"> */}
-        {/* <img src="/images/man.png" className="avatar" alt="Image" /> */}
-        {/* </div> */}
+        <div
+          className="goback"
+          onClick={() => {
+            Goeinfbacktopage();
+          }}
+        >
+          <FiArrowRight />
+        </div>
         {!uplodeimagescreen ? (
           <Form
             name="basic"
             initialValues={{ remember: true }}
             onFinish={onFinish}
           >
-            <div
-              className="goback"
-              onClick={() => {
-                Goeinfbacktopage();
-              }}
-            >
-              <FiArrowRight />
-            </div>
-
             <div className="theproblemis">
               <p>הבעיה היא {Typeofreq.maincategoryname}</p>
               {Icon ? (
@@ -302,7 +308,9 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
             </Form.Item>
           </Form>
         ) : (
-          <Uplodetaskimage ticketid={ticketid} userid={loginstatus.userid} />
+          <div>
+            <Uplodetaskimage ticketid={ticketid} userid={loginstatus.userid} />
+          </div>
         )}
         <ModalStyeld
           visible={errmassege}

@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { Spin } from "antd";
+
 import ReactToPrint from "react-to-print";
 import { AiOutlineFilePdf } from "react-icons/ai";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,13 +17,16 @@ import SendMassege from "../components/SendMassege";
 import Adduser from "../components/Adduser";
 import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
+import Ticketlis from "../screens/Ticketlis";
 
 const ContrulScreen = ({ dir }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
   const masof = useContext(DataContext).masof;
+
   const componentRef = useRef();
 
+  // useEffect(() => {}, [progres]);
   return (
     <Router>
       <Menu dir={dir} />
@@ -37,18 +40,38 @@ const ContrulScreen = ({ dir }) => {
         <Route exact path="/">
           <Nwerequest />
         </Route>
-        <Route path="/ListOfreq">
+        <Route path="/test">
           {ticketlist && defullang ? (
             <ListOfreq repeatedtask={false} />
           ) : (
-            <Spin size="large" />
+            <img
+              src="/images/Semdimag.png"
+              className="lodingimage"
+              alt="lodingimage"
+            />
+          )}
+        </Route>
+
+        <Route path="/ListOfreq">
+          {ticketlist && defullang ? (
+            <Ticketlis repeatedtask={false} />
+          ) : (
+            <img
+              src="/images/Semdimag.png"
+              className="lodingimage"
+              alt="lodingimage"
+            />
           )}
         </Route>
         <Route path="/Repeatedtask">
           {ticketlist && defullang ? (
-            <ListOfreq Repeatedtask={true} />
+            <Ticketlis repeatedtask={true} />
           ) : (
-            <Spin size="large" />
+            <img
+              src="/images/Semdimag.png"
+              className="lodingimage"
+              alt="lodingimage"
+            />
           )}
         </Route>
         <Route path="/temmembertask">
@@ -65,7 +88,11 @@ const ContrulScreen = ({ dir }) => {
             <Categoris />
           </Route>
         ) : (
-          <Spin size="large" />
+          <img
+            src="/images/Semdimag.png"
+            className="lodingimage"
+            alt="lodingimage"
+          />
         )}
 
         <Route path="/setings">

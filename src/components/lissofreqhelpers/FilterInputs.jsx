@@ -133,27 +133,72 @@ export function FiltersForsort({
           <Option key={"status2"} value={lang.lang194}>
             {lang.lang173}
 
-            <Badge dir="tlr" overflowCount={999} count={numofopen} />
+            <Badge
+              dir="tlr"
+              overflowCount={999}
+              count={numofopen}
+              style={{
+                backgroundColor: "#EBBE74",
+                color: "black",
+                fontsize: "16px",
+              }}
+            />
           </Option>
           {/* בטיפול */}
           <Option key={"status3"} value={lang.lang174}>
             {lang.lang174}
-            <Badge dir="tlr" overflowCount={999} count={numotrintment} />
+            <Badge
+              dir="tlr"
+              overflowCount={999}
+              count={numotrintment}
+              style={{
+                backgroundColor: "#EBBE74",
+                color: "black",
+                fontsize: "16px",
+              }}
+            />
           </Option>
           {/* בטיפול ספק חיצוני */}
           <Option key={"status4"} value={lang.lang175}>
             {lang.lang175}
-            <Badge dir="tlr" overflowCount={999} count={numoprofessional} />
+            <Badge
+              dir="tlr"
+              overflowCount={999}
+              count={numoprofessional}
+              style={{
+                backgroundColor: "#EBBE74",
+                color: "black",
+                fontsize: "16px",
+              }}
+            />
           </Option>
           {/* סגור */}
           <Option key={"status5"} value={lang.lang176}>
             {lang.lang176}
-            <Badge dir="tlr" overflowCount={999} count={numclose} />
+            <Badge
+              dir="tlr"
+              overflowCount={999}
+              count={numclose}
+              style={{
+                backgroundColor: "#EBBE74",
+                color: "black",
+                fontsize: "16px",
+              }}
+            />
           </Option>
           {/* נמחק */}
           <Option key={"status6"} value={lang.lang177}>
             {lang.lang177}
-            <Badge dir="tlr" overflowCount={999} count={numdelet} />
+            <Badge
+              dir="tlr"
+              overflowCount={999}
+              count={numdelet}
+              style={{
+                backgroundColor: "#EBBE74",
+                color: "black",
+                fontsize: "16px",
+              }}
+            />
           </Option>
         </Select>
       </div>
@@ -174,6 +219,11 @@ export function FiltersForsort({
                     dir="tlr"
                     overflowCount={999}
                     count={el?.breadcrumb?.length}
+                    style={{
+                      backgroundColor: "#EBBE74",
+                      color: "black",
+                      fontsize: "16px",
+                    }}
                   />
                 </Option>
               ))
@@ -187,13 +237,25 @@ export function FiltersForsort({
           onChange={filterallUrgency}
         >
           <Option value={false}>{lang?.lang353}</Option>
-          <Option value={"3"}>{lang?.lang120}</Option>
-          <Option value={"2"}>{lang?.lang121}</Option>
-          <Option value={"1"}>{lang?.lang122}</Option>
+          <Option value={"3"}>
+            <Badge color={"#389e0d"} text={lang?.lang120} />
+          </Option>
+
+          <Option value={"2"}>
+            <Badge color={"#fa8c16"} text={lang?.lang121} />
+          </Option>
+          <Option value={"1"}>
+            <Badge color={"#cf1322"} text={lang?.lang122} />
+          </Option>
         </Select>
       </div>
 
-      <TreeSelect {...tProps} />
+      <TreeSelect
+        {...tProps}
+        style={{
+          width: 200,
+        }}
+      />
 
       {/*  כל המשתמשים  */}
       <div className="selcts">
@@ -214,6 +276,11 @@ export function FiltersForsort({
                     dir="tlr"
                     overflowCount={999}
                     count={el?.users?.length}
+                    style={{
+                      backgroundColor: "#EBBE74",
+                      color: "black",
+                      fontsize: "16px",
+                    }}
                   />
                 </Option>
               ))

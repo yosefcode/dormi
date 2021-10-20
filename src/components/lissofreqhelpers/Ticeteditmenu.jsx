@@ -217,34 +217,26 @@ const CardStyeld = styled.div`
 export const Switchurgency = (urgencyadmin, lang122, lang121, lang120) => {
   let urgencytext;
   let urgency;
-
+  let green = "#389e0d";
+  let yeloo = "#fa8c16";
+  let red = "#cf1322";
   switch (urgencyadmin) {
     case "1":
       urgencytext = lang122;
-      urgency = {
-        color: "#389e0d",
-        backgroundcoler: "#f6ffed",
-        border: "#b7eb8f",
-      };
+      urgency = green;
 
       return { urgencytext, urgency };
       break;
     case "2":
       urgencytext = lang121;
-      urgency = {
-        color: "#fa8c16",
-        backgroundcoler: "#fff7e6",
-        border: "#ffd591;",
-      };
+      urgency = yeloo;
+
       return { urgencytext, urgency };
       break;
     case "3":
       urgencytext = lang120;
-      urgency = {
-        color: "#cf1322",
-        backgroundcoler: "#fff1f0",
-        border: "#ffa39e",
-      };
+      urgency = red;
+
       return { urgencytext, urgency };
       break;
   }
@@ -253,22 +245,16 @@ export const Switchurgency = (urgencyadmin, lang122, lang121, lang120) => {
 export const Switcstatus = (statusname, lang162, lang174) => {
   let status;
   let statustext;
+  let blue = "#108ee9";
+  let green = "#87d068";
   switch (statusname) {
     case "פנייה חדשה":
-      status = {
-        color: "white",
-        backgroundcoler: "#108ee9",
-        border: "#1410e9",
-      };
+      status = blue;
       statustext = lang162;
       return { status, statustext };
       break;
     case "בטיפול":
-      status = {
-        color: "white",
-        backgroundcoler: "#87d068",
-        border: "#68d082",
-      };
+      status = green;
       statustext = lang174;
       return { status, statustext };
 
