@@ -36,6 +36,8 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
   const [previewVisible, setpreviewVisible] = useState(false);
   const [previewTitle, setpreviewTitle] = useState("");
   const [sendbutton, setsendbutton] = useState(false);
+  // const [aftersend, setaftersend] = useState(false);
+
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -74,8 +76,8 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
       img,
     };
     let res = await PostToServer(reqruter, obj);
+    setuplodeimage("");
 
-    console.log("state", res);
     setButtonsecses(true);
     setloadings([0]);
   };
@@ -91,24 +93,28 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
           />
 
           <h2 style={{ color: "#1C1547" }}>{lang?.lang131}</h2>
-          <p>נעדכן אותך בהמשך טיפוך</p>
+          <p>נעדכן אותך בהמשך טיפול</p>
 
           <div className="avaterpopup">
-            <Upload
-              listType="picture-card"
-              fileList={fileList}
-              onPreview={handlePreview}
-              onChange={upludeimage}
-            >
-              <button className="uploadimage">
-                <span>
-                  <AiOutlineCamera className="camraicon" />
-                </span>
-                <span>{lang?.lang274}</span>
-              </button>
-            </Upload>
+            <div>
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={upludeimage}
+              >
+                {!Buttonsecses ? (
+                  <button className="uploadimage">
+                    <span>
+                      <AiOutlineCamera className="camraicon" />
+                    </span>
+                    <span>{lang?.lang274}</span>
+                  </button>
+                ) : null}
+              </Upload>
+            </div>
 
-            {sendbutton ? (
+            {sendbutton || Buttonsecses ? (
               <Buttonsenimage Buttonsecses={Buttonsecses}>
                 <Button onClick={sendimage} loading={loadings[2]}>
                   {!Buttonsecses ? lang?.lang265 : "נשלח"}

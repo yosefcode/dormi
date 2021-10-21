@@ -92,7 +92,7 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
   );
   let stafarry = ["אביתר", "בעז", "משה"];
   return (
-    <div>
+    <div className="Apruchclose">
       <div className="edittask">
         <Form name="basic" onFinish={onFinish} form={form}>
           <div className="formedittask">
@@ -151,9 +151,9 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
 
             <br />
           </div>
-          <Button type="primary" htmlType="submit">
+          <button className="modalbutoonsend" htmlType="submit">
             send
-          </Button>
+          </button>
         </Form>
       </div>
     </div>
@@ -217,9 +217,10 @@ const CardStyeld = styled.div`
 export const Switchurgency = (urgencyadmin, lang122, lang121, lang120) => {
   let urgencytext;
   let urgency;
-  let green = "#389e0d";
-  let yeloo = "#fa8c16";
-  let red = "#cf1322";
+
+  let green = "#22E7B7";
+  let yeloo = "orange";
+  let red = "#D91D61";
   switch (urgencyadmin) {
     case "1":
       urgencytext = lang122;

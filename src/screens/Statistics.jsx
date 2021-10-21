@@ -4,6 +4,7 @@ import { Continer } from "../styelscomponents/StatisicChart";
 import { Chart } from "react-google-charts";
 
 const Statistics = React.forwardRef((props, ref) => {
+  document.body.style.backgroundColor = "white";
   const [data, setdata] = useState();
   const [firstlode, setfirstlode] = useState(true);
   useEffect(() => {

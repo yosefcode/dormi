@@ -9,6 +9,7 @@ import { Arryoficons } from "../Icons";
 import Formtask from "../components/Formtask";
 
 const Nwerequest = ({ Temmembertask }) => {
+  document.body.style.backgroundColor = "white";
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;

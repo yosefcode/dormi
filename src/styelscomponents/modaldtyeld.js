@@ -17,10 +17,55 @@ export const ModalStyeld = styled(Modal)`
     border: none;
     box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
   }
+  @media only screen and (max-width: 600px) {
+    .formedittask {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+  }
+  .ant-select {
+    width: 300px;
+    border-color: none;
+    margin-bottom: 3px;
+    box-sizing: border-box;
+    border-radius: 11px;
+  }
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+    margin-bottom: 2px;
+  }
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+  }
 
   .formedittask {
     display: flex;
     /* background-color: blue; */
+  }
+  .modalbutoonsend {
+    width: 149.5px;
+    height: 63px;
+
+    background: #0f0743;
+    border-radius: 11px;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+
+    color: #ffffff;
   }
   .edittask {
     display: flex;

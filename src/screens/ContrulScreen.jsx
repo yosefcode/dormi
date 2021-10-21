@@ -54,7 +54,7 @@ const ContrulScreen = ({ dir }) => {
 
         <Route path="/ListOfreq">
           {ticketlist && defullang ? (
-            <Ticketlis repeatedtask={false} />
+            <Ticketlis Repeatedtask={false} />
           ) : (
             <img
               src="/images/Semdimag.png"
@@ -65,7 +65,7 @@ const ContrulScreen = ({ dir }) => {
         </Route>
         <Route path="/Repeatedtask">
           {ticketlist && defullang ? (
-            <Ticketlis repeatedtask={true} />
+            <Ticketlis Repeatedtask={true} />
           ) : (
             <img
               src="/images/Semdimag.png"

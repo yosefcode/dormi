@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Contener, Drawerstyle } from "../styelscomponents/Ticketliststyel";
+import {
+  Contener,
+  Drawerstyle,
+  Selectfilter,
+} from "../styelscomponents/Ticketliststyel";
 import DataContext from "../DataContext";
 import { FaFilter } from "react-icons/fa";
-import { ImCloudDownload } from "react-icons/im";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { AiOutlineCamera } from "react-icons/ai";
-import { FaMapPin } from "react-icons/fa";
-import { BsThreeDotsVertical, BsFillPersonFill } from "react-icons/bs";
+
+import Exelexport from "../components/lissofreqhelpers/Exelexport";
+
+import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   Ordercareguris,
   Orderlocation,
@@ -28,26 +31,39 @@ import {
   Switchurgency,
   Switcstatus,
 } from "../components/lissofreqhelpers/Ticeteditmenu";
+import {
+  Carddatasmall,
+  Carddatabig,
+  Urgensy,
+} from "../components/lissofreqhelpers/Carddata";
 import { FiltersForsort } from "../components/lissofreqhelpers/FilterInputs";
+import {
+  SendmasegeTask,
+  Sentostaf,
+  Carddata,
+} from "../components/lissofreqhelpers/Tasks";
+import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 
-import { Badge, Card, Menu, Dropdown } from "antd";
+import { Card, Menu, Dropdown } from "antd";
 
-const Ticketlis = (props) => {
+const Ticketlis = ({ Repeatedtask }) => {
   const itemsRef = useRef([]);
 
   document.body.style.backgroundColor = "#e5e5e5";
-  const defoltlang = useContext(DataContext).lang;
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketlist;
+  const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
   //  הגדארות משתנות לפי גודל מסך
   const [screnphunesize, setscrenphunesize] = useState();
   const [fullcard, setfullcard] = useState(false);
+  //  הגדרת מאפיין - משימות מתוזמנות או רגילות
+
   const [Drawervisible, setDrawervisible] = useState(false);
   const openfilter = () => {
     setDrawervisible(!Drawervisible);
   };
-  let arry = ["1", "2"];
+
   /// סטייטס לכל הסינונים
   const [AllTikets, setAllTikets] = useState([]);
 
@@ -61,14 +77,13 @@ const Ticketlis = (props) => {
   const [chingeurgency, setchingeurgency] = useState(false);
   const [filteruser, setfilteruser] = useState();
   const [selectedstatus, setselectedstatus] = useState();
+
   // רשימת חדרים ומיכומים
 
   // עדכון שינוי סטטוס דחיפות  פנייה
   function findChangeurgency(value) {
     let requst = ticketlist.findIndex((Item) => Item.ticketid === value[1]);
-
     ticketlist[requst].urgencyadmin = value[2];
-
     setchingeurgency(!chingeurgency);
     setlocallist(ticketlist);
   }
@@ -221,6 +236,7 @@ const Ticketlis = (props) => {
     locationfilter,
     filteruser,
     selectedstatus,
+    fullcard,
   ]);
 
   const SelfOpenststus = (i) => {
@@ -231,7 +247,7 @@ const Ticketlis = (props) => {
     }
   };
   const AllOpenststus = () => {
-    for (let i = 0; arry.length > i; i++) {
+    for (let i = 0; AllTikets.length > i; i++) {
       if (fullcard) {
         itemsRef.current[i].style.display = "none";
 
@@ -262,7 +278,7 @@ const Ticketlis = (props) => {
     setedittask(true);
   };
   const [claerapruchform, setclaerapruchform] = useState(false);
-  console.log(selectedstatus);
+
   return (
     <Contener Screnphunesize={screnphunesize}>
       <div className="Mangeroption">
@@ -275,35 +291,35 @@ const Ticketlis = (props) => {
         <button className="MangerButton shwobutton" onClick={AllOpenststus}>
           הצג את כל פרטי הפנייה
         </button>
-        <button className="MangerButton shwobutton">
-          יצא לאקסל <ImCloudDownload />
-        </button>
+        <Exelexport data={AllTikets} />
+
         <Dropdown overlay={menu} placement="bottomLeft">
           <button className="DropdownButton shwobuttondropdown">
             <BsThreeDotsVertical />
           </button>
         </Dropdown>
       </div>
-
       {Drawervisible && !screnphunesize ? (
-        <FiltersForsort
-          filterarry={filterarry}
-          setingAllOpenCategoris={(value) => {
-            setAllOpenCategoris(value);
-          }}
-          setingfilterallUrgency={(value) => {
-            setfilterallUrgency(value);
-          }}
-          setlocationsort={(value) => {
-            setlocationfilter(value);
-          }}
-          setUserFilter={(value) => {
-            setfilteruser(value);
-          }}
-          selectedstatus={(value) => {
-            setselectedstatus(value);
-          }}
-        />
+        <Selectfilter>
+          <FiltersForsort
+            filterarry={filterarry}
+            setingAllOpenCategoris={(value) => {
+              setAllOpenCategoris(value);
+            }}
+            setingfilterallUrgency={(value) => {
+              setfilterallUrgency(value);
+            }}
+            setlocationsort={(value) => {
+              setlocationfilter(value);
+            }}
+            setUserFilter={(value) => {
+              setfilteruser(value);
+            }}
+            selectedstatus={(value) => {
+              setselectedstatus(value);
+            }}
+          />
+        </Selectfilter>
       ) : null}
       {/* כמה פניות יש */}
       <p id="discriptun">מציג {AllTikets.length} פניות : </p>
@@ -382,46 +398,43 @@ const Ticketlis = (props) => {
 
           return (
             <Card bordered={false} key={i}>
-              <div className="Smallcard">
-                <p id="discriptun">
-                  {el.categoryname} - {el.categoryname}
-                </p>
-                <p id="cooment"> {el.comments}</p>
-                <Badge color={status} text={statustext} />
+              <Carddatasmall
+                el={el}
+                i={i}
+                status={status}
+                statustext={statustext}
+                SelfOpenststus={SelfOpenststus}
+                Repeatedtask={Repeatedtask}
+              />
 
-                <Badge color={urgency} text={urgencytext} className="urgency" />
-              </div>
               <div
                 ref={(el) => (itemsRef.current[i] = el)}
-                style={{ display: "none", color: "#807e94", marginTop: "20px" }}
+                style={{
+                  display: "none",
+                  color: "#807e94",
+                  marginTop: "20px",
+                }}
               >
                 <hr />
-                <p>
-                  <FaMapPin />
-                  {el.locationName}-{el.roomName}
-                </p>
-                <p>
-                  <BsFillPersonFill /> {el.firstname} {el.lastname}
-                  <span className="Calltoaction">{el.phone}</span>
-                </p>
-                <p>
-                  <AiOutlineCamera />
-                  <span className="Calltoaction">תמונה</span>
-                </p>
-                <p>
-                  {el.dateopened}
-                  <span id="displyid">{el.ticketid}</span>
-                </p>
+
+                <Carddatabig el={el} />
               </div>
-              <div className="action">
-                <MdKeyboardArrowDown
-                  onClick={() => {
-                    SelfOpenststus(i);
-                  }}
+
+              <div style={{ pointerevents: "initial" }} className="action">
+                <Urgensy
+                  el={el}
+                  urgency={urgency}
+                  urgencytext={urgencytext}
+                  findChangeurgency={findChangeurgency}
                 />
 
-                <Dropdown overlay={setingmenu} placement="bottomLeft">
-                  <button className="cardbutton">
+                <Dropdown
+                  overlay={setingmenu}
+                  placement="bottomLeft"
+                  trigger={["click"]}
+                  className="cardbutton"
+                >
+                  <button>
                     <BsThreeDotsVertical />
                   </button>
                 </Dropdown>
@@ -444,13 +457,15 @@ const Ticketlis = (props) => {
           visible={Drawervisible}
           key={"bottom"}
           footer={
-            <div className="buttons">
-              <button className="Clear">נקה</button>
-              <button className="ok">
-                אישור
-                <FaFilter />
-              </button>
-            </div>
+            <button
+              className="ok"
+              onClick={() => {
+                setDrawervisible(false);
+              }}
+            >
+              אישור
+              <FaFilter />
+            </button>
           }
           height={450}
           bodyStyle={{
@@ -477,6 +492,42 @@ const Ticketlis = (props) => {
           />
         </Drawerstyle>
       ) : null}
+
+      <ModalStyeld
+        title={`${lang?.lang208} - ${problemid}`}
+        visible={openaptuchclosemodal}
+        onCancel={() => {
+          setopenaptuchclosemodal(false);
+          setclaerapruchform(true);
+        }}
+        footer={false}
+      >
+        <Apruchclose
+          ticketguid={problemid}
+          Closemodal={closeopenaptuchclosemoda}
+          Clearform={claerapruchform}
+        />
+      </ModalStyeld>
+      <ModalStyeld
+        title={lang?.lang263}
+        visible={Sendmassege}
+        onCancel={() => {
+          setSendmassege(false);
+        }}
+        footer={false}
+      >
+        <SendmasegeTask onsendmassege={onsendmassege} />
+      </ModalStyeld>
+      <ModalStyeld
+        title={lang?.lang240}
+        visible={Referraltostaff}
+        onCancel={() => {
+          setReferraltostaff(false);
+        }}
+        footer={false}
+      >
+        <Sentostaf onReferr={onReferr} />
+      </ModalStyeld>
     </Contener>
   );
 };

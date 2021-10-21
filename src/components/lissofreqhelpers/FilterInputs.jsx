@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
-import { Select, Badge, TreeSelect } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Select, Badge, TreeSelect, Form } from "antd";
 
 import DataContext from "../../DataContext";
-
 const { Option } = Select;
 
 const { SHOW_PARENT } = TreeSelect;
@@ -85,7 +84,7 @@ export function FiltersForsort({
       width: "100%",
     },
   };
-  console.log(filterarry);
+
   let numofopen;
   let numotrintment;
   let numoprofessional;
@@ -118,185 +117,210 @@ export function FiltersForsort({
     }
   }
 
+  // };
+  const [form] = Form.useForm();
+  const clear = () => {
+    form.resetFields();
+  };
   return (
     <div className="filteroption">
-      <div className="selcts">
-        <Select
-          showSearch
-          placeholder={lang?.lang178}
-          onChange={selectedstatusfilter}
-        >
-          <Option key={"status1"} value={false}>
-            {lang.lang178}
-          </Option>
-          {/*  פנייה חדשה */}
-          <Option key={"status2"} value={lang.lang194}>
-            {lang.lang173}
+      <button button onClick={clear} className="clearbutton">
+        נקה הכל
+      </button>
+      <Form form={form} name="filterform">
+        <div className="selcts">
+          <Form.Item name="opentask">
+            <Select
+              showSearch
+              placeholder={lang?.lang178}
+              onChange={selectedstatusfilter}
+            >
+              <Option key={"status1"} value={false}>
+                {lang.lang178}
+              </Option>
+              {/*  פנייה חדשה */}
+              <Option key={"status2"} value={lang.lang194}>
+                {lang.lang173}
 
-            <Badge
-              dir="tlr"
-              overflowCount={999}
-              count={numofopen}
-              style={{
-                backgroundColor: "#EBBE74",
-                color: "black",
-                fontsize: "16px",
-              }}
-            />
-          </Option>
-          {/* בטיפול */}
-          <Option key={"status3"} value={lang.lang174}>
-            {lang.lang174}
-            <Badge
-              dir="tlr"
-              overflowCount={999}
-              count={numotrintment}
-              style={{
-                backgroundColor: "#EBBE74",
-                color: "black",
-                fontsize: "16px",
-              }}
-            />
-          </Option>
-          {/* בטיפול ספק חיצוני */}
-          <Option key={"status4"} value={lang.lang175}>
-            {lang.lang175}
-            <Badge
-              dir="tlr"
-              overflowCount={999}
-              count={numoprofessional}
-              style={{
-                backgroundColor: "#EBBE74",
-                color: "black",
-                fontsize: "16px",
-              }}
-            />
-          </Option>
-          {/* סגור */}
-          <Option key={"status5"} value={lang.lang176}>
-            {lang.lang176}
-            <Badge
-              dir="tlr"
-              overflowCount={999}
-              count={numclose}
-              style={{
-                backgroundColor: "#EBBE74",
-                color: "black",
-                fontsize: "16px",
-              }}
-            />
-          </Option>
-          {/* נמחק */}
-          <Option key={"status6"} value={lang.lang177}>
-            {lang.lang177}
-            <Badge
-              dir="tlr"
-              overflowCount={999}
-              count={numdelet}
-              style={{
-                backgroundColor: "#EBBE74",
-                color: "black",
-                fontsize: "16px",
-              }}
-            />
-          </Option>
-        </Select>
-      </div>
+                <Badge
+                  dir="tlr"
+                  overflowCount={999}
+                  count={numofopen}
+                  style={{
+                    backgroundColor: "#EBBE74",
+                    color: "black",
+                    fontsize: "16px",
+                  }}
+                />
+              </Option>
+              {/* בטיפול */}
+              <Option key={"status3"} value={lang.lang174}>
+                {lang.lang174}
+                <Badge
+                  dir="tlr"
+                  overflowCount={999}
+                  count={numotrintment}
+                  style={{
+                    backgroundColor: "#EBBE74",
+                    color: "black",
+                    fontsize: "16px",
+                  }}
+                />
+              </Option>
+              {/* בטיפול ספק חיצוני */}
+              <Option key={"status4"} value={lang.lang175}>
+                {lang.lang175}
+                <Badge
+                  dir="tlr"
+                  overflowCount={999}
+                  count={numoprofessional}
+                  style={{
+                    backgroundColor: "#EBBE74",
+                    color: "black",
+                    fontsize: "16px",
+                  }}
+                />
+              </Option>
+              {/* סגור */}
+              <Option key={"status5"} value={lang.lang176}>
+                {lang.lang176}
+                <Badge
+                  dir="tlr"
+                  overflowCount={999}
+                  count={numclose}
+                  style={{
+                    backgroundColor: "#EBBE74",
+                    color: "black",
+                    fontsize: "16px",
+                  }}
+                />
+              </Option>
+              {/* נמחק */}
+              <Option key={"status6"} value={lang.lang177}>
+                {lang.lang177}
+                <Badge
+                  dir="tlr"
+                  overflowCount={999}
+                  count={numdelet}
+                  style={{
+                    backgroundColor: "#EBBE74",
+                    color: "black",
+                    fontsize: "16px",
+                  }}
+                />
+              </Option>
+            </Select>
+          </Form.Item>
+        </div>
+        <Form.Item name="allOpenCategoris">
+          <div className="selcts">
+            <Select
+              showSearch
+              placeholder={lang?.lang354}
+              onChange={AllOpenCategoris}
+            >
+              <Option value={false}>{lang.lang354}</Option>
 
-      <div className="selcts">
-        <Select
-          showSearch
-          placeholder={lang?.lang354}
-          onChange={AllOpenCategoris}
-        >
-          <Option value={false}>{lang.lang354}</Option>
+              {filterarry
+                ? filterarry.breadcrumb.map((el) => (
+                    <Option value={el?.breadcrumb[0]}>
+                      {el?.breadcrumb[0]}{" "}
+                      <Badge
+                        dir="tlr"
+                        overflowCount={999}
+                        count={el?.breadcrumb?.length}
+                        style={{
+                          backgroundColor: "#EBBE74",
+                          color: "black",
+                          fontsize: "16px",
+                        }}
+                      />
+                    </Option>
+                  ))
+                : null}
+            </Select>
+          </div>
+        </Form.Item>
 
-          {filterarry
-            ? filterarry.breadcrumb.map((el) => (
-                <Option value={el?.breadcrumb[0]}>
-                  {el?.breadcrumb[0]}{" "}
-                  <Badge
-                    dir="tlr"
-                    overflowCount={999}
-                    count={el?.breadcrumb?.length}
-                    style={{
-                      backgroundColor: "#EBBE74",
-                      color: "black",
-                      fontsize: "16px",
-                    }}
-                  />
-                </Option>
-              ))
-            : null}
-        </Select>
-      </div>
-      <div className="selcts">
-        <Select
-          showSearch
-          placeholder={lang?.lang353}
-          onChange={filterallUrgency}
-        >
-          <Option value={false}>{lang?.lang353}</Option>
-          <Option value={"3"}>
-            <Badge color={"#389e0d"} text={lang?.lang120} />
-          </Option>
+        <Form.Item name="filterallUrgency">
+          <div className="selcts">
+            <Select
+              showSearch
+              placeholder={lang?.lang353}
+              onChange={filterallUrgency}
+            >
+              <Option value={false}>{lang?.lang353}</Option>
 
-          <Option value={"2"}>
-            <Badge color={"#fa8c16"} text={lang?.lang121} />
-          </Option>
-          <Option value={"1"}>
-            <Badge color={"#cf1322"} text={lang?.lang122} />
-          </Option>
-        </Select>
-      </div>
+              <Option value={"3"}>
+                <Badge color={"#D91D61"} text={lang?.lang120} />
+              </Option>
 
-      <TreeSelect
-        {...tProps}
-        style={{
-          width: 200,
-        }}
-      />
+              <Option value={"2"}>
+                <Badge color={"orange"} text={lang?.lang121} />
+              </Option>
+              <Option value={"1"}>
+                <Badge color={"#22E7B7"} text={lang?.lang122} />
+              </Option>
+            </Select>
+          </div>
 
-      {/*  כל המשתמשים  */}
-      <div className="selcts">
-        <Select showSearch placeholder={lang?.lang352} onChange={filterofuser}>
-          <Option value={false}>{lang.lang352}</Option>
-          {filterarry
-            ? filterarry.users.map((el, index) => (
-                <Option
-                  key={index}
-                  value={[
-                    el.users[0].user,
-                    el.users[0].firstname,
-                    el.users[0].lastname,
-                  ]}
-                >
-                  {el.users[0].user}{" "}
-                  <Badge
-                    dir="tlr"
-                    overflowCount={999}
-                    count={el?.users?.length}
-                    style={{
-                      backgroundColor: "#EBBE74",
-                      color: "black",
-                      fontsize: "16px",
-                    }}
-                  />
-                </Option>
-              ))
-            : null}
-        </Select>
-      </div>
-      {/* הועבר לטיפול */}
-      <div className="selcts">
-        <Select
-          showSearch
-          placeholder={lang?.lang358}
-          // onChange={AllOpenCategoris}
-        >
-          <Option value={false}>{lang.lang358}</Option>
-        </Select>
-      </div>
+          <TreeSelect
+            {...tProps}
+            style={{
+              width: 200,
+            }}
+          />
+        </Form.Item>
+        <Form.Item name="filterofuser">
+          {/*  כל המשתמשים  */}
+          <div className="selcts">
+            <Select
+              showSearch
+              placeholder={lang?.lang352}
+              onChange={filterofuser}
+            >
+              <Option value={false}>{lang.lang352}</Option>
+              {filterarry
+                ? filterarry.users.map((el, index) => (
+                    <Option
+                      key={index}
+                      value={[
+                        el.users[0].user,
+                        el.users[0].firstname,
+                        el.users[0].lastname,
+                      ]}
+                    >
+                      {el.users[0].user}{" "}
+                      <Badge
+                        dir="tlr"
+                        overflowCount={999}
+                        count={el?.users?.length}
+                        style={{
+                          backgroundColor: "#EBBE74",
+                          color: "black",
+                          fontsize: "16px",
+                        }}
+                      />
+                    </Option>
+                  ))
+                : null}
+            </Select>
+          </div>
+        </Form.Item>
+
+        <Form.Item name="poshtostaff">
+          {/* הועבר לטיפול */}
+          <div className="selcts">
+            <Select
+              showSearch
+              placeholder={lang?.lang358}
+              // onChange={AllOpenCategoris}
+            >
+              <Option value={false}>{lang.lang358}</Option>
+            </Select>
+          </div>
+        </Form.Item>
+      </Form>
     </div>
   );
 }

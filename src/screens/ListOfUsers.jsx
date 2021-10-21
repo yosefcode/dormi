@@ -72,6 +72,7 @@ const columns = [
   },
 ];
 function Users() {
+  document.body.style.backgroundColor = "white";
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Drawer } from "antd";
+import { Drawer, Select } from "antd";
 
 export const Contener = styled.div`
   display: flex;
@@ -8,6 +8,21 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
+  .clearbutton {
+    color: #0f0743;
+    width: 97px;
+    background: none;
+    border: none;
+    margin-inline-start: 75%;
+    margin-bottom: 5%;
+    font-weight: 500;
+    font-size: 14px;
+    -webkit-text-decoration: underline;
+    text-decoration: underline;
+  }
+  .ant-form-item {
+    margin-bottom: 0px;
+  }
   .Mangeroption {
     display: flex;
 
@@ -41,47 +56,11 @@ export const Contener = styled.div`
     background-color: white;
     position: relative;
   }
-  /*
+  .action {
+    display: flex;
 
-  .Dropdown-item {
-    background: #fafcff;
-    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 30%);
-
-    color: #0f0743;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 23px;
-    margin: 2px;
-    height: 40px;
-
-    border-radius: 9px;
-    padding: 2%;
+    justify-content: space-between;
   }
-  .Dropdown {
-    width: 279px;
-    height: 141px;
-    
-    position: absolute;
-    top: 137px;
-    animation: mymove 0.2s;
-  } */
-  /* .Dropdown-button {
-    height: 40px;
-    width: 277px;
-    margin-top: 2px;
-    background: #ffffff;
-    border-radius: 9px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 23px;
-
-    color: #0f0743;
-    text-align: center;
-    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 30%);
-
-    color: #0f0743;
-    border: none;
-  } */
   .shwobutton {
     display: ${(props) => (props.Screnphunesize ? "none" : "inherit")};
   }
@@ -95,11 +74,13 @@ export const Contener = styled.div`
     .ant-card {
       width: 90%;
     }
+    #status {
+      font-weight: bold;
+    }
     #cooment {
       font-size: 14px;
       margin-top: -19px;
       /* or 17px */
-
       color: #0f0743;
     }
   }
@@ -149,7 +130,6 @@ export const Contener = styled.div`
     padding-inline-end: 3px;
   }
   .cardbutton {
-    margin-inline-start: 86%;
     background-color: white;
     border: none;
   }
@@ -163,31 +143,54 @@ export const Contener = styled.div`
   #displyid {
     margin-inline-start: 9px;
   }
-  .action {
-    display: flex;
-  }
+`;
+export const Selectfilter = styled.div`
+  margin-top: 10px;
   .ant-select {
     width: 200px;
     border-color: none;
     margin-bottom: 3px;
     box-sizing: border-box;
     border-radius: 11px;
-  }
-  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
-    margin-bottom: 2px;
-  }
-  .ant-select-selector {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      border: 1px solid #d6e2f1;
+      box-sizing: border-box;
+      border-radius: 11px;
+      border-color: none;
+      margin-bottom: 2px;
+    }
+    .ant-select-selector {
+      border: 1px solid #d6e2f1;
+      box-sizing: border-box;
+      border-radius: 11px;
+      border-color: none;
+    }
   }
 `;
 export const Drawerstyle = styled(Drawer)`
+  .clearbutton {
+    background: none;
+    color: #0f0743;
+    border: none;
+    margin-inline-start: 75%;
+    margin-bottom: 5%;
+
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+  .ant-form-item {
+    margin-bottom: 0px;
+  }
+  .ant-drawer-title {
+    text-align: center;
+  }
+  .ant-drawer-footer {
+    text-align: center;
+  }
+  .ant-drawer-body {
+    text-align: center;
+  }
   .ant-select {
     width: 200px;
     border-color: none;
@@ -231,5 +234,63 @@ export const Drawerstyle = styled(Drawer)`
     background: #0f0743;
     border-radius: 11px;
     border-color: white;
+  }
+`;
+export const StyeldSelect = styled(Select)`
+  /* @media only screen and (min-width: 600px) {
+    width: 110px;
+  } */
+  width: 110px;
+  height: 24px;
+
+  .ant-select {
+    border: none !important;
+    width: 20px !important;
+  }
+
+  .ant-select-selector {
+    pointer-events: ${(props) =>
+      props.Permission ? "auto" : "none"}!important;
+    font-size: 12px;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+    width: 124px;
+  }
+  .ant-select-selector::hover {
+    box-shadow: none !important;
+  }
+  .ant-select-rtl.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-item {
+    border: none !important;
+  }
+  .ant-select-arrow {
+    display: ${(props) => (props.Permission ? "inherit" : "none")}!important;
+    color: #0f0743;
+    /* background-color: red; */
+
+    top: 16px;
+
+    inset-inline-start: 83px;
+  }
+
+  .ant-card-extra {
+    margin-right: -14px;
+  }
+  .valueBadge {
+    color: #0f0743;
+    background: #e5ebf3;
+    width: 90px;
+    height: 30px;
+    font-weight: bold;
+    text-align: -webkit-center;
+  }
+  #valueBadgetext {
+    background-color: red;
+    top: 10px;
   }
 `;
