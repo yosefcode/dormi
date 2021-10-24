@@ -5,16 +5,40 @@ export const Container = styled.div`
   justify-content: center;
   margin-top: 10%;
   flex-direction: column;
-  @media only screen and (min-width: 600px) {
-    margin-top: 20px;
-    margin-inline-start: 200px;
+
+  align-content: space-around;
+  flex-wrap: wrap;
+  .hader {
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+
+    color: #0f0743;
+  }
+  .goback {
+    font-size: 47px;
+    margin-inline-start: -80%;
+    margin-top: -8%;
+  }
+
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+  }
+
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
   }
   @media only screen and (max-width: 600px) {
-    .hader {
-      background-color: blue;
-      margin-bottom: 305%;
+    .ant-form {
+      width: 267px;
     }
   }
+
   hr {
     border-top: 1px #aaa;
     width: 90%;
@@ -26,26 +50,53 @@ export const Container = styled.div`
     margin-bottom: -3px;
     align-items: center;
   }
-  .ant-form-item-control-input {
-    width: 215px;
+  button.ant-btn.ant-btn-primary {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 269px;
+    height: 34px;
+    border-color: #ffd17e;
   }
-  @media only screen and (max-width: 600px) {
-    .ant-form-item-label > label {
-      position: static;
-      width: 332px;
-      height: 19px;
-      text-align: right;
+  .closecheckboox {
+    -webkit-appearance: none;
 
-      /* margin: 5px 0px; */
-    }
-    .ant-form {
-      position: absolute;
+    padding: 0px;
 
-      width: 267px;
-      margin-left: 5%;
-      text-align: center;
-      padding-left: 7%;
-      padding-right: 7%;
-    }
+    width: 19px;
+    height: 19px;
+
+    border: 1.52px solid #ffd17e;
+    box-sizing: border-box;
+    border-radius: 76px;
+    margin-top: 7px;
+  }
+  .closecheckboox:active {
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+      inset 0px 1px 3px rgba(0, 0, 0, 0.1); */
+  }
+  .closecheckboox:checked {
+    content: url("/images/Vector.svg");
+    align-items: center;
+    padding: 0px;
+
+    width: 19px;
+    height: 19px;
+
+    background: #ffd17e;
+    border: 1.52px solid #ffd17e;
+    box-sizing: border-box;
+    border-radius: 76px;
+  }
+  .radiogrop {
+    display: flex;
+    flex-direction: column;
+  }
+  .radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .ant-switch-checked {
+    background-color: #ffd17e;
   }
 `;

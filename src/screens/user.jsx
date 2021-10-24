@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Contener,
-  Styeldformitem,
-  Styeldformitem2,
-} from "../styelscomponents/Styelsuser";
+import { Contener } from "../styelscomponents/Styelsuser";
 import { Form, Input, Button, Select, Switch } from "antd";
 import DataContext from "../DataContext";
 
@@ -31,53 +27,49 @@ const User = () => {
   const arry = ["1", "2", "3"];
   return (
     <Contener>
-      {/* <div className="userpersonalinfi"> katz</div>
-      <div className="usernoteficationautt">boaz</div> */}
+      gggggg
       <Form name="basic" onFinish={onFinish}>
         <div className="userpersonalinfi">
           <p>{lang?.lang315}</p>
           <a>{lang?.lang316}</a>
-          <Styeldformitem
+          <Form.Item
             label={lang?.lang305}
             name="username"
             initialValue={loginstatus?.firstname}
           >
             <Input />
-          </Styeldformitem>
+          </Form.Item>
 
-          <Styeldformitem
+          <Form.Item
             label={lang?.lang306}
             name="last_name"
             initialValue={loginstatus?.lastname}
           >
             <Input />
-          </Styeldformitem>
-          <Styeldformitem
-            label={`${lang?.lang307}(${lang?.lang312})`}
-            name="email"
-          >
+          </Form.Item>
+          <Form.Item label={`${lang?.lang307}(${lang?.lang312})`} name="email">
             <Input />
-          </Styeldformitem>
-          <Styeldformitem label={lang?.lang313} name="room">
+          </Form.Item>
+          <Form.Item label={lang?.lang313} name="room">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
               })}
             </Select>
-          </Styeldformitem>
+          </Form.Item>
 
-          <Styeldformitem label={`${lang?.lang377}?`} name="entrance">
+          <Form.Item label={`${lang?.lang377}?`} name="entrance">
             <Switch defaultChecked={false} />
-          </Styeldformitem>
+          </Form.Item>
 
-          <Styeldformitem label={lang?.lang319} name="auht_rank">
+          <Form.Item label={lang?.lang319} name="auht_rank">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
               })}
             </Select>
-          </Styeldformitem>
-          <Styeldformitem
+          </Form.Item>
+          <Form.Item
             label={`${lang?.lang320}(${lang?.lang321})`}
             name="school_year"
           >
@@ -86,30 +78,30 @@ const User = () => {
                 return <Option>{el}</Option>;
               })}
             </Select>
-          </Styeldformitem>
-          <Styeldformitem label={lang?.lang309} name="password">
+          </Form.Item>
+          <Form.Item label={lang?.lang309} name="password">
             <Input />
-          </Styeldformitem>
-          <Styeldformitem label={lang?.lang308} name="phonenumber">
+          </Form.Item>
+          <Form.Item label={lang?.lang308} name="phonenumber">
             <Input />
-          </Styeldformitem>
-          <Styeldformitem label={lang?.lang310} name="language">
+          </Form.Item>
+          <Form.Item label={lang?.lang310} name="language">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
               })}
             </Select>
-          </Styeldformitem>
-          <Styeldformitem label="לאפשר את הפנייה ל:" name="send_to">
+          </Form.Item>
+          <Form.Item label="לאפשר את הפנייה ל:" name="send_to">
             <Select defaultValue="עברית">
               {arry.map((el) => {
                 return <Option>{el}</Option>;
               })}
             </Select>
-          </Styeldformitem>
-          <Styeldformitem label={`${lang?.lang311}?`} name="user_active">
+          </Form.Item>
+          <Form.Item label={`${lang?.lang311}?`} name="user_active">
             <Switch defaultChecked={false} />
-          </Styeldformitem>
+          </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               {lang?.lang156}
@@ -121,41 +113,41 @@ const User = () => {
 
           <p>{lang?.lang365}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label={lang?.lang369} name="open_req_in_email">
+            <Form.Item label={lang?.lang369} name="open_req_in_email">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
+            </Form.Item>
             {/* </div>
           <div className="noteficationautt"> */}
-            <Styeldformitem2 label={lang?.lang370} name="open_req_masege">
+            <Form.Item label={lang?.lang370} name="open_req_masege">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
+            </Form.Item>
           </div>
           <p>{lang?.lang380}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label={lang?.lang369} name="close_req_in_email">
+            <Form.Item label={lang?.lang369} name="close_req_in_email">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
-            <Styeldformitem2 label={lang?.lang370} name="close_req_masege">
+            </Form.Item>
+            <Form.Item label={lang?.lang370} name="close_req_masege">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
+            </Form.Item>
           </div>
           <p>{lang?.lang366}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label={lang?.lang369} name="start_handle_in_email">
+            <Form.Item label={lang?.lang369} name="start_handle_in_email">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
-            <Styeldformitem2 label={lang?.lang370} name="start_handle_masege">
+            </Form.Item>
+            <Form.Item label={lang?.lang370} name="start_handle_masege">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
+            </Form.Item>
           </div>
           <p>{lang?.lang367}:</p>
           <div className="noteficationautt">
-            <Styeldformitem2 label={lang?.lang369} name="end_handle_in_email">
+            <Form.Item label={lang?.lang369} name="end_handle_in_email">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
-            <Styeldformitem2 label={lang?.lang370} name="end_handle_masege">
+            </Form.Item>
+            <Form.Item label={lang?.lang370} name="end_handle_masege">
               <Switch defaultChecked={false} />
-            </Styeldformitem2>
+            </Form.Item>
           </div>
         </div>
       </Form>

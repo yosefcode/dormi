@@ -314,7 +314,7 @@ const Ticketlis = ({ Repeatedtask }) => {
             </button>
             <Exelexport data={AllTikets} />
 
-            <Dropdown overlay={menu} placement="bottomLeft">
+            <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
               <button className="DropdownButton shwobuttondropdown">
                 <BsThreeDotsVertical />
               </button>

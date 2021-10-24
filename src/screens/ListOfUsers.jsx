@@ -113,11 +113,7 @@ function Users() {
   const menu = (
     <Menu>
       <Menu.Item>
-        {/* <p className="Dropdown-item"> */}
-
         <Link to="/Adduser">{lang?.lang244} </Link>
-
-        {/* </p> */}
       </Menu.Item>
 
       <Menu.Item>
@@ -147,49 +143,33 @@ function Users() {
           </p>
         </button>
 
-        <Dropdown overlay={menu} placement="bottomLeft">
+        <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
           <button className="DropdownButton shwobuttondropdown">
             <BsThreeDotsVertical />
           </button>
         </Dropdown>
       </div>
       <div className="haderflex">
-        <Select
-          showSearch
-          placeholder={lang?.lang352}
-          onChange={(value) => {
-            setuserfilter(value);
-          }}
-        >
-          <Option value={false}>{lang.lang352}</Option>
+        {Drawervisible ? (
+          <Select
+            showSearch
+            placeholder={lang?.lang352}
+            onChange={(value) => {
+              setuserfilter(value);
+            }}
+          >
+            <Option value={false}>{lang.lang352}</Option>
 
-          {Alluserarry
-            ? Alluserarry.map((el) => (
-                <Option value={el.fullname}>{el.fullname}</Option>
-              ))
-            : null}
-        </Select>
+            {fackarry
+              ? fackarry.map((el) => (
+                  <Option value={el.fullname}>{el.fullname}</Option>
+                ))
+              : null}
+          </Select>
+        ) : null}
 
-        {/* <span className="span_buttons"> */}
         <h2>{lang?.lang102}</h2>
-        {/* <Input
-          placeholder={lang?.lang248}
-          onChange={onSearch}
-          className="serch"
-        />
 
-      
-
-        <Link className="adduser" to="/Adduser">
-          {lang?.lang244}{" "}
-        </Link> */}
-        {/* <Tablestyel
-        dataSource={fackarry}
-        columns={columns}
-        pagination={false}
-        scroll={{ x: 1000 }}
-        // size={"small"}
-      /> */}
         {Alluserarry
           ? Alluserarry.map((user, i) => {
               let levelname;
@@ -242,7 +222,11 @@ function Users() {
                   >
                     <hr />
 
-                    <div>
+                    <div
+                      onClick={() => {
+                        SelfOpenststus(i);
+                      }}
+                    >
                       <p>
                         <FaMapPin />
                         {user.locationName}-{user.roomName}
