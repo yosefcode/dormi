@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Continer } from "../styelscomponents/StatisicChart";
 // import "../screens/Statistics.css";
 import { Chart } from "react-google-charts";

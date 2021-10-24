@@ -1,22 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import DataContext from "../DataContext";
 import { PoweroffOutlined } from "@ant-design/icons";
 
-import {
-  Form,
-  Input,
-  Button,
-  Modal,
-  Radio,
-  Space,
-  Select,
-  Upload,
-  DatePicker,
-  Badge,
-} from "antd";
-import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
+import { Form, Input, Button, Select, DatePicker, Badge } from "antd";
+import { FormContener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
-import { BsCloudUpload } from "react-icons/bs";
+
 import { week, month } from "./Arrydaits";
 import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";

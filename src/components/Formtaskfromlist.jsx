@@ -3,7 +3,7 @@ import DataContext from "../DataContext";
 
 import { Link } from "react-router-dom";
 
-import { Form, Input, Button, Modal, Radio, Space, Select, Upload } from "antd";
+import { Form, Input, Button, Select, Badge } from "antd";
 import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
@@ -19,7 +19,7 @@ const Formtaslfromlist = ({
 
   Temmembertask,
 }) => {
-  document.body.style.backgroundColor = "#3286F9";
+  document.body.style.backgroundColor = "white";
 
   const { Option } = Select;
   const { TextArea } = Input;
@@ -44,13 +44,6 @@ const Formtaslfromlist = ({
   useEffect(() => {
     useefctasync();
   }, []);
-  // useEffect(async () => {
-  //   let res = categorynames.filter(
-  //     (item) => item.maincategoryname === data.breadcrumb
-  //   );
-
-  //   setSubcategory(res[0]);
-  // }, []);
 
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
@@ -144,9 +137,6 @@ const Formtaslfromlist = ({
   return (
     <div>
       <FormContener>
-        {/* <div className="avatar"> */}
-        <img src="/images/man.png" className="avatar" alt="Image" />
-        {/* </div> */}
         {!uplodeimagescreen ? (
           <Form
             name="basic"
@@ -214,25 +204,22 @@ const Formtaslfromlist = ({
             >
               <TextArea rows={4} />
             </Form.Item>
+
             <Form.Item
               name="urgencyid"
               initialValue={parseInt(data.urgencyadmin)}
             >
-              <Radio.Group>
-                <Space direction="vertical">
-                  <Radio className="Radio1" value={1}>
-                    {lang?.lang120}
-                  </Radio>
-
-                  <Radio className="Radio2" value={2}>
-                    {lang?.lang121}
-                  </Radio>
-
-                  <Radio className="Radio3" value={3}>
-                    {lang?.lang122}
-                  </Radio>
-                </Space>
-              </Radio.Group>
+              <Select defaultValue={2}>
+                <Option key={1} value={1}>
+                  <Badge color="#22E7B7" text={lang?.lang120} />
+                </Option>
+                <Option key={2} value={2}>
+                  <Badge color="orange" text={lang?.lang121} />
+                </Option>
+                <Option key={3} value={3}>
+                  <Badge color="#D91D61" text={lang?.lang122} />
+                </Option>
+              </Select>
             </Form.Item>
             {Temmembertask ? (
               <div className="frequency">

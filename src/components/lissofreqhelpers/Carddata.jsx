@@ -7,7 +7,7 @@ import { AiOutlineClockCircle, AiOutlineCamera } from "react-icons/ai";
 import { FaMapPin } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 
-import { Badge, Card, Menu, Dropdown, Select } from "antd";
+import { Badge, Card, Menu, Dropdown, Select, Tooltip } from "antd";
 
 const { Option } = Select;
 export function Carddatasmall({
@@ -27,9 +27,10 @@ export function Carddatasmall({
       }}
     >
       <div className="Smallcard">
-        <p id="discriptun">
+        {/* <p id="discriptun">
           {el.categoryname} - {el.categoryname}
-        </p>
+        </p> */}
+
         <p id="cooment"> {el.comments}</p>
         {Repeatedtask ? (
           <p>
@@ -100,7 +101,13 @@ export function Carddatabig({ el }) {
     </div>
   );
 }
-export function Urgensy({ el, urgency, urgencytext, findChangeurgency }) {
+export function Urgensy({
+  el,
+  urgency,
+  urgencytext,
+  findChangeurgency,
+  Permission,
+}) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
 
@@ -125,7 +132,7 @@ export function Urgensy({ el, urgency, urgencytext, findChangeurgency }) {
         }
         onChange={onChinge}
         dropdownClassName="dropdownClassName"
-        Permission={true}
+        Permission={Permission}
       >
         <Option value={[lang?.lang122, el.ticketid, "1"]}>
           {" "}

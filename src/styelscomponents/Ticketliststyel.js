@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Drawer, Select } from "antd";
-
+import { BsCheck } from "react-icons/bs";
 export const Contener = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,6 +8,110 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
+  .Closepopup {
+    position: fixed;
+    bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 30px;
+    background-color: rgba(15, 7, 67, 1);
+    color: white;
+    width: 100%;
+    height: 63px;
+  }
+
+  .Closepopupsubmit {
+    padding: 0px 12px 0px 20px;
+
+    width: 165px;
+    height: 47px;
+
+    background: #ffffff;
+    border-radius: 11px;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+    content: url("/images/lightning.svg");
+    color: #0f0743;
+
+    /* Inside Auto Layout */
+  }
+  .cancelClosep {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #ffffff;
+    background: none;
+    border: none;
+  }
+  .Closepopup-numbertasks {
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+
+    color: #ffffff;
+  }
+  .ant-card-head {
+    padding: none;
+  }
+  .ant-card-head {
+    display: contents;
+  }
+
+  .cardtitel {
+    display: flex;
+    /* flex-direction: row; */
+  }
+  @media only screen and (min-width: 600px) {
+    .closecheckboox {
+      margin-right: 63%;
+    }
+  }
+  .closecheckboox {
+    -webkit-appearance: none;
+
+    padding: 0px;
+
+    width: 19px;
+    height: 19px;
+
+    border: 1.52px solid #ffd17e;
+    box-sizing: border-box;
+    border-radius: 76px;
+    margin-top: 7px;
+  }
+  .closecheckboox:active {
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+      inset 0px 1px 3px rgba(0, 0, 0, 0.1); */
+  }
+  .closecheckboox:checked {
+    content: url("/images/Vector.svg");
+    align-items: center;
+    padding: 0px;
+
+    width: 19px;
+    height: 19px;
+
+    background: #ffd17e;
+    border: 1.52px solid #ffd17e;
+    box-sizing: border-box;
+    border-radius: 76px;
+  }
+
   .clearbutton {
     color: #0f0743;
     width: 97px;
@@ -72,8 +176,14 @@ export const Contener = styled.div`
 
   @media only screen and (max-width: 600px) {
     .ant-card {
-      width: 90%;
+      width: 315px;
     }
+  }
+  @media only screen and (min-width: 600px) {
+    .ant-card {
+      width: 900px;
+    }
+
     #status {
       font-weight: bold;
     }
@@ -85,10 +195,6 @@ export const Contener = styled.div`
     }
   }
   @media only screen and (min-width: 600px) {
-    .Smallcard {
-      display: flex;
-      justify-content: space-around;
-    }
     #cooment {
       margin-top: 0;
       font-size: 14px;
@@ -102,7 +208,6 @@ export const Contener = styled.div`
   }
 
   .ant-card {
-    width: 80%;
     background: #ffffff;
     border: 1px solid #d6e2f1;
     box-sizing: border-box;
@@ -116,10 +221,20 @@ export const Contener = styled.div`
     color: #d6e2f1;
   }
   #discriptun {
+    margin-inline-end: -15px;
+    margin-inline-start: 4px;
     font-weight: bold;
     font-size: 17px;
-
+    margin: 4px 7px;
     color: #0f0743;
+    line-height: 122.88%;
+    width: 291px;
+    height: 21px;
+    text-align: right;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 4px 0px;
   }
 
   .urgency {

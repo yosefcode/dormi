@@ -8,9 +8,9 @@ import Nwerequest from "../screens/new_request";
 import User from "../components/user";
 import Menu from "./Menu";
 import ListOfreq from "./ListOfreq";
-import Location from "../components/Location";
+import Location from "./Location";
 import Users from "./ListOfUsers";
-import Categoris from "../components/Categoris";
+import Categoris from "./Categoris";
 import Setings from "../components/Setings";
 import Affiliation from "../components/Affiliation";
 import SendMassege from "../components/SendMassege";
@@ -18,7 +18,7 @@ import Adduser from "../components/Adduser";
 import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
 import Ticketlis from "../screens/Ticketlis";
-
+import { FaSpinner } from "react-icons/fa";
 const ContrulScreen = ({ dir }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
@@ -32,7 +32,18 @@ const ContrulScreen = ({ dir }) => {
       <Menu dir={dir} />
       <Switch>
         <Route path="/Users">
-          <User />
+          {ticketlist && defullang ? (
+            <User />
+          ) : (
+            <div>
+              <img
+                src="/images/Semdimag.png"
+                className="lodingimage"
+                alt="lodingimage"
+              />
+              <FaSpinner />
+            </div>
+          )}
         </Route>
         <Route path="/Checkform">
           <Checkform />
@@ -44,11 +55,14 @@ const ContrulScreen = ({ dir }) => {
           {ticketlist && defullang ? (
             <ListOfreq repeatedtask={false} />
           ) : (
-            <img
-              src="/images/Semdimag.png"
-              className="lodingimage"
-              alt="lodingimage"
-            />
+            <div>
+              <img
+                src="/images/Semdimag.png"
+                className="lodingimage"
+                alt="lodingimage"
+              />
+              <FaSpinner />
+            </div>
           )}
         </Route>
 
@@ -56,22 +70,28 @@ const ContrulScreen = ({ dir }) => {
           {ticketlist && defullang ? (
             <Ticketlis Repeatedtask={false} />
           ) : (
-            <img
-              src="/images/Semdimag.png"
-              className="lodingimage"
-              alt="lodingimage"
-            />
+            <div>
+              <img
+                src="/images/Semdimag.png"
+                className="lodingimage"
+                alt="lodingimage"
+              />
+              <FaSpinner />
+            </div>
           )}
         </Route>
         <Route path="/Repeatedtask">
           {ticketlist && defullang ? (
             <Ticketlis Repeatedtask={true} />
           ) : (
-            <img
-              src="/images/Semdimag.png"
-              className="lodingimage"
-              alt="lodingimage"
-            />
+            <div>
+              <img
+                src="/images/Semdimag.png"
+                className="lodingimage"
+                alt="lodingimage"
+              />
+              <FaSpinner />
+            </div>
           )}
         </Route>
         <Route path="/temmembertask">
@@ -81,7 +101,18 @@ const ContrulScreen = ({ dir }) => {
           <Location />
         </Route>
         <Route path="/list_users">
-          <Users />
+          {ticketlist && defullang ? (
+            <Users />
+          ) : (
+            <div>
+              <img
+                src="/images/Semdimag.png"
+                className="lodingimage"
+                alt="lodingimage"
+              />
+              <FaSpinner />
+            </div>
+          )}
         </Route>
         {masof ? (
           <Route path="/categoris">

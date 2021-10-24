@@ -1,94 +1,117 @@
 import styled from "styled-components";
-import { Card, Table } from "antd";
 
-export const Cardstyeld = styled(Card)`
-  /* @media only screen and (max-width: 600px) {
-  } */
-  .ant-card-bordered {
-    width: 239px;
-    margin-top: 12px;
-  }
-  /* .ant-card.ant-card-bordered.ant-card-type-inner.ant-card-rtl {
-    /* .ant-card-bordered { */
-  /* width: 700px;
-    margin-top: 12px;
-  }  */
-`;
 export const Contener = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
   .haderflex {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-  }
-  /* align-items: center; */
-
-  /*
-  .test {
-    width: 100px;
-    height: 100px;
-    background: blue;
-    color: red;
-  }
-  .usecard {
-    background-color: red;
-    width: 100px;
-    height: 10px;
-  }
-  .serch {
-    width: 170px;
-  }
-  .sendmail {
-    color: #fff;
-    background-color: #000;
-    border-radius: 17px;
-    height: 36px;
-    padding: 1%;
-    border: none;
-  }
-
-  .adduser {
-    color: #fff;
-    background-color: #00c851;
-    height: 36px;
-    border-radius: 17px;
-    border: none;
-    padding: 1%;
+    word-wrap: break-word;
   }
   @media only screen and (max-width: 600px) {
-    .adduser {
-      color: #fff;
-      background-color: #00c851;
-
-      height: 36px;
-      border-radius: 17px;
-      font-size: 10px;
-      border: none;
-      margin-inline-start: 5px;
-    }
-    .sendmail {
-      color: #fff;
-      font-size: 10px;
-
-      background-color: #000;
-
-      border-radius: 17px;
-      height: 36px;
-      margin-inline-start: 5px;
-
-      border: none;
+    .ant-card {
+      width: 315px;
     }
   }
+  @media only screen and (min-width: 600px) {
+    .ant-card {
+      width: 900px;
+    }
+  }
+  .ant-card {
+    background: #ffffff;
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    margin-top: 4px;
+  }
+  .ant-card-body {
+    padding: 12px;
+  }
+  .ant-card-extra {
+    margin-right: -14px;
+  }
+  .titelcard {
+    display: flex;
+    align-content: flex-end;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .cardbutton {
+    background-color: white;
+    border: none;
+  }
+  .Mangeroption {
+    display: flex;
 
- */
-`;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-around;
+  }
+  .MangerButton {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    align-items: center;
+    padding: 0px 16px;
+    background-color: white;
+    width: 127.5px;
+    height: 55px;
+    color: #0f0743;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin-inline-end: 4%;
+  }
+  .DropdownButton {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    width: 44px;
+    height: 55px;
+    align-items: center;
+    padding: 0px 16px;
+    background-color: white;
+    position: relative;
+  }
+  .action {
+    display: flex;
+    justify-content: space-around;
+  }
+  .shwobutton {
+    display: ${(props) => (props.Screnphunesize ? "none" : "inherit")};
+  }
 
-export const Tablestyel = styled(Table)`
-  /* @media only screen and (max-width: 600px) {
-  
-  } */
+  .shwobuttondropdown {
+    display: ${(props) =>
+      props.Screnphunesize ? "inherit" : "none"}!important;
+  }
+  .ant-select {
+    width: 200px;
+    margin-top: 10px;
+
+    border-color: none;
+    margin-bottom: 3px;
+    box-sizing: border-box;
+    border-radius: 11px;
+  }
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+    margin-bottom: 2px;
+  }
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+  }
 `;

@@ -163,26 +163,18 @@ export const Posteditofticket = (task, ticketguid, value) => {
   console.log("Delet", task, ticketguid);
 };
 
-export const Closetask = ({ data, submit }) => {
+export const Closetask = ({ data, submit, cancelClosep }) => {
   return (
     <div className="Closepopup">
-      <CardStyeld>
-        <h3>
-          {`משימות למחיקה`} {data.length}
-        </h3>
-        {data.map((item) => {
-          return (
-            <div>
-              <span> מספר משימה</span>
-              <span> {item.id}</span>
-            </div>
-          );
-        })}
-
-        <button className="submit" onClick={submit}>
-          מחק
-        </button>
-      </CardStyeld>
+      <span className="Closepopup-numbertasks">נבחרו {data.length}</span>
+      <button className="cancelClosep" onClick={cancelClosep}>
+        {" "}
+        ביטול
+      </button>
+      <button className="Closepopupsubmit" onClick={submit}>
+        <img src="images/lightning.svg" alt="lightning" />
+        פעולה מהירה
+      </button>
     </div>
   );
 };

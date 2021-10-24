@@ -6,9 +6,9 @@ import {
 } from "../styelscomponents/Ticketliststyel";
 import DataContext from "../DataContext";
 import { FaFilter } from "react-icons/fa";
-
+import { BsCheck } from "react-icons/bs";
 import Exelexport from "../components/lissofreqhelpers/Exelexport";
-
+import Formtaskfromlist from "../components/Formtaskfromlist";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   Ordercareguris,
@@ -44,7 +44,7 @@ import {
 } from "../components/lissofreqhelpers/Tasks";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 
-import { Card, Menu, Dropdown } from "antd";
+import { Card, Menu, Dropdown, Tooltip } from "antd";
 
 const Ticketlis = ({ Repeatedtask }) => {
   const itemsRef = useRef([]);
@@ -54,6 +54,8 @@ const Ticketlis = ({ Repeatedtask }) => {
   const ticketlist = useContext(DataContext).ticketlist;
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
+  let userlevelid = loginstatus?.levelid;
+
   //  הגדארות משתנות לפי גודל מסך
   const [screnphunesize, setscrenphunesize] = useState();
   const [fullcard, setfullcard] = useState(false);
@@ -127,12 +129,20 @@ const Ticketlis = ({ Repeatedtask }) => {
   // צקבוקס סגירת פנייה
   const [arrytaskforclose, setarrytaskforclose] = useState([]);
   const [arresticets, setarresticets] = useState(false);
+  const checkboxref = useRef([]);
   const Delettask = async () => {
     console.log("Delettask", arrytaskforclose);
 
     setarresticets(true);
   };
   let arr = [];
+  const cancelClosep = (value) => {
+    for (let i = 0; AllTikets.length > i; i++) {
+      checkboxref.current[i].checked = false;
+    }
+    arr = [];
+    setarrytaskforclose([]);
+  };
   const closetask = (e) => {
     if (e.target.checked) {
       arr.push(...arrytaskforclose);
@@ -147,10 +157,15 @@ const Ticketlis = ({ Repeatedtask }) => {
       setarrytaskforclose(result);
     }
   };
+  const [Permission, setPermission] = useState();
   useEffect(() => {
     if (!firstlode) {
       let intViewportWidth = window.innerWidth;
-
+      if (userlevelid === 10 || userlevelid === 5 || userlevelid === 13) {
+        setPermission(true);
+      } else {
+        setPermission(false);
+      }
       if (intViewportWidth > 600) {
         setscrenphunesize(false);
       } else {
@@ -246,7 +261,9 @@ const Ticketlis = ({ Repeatedtask }) => {
       itemsRef.current[i].style.display = "inherit";
     }
   };
+  const [opentikitatatus, setopentikitatatus] = useState(true);
   const AllOpenststus = () => {
+    setopentikitatatus(!opentikitatatus);
     for (let i = 0; AllTikets.length > i; i++) {
       if (fullcard) {
         itemsRef.current[i].style.display = "none";
@@ -267,7 +284,7 @@ const Ticketlis = ({ Repeatedtask }) => {
 
       <Menu.Item>
         <p className="Dropdown-item" onClick={AllOpenststus}>
-          הצג את כל פרטי הפנייה
+          {opentikitatatus ? "הצג כל פרטי הפנייה" : "סגור כל פרטי הפנייה"}{" "}
         </p>
       </Menu.Item>
     </Menu>
@@ -280,255 +297,312 @@ const Ticketlis = ({ Repeatedtask }) => {
   const [claerapruchform, setclaerapruchform] = useState(false);
 
   return (
-    <Contener Screnphunesize={screnphunesize}>
-      <div className="Mangeroption">
-        <button className="MangerButton" onClick={openfilter}>
-          {lang?.lang196} <FaFilter />
-        </button>
+    <div>
+      {edittask ? (
+        <Contener Screnphunesize={screnphunesize}>
+          <div className="Mangeroption">
+            <button className="MangerButton" onClick={openfilter}>
+              {lang?.lang196} <FaFilter />
+            </button>
 
-        <button className="MangerButton">בחירה</button>
-        <button className="MangerButton shwobutton">הצג פניות פתוחות</button>
-        <button className="MangerButton shwobutton" onClick={AllOpenststus}>
-          הצג את כל פרטי הפנייה
-        </button>
-        <Exelexport data={AllTikets} />
+            <button className="MangerButton">בחירה</button>
+            <button className="MangerButton shwobutton">
+              הצג פניות פתוחות
+            </button>
+            <button className="MangerButton shwobutton" onClick={AllOpenststus}>
+              הצג את כל פרטי הפנייה
+            </button>
+            <Exelexport data={AllTikets} />
 
-        <Dropdown overlay={menu} placement="bottomLeft">
-          <button className="DropdownButton shwobuttondropdown">
-            <BsThreeDotsVertical />
-          </button>
-        </Dropdown>
-      </div>
-      {Drawervisible && !screnphunesize ? (
-        <Selectfilter>
-          <FiltersForsort
-            filterarry={filterarry}
-            setingAllOpenCategoris={(value) => {
-              setAllOpenCategoris(value);
-            }}
-            setingfilterallUrgency={(value) => {
-              setfilterallUrgency(value);
-            }}
-            setlocationsort={(value) => {
-              setlocationfilter(value);
-            }}
-            setUserFilter={(value) => {
-              setfilteruser(value);
-            }}
-            selectedstatus={(value) => {
-              setselectedstatus(value);
-            }}
-          />
-        </Selectfilter>
-      ) : null}
-      {/* כמה פניות יש */}
-      <p id="discriptun">מציג {AllTikets.length} פניות : </p>
-
-      {AllTikets ? (
-        AllTikets.map((el, i) => {
-          // משימות עריכה
-          const setingmenu = (
-            <Menu>
-              {/* שלח הודעה */}
-              <Menu.Item
-                onClick={() => {
-                  setSendmassege(true);
-                  setproblemid(el.ticketid);
+            <Dropdown overlay={menu} placement="bottomLeft">
+              <button className="DropdownButton shwobuttondropdown">
+                <BsThreeDotsVertical />
+              </button>
+            </Dropdown>
+          </div>
+          {Drawervisible && !screnphunesize ? (
+            <Selectfilter>
+              <FiltersForsort
+                filterarry={filterarry}
+                setingAllOpenCategoris={(value) => {
+                  setAllOpenCategoris(value);
                 }}
-              >
-                {lang?.lang263}
-              </Menu.Item>
-              {/* הפנה לאיש צוות */}
-              <Menu.Item
-                onClick={() => {
-                  setReferraltostaff(true);
-                  setproblemid(el.ticketid);
+                setingfilterallUrgency={(value) => {
+                  setfilterallUrgency(value);
                 }}
-              >
-                {lang?.lang240}
-              </Menu.Item>
-
-              {/* סגירה מתקדמת */}
-              <Menu.Item
-                onClick={() => {
-                  setopenaptuchclosemodal(true);
-
-                  setproblemid(el.ticketid);
+                setlocationsort={(value) => {
+                  setlocationfilter(value);
                 }}
-              >
-                {lang?.lang208}
-              </Menu.Item>
-              {/* עריכה */}
-              <Menu.Item
-                onClick={() => {
-                  setedittask(false);
-                  setdataforedit(el);
+                setUserFilter={(value) => {
+                  setfilteruser(value);
                 }}
-              >
-                {lang?.lang243}
-              </Menu.Item>
-              {/* מחיקה */}
-              <Menu.Item
-                onClick={() => Posteditofticket("Delet", el.ticketguid)}
-              >
-                {lang?.lang147}
-              </Menu.Item>
-            </Menu>
-          );
-
-          /// הגדרת סטטוס בקשה ודחיפות לכל כרטיס
-          let resulturgency = Switchurgency(
-            el.urgencyadmin,
-            lang?.lang122,
-            lang?.lang121,
-            lang?.lang120
-          );
-
-          let urgency = resulturgency?.urgency;
-          let urgencytext = resulturgency?.urgencytext;
-
-          let resultstatus = Switcstatus(
-            el.statusname,
-            lang?.lang162,
-            lang?.lang174
-          );
-
-          let status = resultstatus?.status;
-          let statustext = resultstatus?.statustext;
-
-          return (
-            <Card bordered={false} key={i}>
-              <Carddatasmall
-                el={el}
-                i={i}
-                status={status}
-                statustext={statustext}
-                SelfOpenststus={SelfOpenststus}
-                Repeatedtask={Repeatedtask}
+                selectedstatus={(value) => {
+                  setselectedstatus(value);
+                }}
               />
+            </Selectfilter>
+          ) : null}
+          {/* כמה פניות יש */}
+          <p id="discriptun">מציג {AllTikets.length} פניות : </p>
+          {AllTikets ? (
+            AllTikets.map((el, i) => {
+              // משימות עריכה
+              const setingmenu = (
+                <Menu>
+                  {/* שלח הודעה */}
+                  <Menu.Item
+                    onClick={() => {
+                      setSendmassege(true);
+                      setproblemid(el.ticketid);
+                    }}
+                  >
+                    {lang?.lang263}
+                  </Menu.Item>
+                  {/* הפנה לאיש צוות */}
+                  <Menu.Item
+                    onClick={() => {
+                      setReferraltostaff(true);
+                      setproblemid(el.ticketid);
+                    }}
+                  >
+                    {lang?.lang240}
+                  </Menu.Item>
 
-              <div
-                ref={(el) => (itemsRef.current[i] = el)}
-                style={{
-                  display: "none",
-                  color: "#807e94",
-                  marginTop: "20px",
-                }}
-              >
-                <hr />
+                  {/* סגירה מתקדמת */}
+                  <Menu.Item
+                    onClick={() => {
+                      setopenaptuchclosemodal(true);
 
-                <Carddatabig el={el} />
-              </div>
+                      setproblemid(el.ticketid);
+                    }}
+                  >
+                    {lang?.lang208}
+                  </Menu.Item>
+                  {/* עריכה */}
+                  <Menu.Item
+                    onClick={() => {
+                      setedittask(false);
+                      setdataforedit(el);
+                    }}
+                  >
+                    {lang?.lang243}
+                  </Menu.Item>
+                  {/* מחיקה */}
+                  <Menu.Item
+                    onClick={() => Posteditofticket("Delet", el.ticketguid)}
+                  >
+                    {lang?.lang147}
+                  </Menu.Item>
+                </Menu>
+              );
 
-              <div style={{ pointerevents: "initial" }} className="action">
-                <Urgensy
-                  el={el}
-                  urgency={urgency}
-                  urgencytext={urgencytext}
-                  findChangeurgency={findChangeurgency}
-                />
+              /// הגדרת סטטוס בקשה ודחיפות לכל כרטיס
+              let resulturgency = Switchurgency(
+                el.urgencyadmin,
+                lang?.lang122,
+                lang?.lang121,
+                lang?.lang120
+              );
 
-                <Dropdown
-                  overlay={setingmenu}
-                  placement="bottomLeft"
-                  trigger={["click"]}
-                  className="cardbutton"
+              let urgency = resulturgency?.urgency;
+              let urgencytext = resulturgency?.urgencytext;
+
+              let resultstatus = Switcstatus(
+                el.statusname,
+                lang?.lang162,
+                lang?.lang174
+              );
+
+              let status = resultstatus?.status;
+              let statustext = resultstatus?.statustext;
+              let Tooltipvesuble;
+
+              if (i === 0) {
+                Tooltipvesuble = true;
+              } else {
+                Tooltipvesuble = false;
+              }
+
+              return (
+                <Card
+                  bordered={false}
+                  key={i}
+                  title={
+                    <div className="cardtitel">
+                      <p
+                        onClick={() => {
+                          SelfOpenststus(i);
+                        }}
+                        id="discriptun"
+                      >
+                        {el.categoryname} - {el.categoryname}
+                      </p>
+                      {/* <label for="horns">{lang?.lang145}</label> */}
+
+                      <Tooltip
+                        placement="bottomLeft"
+                        title={lang?.lang145}
+                        visible={Tooltipvesuble}
+                      >
+                        <input
+                          onChange={closetask}
+                          type="checkbox"
+                          id="horns"
+                          name="horns"
+                          className="closecheckboox"
+                          ref={(el) => (checkboxref.current[i] = el)}
+                          value={el.ticketid}
+                        />
+                      </Tooltip>
+                    </div>
+                  }
                 >
-                  <button>
-                    <BsThreeDotsVertical />
-                  </button>
-                </Dropdown>
-              </div>
-            </Card>
-          );
-        })
-      ) : (
-        <div>{lang?.lang181}</div>
-      )}
-      {/* פתיחת מגירה לפלאפון */}
-      {screnphunesize ? (
-        <Drawerstyle
-          title="סינון"
-          placement={"bottom"}
-          // closable={false}
-          onClose={() => {
-            setDrawervisible(false);
-          }}
-          visible={Drawervisible}
-          key={"bottom"}
-          footer={
-            <button
-              className="ok"
-              onClick={() => {
+                  <Carddatasmall
+                    el={el}
+                    i={i}
+                    status={status}
+                    statustext={statustext}
+                    SelfOpenststus={SelfOpenststus}
+                    Repeatedtask={Repeatedtask}
+                  />
+
+                  <div
+                    ref={(el) => (itemsRef.current[i] = el)}
+                    style={{
+                      display: "none",
+                      color: "#807e94",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <hr />
+
+                    <Carddatabig el={el} />
+                  </div>
+                  <div className="action">
+                    <Urgensy
+                      Permission={Permission}
+                      el={el}
+                      urgency={urgency}
+                      urgencytext={urgencytext}
+                      findChangeurgency={findChangeurgency}
+                    />
+
+                    <Dropdown
+                      overlay={setingmenu}
+                      placement="bottomLeft"
+                      trigger={["click"]}
+                      className="cardbutton"
+                    >
+                      <button>
+                        <BsThreeDotsVertical />
+                      </button>
+                    </Dropdown>
+                  </div>
+                </Card>
+              );
+            })
+          ) : (
+            <div>{lang?.lang181}</div>
+          )}
+          {/* פתיחת מגירה לפלאפון */}
+          {screnphunesize ? (
+            <Drawerstyle
+              title="סינון"
+              placement={"bottom"}
+              // closable={false}
+              onClose={() => {
                 setDrawervisible(false);
               }}
+              visible={Drawervisible}
+              key={"bottom"}
+              footer={
+                <button
+                  className="ok"
+                  onClick={() => {
+                    setDrawervisible(false);
+                  }}
+                >
+                  אישור
+                  <FaFilter />
+                </button>
+              }
+              height={450}
+              bodyStyle={{
+                textalign: "center",
+              }}
             >
-              אישור
-              <FaFilter />
-            </button>
-          }
-          height={450}
-          bodyStyle={{
-            textalign: "center",
-          }}
-        >
-          <FiltersForsort
-            filterarry={filterarry}
-            setingAllOpenCategoris={(value) => {
-              setAllOpenCategoris(value);
+              <FiltersForsort
+                filterarry={filterarry}
+                setingAllOpenCategoris={(value) => {
+                  setAllOpenCategoris(value);
+                }}
+                setingfilterallUrgency={(value) => {
+                  setfilterallUrgency(value);
+                }}
+                setlocationsort={(value) => {
+                  setlocationfilter(value);
+                }}
+                setUserFilter={(value) => {
+                  setfilteruser(value);
+                }}
+                selectedstatus={(value) => {
+                  setselectedstatus(value);
+                }}
+              />
+            </Drawerstyle>
+          ) : null}
+          {arrytaskforclose.length > 0 ? (
+            // פופ אפ למחיקות מרובה של כרטיסים
+            <Closetask
+              data={arrytaskforclose}
+              submit={Delettask}
+              cancelClosep={cancelClosep}
+            />
+          ) : null}
+          {/* מודלוים משימות כרטיס */}
+          {/* סגריה מתקדמת */}
+          <ModalStyeld
+            title={`${lang?.lang208} - ${problemid}`}
+            visible={openaptuchclosemodal}
+            onCancel={() => {
+              setopenaptuchclosemodal(false);
+              setclaerapruchform(true);
             }}
-            setingfilterallUrgency={(value) => {
-              setfilterallUrgency(value);
+            footer={false}
+          >
+            <Apruchclose
+              ticketguid={problemid}
+              Closemodal={closeopenaptuchclosemoda}
+              Clearform={claerapruchform}
+            />
+          </ModalStyeld>
+          {/* שלח הודעה */}
+          <ModalStyeld
+            title={lang?.lang263}
+            visible={Sendmassege}
+            onCancel={() => {
+              setSendmassege(false);
             }}
-            setlocationsort={(value) => {
-              setlocationfilter(value);
+            footer={false}
+          >
+            <SendmasegeTask onsendmassege={onsendmassege} />
+          </ModalStyeld>
+          {/* שלח לאיש צוות */}
+          <ModalStyeld
+            title={lang?.lang240}
+            visible={Referraltostaff}
+            onCancel={() => {
+              setReferraltostaff(false);
             }}
-            setUserFilter={(value) => {
-              setfilteruser(value);
-            }}
-            selectedstatus={(value) => {
-              setselectedstatus(value);
-            }}
-          />
-        </Drawerstyle>
-      ) : null}
-
-      <ModalStyeld
-        title={`${lang?.lang208} - ${problemid}`}
-        visible={openaptuchclosemodal}
-        onCancel={() => {
-          setopenaptuchclosemodal(false);
-          setclaerapruchform(true);
-        }}
-        footer={false}
-      >
-        <Apruchclose
-          ticketguid={problemid}
-          Closemodal={closeopenaptuchclosemoda}
-          Clearform={claerapruchform}
-        />
-      </ModalStyeld>
-      <ModalStyeld
-        title={lang?.lang263}
-        visible={Sendmassege}
-        onCancel={() => {
-          setSendmassege(false);
-        }}
-        footer={false}
-      >
-        <SendmasegeTask onsendmassege={onsendmassege} />
-      </ModalStyeld>
-      <ModalStyeld
-        title={lang?.lang240}
-        visible={Referraltostaff}
-        onCancel={() => {
-          setReferraltostaff(false);
-        }}
-        footer={false}
-      >
-        <Sentostaf onReferr={onReferr} />
-      </ModalStyeld>
-    </Contener>
+            footer={false}
+          >
+            <Sentostaf onReferr={onReferr} />
+          </ModalStyeld>
+        </Contener>
+      ) : (
+        <Formtaskfromlist Goback={Goback} data={dataforedit} />
+      )}
+    </div>
   );
 };
 

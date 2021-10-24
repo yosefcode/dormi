@@ -26,7 +26,6 @@ const HaderMenu = ({ LoginScreen, dir }) => {
 
   const lang = defoltlang?.lang;
 
-  const [current, setcurrent] = useState(`mail`);
   let status = LoginScreen;
 
   let chors;
@@ -78,6 +77,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
       ) : (
         <div className="haeder">
           <AiOutlineMenu onClick={closeMenue} />
+
           <img src="/images/logo_dormi.png" alt="Image" className="imagelogo" />
           <Drawerstyle
             title={<Dormilogo />}

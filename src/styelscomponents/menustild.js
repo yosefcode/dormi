@@ -44,9 +44,12 @@ export const Contyner = styled.div`
     width: 80px;
   }
   svg {
-    color: white;
+    font-size: 190%;
   }
-
+  .progresbar {
+    color: brown;
+    background-color: red;
+  }
   .haeder {
     width: 100%;
     height: 52px;

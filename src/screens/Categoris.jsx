@@ -5,7 +5,6 @@ import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Menu, Dropdown, Form, Input } from "antd";
 import { Arryoficons } from "../Icons";
-import { PoweroffOutlined } from "@ant-design/icons";
 
 import DataContext from "../DataContext";
 function Categoris() {
@@ -41,7 +40,7 @@ function Categoris() {
     );
     categoryarry[requst].icon = value;
     setchingeurgency(!chingeurgency);
-   
+
     setlocalarry(categoryarry);
   };
 
