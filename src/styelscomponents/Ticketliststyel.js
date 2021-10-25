@@ -130,6 +130,7 @@ export const Contener = styled.div`
   .Mangeroption {
     display: flex;
 
+    margin-top: 11px;
     flex-wrap: nowrap;
     align-content: space-around;
     justify-content: space-around;

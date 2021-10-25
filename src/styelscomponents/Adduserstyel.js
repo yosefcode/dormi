@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
   .goback {
     font-size: 47px;
-    margin-inline-start: -80%;
+    width: 10px;
     margin-top: -8%;
   }
 

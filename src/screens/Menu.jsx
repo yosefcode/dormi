@@ -180,9 +180,16 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                   mode="inline"
                   style={{ background: "#1c1547", border: "#1c1547" }}
                 >
-                  <SubMenu key="sub1-2" title="תפריט">
-                    <Menu.Item key="3">תפריט</Menu.Item>
-                    <Menu.Item key="4">טפסים שנשלחו</Menu.Item>
+                  <SubMenu key="sub1-2" title="טפסים">
+                    <Menu.Item key="3">
+                      {" "}
+                      <Link to="/Forms"> טפסים</Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="4">
+                      {" "}
+                      <Link to="/SendsForm"> טפסים שנשלחו</Link>
+                    </Menu.Item>
                   </SubMenu>
                 </MenuStyel>
               ) : null}

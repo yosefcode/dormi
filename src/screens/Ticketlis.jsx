@@ -55,7 +55,8 @@ const Ticketlis = ({ Repeatedtask }) => {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
   let userlevelid = loginstatus?.levelid;
-
+  const [locallist, setlocallist] = useState();
+  const [firstlode, setlfirstlode] = useState();
   //  הגדארות משתנות לפי גודל מסך
   const [screnphunesize, setscrenphunesize] = useState();
   const [fullcard, setfullcard] = useState(false);
@@ -73,8 +74,7 @@ const Ticketlis = ({ Repeatedtask }) => {
   const [filterarry, setfilterarry] = useState();
   const [AllOpenCategoris, setAllOpenCategoris] = useState();
   const [filterallUrgency, setfilterallUrgency] = useState();
-  const [locallist, setlocallist] = useState();
-  const [firstlode, setlfirstlode] = useState();
+
   const [locationfilter, setlocationfilter] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
   const [filteruser, setfilteruser] = useState();
@@ -160,6 +160,7 @@ const Ticketlis = ({ Repeatedtask }) => {
   const [Permission, setPermission] = useState();
   useEffect(() => {
     if (!firstlode) {
+      // setfilteruser();
       let intViewportWidth = window.innerWidth;
       if (userlevelid === 10 || userlevelid === 5 || userlevelid === 13) {
         setPermission(true);
@@ -221,6 +222,7 @@ const Ticketlis = ({ Repeatedtask }) => {
       result = Filterlocation(result, locationfilter);
       // פילטר לפי משתמשים
       result = FilterAllusers(result, filteruser);
+
       // פילטר לפי סטטוס
       result = FilterAllstatus(result, selectedstatus);
 
@@ -418,7 +420,7 @@ const Ticketlis = ({ Repeatedtask }) => {
               let Tooltipvesuble;
 
               if (i === 0) {
-                Tooltipvesuble = true;
+                Tooltipvesuble = false;
               } else {
                 Tooltipvesuble = false;
               }

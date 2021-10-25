@@ -19,6 +19,8 @@ import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
 import Ticketlis from "../screens/Ticketlis";
 import { FaSpinner } from "react-icons/fa";
+import Forms from "./Forms";
+import SendsForm from "./SendsForm";
 const ContrulScreen = ({ dir }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
@@ -134,6 +136,12 @@ const ContrulScreen = ({ dir }) => {
         </Route>
         <Route path="/SendMassege">
           <SendMassege />
+        </Route>
+        <Route path="/Forms">
+          <Forms />
+        </Route>
+        <Route path="/SendsForm">
+          <SendsForm />
         </Route>
 
         <Route path="/Adduser">
