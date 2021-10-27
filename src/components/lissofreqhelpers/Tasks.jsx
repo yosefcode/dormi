@@ -91,7 +91,36 @@ export function Carddata({ element }) {
     </>
   );
 }
+export const Quickclosebuuton = ({ action }) => {
+  const onfinish = (type, value) => {
+    action(type, value);
+  };
 
+  return (
+    <div className="listQuickclosebuuton">
+      <button
+        onClick={() => {
+          onfinish("close", null);
+        }}
+        className="Quickclosebuutonup"
+      >
+        <img src="/images/checkbox.svg" alt="icon" /> סגירה מהירה
+      </button>
+      <button className="Quickclosebuuton">
+        <img src="/images/camra.svg" alt="icon" /> סמן כפנייה חדשה
+      </button>
+      <button className="Quickclosebuuton">
+        <img src="/images/ranch.svg" alt="icon" /> סמן כפנייה בטיפול
+      </button>
+      <button className="Quickclosebuuton">
+        <img src="/images/avatar.svg" alt="icon" /> הפנה לאיש צוות
+      </button>
+      <button className="Quickclosebuutdown">
+        <img src="/images/trash.svg" alt="icon" /> מחיקה
+      </button>
+    </div>
+  );
+};
 /// כל סוגי הפילטרים
 
 // export function FiltersForsort({

@@ -22,6 +22,8 @@ const delet = "מחיקה";
 function Users() {
   document.body.style.backgroundColor = "white";
   const defoltlang = useContext(DataContext).lang;
+  const userlist = useContext(DataContext).userlist;
+
   const itemsRef = useRef([]);
 
   const lang = defoltlang?.lang;
@@ -72,9 +74,9 @@ function Users() {
         setscrenphunesize(true);
       }
       setfirstlode(true);
-      setAlluserarry(fackarry);
+      setAlluserarry(userlist);
     } else {
-      let res = FilterAllusers(fackarry, userfilter);
+      let res = FilterAllusers(userlist, userfilter);
       setAlluserarry(res);
     }
   }, [userfilter]);
@@ -172,9 +174,10 @@ function Users() {
 
         {Alluserarry
           ? Alluserarry.map((user, i) => {
+              // debugger;
               let levelname;
               let levelscolor;
-              switch (user.userlevel) {
+              switch (user.langid) {
                 // משתמש
                 case 1:
                   levelscolor = "purple";
@@ -200,15 +203,16 @@ function Users() {
                   >
                     <p>
                       <Avatar size={42} icon={<UserOutlined />} />{" "}
-                      {user.fullname}
+                      {user.firstname} {user.lastname}
                     </p>
+                    {/*
                     <p>
                       <Badge color={levelscolor} text={levelname} />
                     </p>
                     <p>
                       <Badge
                         color={"#f50"}
-                        text={`${lang?.lang237} ${user.Numberoftasks} `}
+                        text={`${lang?.lang237} ${user.ticketcount} `}
                       />
                     </p>
                   </div>
@@ -229,7 +233,7 @@ function Users() {
                     >
                       <p>
                         <FaMapPin />
-                        {user.locationName}-{user.roomName}
+                        {user.roomname}
                       </p>
                       <p>
                         <span
@@ -254,6 +258,7 @@ function Users() {
                       <BsTrash />
                     </button>
                     <AiOutlineEdit />
+                  */}
                   </div>
                 </Card>
               );

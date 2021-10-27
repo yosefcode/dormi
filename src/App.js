@@ -21,6 +21,8 @@ function App() {
   const [masof, setmasof] = useState();
   const [ticketlist, setticketlist] = useState();
   const [dir, setsir] = useState("tlr");
+  const [userlist, srtuserlist] = useState();
+
   const providerOptions = {
     data,
     changdata: (value) => {
@@ -45,6 +47,10 @@ function App() {
     dir,
     changedir: (value) => {
       setsir(value);
+    },
+    userlist,
+    changuserlist: (value) => {
+      srtuserlist(value);
     },
   };
   const cookies = new Cookies();
@@ -103,6 +109,7 @@ function App() {
 
         setlang(res.changlang);
         setmasof(res.changmasof);
+        srtuserlist(res.changuserlist);
       }
     } else {
       defultlang();

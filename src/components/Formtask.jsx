@@ -17,7 +17,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
   const { TextArea } = Input;
 
   const loginstatus = useContext(DataContext).loginstatus;
-
+  const changeticketlist = useContext(DataContext).changeticketlist;
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
@@ -70,7 +70,6 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
     }
     let urgencyid = value?.urgencyid;
 
-    debugger;
     let comments;
     if (value.comments) {
       comments = value.comments.replace(/[<>${}]/g, "danger$&");
@@ -87,7 +86,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
       comments,
       // ...typeofreq,
     };
-    debugger;
+
     let reqruter = "newticket";
     let res = await PostToServer(reqruter, obj);
     if (res.error === 1) {
@@ -95,15 +94,21 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
       seterrmassegetext(res.message);
       setloadings([0]);
     } else {
+      let ruteruserid = "ticketlist";
+
+      let ticketlis = await PostToServer(ruteruserid, { userid: userid });
+      changeticketlist(ticketlis);
       setloadings([0]);
-      seterrmassege(true);
+      setuplodeimagescreen(true);
+
+      // seterrmassege(true);
       setticketid(res.ticketid);
       seterrmassegetext(res.message);
 
-      setTimeout(() => {
-        setuplodeimagescreen(true);
-        seterrmassege(false);
-      }, 2000);
+      // setTimeout(() => {
+      // setuplodeimagescreen(true);
+      // seterrmassege(false);
+      // }, 2000);
     }
   };
 

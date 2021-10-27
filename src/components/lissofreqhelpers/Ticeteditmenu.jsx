@@ -53,10 +53,15 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
       .getTrimmedCanvas()
       .toDataURL("image/png");
     console.log("hiddensignature", hiddensignature);
-    let closingPic = fileList;
+
+    let closingPic;
 
     let userid = loginstatus.userid;
-
+    if (fileList) {
+      closingPic = fileList;
+    } else {
+      closingPic = [];
+    }
     // let y = ticketguid;
     // let x = value;
     let task = "cost";
@@ -64,15 +69,16 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
     let obj = {
       task,
       userid,
-      ticketguid,
+      tickets: [{ ticketguid }],
       ...value,
       closingPic,
       hiddensignature,
     };
-    debugger;
+
     console.log(obj);
     let ruter = "ticket";
     let res = await PostToServer(ruter, obj);
+    console.log(res);
     sigCanvas.current.clear();
     // debugger;
 
@@ -163,15 +169,15 @@ export const Posteditofticket = (task, ticketguid, value) => {
   console.log("Delet", task, ticketguid);
 };
 
-export const Closetask = ({ data, submit, cancelClosep }) => {
+export const Closetask = ({ data, opendrwor, cancelClosep }) => {
   return (
     <div className="Closepopup">
-      <span className="Closepopup-numbertasks">נבחרו {data.length}</span>
+      <span className="Closepopup-numbertasks">נבחרו {data}</span>
       <button className="cancelClosep" onClick={cancelClosep}>
         {" "}
         ביטול
       </button>
-      <button className="Closepopupsubmit" onClick={submit}>
+      <button className="Closepopupsubmit" onClick={opendrwor}>
         <img src="images/lightning.svg" alt="lightning" />
         פעולה מהירה
       </button>

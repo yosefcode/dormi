@@ -6,26 +6,23 @@ import { ModalStyeld } from "../../styelscomponents/modaldtyeld";
 import { AiOutlineClockCircle, AiOutlineCamera } from "react-icons/ai";
 import { FaMapPin } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
-
 import { Badge, Card, Menu, Dropdown, Select, Tooltip } from "antd";
 
+const { REACT_APP_URL_UPLOADS } = process.env;
+const imegeruter = REACT_APP_URL_UPLOADS;
 const { Option } = Select;
 export function Carddatasmall({
   el,
   i,
   status,
   statustext,
-  SelfOpenststus,
+
   Repeatedtask,
 }) {
   // {Repeatedtask ? (
 
   return (
-    <div
-      onClick={() => {
-        SelfOpenststus(i);
-      }}
-    >
+    <div>
       <div className="Smallcard">
         {/* <p id="discriptun">
           {el.categoryname} - {el.categoryname}
@@ -86,17 +83,11 @@ export function Carddatabig({ el }) {
         }}
         footer={false}
       >
-        <p>תמונה</p>
-
-        <p>תמונה</p>
-
-        <p>תמונה</p>
-
-        <p>תמונה</p>
-
-        <p>תמונה</p>
-
-        <p>תמונה</p>
+        <img
+          src={`${imegeruter}/${el.openimage}`}
+          alt="no img"
+          style={{ width: "100px", height: "100px" }}
+        />
       </ModalStyeld>
     </div>
   );
@@ -106,7 +97,7 @@ export function Urgensy({
   urgency,
   urgencytext,
   findChangeurgency,
-  Permission,
+  permission,
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
@@ -132,7 +123,7 @@ export function Urgensy({
         }
         onChange={onChinge}
         dropdownClassName="dropdownClassName"
-        Permission={Permission}
+        Permission={permission}
       >
         <Option value={[lang?.lang122, el.ticketid, "1"]}>
           {" "}

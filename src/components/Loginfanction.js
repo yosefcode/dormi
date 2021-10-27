@@ -8,7 +8,7 @@ const cookies = new Cookies();
 export const Loginfunction = async (value) => {
   const dateforminits = new Date();
   const testDate = new Date(
-    dateforminits.setMinutes(dateforminits.getMinutes() + 10)
+    dateforminits.setMinutes(dateforminits.getMinutes() + 100)
   );
 
   let uservalue = {
@@ -27,6 +27,8 @@ export const Loginfunction = async (value) => {
       let userid = { userid: res.userid };
 
       let masof = await PostToServer(ruteruserid, userid);
+      let userlistruter = "userlist";
+      let userlist = await PostToServer(userlistruter, userid);
 
       // changmasof(masof);
 
@@ -51,11 +53,18 @@ export const Loginfunction = async (value) => {
         changloginstatus: logde,
         changlang: objlang,
         changmasof: masof,
+        changuserlist: userlist,
       };
       //get tokeb for fierbase
       getToken()
-        .then((res) => {
-          console.log("res in logd", res);
+        .then(async (result) => {
+          let usertoken = "usertoken";
+
+          let obj = {
+            userid: res.userid,
+            token: result,
+          };
+          let getuser = await PostToServer(usertoken, obj);
         })
         .catch((err) => {
           console.log(err);

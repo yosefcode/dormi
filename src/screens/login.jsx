@@ -101,12 +101,12 @@ const Login = (props) => {
               },
             ]}
           >
-            <Input
-              onChange={(e) => {
-                let x = e.target.value;
+            <input
+            // onChange={(e) => {
+            //   let x = e.target.value;
 
-                setemailforcheackpass(x);
-              }}
+            //   setemailforcheackpass(x);
+            // }}
             />
           </Form.Item>
 
