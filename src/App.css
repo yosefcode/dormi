@@ -1,8 +1,7 @@
 @import "~antd/dist/antd.css";
 
-/* .ant-select-tree .ant-select-tree-treenode {
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&display=swap");
 
-} */
 @media print {
   body {
     -webkit-print-color-adjust: exact;

@@ -11,36 +11,7 @@ import { Badge, Card, Menu, Dropdown, Select, Tooltip } from "antd";
 const { REACT_APP_URL_UPLOADS } = process.env;
 const imegeruter = REACT_APP_URL_UPLOADS;
 const { Option } = Select;
-export function Carddatasmall({
-  el,
-  i,
-  status,
-  statustext,
 
-  Repeatedtask,
-}) {
-  // {Repeatedtask ? (
-
-  return (
-    <div>
-      <div className="Smallcard">
-        {/* <p id="discriptun">
-          {el.categoryname} - {el.categoryname}
-        </p> */}
-
-        <p id="cooment"> {el.comments}</p>
-        {Repeatedtask ? (
-          <p>
-            <AiOutlineClockCircle />
-            מטלה מתוזמנת
-          </p>
-        ) : (
-          <Badge id="status" color={status} text={statustext} />
-        )}
-      </div>
-    </div>
-  );
-}
 export function Carddatabig({ el }) {
   const [imegvesebule, setimegvesebule] = useState(false);
 
@@ -110,6 +81,7 @@ export function Urgensy({
       <StyeldSelect
         primary={urgency}
         defaultValue={urgencytext}
+        showArrow={false}
         value={
           <div className="valueBadge">
             <Badge
@@ -123,19 +95,19 @@ export function Urgensy({
         }
         onChange={onChinge}
         dropdownClassName="dropdownClassName"
-        Permission={permission}
+        permission={permission}
       >
-        <Option value={[lang?.lang122, el.ticketid, "1"]}>
+        <Option value={[lang?.lang122, el.ticketguid, "1"]}>
           {" "}
           <Badge color="#22E7B7"></Badge>
           {lang?.lang122}
         </Option>
-        <Option value={[lang?.lang121, el.ticketid, "2"]}>
+        <Option value={[lang?.lang121, el.ticketguid, "2"]}>
           {" "}
           <Badge color="orange"></Badge>
           {lang?.lang121}
         </Option>
-        <Option value={[lang?.lang120, el.ticketid, "3"]}>
+        <Option value={[lang?.lang120, el.ticketguid, "3"]}>
           {" "}
           <Badge color="#D91D61"></Badge>
           {lang?.lang120}

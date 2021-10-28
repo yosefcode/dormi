@@ -12,6 +12,8 @@ import Exelexport from "../components/lissofreqhelpers/Exelexport";
 import { PostToServer } from "../serveses";
 import Formtaskfromlist from "../components/Formtaskfromlist";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { AiOutlineClockCircle } from "react-icons/ai";
+
 import {
   Ordercareguris,
   Orderlocation,
@@ -33,11 +35,7 @@ import {
   Switchurgency,
   Switcstatus,
 } from "../components/lissofreqhelpers/Ticeteditmenu";
-import {
-  Carddatasmall,
-  Carddatabig,
-  Urgensy,
-} from "../components/lissofreqhelpers/Carddata";
+import { Carddatabig, Urgensy } from "../components/lissofreqhelpers/Carddata";
 import { FiltersForsort } from "../components/lissofreqhelpers/FilterInputs";
 import {
   SendmasegeTask,
@@ -47,7 +45,7 @@ import {
 } from "../components/lissofreqhelpers/Tasks";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 
-import { Card, Menu, Dropdown } from "antd";
+import { Card, Menu, Dropdown, Badge } from "antd";
 
 const Ticketlis = ({ Repeatedtask }) => {
   const itemsRef = useRef([]);
@@ -63,24 +61,22 @@ const Ticketlis = ({ Repeatedtask }) => {
   const lang = defoltlang?.lang;
   let userlevelid = loginstatus?.levelid;
   let userid = loginstatus?.userid;
-
+  const [locallist, setlocallist] = useState();
+  const [firstlode, setlfirstlode] = useState();
   // עדכון דאטא
   const [updaterefresh, setupdaterefresh] = useState(false);
   const Updatedata = async () => {
     let ruteruserid = "ticketlist";
 
     let ticketlis = await PostToServer(ruteruserid, { userid: userid });
+
     changeticketlist(ticketlis);
 
-    setAllTikets(ticketlis);
+    setlfirstlode(false);
 
-    setarresticets(true);
-    console.log("res", ticketlis);
     setupdaterefresh(!updaterefresh);
   };
 
-  const [locallist, setlocallist] = useState();
-  const [firstlode, setlfirstlode] = useState();
   //  הגדארות משתנות לפי גודל מסך
   const [screnphunesize, setscrenphunesize] = useState();
   const [fullcard, setfullcard] = useState(false);
@@ -107,18 +103,40 @@ const Ticketlis = ({ Repeatedtask }) => {
   // רשימת חדרים ומיכומים
 
   // עדכון שינוי סטטוס דחיפות  פנייה
-  function findChangeurgency(value) {
-    let requst = ticketlist.findIndex((Item) => Item.ticketid === value[1]);
-    ticketlist[requst].urgencyadmin = value[2];
-    setchingeurgency(!chingeurgency);
-    setlocallist(ticketlist);
-  }
+  const findChangeurgency = async (value) => {
+    // let requst = ticketlist.findIndex((Item) => Item.ticketguid === value[1]);
+    // ticketlist[requst].urgencyadmin = value[2];
+    // setchingeurgency(!chingeurgency);
+    // setlocallist(ticketlist);
+    let obj = {
+      task: "urgencyadmin",
+      tickets: [
+        {
+          ticketguid: value[1],
+        },
+      ],
+      urgencyadmin: parseInt(value[2]),
+    };
+
+    await PostToServer(ticketruter, obj);
+
+    Updatedata();
+  };
   // עדכון שינוי סטטוס טיפול פנייה
 
-  function findChangstatus(value) {
-    let requst = ticketlist.findIndex((Item) => Item.ticketid === value[1]);
-
-    ticketlist[requst].statusname = value[2];
+  function findChangstatus(value, type) {
+    let newstatusname;
+    switch (type) {
+      case "open":
+        newstatusname = lang.lang162;
+        break;
+      case "pending":
+        newstatusname = lang.lang174;
+        break;
+      default:
+    }
+    let requst = ticketlist.findIndex((Item) => Item.ticketguid === value);
+    ticketlist[requst].statusname = newstatusname;
 
     setchingeurgency(!chingeurgency);
     setlocallist(ticketlist);
@@ -154,27 +172,52 @@ const Ticketlis = ({ Repeatedtask }) => {
 
   const [quickclose, setquickclose] = useState(false);
   const [visible, setvisible] = useState(false);
+  const canceljob = useRef(false);
 
-  const [arresticets, setarresticets] = useState(false);
-
+  const [cancelquickfunc, setcancelquickfunc] = useState({
+    status: false,
+    type: null,
+  });
   const [cunter, setcunter] = useState(0);
+  const canceling = async () => {
+    canceljob.current = true;
+    setcancelquickfunc({ status: false, type: null });
 
+    console.log("stop");
+
+    console.log(AllTikets);
+    let ruteruserid = "ticketlist";
+
+    let ticketlis = await PostToServer(ruteruserid, { userid: userid });
+
+    setAllTikets(ticketlis);
+
+    setcunter(0);
+  };
   const closeMenue = () => {
-    setvisible(!visible);
+    if (cunter > 0 && !visible) {
+      setvisible(true);
+    } else {
+      setvisible(false);
+    }
+  };
+  const closepupup = () => {
+    setquickclose(!quickclose);
   };
   // סוגר הכל
   const Opquickctaskoption = () => {
-    // setvisible(false);
+    setvisible(false);
 
     if (quickclose) {
-      setvisible(false);
       for (let i = 0; AllTikets.length > i; i++) {
         checkboxref.current[i].checked = false;
       }
-
       setcunter(0);
+
+      closepupup();
+    } else {
+      closepupup();
     }
-    setquickclose(!quickclose);
   };
 
   //  מבטל סימונים
@@ -186,7 +229,6 @@ const Ticketlis = ({ Repeatedtask }) => {
     setcunter(0);
   };
   const Tikettoquikeclose = (bulian, i) => {
-    // debugger;
     checkboxref.current[i].checked = bulian;
 
     if (bulian) {
@@ -198,75 +240,117 @@ const Ticketlis = ({ Repeatedtask }) => {
     }
   };
 
-  const Oqquickaction = async (type, value) => {
-    let arrytecetsalltask = [];
-    let currentref;
-    // let x = checkboxref.current;
-    // debugger;
-    checkboxref.current.map((ref) => {
-      if (ref.checked) {
-        arrytecetsalltask.push({ ticketguid: ref.value });
-        for (var i = 0; i < AllTikets.length; i++) {
-          if (AllTikets[i].ticketguid === ref.value) {
-            AllTikets.splice(i, 1);
-          }
-        }
-        // currentref = locallist.filter((el) => el.ticketguid !== ref.value);
-      }
-    });
-    Opquickctaskoption();
+  const OqquickActionFunc = async (arrytecetsalltask, type, value) => {
+    setcancelquickfunc({ status: false, type: null });
 
-    let obj;
-    let res;
+    setcunter(0);
+    closepupup();
+    if (!canceljob.current) {
+      console.log("startingfunc");
+
+      let obj;
+
+      switch (type) {
+        case "close":
+          let closeobj = {
+            task: "close",
+            userid: userid,
+            tickets: arrytecetsalltask,
+          };
+
+          await PostToServer(ticketruter, closeobj);
+
+          let arr = [];
+          for (let i = 0; i < AllTikets.length; i++) {
+            if (checkboxref.current[i].value === AllTikets[i].ticketguid) {
+              arr.push(checkboxref.current[i]);
+            }
+          }
+          checkboxref.current = arr;
+
+          break;
+        case "pending":
+          obj = {
+            task: "pending",
+            userid: userid,
+            tickets: arrytecetsalltask,
+          };
+          break;
+        case "open":
+          obj = {
+            task: "open",
+            userid: userid,
+            tickets: arrytecetsalltask,
+          };
+          break;
+        case "forward":
+          obj = {
+            task: "forward",
+            userid: userid,
+            tickets: arrytecetsalltask,
+            forwardtouser: value,
+          };
+          break;
+        default:
+          break;
+      }
+      for (let i = 0; AllTikets.length > i; i++) {
+        checkboxref.current[i].checked = false;
+      }
+      if (type !== "close") {
+        let res = await PostToServer(ticketruter, obj);
+        console.log(res);
+      }
+    } else {
+      for (let i = 0; AllTikets.length > i; i++) {
+        checkboxref.current[i].checked = false;
+      }
+      canceljob.current = false;
+    }
+    Updatedata();
+  };
+  const Oqquickaction = async (type, value) => {
     switch (type) {
       case "close":
-        obj = {
-          task: "close",
-          userid: userid,
-          tickets: arrytecetsalltask,
-        };
-        res = await PostToServer(ticketruter, obj);
+        setcancelquickfunc({ status: true, type: "close" });
 
-        console.log("after", AllTikets);
-        setAllTikets(AllTikets);
         break;
       case "pending":
-        obj = {
-          task: "pending",
-          userid: userid,
-          tickets: arrytecetsalltask,
-        };
+        setcancelquickfunc({ status: true, type: "pending" });
+
         break;
       case "open":
-        obj = {
-          task: "open",
-          userid: userid,
-          tickets: arrytecetsalltask,
-        };
+        setcancelquickfunc({ status: true, type: "open" });
+
         break;
       case "forward":
-        obj = {
-          task: "forward",
-          userid: userid,
-          tickets: arrytecetsalltask,
-          forwardtouser: value,
-        };
+        setcancelquickfunc({ status: true, type: "forward" });
+
         break;
       default:
         break;
     }
+    let arrytecetsalltask = [];
 
-    let arr = [];
-    for (let i = 0; i < AllTikets.length; i++) {
-      if (checkboxref.current[i].value === AllTikets[i].ticketguid) {
-        arr.push(checkboxref.current[i]);
+    checkboxref.current.map((ref) => {
+      if (ref.checked) {
+        arrytecetsalltask.push({ ticketguid: ref.value });
+        if (type === "pending" || type === "open") {
+          findChangstatus(ref.value, type);
+        }
+        if (type === "close") {
+          for (var i = 0; i < AllTikets.length; i++) {
+            if (AllTikets[i].ticketguid === ref.value) {
+              AllTikets.splice(i, 1);
+            }
+          }
+        }
       }
-    }
-    checkboxref.current = arr;
-    // setarresticets(true);
+    });
 
-    Updatedata();
-    console.log(res);
+    closeMenue();
+
+    setTimeout(() => OqquickActionFunc(arrytecetsalltask, type, value), 2000);
   };
 
   const [Permission, setPermission] = useState();
@@ -324,9 +408,7 @@ const Ticketlis = ({ Repeatedtask }) => {
 
       setAllTikets(ticketlist);
     } else {
-      let result = ticketlist;
-
-      // let result = locallist;
+      let result = locallist;
       // פילטר לפי קטגוריות
       result = FilterAllOpenCategoris(result, AllOpenCategoris);
       // פילטר לפי דחיפות
@@ -362,12 +444,13 @@ const Ticketlis = ({ Repeatedtask }) => {
     filterallUrgency,
     chingeurgency,
     nolist,
-    arresticets,
+
     locationfilter,
     filteruser,
     selectedstatus,
     fullcard,
     updaterefresh,
+    firstlode,
   ]);
 
   const SelfOpenststus = (i) => {
@@ -411,7 +494,7 @@ const Ticketlis = ({ Repeatedtask }) => {
     setedittask(true);
   };
   const [claerapruchform, setclaerapruchform] = useState(false);
-  console.log(AllTikets.length);
+
   return (
     <div>
       {edittask ? (
@@ -535,44 +618,76 @@ const Ticketlis = ({ Repeatedtask }) => {
               let statustext = resultstatus?.statustext;
 
               return (
-                <Card bordered={false} key={i}>
-                  <div
-                    onClick={() => {
-                      if (quickclose) {
-                        if (!checkboxref.current[i].checked) {
-                          Tikettoquikeclose(true, i);
-                        } else {
-                          Tikettoquikeclose(false, i);
-
-                          // checkboxref.current[i].checked = false;
-                        }
+                <Card
+                  bordered={false}
+                  key={i}
+                  onClick={() => {
+                    if (quickclose) {
+                      if (!checkboxref.current[i].checked) {
+                        Tikettoquikeclose(true, i);
                       } else {
-                        SelfOpenststus(i);
-                      }
-                    }}
-                  >
-                    <p id="discriptun">
-                      {el.categoryname} - {el.categoryname}
-                    </p>
-                    {/* <label for="horns">{lang?.lang145}</label> */}
+                        Tikettoquikeclose(false, i);
 
-                    <input
-                      type="checkbox"
-                      id="horns"
-                      name="horns"
-                      className="closecheckboox"
-                      ref={(el) => (checkboxref.current[i] = el)}
-                      // checked={false}
-                      value={el.ticketguid}
-                    />
-                    <Carddatasmall
-                      el={el}
-                      i={i}
-                      status={status}
-                      statustext={statustext}
-                      quickclose={quickclose}
-                      Repeatedtask={Repeatedtask}
-                    />
+                        // checkboxref.current[i].checked = false;
+                      }
+                    } else {
+                      SelfOpenststus(i);
+                    }
+                  }}
+                >
+                  <div
+                  // onClick={() => {
+                  //   if (quickclose) {
+                  //     if (!checkboxref.current[i].checked) {
+                  //       Tikettoquikeclose(true, i);
+                  //     } else {
+                  //       Tikettoquikeclose(false, i);
+
+                  //       // checkboxref.current[i].checked = false;
+                  //     }
+                  //   } else {
+                  //     SelfOpenststus(i);
+                  //   }
+                  // }}
+                  >
+                    <div className="discriptun">
+                      <p id="discriptun">
+                        {el.categoryname} - {el.categoryname}
+                      </p>
+                      {/* <label for="horns">{lang?.lang145}</label> */}
+
+                      <input
+                        type="checkbox"
+                        id="horns"
+                        name="horns"
+                        className="closecheckboox"
+                        ref={(el) => (checkboxref.current[i] = el)}
+                        // checked={false}
+                        value={el.ticketguid}
+                      />
+                    </div>
+                    <p id="cooment"> {el.comments}</p>
+                    <div className="Smallcard">
+                      {Repeatedtask ? (
+                        <p>
+                          <AiOutlineClockCircle />
+                          מטלה מתוזמנת
+                        </p>
+                      ) : (
+                        <>
+                          <Badge id="status" color={status} text={statustext} />
+                          <div className="pointerblock">
+                            <Urgensy
+                              permission={Permission}
+                              el={el}
+                              urgency={urgency}
+                              urgencytext={urgencytext}
+                              findChangeurgency={findChangeurgency}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
                     <div
                       ref={(el) => (itemsRef.current[i] = el)}
                       style={{
@@ -586,25 +701,17 @@ const Ticketlis = ({ Repeatedtask }) => {
                       <Carddatabig el={el} />
                     </div>
                     <div className="action">
-                      <Urgensy
-                        permission={Permission}
-                        el={el}
-                        urgency={urgency}
-                        urgencytext={urgencytext}
-                        findChangeurgency={findChangeurgency}
-                      />
+                      <Dropdown
+                        overlay={setingmenu}
+                        placement="bottomLeft"
+                        trigger={["click"]}
+                        className="cardbutton"
+                      >
+                        <button>
+                          <BsThreeDotsVertical />
+                        </button>
+                      </Dropdown>
                     </div>
-
-                    <Dropdown
-                      overlay={setingmenu}
-                      placement="bottomLeft"
-                      trigger={["click"]}
-                      className="cardbutton"
-                    >
-                      <button>
-                        <BsThreeDotsVertical />
-                      </button>
-                    </Dropdown>
                   </div>
                 </Card>
               );
@@ -659,6 +766,7 @@ const Ticketlis = ({ Repeatedtask }) => {
               />
             </Drawerstyle>
           ) : null}
+
           <QuickcloDrawerstyle
             placement={"bottom"}
             onClose={closeMenue}
@@ -678,6 +786,8 @@ const Ticketlis = ({ Repeatedtask }) => {
                     data={cunter}
                     cancelClosep={cancelClosep}
                     opendrwor={closeMenue}
+                    cancelquickfunc={cancelquickfunc}
+                    canceloperition={canceling}
                   />
                 ) : null}
               </div>
@@ -686,6 +796,7 @@ const Ticketlis = ({ Repeatedtask }) => {
           >
             <Quickclosebuuton action={Oqquickaction} />
           </QuickcloDrawerstyle>
+
           {quickclose ? (
             // פופ אפ למחיקות מרובה של כרטיסים
 
@@ -693,6 +804,8 @@ const Ticketlis = ({ Repeatedtask }) => {
               data={cunter}
               cancelClosep={cancelClosep}
               opendrwor={closeMenue}
+              cancelquickfunc={cancelquickfunc}
+              canceloperition={canceling}
             />
           ) : null}
           {/* מודלוים משימות כרטיס */}

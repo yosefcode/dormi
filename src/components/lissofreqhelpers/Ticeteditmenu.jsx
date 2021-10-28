@@ -1,10 +1,9 @@
 import React, { useContext, useState, useRef } from "react";
-import { Select, Input, Upload, Button, Form } from "antd";
+import { Select, Input, Upload, Form } from "antd";
 import SignaturePad from "react-signature-canvas";
 import DataContext from "../../DataContext";
 import { BsCloudUpload } from "react-icons/bs";
 import { PostToServer } from "../../serveses";
-import styled from "styled-components";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -169,49 +168,72 @@ export const Posteditofticket = (task, ticketguid, value) => {
   console.log("Delet", task, ticketguid);
 };
 
-export const Closetask = ({ data, opendrwor, cancelClosep }) => {
+export const Closetask = ({
+  data,
+  opendrwor,
+  cancelClosep,
+  cancelquickfunc,
+  canceloperition,
+}) => {
+  let text;
+
+  switch (cancelquickfunc.type) {
+    case "close":
+      text = "נמחקו";
+      break;
+    case "pending":
+      text = "שונה ל -בטיפול";
+
+      break;
+    case "open":
+      text = "סומנו כחדשות";
+
+      break;
+    case "forward":
+      text = "הופנו לאיש צוות";
+
+      break;
+    default:
+      break;
+  }
+
   return (
     <div className="Closepopup">
-      <span className="Closepopup-numbertasks">נבחרו {data}</span>
-      <button className="cancelClosep" onClick={cancelClosep}>
-        {" "}
-        ביטול
-      </button>
-      <button className="Closepopupsubmit" onClick={opendrwor}>
-        <img src="images/lightning.svg" alt="lightning" />
-        פעולה מהירה
-      </button>
+      <div>
+        {data > 0 ? (
+          <div className="Closepopup-numbertasks">
+            {!cancelquickfunc.status ? (
+              <div> {data} נבחרו </div>
+            ) : (
+              <div>
+                <img src="/images/vicon.svg" alt="v" /> {data} פניות {text}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div>בחר פניות</div>
+        )}
+      </div>
+      {data > 0 && !cancelquickfunc.status ? (
+        <button className="cancelClosep" onClick={cancelClosep}>
+          {" "}
+          ביטול
+        </button>
+      ) : null}
+      {!cancelquickfunc.status ? (
+        <button className="Closepopupsubmit" onClick={opendrwor}>
+          <img src="images/lightning.svg" alt="lightning" />
+          פעולה מהירה
+        </button>
+      ) : (
+        <button className="cancelClosep" onClick={canceloperition}>
+          בטל
+        </button>
+      )}
     </div>
   );
 };
-const CardStyeld = styled.div`
-  height: 267px;
 
-  overflow-y: scroll;
-  text-align: start;
-  height: 208px;
-  background-color: white;
-
-  width: 126px;
-
-  h3 {
-    background-color: gray;
-    text-align: start;
-    height: 55px;
-    padding: 5%;
-    display: block;
-  }
-  .listodors {
-    display: flex;
-
-    flex-direction: column;
-  }
-  .singellocation {
-    display: flex;
-    margin: 10px;
-    justify-content: space-between;
-  }
-`;
 export const Switchurgency = (urgencyadmin, lang122, lang121, lang120) => {
   let urgencytext;
   let urgency;
@@ -225,19 +247,22 @@ export const Switchurgency = (urgencyadmin, lang122, lang121, lang120) => {
       urgency = green;
 
       return { urgencytext, urgency };
-      break;
+    // break;
     case "2":
       urgencytext = lang121;
       urgency = yeloo;
 
       return { urgencytext, urgency };
-      break;
+    // break;
     case "3":
       urgencytext = lang120;
       urgency = red;
 
       return { urgencytext, urgency };
-      break;
+    // break;
+    default:
+      urgencytext = lang122;
+      urgency = green;
   }
 };
 

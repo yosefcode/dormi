@@ -9,15 +9,15 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
+  font-family: "Heebo";
 
   .Closepopup {
     position: fixed;
     bottom: 1px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 8px 30px;
     background-color: rgba(15, 7, 67, 1);
     color: white;
     width: 100%;
@@ -48,7 +48,6 @@ export const Contener = styled.div`
     font-weight: normal;
     font-size: 17px;
     line-height: 118.88%;
-    /* or 20px */
 
     text-align: center;
     text-decoration-line: underline;
@@ -57,15 +56,11 @@ export const Contener = styled.div`
     background: none;
     border: none;
   }
+
   .Closepopup-numbertasks {
+    font-style: normal;
     font-weight: bold;
     font-size: 17px;
-    line-height: 118.88%;
-    /* or 20px */
-
-    text-align: center;
-
-    color: #ffffff;
   }
   .ant-card-head {
     padding: none;
@@ -112,6 +107,7 @@ export const Contener = styled.div`
     border: 1.52px solid #ffd17e;
     box-sizing: border-box;
     border-radius: 76px;
+    margin-top: 2px;
   }
 
   .clearbutton {
@@ -164,9 +160,13 @@ export const Contener = styled.div`
     position: relative;
   }
   .action {
-    display: flex;
+    position: absolute;
+    left: 10px;
+    pointer-events: none;
 
-    justify-content: space-between;
+    bottom: 9px;
+  }
+  .pointerblock {
   }
   .shwobutton {
     display: ${(props) => (props.Screnphunesize ? "none" : "inherit")};
@@ -186,25 +186,8 @@ export const Contener = styled.div`
     .ant-card {
       width: 900px;
     }
-
-    #status {
-      font-weight: bold;
-    }
-    #cooment {
-      font-size: 14px;
-      margin-top: -19px;
-      /* or 17px */
-      color: #0f0743;
-    }
   }
   @media only screen and (min-width: 600px) {
-    #cooment {
-      margin-top: 0;
-      font-size: 14px;
-
-      color: #0f0743;
-    }
-
     .urgency {
       height: 26px;
     }
@@ -223,6 +206,30 @@ export const Contener = styled.div`
   hr {
     color: #d6e2f1;
   }
+  .discriptun {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+  }
+  #cooment {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 122.88%;
+    color: #0f0743;
+  }
+  #status {
+  }
+  .ant-badge-status-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #0f0743;
+    margin-inline-start: 2.2px;
+  }
+  .ant-badge-status-dot {
+    top: 0px;
+  }
   #discriptun {
     margin-inline-end: -15px;
     margin-inline-start: 4px;
@@ -231,15 +238,17 @@ export const Contener = styled.div`
     margin: 4px 7px;
     color: #0f0743;
     line-height: 122.88%;
-    width: 291px;
-    height: 21px;
+    /* width: 291px;
+    height: 21px; */
     text-align: right;
     flex: none;
     order: 0;
     flex-grow: 0;
     margin: 4px 0px;
   }
-
+  .Smallcard {
+    display: flex;
+  }
   .urgency {
     background-color: #e5ebf3;
     margin-inline-start: 8px;
@@ -393,7 +402,8 @@ export const QuickcloDrawerstyle = styled(Drawer)`
     border: none;
   }
   .Closepopup-numbertasks {
-    font-weight: bold;
+    font-style: normal;
+    font-weight: 300;
     font-size: 17px;
     line-height: 118.88%;
     /* or 20px */
@@ -556,24 +566,24 @@ export const Drawerstyle = styled(Drawer)`
     text-align: center;
   }
   .ant-select {
-    width: 200px;
+    /* width: 200px;
     border-color: none;
     margin-bottom: 3px;
     box-sizing: border-box;
-    border-radius: 11px;
+    border-radius: 11px; */
   }
   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border: 1px solid #d6e2f1;
+    /* border: 1px solid #d6e2f1;
     box-sizing: border-box;
     border-radius: 11px;
     border-color: none;
-    margin-bottom: 2px;
+    margin-bottom: 2px; */
   }
   .ant-select-selector {
-    border: 1px solid #d6e2f1;
+    /* border: 1px solid #d6e2f1;
     box-sizing: border-box;
     border-radius: 11px;
-    border-color: none;
+    border-color: none; */
   }
 
   .ant-drawer-content {
@@ -604,57 +614,54 @@ export const StyeldSelect = styled(Select)`
   /* @media only screen and (min-width: 600px) {
     width: 110px;
   } */
-  width: 110px;
+  width: 97px;
   height: 24px;
+  margin-top: -4%;
+  background: #e5ebf3;
+  margin-inline-start: 10%;
+  .ant-badge-status-text {
+    font-family: "Heebo";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
 
-  .ant-select {
-    border: none !important;
-    width: 20px !important;
+    color: #0f0743;
+    margin-inline-start: 2.2px;
   }
-
+  .ant-badge-status-dot {
+    top: 0px;
+    margin-inline-start: 2px;
+  }
   .ant-select-selector {
     pointer-events: ${(props) =>
-      props.Permission ? "auto" : "none"}!important;
-    font-size: 12px;
+      props.permission ? "auto" : "none"}!important;
+
     border: none !important;
     box-shadow: none !important;
-  }
-
-  .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-    border: none !important;
-    box-shadow: none !important;
-    width: 124px;
-  }
-  .ant-select-selector::hover {
-    box-shadow: none !important;
-  }
-  .ant-select-rtl.ant-select-single.ant-select-show-arrow
-    .ant-select-selection-item {
-    border: none !important;
-  }
-  .ant-select-arrow {
-    display: ${(props) => (props.Permission ? "inherit" : "none")}!important;
-    color: #0f0743;
-    /* background-color: red; */
-
-    top: 16px;
-
-    inset-inline-start: 83px;
   }
 
   .ant-card-extra {
-    margin-right: -14px;
+    /* margin-right: -14px; */
   }
   .valueBadge {
-    color: #0f0743;
+    margin-top: -5%;
+
+    text-align: start;
+
+    height: 24px;
     background: #e5ebf3;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+
+    /* color: #0f0743;
     width: 90px;
     height: 30px;
     font-weight: bold;
-    text-align: -webkit-center;
+    text-align: -webkit-center; */
   }
   #valueBadgetext {
-    background-color: red;
-    top: 10px;
+    /* background-color: red;
+    top: 10px; */
   }
 `;
