@@ -834,7 +834,7 @@ const Ticketlis = ({ Repeatedtask }) => {
               setvisibletaskDrawer(!visibletaskDrawer);
             }}
             visible={visibletaskDrawer}
-            height={450}
+            height={600}
           >
             <ListtaskforEdit
               action={Taskeditfunc}
@@ -854,7 +854,7 @@ const Ticketlis = ({ Repeatedtask }) => {
             // bodyStyle={{
             //   backgroundColor: "transparent",
             // }}
-            height={1000}
+            height={400}
             footer={
               <div>
                 {quickclose ? (

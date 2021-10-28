@@ -158,8 +158,8 @@ export const ListtaskforEdit = ({ action, close }) => {
         <img src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
       <br />
-      <button className="Quickclosebuuton" onClick={onclose}>
-        <img src="/images/pen.svg" alt="icon" /> {lang?.lang251}
+      <button className="Quickclosebuutdownclose" onClick={onclose}>
+        {lang?.lang251}
       </button>
     </div>
   );
@@ -200,7 +200,9 @@ export const Quickclosebuuton = ({ action }) => {
       <button className="Quickclosebuuton">
         <img src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
-      <button className="Quickclosebuutdownclose">{lang?.lang147}</button>
+      <button className="Quickclosebuutdown">
+        <img src="/images/trash.svg" alt="icon" /> {lang?.lang147}
+      </button>
     </div>
   );
 };

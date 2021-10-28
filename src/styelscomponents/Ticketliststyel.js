@@ -316,11 +316,8 @@ export const QuickcloDrawerstyle = styled(Drawer)`
     font-weight: 500;
     font-size: 16px;
     line-height: 23px;
-    padding: 16px 15px 16px 0px;
     width: 310px;
     height: 56px;
-    border-radius: 24px 24px 0px 0px;
-    text-align: center;
 
     color: #0f0743;
   }
