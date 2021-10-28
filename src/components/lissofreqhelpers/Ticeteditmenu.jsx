@@ -217,8 +217,8 @@ export const Closetask = ({
       </div>
       {data > 0 && !cancelquickfunc.status ? (
         <button className="cancelClosep" onClick={cancelClosep}>
-          {" "}
-          {lang?.lang251}
+          בטל
+          {/* {lang?.lang251} */}
         </button>
       ) : null}
       {!cancelquickfunc.status ? (

@@ -13,6 +13,7 @@ export function FiltersForsort({
   setlocationsort,
   setUserFilter,
   selectedstatus,
+  clear,
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
@@ -33,9 +34,52 @@ export function FiltersForsort({
   const selectedstatusfilter = (value) => {
     selectedstatus(value);
   };
+  const masof = useContext(DataContext).masof;
 
-  // data לבחירת סינון על פי מיקום
+  let locations = masof.locations;
+  let categoryarry = masof.categorynames;
+  // debugger;
+  const treeData3 = categoryarry.map((Item, index) => {
+    let childrenobj = Item.subcategory.map((el) => {
+      return {
+        title: `category ${el.subname}`,
+        value: `${Item.maincategoryname} category:${el.subname}`,
+        key: `${Item.maincategoryname} category:${el.subname}`,
+      };
+    });
+
+    let obj = {
+      title: Item.maincategoryname,
+      value: Item.lmaincategoryname,
+      key: Item.maincategoryname,
+      children: childrenobj,
+    };
+    return obj;
+  });
+  // debugger;
+  // כל המתחמים לבחירת סינון על פי מיקום
+  const treeData2 = locations.map((Item, index) => {
+    let childrenobj = Item.rooms.map((el) => {
+      return {
+        title: `room ${el.roomname}`,
+        value: `${Item.locationname} room:${el.roomname}`,
+        key: `${Item.locationname} room:${el.roomname}`,
+      };
+    });
+
+    let obj = {
+      title: Item.locationname,
+      value: Item.locationname,
+      key: Item.locationname,
+      children: childrenobj,
+    };
+    return obj;
+  });
+  // debugger;
+  // רק מהפניות הפתוחות
   const treeData = filterarry.locationName.map((Item, index) => {
+    // const treeData = locations.map((Item, index) => {
+
     function onlyUnique(value, index, self) {
       return self.indexOf(value) === index;
     }
@@ -70,9 +114,38 @@ export function FiltersForsort({
     };
     return obj;
   });
+  // let x = treeData;
+  // let y = treeData2;
 
+  // debugger;
+  const tProps2 = {
+    treeData2,
+
+    value: locationvalue,
+    onChange: locationfilter,
+    treeCheckable: true,
+
+    showCheckedStrategy: SHOW_PARENT,
+    placeholder: lang.lang355,
+    style: {
+      width: "100%",
+    },
+  };
   const tProps = {
     treeData,
+
+    value: locationvalue,
+    onChange: locationfilter,
+    treeCheckable: true,
+
+    showCheckedStrategy: SHOW_PARENT,
+    placeholder: lang.lang355,
+    style: {
+      width: "100%",
+    },
+  };
+  const tProps3 = {
+    treeData3,
 
     value: locationvalue,
     onChange: locationfilter,
@@ -119,13 +192,14 @@ export function FiltersForsort({
 
   // };
   const [form] = Form.useForm();
-  const clear = () => {
+  const clearform = () => {
+    clear();
     form.resetFields();
   };
 
   return (
     <div className="filteroption">
-      <button button onClick={clear} className="clearbutton">
+      <button button onClick={clearform} className="clearbutton">
         נקה הכל
       </button>
       <Form form={form} name="filterform">
@@ -271,6 +345,18 @@ export function FiltersForsort({
               width: 200,
             }}
           />
+          {/* <TreeSelect
+            {...tProps2}
+            style={{
+              width: 200,
+            }}
+          />
+          <TreeSelect
+            {...tProps3}
+            style={{
+              width: 200,
+            }}
+          /> */}
         </Form.Item>
         <Form.Item name="filterofuser">
           {/*  כל המשתמשים  */}

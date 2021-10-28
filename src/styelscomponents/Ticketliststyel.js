@@ -583,18 +583,18 @@ export const Drawerstyle = styled(Drawer)`
     text-align: center;
   }
   .ant-select {
-    /* width: 200px;
+    width: 200px;
     border-color: none;
     margin-bottom: 3px;
     box-sizing: border-box;
-    border-radius: 11px; */
+    border-radius: 11px;
   }
   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    /* border: 1px solid #d6e2f1;
+    border: 1px solid #d6e2f1;
     box-sizing: border-box;
     border-radius: 11px;
     border-color: none;
-    margin-bottom: 2px; */
+    margin-bottom: 2px;
   }
   .ant-select-selector {
     /* border: 1px solid #d6e2f1;

@@ -64,6 +64,7 @@ const Ticketlis = ({ Repeatedtask }) => {
   let userid = loginstatus?.userid;
   const [locallist, setlocallist] = useState();
   const [firstlode, setlfirstlode] = useState();
+  const [filtercunter, setfiltercunter] = useState(0);
   // עדכון דאטא
   const [updaterefresh, setupdaterefresh] = useState(false);
   const Updatedata = async () => {
@@ -315,6 +316,7 @@ const Ticketlis = ({ Repeatedtask }) => {
 
     setcunter(0);
     closepupup();
+
     if (!canceljob.current) {
       console.log("startingfunc");
 
@@ -329,14 +331,6 @@ const Ticketlis = ({ Repeatedtask }) => {
           };
 
           await PostToServer(ticketruter, closeobj);
-
-          let arr = [];
-          for (let i = 0; i < AllTikets.length; i++) {
-            if (checkboxref.current[i].value === AllTikets[i].ticketguid) {
-              arr.push(checkboxref.current[i]);
-            }
-          }
-          checkboxref.current = arr;
 
           break;
         case "pending":
@@ -364,17 +358,12 @@ const Ticketlis = ({ Repeatedtask }) => {
         default:
           break;
       }
-      for (let i = 0; AllTikets.length > i; i++) {
-        checkboxref.current[i].checked = false;
-      }
+
       if (type !== "close") {
         let res = await PostToServer(ticketruter, obj);
         console.log(res);
       }
     } else {
-      for (let i = 0; AllTikets.length > i; i++) {
-        checkboxref.current[i].checked = false;
-      }
       canceljob.current = false;
     }
     Updatedata();
@@ -401,9 +390,17 @@ const Ticketlis = ({ Repeatedtask }) => {
         break;
     }
     let arrytecetsalltask = [];
+    // let x = AllTikets;
 
+    let arr = [];
+    for (let i = 0; i < AllTikets.length; i++) {
+      if (checkboxref.current[i].value === AllTikets[i].ticketguid) {
+        arr.push(checkboxref.current[i]);
+      }
+    }
+    checkboxref.current = arr;
     checkboxref.current.map((ref) => {
-      if (ref.checked) {
+      if (ref?.checked) {
         arrytecetsalltask.push({ ticketguid: ref.value });
         if (type === "pending" || type === "open") {
           findChangstatus(ref.value, type);
@@ -419,7 +416,9 @@ const Ticketlis = ({ Repeatedtask }) => {
     });
 
     closeMenue();
-
+    for (let i = 0; locallist.length > i; i++) {
+      checkboxref.current[i].checked = false;
+    }
     setTimeout(() => OqquickActionFunc(arrytecetsalltask, type, value), 2000);
   };
 
@@ -480,18 +479,42 @@ const Ticketlis = ({ Repeatedtask }) => {
     } else {
       let result = locallist;
       // פילטר לפי קטגוריות
+      let cunter_num_of_filter = [false, false, false, false, false, false];
       result = FilterAllOpenCategoris(result, AllOpenCategoris);
+      if (AllOpenCategoris) {
+        cunter_num_of_filter[0] = true;
+      } else {
+        cunter_num_of_filter[0] = false;
+      }
       // פילטר לפי דחיפות
       result = FilterUrgency(result, filterallUrgency);
-
+      if (filterallUrgency) {
+        cunter_num_of_filter[1] = true;
+      } else {
+        cunter_num_of_filter[1] = false;
+      }
       //פילטר לפי מיקום
       result = Filterlocation(result, locationfilter);
+      if (locationfilter) {
+        cunter_num_of_filter[2] = true;
+      } else {
+        cunter_num_of_filter[2] = false;
+      }
+
       // פילטר לפי משתמשים
       result = FilterAllusers(result, filteruser);
-
+      if (filteruser) {
+        cunter_num_of_filter[3] = true;
+      } else {
+        cunter_num_of_filter[3] = false;
+      }
       // פילטר לפי סטטוס
       result = FilterAllstatus(result, selectedstatus);
-
+      if (selectedstatus) {
+        cunter_num_of_filter[4] = true;
+      } else {
+        cunter_num_of_filter[4] = false;
+      }
       // result = Filterdelittask(result, arrytaskforclose);
       // if (arresticets) {
       //   for (let i = 0; AllTikets.length > i; i++) {
@@ -506,7 +529,15 @@ const Ticketlis = ({ Repeatedtask }) => {
       // } else {
       //   Checkstatuslist(true);
       // }
+      // let cuntefilters = cunter_num_of_filter.indexOf(true, 3);
+      let cunter = 0;
+      cunter_num_of_filter.map((el) => {
+        if (el) {
+          cunter = cunter + 1;
+        }
+      });
 
+      setfiltercunter(cunter);
       setAllTikets(result);
     }
   }, [
@@ -572,6 +603,22 @@ const Ticketlis = ({ Repeatedtask }) => {
           <div className="Mangeroption">
             <button className="MangerButton" onClick={openfilter}>
               {lang?.lang196} <FaFilter />
+              {filtercunter > 0 ? (
+                <div>
+                  <Badge
+                    dir="tlr"
+                    overflowCount={999}
+                    count={filtercunter}
+                    style={{
+                      backgroundColor: "#EBBE74",
+                      color: "black",
+                      fontsize: "16px",
+                      right: "13px",
+                      bottom: "18px",
+                    }}
+                  />
+                </div>
+              ) : null}
             </button>
 
             <button className="MangerButton" onClick={Opquickctaskoption}>
@@ -609,6 +656,13 @@ const Ticketlis = ({ Repeatedtask }) => {
                 }}
                 selectedstatus={(value) => {
                   setselectedstatus(value);
+                }}
+                clear={() => {
+                  setAllOpenCategoris(false);
+                  setfilterallUrgency(false);
+                  setlocationfilter(false);
+                  setfilteruser(false);
+                  setselectedstatus(false);
                 }}
               />
             </Selectfilter>
@@ -823,6 +877,15 @@ const Ticketlis = ({ Repeatedtask }) => {
                 selectedstatus={(value) => {
                   setselectedstatus(value);
                 }}
+                clear={() => {
+                  setAllOpenCategoris(false);
+                  setfilterallUrgency(false);
+                  setlocationfilter(false);
+                  setfilteruser(false);
+                  setselectedstatus(false);
+
+                  // setupdaterefresh(!updaterefresh);
+                }}
               />
             </Drawerstyle>
           ) : null}
@@ -846,14 +909,7 @@ const Ticketlis = ({ Repeatedtask }) => {
           <QuickcloDrawerstyle
             placement={"bottom"}
             onClose={closeMenue}
-            // mask={false}
             visible={visible}
-            // contentWrapperStyle={{
-            //   backgroundColor: "transparent",
-            // }}
-            // bodyStyle={{
-            //   backgroundColor: "transparent",
-            // }}
             height={400}
             footer={
               <div>
