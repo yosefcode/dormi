@@ -176,7 +176,8 @@ export const Closetask = ({
   canceloperition,
 }) => {
   let text;
-
+  const defoltlang = useContext(DataContext).lang;
+  let lang = defoltlang;
   switch (cancelquickfunc.type) {
     case "close":
       text = "נמחקו";
@@ -217,7 +218,7 @@ export const Closetask = ({
       {data > 0 && !cancelquickfunc.status ? (
         <button className="cancelClosep" onClick={cancelClosep}>
           {" "}
-          ביטול
+          {lang?.lang251}
         </button>
       ) : null}
       {!cancelquickfunc.status ? (

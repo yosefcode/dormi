@@ -162,8 +162,11 @@ export const Contener = styled.div`
   .action {
     position: absolute;
     left: 10px;
-    pointer-events: none;
-
+    border: none;
+    position: absolute;
+    left: 10px;
+    bottom: 9px;
+    background: none;
     bottom: 9px;
   }
   .pointerblock {
@@ -295,6 +298,7 @@ export const Selectfilter = styled.div`
   }
 `;
 export const QuickcloDrawerstyle = styled(Drawer)`
+  font-family: "Heebo";
   .listQuickclosebuuton {
     display: flex;
     flex-direction: column;
@@ -303,6 +307,22 @@ export const QuickcloDrawerstyle = styled(Drawer)`
   }
   .ant-drawer-content {
     background-color: transparent;
+  }
+  .Quickclosebuutdownclose {
+    border: none;
+    background: #fafcff;
+    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
+    margin: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding: 16px 15px 16px 0px;
+    width: 310px;
+    height: 56px;
+    border-radius: 24px 24px 0px 0px;
+    text-align: center;
+
+    color: #0f0743;
   }
   .Quickclosebuutonup {
     border: none;

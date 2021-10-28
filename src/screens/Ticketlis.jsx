@@ -42,6 +42,7 @@ import {
   Sentostaf,
   Carddata,
   Quickclosebuuton,
+  ListtaskforEdit,
 } from "../components/lissofreqhelpers/Tasks";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 
@@ -77,7 +78,7 @@ const Ticketlis = ({ Repeatedtask }) => {
     setupdaterefresh(!updaterefresh);
   };
 
-  //  הגדארות משתנות לפי גודל מסך
+  //  הגדרות משתנות לפי גודל מסך
   const [screnphunesize, setscrenphunesize] = useState();
   const [fullcard, setfullcard] = useState(false);
   //  הגדרת מאפיין - משימות מתוזמנות או רגילות
@@ -168,7 +169,76 @@ const Ticketlis = ({ Repeatedtask }) => {
   const closeopenaptuchclosemoda = () => {
     setopenaptuchclosemodal(false);
   };
-  // פעולה מהירה
+  // סגירה רגילה
+
+  const Drawerforalltask = () => {
+    setvisibletaskDrawer(false);
+  };
+  const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
+  const [Chusenrikit, setChusenrikit] = useState();
+  const Taskeditfunc = async (type, value) => {
+    setChusenrikit(null);
+    Drawerforalltask();
+    console.log(Chusenrikit, type, value);
+    let arrytecetsalltask = [{ ticketguid: Chusenrikit }];
+    let obj;
+
+    switch (type) {
+      case "close":
+        obj = {
+          task: "close",
+          userid: userid,
+          tickets: arrytecetsalltask,
+        };
+        await PostToServer(ticketruter, obj);
+        Updatedata();
+
+        break;
+      case "pending":
+        obj = {
+          task: "pending",
+          userid: userid,
+          tickets: arrytecetsalltask,
+        };
+        await PostToServer(ticketruter, obj);
+        Updatedata();
+        break;
+      case "open":
+        obj = {
+          task: "open",
+          userid: userid,
+          tickets: arrytecetsalltask,
+        };
+        await PostToServer(ticketruter, obj);
+        Updatedata();
+        break;
+      case "forward":
+        obj = {
+          task: "forward",
+          userid: userid,
+          tickets: arrytecetsalltask,
+          forwardtouser: value,
+        };
+        break;
+      case "message":
+        setSendmassege(true);
+        break;
+      case "cost":
+        setopenaptuchclosemodal(true);
+
+        break;
+      case "edit":
+        let findtiket = ticketlist.filter((el) => {
+          return el.ticketguid === Chusenrikit;
+        });
+        debugger;
+        setdataforedit(findtiket[0]);
+        setedittask(false);
+        break;
+      default:
+        break;
+    }
+  };
 
   const [quickclose, setquickclose] = useState(false);
   const [visible, setvisible] = useState(false);
@@ -553,7 +623,6 @@ const Ticketlis = ({ Repeatedtask }) => {
                   {/* שלח הודעה */}
                   <Menu.Item
                     onClick={() => {
-                      setSendmassege(true);
                       setproblemid(el.ticketguid);
                     }}
                   >
@@ -635,26 +704,11 @@ const Ticketlis = ({ Repeatedtask }) => {
                     }
                   }}
                 >
-                  <div
-                  // onClick={() => {
-                  //   if (quickclose) {
-                  //     if (!checkboxref.current[i].checked) {
-                  //       Tikettoquikeclose(true, i);
-                  //     } else {
-                  //       Tikettoquikeclose(false, i);
-
-                  //       // checkboxref.current[i].checked = false;
-                  //     }
-                  //   } else {
-                  //     SelfOpenststus(i);
-                  //   }
-                  // }}
-                  >
+                  <div>
                     <div className="discriptun">
                       <p id="discriptun">
                         {el.categoryname} - {el.categoryname}
                       </p>
-                      {/* <label for="horns">{lang?.lang145}</label> */}
 
                       <input
                         type="checkbox"
@@ -662,7 +716,6 @@ const Ticketlis = ({ Repeatedtask }) => {
                         name="horns"
                         className="closecheckboox"
                         ref={(el) => (checkboxref.current[i] = el)}
-                        // checked={false}
                         value={el.ticketguid}
                       />
                     </div>
@@ -700,19 +753,26 @@ const Ticketlis = ({ Repeatedtask }) => {
 
                       <Carddatabig el={el} />
                     </div>
-                    <div className="action">
-                      <Dropdown
+                    {/* <div className="action"> */}
+                    {/* <Dropdown
                         overlay={setingmenu}
                         placement="bottomLeft"
                         trigger={["click"]}
                         className="cardbutton"
-                      >
-                        <button>
-                          <BsThreeDotsVertical />
-                        </button>
-                      </Dropdown>
-                    </div>
+                      > */}
+                    <button
+                      className="action"
+                      onClick={() => {
+                        setvisibletaskDrawer(!visibletaskDrawer);
+                        setChusenrikit(el.ticketguid);
+                      }}
+                    >
+                      <BsThreeDotsVertical />
+                    </button>
+
+                    {/* </Dropdown> */}
                   </div>
+                  {/* </div> */}
                 </Card>
               );
             })
@@ -766,19 +826,35 @@ const Ticketlis = ({ Repeatedtask }) => {
               />
             </Drawerstyle>
           ) : null}
+          {/* משימות סגירה רגילה */}
 
+          <QuickcloDrawerstyle
+            placement={"bottom"}
+            onClose={() => {
+              setvisibletaskDrawer(!visibletaskDrawer);
+            }}
+            visible={visibletaskDrawer}
+            height={450}
+          >
+            <ListtaskforEdit
+              action={Taskeditfunc}
+              close={() => {
+                setvisibletaskDrawer(!visibletaskDrawer);
+              }}
+            />
+          </QuickcloDrawerstyle>
           <QuickcloDrawerstyle
             placement={"bottom"}
             onClose={closeMenue}
             // mask={false}
             visible={visible}
-            contentWrapperStyle={{
-              backgroundColor: "transparent",
-            }}
-            bodyStyle={{
-              backgroundColor: "transparent",
-            }}
-            height={450}
+            // contentWrapperStyle={{
+            //   backgroundColor: "transparent",
+            // }}
+            // bodyStyle={{
+            //   backgroundColor: "transparent",
+            // }}
+            height={1000}
             footer={
               <div>
                 {quickclose ? (
