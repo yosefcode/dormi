@@ -68,8 +68,12 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
     if (value?.categoryid) {
       categoryid = value?.categoryid[1];
     }
-    let urgencyid = value?.urgencyid;
-
+    let urgencyid;
+    if (value?.urgencyid) {
+      urgencyid = value?.urgencyid;
+    } else {
+      urgencyid = 2;
+    }
     let comments;
     if (value.comments) {
       comments = value.comments.replace(/[<>${}]/g, "danger$&");
@@ -88,6 +92,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
     };
 
     let reqruter = "newticket";
+
     let res = await PostToServer(reqruter, obj);
     if (res.error === 1) {
       seterrmassege(true);

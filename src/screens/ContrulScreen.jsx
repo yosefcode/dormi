@@ -100,7 +100,18 @@ const ContrulScreen = ({ dir }) => {
           <Nwerequest Temmembertask={true} />
         </Route>
         <Route path="/location">
-          <Location />
+          {ticketlist && defullang ? (
+            <Location />
+          ) : (
+            <div>
+              <img
+                src="/images/Semdimag.png"
+                className="lodingimage"
+                alt="lodingimage"
+              />
+              <FaSpinner />
+            </div>
+          )}
         </Route>
         <Route path="/list_users">
           {ticketlist && defullang ? (
@@ -118,7 +129,18 @@ const ContrulScreen = ({ dir }) => {
         </Route>
         {masof ? (
           <Route path="/categoris">
-            <Categoris />
+            {ticketlist && defullang ? (
+              <Categoris />
+            ) : (
+              <div>
+                <img
+                  src="/images/Semdimag.png"
+                  className="lodingimage"
+                  alt="lodingimage"
+                />
+                <FaSpinner />
+              </div>
+            )}
           </Route>
         ) : (
           <img

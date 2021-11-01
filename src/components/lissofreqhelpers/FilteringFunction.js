@@ -10,7 +10,7 @@ export const Filterdelittask = (data, alldelettask) => {
 
   return arryofprojects[0];
 };
-// פילטר לפי קטגוריות
+// פילטר לפי דחיפות
 
 export function FilterUrgency(arry, filterallUrgency) {
   if (filterallUrgency) {
@@ -21,13 +21,41 @@ export function FilterUrgency(arry, filterallUrgency) {
     return arry;
   }
 }
-// פילטר לפי דחיפות
 
+// פילטר לפי קטגוריות
 export function FilterAllOpenCategoris(arry, AllOpenCategoris) {
   if (AllOpenCategoris) {
-    return arry.filter((el) => {
-      return el.breadcrumb === AllOpenCategoris;
-    });
+    if (AllOpenCategoris?.length > 0) {
+      let arryofres = [];
+      AllOpenCategoris.map((category) => {
+        let chckecategory = category.indexOf("category:");
+
+        if (chckecategory >= 1) {
+          let categoryname = category.slice(chckecategory + 9, category.length);
+
+          let breadcrumb = category.slice(0, chckecategory - 1);
+
+          arry.filter((el) => {
+            if (
+              el.breadcrumb === breadcrumb &&
+              el.categoryname === categoryname
+            ) {
+              arryofres.push(el);
+            }
+          });
+        } else {
+          arry.filter((el) => {
+            if (el.breadcrumb === category) {
+              arryofres.push(el);
+            }
+          });
+        }
+      });
+
+      return arryofres;
+    } else {
+      return arry;
+    }
   } else {
     return arry;
   }

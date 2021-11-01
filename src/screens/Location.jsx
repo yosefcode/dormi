@@ -3,14 +3,19 @@ import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { Menu, Dropdown, Form, Input } from "antd";
+import { Menu, Dropdown, Form, Input, Badge } from "antd";
+import { useHistory } from "react-router-dom";
 
 import DataContext from "../DataContext";
 
 function Location() {
   document.body.style.backgroundColor = "white";
-
+  let history = useHistory();
+  const filterserch = useContext(DataContext).filterserch;
+  const chanfefilter = useContext(DataContext).chanfefilter;
   const defoltlang = useContext(DataContext).lang;
+  const ticketlist = useContext(DataContext).ticketlist;
+
   const masof = useContext(DataContext).masof;
 
   const lang = defoltlang?.lang;
@@ -38,41 +43,15 @@ function Location() {
     </Menu>
   );
 
-  const menuoflocation = (
-    <Menu>
-      <Menu.Item>{lang?.lang235} </Menu.Item>
-      <Menu.Item>{lang?.lang243}</Menu.Item>
-      <Menu.Item>{lang?.lang147}</Menu.Item>
-
-      <Menu.Item>{lang?.lang359}</Menu.Item>
-    </Menu>
-  );
   let locationarry = masof?.locations;
-  // console.log(locationarry);
-  // debugger;
 
-  let arryofcards = [
-    {
-      id: 1,
-      projact: "חדר אוכל",
-      alllocation: [
-        { location: "חדר1", id: 1 },
-        { location: "2חדר", id: 2 },
-      ],
-    },
-    {
-      id: 2,
-      projact: "כפר סטודנטים",
-      alllocation: [
-        { location: "חדר1", id: 1 },
-        { location: "2חדר", id: 2 },
-      ],
-    },
-    {
-      id: 2,
-      projact: "2 סטודנטים",
-    },
-  ];
+  const gotolistoftask = (value) => {
+    filterserch.location = value;
+
+    console.log(filterserch);
+    chanfefilter(filterserch);
+    history.push("/ListOfreq");
+  };
 
   return (
     <Contener>
@@ -101,9 +80,51 @@ function Location() {
                   <div className="listodors">
                     {el.rooms ? (
                       el.rooms.map((item) => {
+                        let cunter = 0;
+                        ticketlist.map((tiket) => {
+                          if (
+                            tiket.locationName === el.locationname &&
+                            tiket.roomName === item.roomname
+                          ) {
+                            cunter = cunter + 1;
+                          }
+                        });
+
+                        const menuoflocation = (
+                          <Menu>
+                            {cunter > 0 ? (
+                              <Menu.Item
+                                onClick={() => {
+                                  let chusentask = `${el.locationame} room:${item.roomname}`;
+                                  gotolistoftask(chusentask);
+                                }}
+                              >
+                                {lang?.lang235}{" "}
+                              </Menu.Item>
+                            ) : null}
+                            <Menu.Item>{lang?.lang243}</Menu.Item>
+                            <Menu.Item>{lang?.lang147}</Menu.Item>
+
+                            <Menu.Item>{lang?.lang359}</Menu.Item>
+                          </Menu>
+                        );
                         return (
                           <div className="singellocation">
-                            <div>{item.roomname}</div>
+                            <div>
+                              {item.roomname}
+                              {cunter > 0 ? (
+                                <Badge
+                                  dir="tlr"
+                                  overflowCount={999}
+                                  count={cunter}
+                                  style={{
+                                    backgroundColor: "#EBBE74",
+                                    color: "black",
+                                    fontsize: "16px",
+                                  }}
+                                />
+                              ) : null}
+                            </div>
                             <div>
                               <Dropdown
                                 overlay={menuoflocation}
@@ -120,7 +141,7 @@ function Location() {
                       })
                     ) : (
                       <div>
-                        <p className="noroms">{lang?.lang225} </p>
+                        <p className="noroms">{lang?.lang225}</p>
                       </div>
                     )}
                   </div>

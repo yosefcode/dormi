@@ -6,80 +6,27 @@ const { Option } = Select;
 
 const { SHOW_PARENT } = TreeSelect;
 /// כל סוגי הפילטרים
-export function FiltersForsort({
-  filterarry,
-  setingAllOpenCategoris,
-  setingfilterallUrgency,
-  setlocationsort,
-  setUserFilter,
-  selectedstatus,
-  clear,
-}) {
+
+const Treesslesctlocation = ({ data, locationfilter }) => {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
+  const filterserch = useContext(DataContext).filterserch;
+  const chanfefilter = useContext(DataContext).chanfefilter;
   const [locationvalue, setlocationvalue] = useState();
-
-  const AllOpenCategoris = (value) => {
-    setingAllOpenCategoris(value);
-  };
-  const filterallUrgency = (value) => {
-    setingfilterallUrgency(value);
-  };
-  const locationfilter = (value) => {
-    setlocationsort(value);
-  };
-  const filterofuser = (value) => {
-    setUserFilter(value);
-  };
-  const selectedstatusfilter = (value) => {
-    selectedstatus(value);
-  };
-  const masof = useContext(DataContext).masof;
-
-  let locations = masof.locations;
-  let categoryarry = masof.categorynames;
-  // debugger;
-  const treeData3 = categoryarry.map((Item, index) => {
-    let childrenobj = Item.subcategory.map((el) => {
-      return {
-        title: `category ${el.subname}`,
-        value: `${Item.maincategoryname} category:${el.subname}`,
-        key: `${Item.maincategoryname} category:${el.subname}`,
-      };
+  const filter = (value) => {
+    chanfefilter({
+      categoris: false,
+      location: false,
     });
-
-    let obj = {
-      title: Item.maincategoryname,
-      value: Item.lmaincategoryname,
-      key: Item.maincategoryname,
-      children: childrenobj,
-    };
-    return obj;
-  });
-  // debugger;
-  // כל המתחמים לבחירת סינון על פי מיקום
-  const treeData2 = locations.map((Item, index) => {
-    let childrenobj = Item.rooms.map((el) => {
-      return {
-        title: `room ${el.roomname}`,
-        value: `${Item.locationname} room:${el.roomname}`,
-        key: `${Item.locationname} room:${el.roomname}`,
-      };
-    });
-
-    let obj = {
-      title: Item.locationname,
-      value: Item.locationname,
-      key: Item.locationname,
-      children: childrenobj,
-    };
-    return obj;
-  });
-  // debugger;
-  // רק מהפניות הפתוחות
-  const treeData = filterarry.locationName.map((Item, index) => {
-    // const treeData = locations.map((Item, index) => {
-
+    setlocationvalue(value);
+    locationfilter(value);
+  };
+  useEffect(() => {
+    if (filterserch.categoris) {
+      setlocationvalue(filterserch.categoris);
+    }
+  }, []);
+  const treeData = data.map((Item, index) => {
     function onlyUnique(value, index, self) {
       return self.indexOf(value) === index;
     }
@@ -114,28 +61,12 @@ export function FiltersForsort({
     };
     return obj;
   });
-  // let x = treeData;
-  // let y = treeData2;
 
-  // debugger;
-  const tProps2 = {
-    treeData2,
-
-    value: locationvalue,
-    onChange: locationfilter,
-    treeCheckable: true,
-
-    showCheckedStrategy: SHOW_PARENT,
-    placeholder: lang.lang355,
-    style: {
-      width: "100%",
-    },
-  };
   const tProps = {
     treeData,
 
     value: locationvalue,
-    onChange: locationfilter,
+    onChange: filter,
     treeCheckable: true,
 
     showCheckedStrategy: SHOW_PARENT,
@@ -144,19 +75,125 @@ export function FiltersForsort({
       width: "100%",
     },
   };
-  const tProps3 = {
-    treeData3,
+  return (
+    <TreeSelect
+      {...tProps}
+      style={{
+        width: 200,
+      }}
+    />
+  );
+};
+const Treesslescategoris = ({ data, AllOpenCategoris }) => {
+  const defoltlang = useContext(DataContext).lang;
+  const filterserch = useContext(DataContext).filterserch;
+  const chanfefilter = useContext(DataContext).chanfefilter;
 
-    value: locationvalue,
-    onChange: locationfilter,
+  const lang = defoltlang?.lang;
+  const [categori, setcategori] = useState();
+
+  useEffect(() => {
+    if (filterserch.categoris) {
+      setcategori(filterserch.categoris);
+    }
+  }, []);
+  const filter = (value) => {
+    chanfefilter({
+      categoris: false,
+      location: false,
+    });
+    setcategori(value);
+
+    AllOpenCategoris(value);
+  };
+
+  const treeData = data.map((Item, index) => {
+    function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
+
+    let onlyroms = Item.breadcrumb.map((el) => {
+      return el.categoryname;
+    });
+
+    let unique = onlyroms.filter(onlyUnique);
+
+    let childrenobj = unique.map((obj) => {
+      if (Item.breadcrumb[0].breadcrumb !== obj) {
+        return {
+          title: obj,
+          value: `${Item.breadcrumb[0].breadcrumb} category:${obj}`,
+          key: `${Item.breadcrumb[0].breadcrumb} category:${obj}`,
+        };
+      } else {
+        return {
+          title: ` category${obj}`,
+          value: `${Item.breadcrumb[0].breadcrumb} category:${obj}`,
+          key: `${Item.breadcrumb[0].breadcrumb} category:${obj}`,
+        };
+      }
+    });
+    // debugger;
+    let obj = {
+      title: `${Item.breadcrumb[0].breadcrumb}  (${Item.breadcrumb.length})`,
+      value: Item.breadcrumb[0].breadcrumb,
+      key: Item.breadcrumb[0].breadcrumb,
+      children: childrenobj,
+    };
+    return obj;
+  });
+
+  const tProps = {
+    treeData,
+
+    value: categori,
+    onChange: filter,
     treeCheckable: true,
 
     showCheckedStrategy: SHOW_PARENT,
-    placeholder: lang.lang355,
+    placeholder: lang?.lang354,
     style: {
       width: "100%",
     },
   };
+  return (
+    <TreeSelect
+      {...tProps}
+      style={{
+        width: 200,
+      }}
+    />
+  );
+};
+export function FiltersForsort({
+  filterarry,
+  setingAllOpenCategoris,
+  setingfilterallUrgency,
+  setlocationsort,
+  setUserFilter,
+  selectedstatus,
+  clear,
+}) {
+  const defoltlang = useContext(DataContext).lang;
+  const lang = defoltlang?.lang;
+  // const [locationvalue, setlocationvalue] = useState();
+
+  const AllOpenCategoris = (value) => {
+    setingAllOpenCategoris(value);
+  };
+  const filterallUrgency = (value) => {
+    setingfilterallUrgency(value);
+  };
+  const locationfilter = (value) => {
+    setlocationsort(value);
+  };
+  const filterofuser = (value) => {
+    setUserFilter(value);
+  };
+  const selectedstatusfilter = (value) => {
+    selectedstatus(value);
+  };
+  const masof = useContext(DataContext).masof;
 
   let numofopen;
   let numotrintment;
@@ -287,36 +324,11 @@ export function FiltersForsort({
             </Select>
           </Form.Item>
         </div>
-        <Form.Item name="allOpenCategoris">
-          <div className="selcts">
-            <Select
-              showSearch
-              placeholder={lang?.lang354}
-              onChange={AllOpenCategoris}
-            >
-              <Option value={false}>{lang.lang354}</Option>
 
-              {filterarry
-                ? filterarry.breadcrumb.map((el) => (
-                    <Option value={el?.breadcrumb[0]}>
-                      {el?.breadcrumb[0]}{" "}
-                      <Badge
-                        dir="tlr"
-                        overflowCount={999}
-                        count={el?.breadcrumb?.length}
-                        style={{
-                          backgroundColor: "#EBBE74",
-                          color: "black",
-                          fontsize: "16px",
-                        }}
-                      />
-                    </Option>
-                  ))
-                : null}
-            </Select>
-          </div>
-        </Form.Item>
-
+        <Treesslescategoris
+          data={filterarry.breadcrumb}
+          AllOpenCategoris={AllOpenCategoris}
+        />
         <Form.Item name="filterallUrgency">
           <div className="selcts">
             <Select
@@ -339,24 +351,10 @@ export function FiltersForsort({
             </Select>
           </div>
 
-          <TreeSelect
-            {...tProps}
-            style={{
-              width: 200,
-            }}
+          <Treesslesctlocation
+            data={filterarry.locationName}
+            locationfilter={locationfilter}
           />
-          {/* <TreeSelect
-            {...tProps2}
-            style={{
-              width: 200,
-            }}
-          />
-          <TreeSelect
-            {...tProps3}
-            style={{
-              width: 200,
-            }}
-          /> */}
         </Form.Item>
         <Form.Item name="filterofuser">
           {/*  כל המשתמשים  */}

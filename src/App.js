@@ -22,8 +22,15 @@ function App() {
   const [ticketlist, setticketlist] = useState();
   const [dir, setsir] = useState("tlr");
   const [userlist, srtuserlist] = useState();
-
+  const [filterserch, setfilterserch] = useState({
+    categoris: false,
+    location: false,
+  });
   const providerOptions = {
+    filterserch,
+    chanfefilter: (value) => {
+      setfilterserch(value);
+    },
     data,
     changdata: (value) => {
       setdata(value);

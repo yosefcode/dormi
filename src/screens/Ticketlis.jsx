@@ -48,10 +48,11 @@ import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 
 import { Card, Menu, Dropdown, Badge } from "antd";
 
-const Ticketlis = ({ Repeatedtask }) => {
+const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const itemsRef = useRef([]);
   const checkboxref = useRef([]);
-
+  const filterserch = useContext(DataContext).filterserch;
+  const chanfefilter = useContext(DataContext).chanfefilter;
   // רוטר טיפול במשימות
   const ticketruter = "ticket";
   document.body.style.backgroundColor = "#e5e5e5";
@@ -93,6 +94,7 @@ const Ticketlis = ({ Repeatedtask }) => {
   const [AllTikets, setAllTikets] = useState([]);
 
   const [filter, setfilter] = useState(false);
+
   const [filterarry, setfilterarry] = useState();
   const [AllOpenCategoris, setAllOpenCategoris] = useState();
   const [filterallUrgency, setfilterallUrgency] = useState();
@@ -106,12 +108,9 @@ const Ticketlis = ({ Repeatedtask }) => {
 
   // עדכון שינוי סטטוס דחיפות  פנייה
   const findChangeurgency = async (value) => {
-    // let requst = ticketlist.findIndex((Item) => Item.ticketguid === value[1]);
-    // ticketlist[requst].urgencyadmin = value[2];
-    // setchingeurgency(!chingeurgency);
-    // setlocallist(ticketlist);
     let obj = {
       task: "urgencyadmin",
+      userid: userid,
       tickets: [
         {
           ticketguid: value[1],
@@ -426,6 +425,21 @@ const Ticketlis = ({ Repeatedtask }) => {
   useEffect(() => {
     if (!firstlode) {
       // setfilteruser();
+      // סננים ממסכים אחרים
+      // filtervalue
+
+      if (filterserch.categoris) {
+        setAllOpenCategoris([filterserch.categoris]);
+
+        filterserch.categoris = false;
+        chanfefilter(filterserch);
+      }
+      if (filterserch.location) {
+        filterserch.location = false;
+        chanfefilter(filterserch);
+        setlocationfilter([filterserch.location]);
+      }
+
       let intViewportWidth = window.innerWidth;
       if (userlevelid === 10 || userlevelid === 5 || userlevelid === 13) {
         setPermission(true);
@@ -459,7 +473,7 @@ const Ticketlis = ({ Repeatedtask }) => {
         statusname.push(ticketlist[i].statusname);
       }
 
-      let resultcategoris = Ordercareguris(breadcrumb);
+      let resultcategoris = Ordercareguris(breadcrumb, ticketlist);
       let resultkocation = Orderlocation(locationName, ticketlist);
       let resultusers = OrderUser(users);
       let resultstatusname = Orderstatusname(statusname);
@@ -481,8 +495,13 @@ const Ticketlis = ({ Repeatedtask }) => {
       // פילטר לפי קטגוריות
       let cunter_num_of_filter = [false, false, false, false, false, false];
       result = FilterAllOpenCategoris(result, AllOpenCategoris);
+
       if (AllOpenCategoris) {
-        cunter_num_of_filter[0] = true;
+        if (AllOpenCategoris[0]) {
+          cunter_num_of_filter[0] = true;
+        } else {
+          cunter_num_of_filter[0] = false;
+        }
       } else {
         cunter_num_of_filter[0] = false;
       }
@@ -496,7 +515,11 @@ const Ticketlis = ({ Repeatedtask }) => {
       //פילטר לפי מיקום
       result = Filterlocation(result, locationfilter);
       if (locationfilter) {
-        cunter_num_of_filter[2] = true;
+        if (locationfilter[0]) {
+          cunter_num_of_filter[2] = true;
+        } else {
+          cunter_num_of_filter[2] = false;
+        }
       } else {
         cunter_num_of_filter[2] = false;
       }

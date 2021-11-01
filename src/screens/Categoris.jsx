@@ -3,15 +3,22 @@ import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { Menu, Dropdown, Form, Input } from "antd";
+import { Menu, Dropdown, Form, Input, Badge } from "antd";
 import { Arryoficons } from "../Icons";
+import { useHistory } from "react-router-dom";
 
 import DataContext from "../DataContext";
 function Categoris() {
   const { SubMenu } = Menu;
   document.body.style.backgroundColor = "white";
+  let history = useHistory();
 
   const defoltlang = useContext(DataContext).lang;
+
+  const filterserch = useContext(DataContext).filterserch;
+  const chanfefilter = useContext(DataContext).chanfefilter;
+  const ticketlist = useContext(DataContext).ticketlist;
+
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
   let categoryarry = masof.categorynames;
@@ -73,18 +80,17 @@ function Categoris() {
     </Menu>
   );
 
-  const menuoflocation = (
-    <Menu>
-      <Menu.Item>{lang?.lang235}</Menu.Item>
-      <Menu.Item>{lang?.lang243}</Menu.Item>
-      <Menu.Item>{lang?.lang147}</Menu.Item>
-    </Menu>
-  );
+  const gotolistoftask = (value) => {
+    filterserch.categoris = value;
 
+    console.log(filterserch);
+    chanfefilter(filterserch);
+    history.push("/ListOfreq");
+  };
   return (
     <Contener>
       <div className="hader">
-        <p>{lang?.lang211}</p>
+        <p>{lang?.lang104}</p>
 
         <button onClick={showModal}>{lang?.lang210}</button>
       </div>
@@ -128,9 +134,50 @@ function Categoris() {
                     <div className="listodors">
                       {el.subcategory ? (
                         el.subcategory.map((item) => {
+                          let cunter = 0;
+
+                          ticketlist.map((tiket) => {
+                            if (
+                              tiket.breadcrumb === el.maincategoryname &&
+                              tiket.categoryname === item.subname
+                            ) {
+                              cunter = cunter + 1;
+                            }
+                          });
+
+                          const menuoflocation = (
+                            <Menu>
+                              {cunter > 0 ? (
+                                <Menu.Item
+                                  onClick={() => {
+                                    let chusentask = `${el.maincategoryname} category:${item.subname}`;
+                                    gotolistoftask(chusentask);
+                                  }}
+                                >
+                                  {lang?.lang300}
+                                </Menu.Item>
+                              ) : null}
+                              <Menu.Item>{lang?.lang243}</Menu.Item>
+                              <Menu.Item>{lang?.lang147}</Menu.Item>
+                            </Menu>
+                          );
                           return (
                             <div className="singellocation">
-                              <div>{item.subname}</div>
+                              <div>
+                                {item.subname}
+                                {cunter > 0 ? (
+                                  <Badge
+                                    dir="tlr"
+                                    overflowCount={999}
+                                    count={cunter}
+                                    style={{
+                                      backgroundColor: "#EBBE74",
+                                      color: "black",
+                                      fontsize: "16px",
+                                    }}
+                                  />
+                                ) : null}
+                              </div>
                               <div>
                                 <Dropdown
                                   overlay={menuoflocation}

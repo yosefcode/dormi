@@ -1,6 +1,6 @@
 // מערך קטגוריות לפי כמות פניות
 
-export const Ordercareguris = (data) => {
+export const Ordercareguris = (data, ticketlist) => {
   let arryofprojects = [];
 
   const uniqueArray = data.filter((item, index) => {
@@ -8,7 +8,9 @@ export const Ordercareguris = (data) => {
   });
 
   for (let i = 0; i < uniqueArray.length; i++) {
-    const breadcrumb = data.filter((item) => item === uniqueArray[i]);
+    const breadcrumb = ticketlist.filter(
+      (item) => item.breadcrumb === uniqueArray[i]
+    );
     arryofprojects.push({ breadcrumb });
   }
 
