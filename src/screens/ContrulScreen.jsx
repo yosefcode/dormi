@@ -25,6 +25,7 @@ const ContrulScreen = ({ dir }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
   const masof = useContext(DataContext).masof;
+  const userlist = useContext(DataContext).userlist;
 
   const componentRef = useRef();
 
@@ -34,7 +35,7 @@ const ContrulScreen = ({ dir }) => {
       <Menu dir={dir} />
       <Switch>
         <Route path="/Users">
-          {ticketlist && defullang ? (
+          {ticketlist && defullang && userlist ? (
             <User />
           ) : (
             <div>

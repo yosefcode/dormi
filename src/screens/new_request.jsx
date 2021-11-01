@@ -36,12 +36,12 @@ const Nwerequest = ({ Temmembertask }) => {
       <div>
         {typs ? (
           <Problemcontener>
-            {/* <img src="/images/man.png" className="avatar" alt="Image" /> */}
             <div className="icondisply">
               <p id="hadep">{lang?.lang337}</p>
               <p>{lang?.lang338}</p>
               <div>
-                <div className="listofproblom">
+                <br />
+                <div className="wrapper">
                   {categorynames
                     ? categorynames.map((el, index) => {
                         let finicon = Arryoficons.find((ic) => {
@@ -59,13 +59,18 @@ const Nwerequest = ({ Temmembertask }) => {
 
                         return (
                           <div
-                            className="problome"
+                            className="item"
                             key={index}
                             onClick={() => {
                               chosentyp(el);
                             }}
                           >
                             <p className="iconproblem">
+                              {/* <img
+                                src={icon}
+                                alt="icon"
+                                style={{ width: "50px", height: "50px" }}
+                              /> */}
                               {icon ? <finicon.icon /> : <PoweroffOutlined />}
                             </p>
                             <p className="uniqueproblem">
@@ -75,6 +80,7 @@ const Nwerequest = ({ Temmembertask }) => {
                         );
                       })
                     : null}
+                  <div class="space"></div>
                 </div>
               </div>
             </div>

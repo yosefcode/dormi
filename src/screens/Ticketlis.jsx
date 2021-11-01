@@ -439,6 +439,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
         chanfefilter(filterserch);
         setlocationfilter([filterserch.location]);
       }
+      if (filterserch.user) {
+        setfilteruser(filterserch.user);
+        filterserch.user = false;
+      }
 
       let intViewportWidth = window.innerWidth;
       if (userlevelid === 10 || userlevelid === 5 || userlevelid === 13) {
@@ -665,6 +669,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             <Selectfilter>
               <FiltersForsort
                 filterarry={filterarry}
+                filteruser={filteruser}
                 setingAllOpenCategoris={(value) => {
                   setAllOpenCategoris(value);
                 }}

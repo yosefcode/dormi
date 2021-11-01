@@ -1,33 +1,56 @@
 import styled from "styled-components";
 
 export const Problemcontener = styled.div`
-  color: rgba(15, 7, 67, 1);
+  /* color: rgba(15, 7, 67, 1);
   display: flex;
-  text-align: start;
+  text-align: start; */
+  font-family: "Heebo";
+
   #hadep {
     font-size: 31px;
   }
   .icondisply {
-    /* position: absolute; */
     margin-top: 20px;
+
+    /* font-family: "Hebbo"; */
   }
-  .listofproblom {
-    display: flex;
-    flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    .wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 133px);
+      grid-gap: 16px;
+      grid-auto-rows: 64px;
+    }
+
+    .item {
+      height: 140px;
+      display: block;
+      background-color: rgba(229, 235, 243, 1);
+      border-radius: 16px;
+      grid-row-end: span 2;
+    }
+
+    .space {
+      grid-area: 1;
+    }
   }
-  .avatar {
-    margin-top: 35px;
+  @media (min-width: 600px) {
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item {
+      background: rgba(229, 235, 243, 1);
+      border-radius: 24px;
+      width: 133px;
+      height: 140px;
+      margin: 2%;
+    }
   }
 
   .uniqueproblem {
     text-align: center;
-  }
-  .problome {
-    background: #e5ebf3;
-    border-radius: 24px;
-    width: 133px;
-    height: 140px;
-    margin: 2%;
   }
 
   .iconproblem {
@@ -41,17 +64,7 @@ export const Problemcontener = styled.div`
   }
   @media only screen and (max-width: 600px) {
     .icondisply {
-      position: absolute;
-      margin-top: 20px;
       padding-inline-start: 38px;
-    }
-    .avatar {
-      margin-top: 35px;
-
-      width: 175px;
-      height: 500px;
-      position: relative;
-      right: 20%;
     }
   }
 `;

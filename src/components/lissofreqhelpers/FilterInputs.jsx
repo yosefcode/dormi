@@ -167,6 +167,7 @@ const Treesslescategoris = ({ data, AllOpenCategoris }) => {
 };
 export function FiltersForsort({
   filterarry,
+  filteruser,
   setingAllOpenCategoris,
   setingfilterallUrgency,
   setlocationsort,
@@ -233,6 +234,10 @@ export function FiltersForsort({
     clear();
     form.resetFields();
   };
+  let userdefultvalue;
+  if (filteruser) {
+    userdefultvalue = filteruser;
+  }
 
   return (
     <div className="filteroption">
@@ -363,6 +368,7 @@ export function FiltersForsort({
               showSearch
               placeholder={lang?.lang352}
               onChange={filterofuser}
+              defaultValue={userdefultvalue}
             >
               <Option value={false}>{lang.lang352}</Option>
               {filterarry

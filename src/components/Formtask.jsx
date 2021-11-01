@@ -198,7 +198,11 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
             </div>
 
             {/* קטגוריה משנית  */}
-            <Form.Item name="categoryid" labelAlign={"right"}>
+            <Form.Item
+              name="categoryid"
+              labelAlign={"right"}
+              rules={[{ required: true, message: lang?.lang110 }]}
+            >
               <Select showSearch placeholder={lang?.lang110}>
                 {Typeofreq
                   ? Typeofreq.subcategory.map((el) => {
@@ -232,7 +236,10 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
               </Select>
             </Form.Item>
             {/* מיקום */}
-            <Form.Item name="locationid">
+            <Form.Item
+              name="locationid"
+              rules={[{ required: true, message: lang?.lang340 }]}
+            >
               <Select
                 showSearch
                 placeholder={lang?.lang340}
@@ -251,7 +258,10 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
             </Form.Item>
             {/* בחר חדר */}
             {selectromm ? (
-              <Form.Item name="roomid">
+              <Form.Item
+                name="roomid"
+                rules={[{ required: true, message: lang?.lang341 }]}
+              >
                 <Select showSearch placeholder={lang?.lang341}>
                   {rommarry
                     ? rommarry.map((el, index) => {

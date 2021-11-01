@@ -4,7 +4,8 @@ import "./App.css";
 import Login from "./screens/login";
 import ContrulScreen from "./screens/ContrulScreen";
 import { Language } from "./styelscomponents/Language";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, message } from "antd";
+
 import Menu from "./screens/Menu";
 import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
@@ -25,6 +26,7 @@ function App() {
   const [filterserch, setfilterserch] = useState({
     categoris: false,
     location: false,
+    user: false,
   });
   const providerOptions = {
     filterserch,
@@ -126,7 +128,7 @@ function App() {
   onMessageListener()
     .then((message) => {
       setgetmassege(message);
-      console.log("notification masege", message);
+      message.success(message);
     })
     .catch((err) => console.log("failed: ", err));
 

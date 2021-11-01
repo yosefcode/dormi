@@ -5,6 +5,7 @@ import DataContext from "../DataContext";
 import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { FaFilter, FaMapPin } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 import { AiOutlineMail, AiOutlineEdit } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
@@ -23,6 +24,7 @@ function Users() {
   document.body.style.backgroundColor = "white";
   const defoltlang = useContext(DataContext).lang;
   const userlist = useContext(DataContext).userlist;
+  const ticketlist = useContext(DataContext).ticketlist;
 
   const itemsRef = useRef([]);
 
@@ -34,6 +36,9 @@ function Users() {
   const [firstlode, setfirstlode] = useState(false);
   const [Alluserarry, setAlluserarry] = useState();
   const [userfilter, setuserfilter] = useState();
+  let history = useHistory();
+  const filterserch = useContext(DataContext).filterserch;
+  const chanfefilter = useContext(DataContext).chanfefilter;
   function FilterAllusers(arry, user) {
     if (user) {
       return arry.filter((el) => {
@@ -73,13 +78,13 @@ function Users() {
       } else {
         setscrenphunesize(true);
       }
-      setfirstlode(true);
       setAlluserarry(userlist);
+      setfirstlode(true);
     } else {
       let res = FilterAllusers(userlist, userfilter);
       setAlluserarry(res);
     }
-  }, [userfilter]);
+  }, [userfilter, Alluserarry]);
 
   const SelfOpenststus = (i) => {
     if (itemsRef.current[i].style.display === "inherit") {
@@ -125,7 +130,12 @@ function Users() {
       </Menu.Item>
     </Menu>
   );
+  const gotolistoftask = (value) => {
+    filterserch.user = value;
 
+    chanfefilter(filterserch);
+    history.push("/ListOfreq");
+  };
   return (
     <Contener Screnphunesize={screnphunesize}>
       <div className="Mangeroption">
@@ -192,6 +202,16 @@ function Users() {
                 default:
                   break;
               }
+              let cunter = 0;
+
+              ticketlist.map((tiket) => {
+                if (
+                  tiket.firstname === user.firstname &&
+                  tiket.lastname === user.lastname
+                ) {
+                  cunter = cunter + 1;
+                }
+              });
 
               return (
                 <Card bordered={false} key={i}>
@@ -205,16 +225,38 @@ function Users() {
                       <Avatar size={42} icon={<UserOutlined />} />{" "}
                       {user.firstname} {user.lastname}
                     </p>
-                    {/*
+
                     <p>
                       <Badge color={levelscolor} text={levelname} />
                     </p>
-                    <p>
+                    <div>
+                      {cunter > 0 ? (
+                        <div>
+                          <Badge
+                            dir="tlr"
+                            overflowCount={999}
+                            count={cunter}
+                            style={{
+                              backgroundColor: "#EBBE74",
+                              color: "black",
+                              fontsize: "16px",
+                            }}
+                            onClick={() => {
+                              gotolistoftask([
+                                user.firstname + " " + user.lastname,
+                                user.firstname,
+                                user.lastname,
+                              ]);
+                            }}
+                          />
+                          <p>פניות פתוחות</p>
+                        </div>
+                      ) : null}
                       <Badge
                         color={"#f50"}
                         text={`${lang?.lang237} ${user.ticketcount} `}
                       />
-                    </p>
+                    </div>
                   </div>
                   <div
                     ref={(el) => (itemsRef.current[i] = el)}
@@ -258,7 +300,6 @@ function Users() {
                       <BsTrash />
                     </button>
                     <AiOutlineEdit />
-                  */}
                   </div>
                 </Card>
               );
