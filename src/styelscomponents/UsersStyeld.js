@@ -7,6 +7,107 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
+  .Closepopup {
+    position: fixed;
+    bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 30px;
+    background-color: rgba(15, 7, 67, 1);
+    color: white;
+    width: 100%;
+    height: 63px;
+  }
+
+  .Closepopupsubmit {
+    padding: 0px 12px 0px 20px;
+
+    width: 165px;
+    height: 47px;
+
+    background: #ffffff;
+    border-radius: 11px;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+    content: url("/images/lightning.svg");
+    color: #0f0743;
+
+    /* Inside Auto Layout */
+  }
+  .cancelClosep {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #ffffff;
+    background: none;
+    border: none;
+  }
+  .Closepopup-numbertasks {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+
+    color: #ffffff;
+  }
+  .clearbutton {
+    background: none;
+    color: #0f0743;
+    border: none;
+    margin-inline-start: 75%;
+    margin-bottom: 5%;
+
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+  .closecheckboox {
+    -webkit-appearance: none;
+
+    padding: 0px;
+
+    width: 19px;
+    height: 19px;
+    border: none;
+    /* border: 1.52px solid #ffd17e; */
+    box-sizing: border-box;
+    border-radius: 76px;
+    margin-top: 7px;
+  }
+  .closecheckboox:active {
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+      inset 0px 1px 3px rgba(0, 0, 0, 0.1); */
+  }
+  .closecheckboox:checked {
+    content: url("/images/Vector.svg");
+    align-items: center;
+    padding: 0px;
+
+    width: 19px;
+    height: 19px;
+
+    background: #ffd17e;
+    border: 1.52px solid #ffd17e;
+    box-sizing: border-box;
+    border-radius: 76px;
+    margin-top: 2px;
+  }
+
   .haderflex {
     display: flex;
     flex-direction: column;

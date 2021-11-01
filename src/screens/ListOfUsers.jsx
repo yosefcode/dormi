@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { FaFilter, FaMapPin } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-
+import { Closetask } from "../components/listuserhalpers/closetask";
 import { AiOutlineMail, AiOutlineEdit } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
@@ -27,7 +27,7 @@ function Users() {
   const ticketlist = useContext(DataContext).ticketlist;
 
   const itemsRef = useRef([]);
-
+  const checkboxref = useRef([]);
   const lang = defoltlang?.lang;
 
   document.body.style.backgroundColor = "white";
@@ -136,13 +136,45 @@ function Users() {
     chanfefilter(filterserch);
     history.push("/ListOfreq");
   };
+  const [visible, setvisible] = useState(false);
+  const [cunter, setcunter] = useState(0);
+  const [quickclose, setquickclose] = useState(false);
+  const closepupup = () => {
+    setquickclose(!quickclose);
+  };
+  const Opquickctaskoption = () => {
+    setvisible(false);
+
+    if (quickclose) {
+      for (let i = 0; Alluserarry.length > i; i++) {
+        checkboxref.current[i].checked = false;
+      }
+      setcunter(0);
+
+      closepupup();
+    } else {
+      closepupup();
+    }
+  };
+  const chuseallusers = () => {
+    for (let i = 0; Alluserarry.length > i; i++) {
+      checkboxref.current[i].checked = true;
+    }
+  };
+  const clerallusers = () => {
+    for (let i = 0; Alluserarry.length > i; i++) {
+      checkboxref.current[i].checked = false;
+    }
+  };
   return (
     <Contener Screnphunesize={screnphunesize}>
       <div className="Mangeroption">
         <button className="MangerButton" onClick={openfilter}>
           {lang?.lang248} <FaFilter />
         </button>
-
+        <button className="MangerButton" onClick={Opquickctaskoption}>
+          <img src="/images/multipulchuis.svg" /> בחירה
+        </button>
         <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
         </button>
@@ -252,12 +284,18 @@ function Users() {
                           <p>פניות פתוחות</p>
                         </div>
                       ) : null}
-                      <Badge
-                        color={"#f50"}
-                        text={`${lang?.lang237} ${user.ticketcount} `}
-                      />
                     </div>
+                    <input
+                      type="checkbox"
+                      id="horns"
+                      name="horns"
+                      className="closecheckboox"
+                      // checked={true}
+                      ref={(el) => (checkboxref.current[i] = el)}
+                      value={user.ticketguid}
+                    />
                   </div>
+
                   <div
                     ref={(el) => (itemsRef.current[i] = el)}
                     style={{
@@ -273,6 +311,10 @@ function Users() {
                         SelfOpenststus(i);
                       }}
                     >
+                      <Badge
+                        color={"#f50"}
+                        text={`${lang?.lang237} ${user.ticketcount} `}
+                      />
                       <p>
                         <FaMapPin />
                         {user.roomname}
@@ -305,6 +347,17 @@ function Users() {
               );
             })
           : null}
+        {quickclose ? (
+          <Closetask
+            data={cunter}
+            chuseallusers={chuseallusers}
+            clerallusers={clerallusers}
+            // cancelClosep={cancelClosep}
+            // opendrwor={closeMenue}
+            // cancelquickfunc={cancelquickfunc}
+            // canceloperition={canceling}
+          />
+        ) : null}
       </div>
     </Contener>
   );

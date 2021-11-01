@@ -115,7 +115,7 @@ const ContrulScreen = ({ dir }) => {
           )}
         </Route>
         <Route path="/list_users">
-          {ticketlist && defullang ? (
+          {ticketlist && defullang && userlist ? (
             <Users />
           ) : (
             <div>

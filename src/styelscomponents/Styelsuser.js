@@ -9,6 +9,7 @@ export const Contener = styled.div`
 
   flex-direction: column;
   align-items: center;
+
   #hadartext {
     width: 238px;
     height: 58px;
