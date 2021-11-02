@@ -11,17 +11,30 @@ export const Contener = styled.div`
   align-items: center;
   font-family: "Heebo";
 
+  @media only screen and (min-width: 600px) {
+    .Closepopup {
+      width: 420px;
+
+      border-radius: 43px;
+    }
+  }
   .Closepopup {
     position: fixed;
     bottom: 1px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    padding: 8px 30px;
     background-color: rgba(15, 7, 67, 1);
-    color: white;
-    width: 100%;
     height: 63px;
+    color: white;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .Closepopup {
+      width: 100%;
+    }
   }
 
   .Closepopupsubmit {

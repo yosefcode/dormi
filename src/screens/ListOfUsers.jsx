@@ -7,9 +7,11 @@ import { UserOutlined } from "@ant-design/icons";
 import { FaFilter, FaMapPin } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Closetask } from "../components/listuserhalpers/closetask";
-import { AiOutlineMail, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
+
 import { BiPhoneCall } from "react-icons/bi";
-import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
+import { BsTrash, BsThreeDotsVertical, BsLayers } from "react-icons/bs";
+
 const { Option } = Select;
 
 const fullname = "שם";
@@ -36,40 +38,48 @@ function Users() {
   const [firstlode, setfirstlode] = useState(false);
   const [Alluserarry, setAlluserarry] = useState();
   const [userfilter, setuserfilter] = useState();
+  const [program, setprogram] = useState(false);
+  const [locallist, setlocallist] = useState();
+
   let history = useHistory();
   const filterserch = useContext(DataContext).filterserch;
   const chanfefilter = useContext(DataContext).chanfefilter;
+  const OrderProgram = (data) => {
+    let arryofprojects = [];
+    const arryfulluser = data.map((el) => {
+      return el;
+    });
+
+    const uniqueArray = arryfulluser.filter((item, index) => {
+      return arryfulluser.indexOf(item) === index;
+    });
+
+    for (let i = 0; i < uniqueArray.length; i++) {
+      const program = data.filter((item) => item === uniqueArray[i]);
+      arryofprojects.push({ program });
+    }
+
+    return arryofprojects;
+  };
   function FilterAllusers(arry, user) {
     if (user) {
       return arry.filter((el) => {
-        return el.fullname === user;
+        return el.firstname === user[0] && el.lastname === user[1];
       });
     } else {
       return arry;
     }
   }
-
-  const fackarry = [
-    {
-      fullname: "boaz",
-      userlevel: 1,
-      email: "aess@gmaul.com",
-      phone: "0526371073",
-      Numberoftasks: 4,
-      locationName: "ffff",
-      roomName: "dddd",
-    },
-    {
-      fullname: "moshe",
-      userlevel: 2,
-      email: "aess@gmaul.com",
-      phone: "0526371073",
-      Numberoftasks: 5,
-      locationName: "ffff",
-      roomName: "dddd",
-    },
-  ];
-
+  function Filterprogram(arry, program) {
+    if (program) {
+      return arry.filter((el) => {
+        return el.academicyear === program[0];
+      });
+    } else {
+      return arry;
+    }
+  }
+  const [listofprogram, setlistofprogram] = useState();
   useEffect(() => {
     if (!firstlode) {
       let intViewportWidth = window.innerWidth;
@@ -78,13 +88,26 @@ function Users() {
       } else {
         setscrenphunesize(true);
       }
+      let program = [];
+      for (let i = 0; userlist?.length > i; i++) {
+        if (userlist[i].academicyear) {
+          program.push(userlist[i].academicyear);
+        }
+      }
+
+      let resorginizprogram = OrderProgram(program, userlist);
+      setlistofprogram(resorginizprogram);
       setAlluserarry(userlist);
+      setlocallist(userlist);
       setfirstlode(true);
     } else {
-      let res = FilterAllusers(userlist, userfilter);
-      setAlluserarry(res);
+      let result = locallist;
+
+      result = FilterAllusers(userlist, userfilter);
+      result = Filterprogram(userlist, program);
+      setAlluserarry(result);
     }
-  }, [userfilter, Alluserarry]);
+  }, [userfilter, Alluserarry, program]);
 
   const SelfOpenststus = (i) => {
     if (itemsRef.current[i].style.display === "inherit") {
@@ -100,7 +123,7 @@ function Users() {
   const AllOpenststus = () => {
     setopentikitatatus(!opentikitatatus);
 
-    for (let i = 0; fackarry.length > i; i++) {
+    for (let i = 0; userlist.length > i; i++) {
       if (fullcard) {
         itemsRef.current[i].style.display = "none";
 
@@ -160,10 +183,23 @@ function Users() {
     for (let i = 0; Alluserarry.length > i; i++) {
       checkboxref.current[i].checked = true;
     }
+    setcunter(Alluserarry.length);
   };
   const clerallusers = () => {
     for (let i = 0; Alluserarry.length > i; i++) {
       checkboxref.current[i].checked = false;
+    }
+    setcunter(0);
+  };
+  const Tikettoquikeclose = (bulian, i) => {
+    checkboxref.current[i].checked = bulian;
+
+    if (bulian) {
+      let num = cunter + 1;
+      setcunter(num);
+    } else {
+      let num = cunter - 1;
+      setcunter(num);
     }
   };
   return (
@@ -175,9 +211,9 @@ function Users() {
         <button className="MangerButton" onClick={Opquickctaskoption}>
           <img src="/images/multipulchuis.svg" /> בחירה
         </button>
-        <button className="MangerButton">
+        {/* <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
-        </button>
+        </button> */}
         <button className="MangerButton shwobutton">
           <Link to="/Adduser">{lang?.lang244} </Link>
         </button>
@@ -195,21 +231,58 @@ function Users() {
       </div>
       <div className="haderflex">
         {Drawervisible ? (
-          <Select
-            showSearch
-            placeholder={lang?.lang352}
-            onChange={(value) => {
-              setuserfilter(value);
-            }}
-          >
-            <Option value={false}>{lang.lang352}</Option>
+          <div>
+            <Select
+              showSearch
+              placeholder={lang?.lang352}
+              onChange={(value) => {
+                setuserfilter(value);
+              }}
+            >
+              <Option value={false}>{lang.lang352}</Option>
 
-            {fackarry
-              ? fackarry.map((el) => (
-                  <Option value={el.fullname}>{el.fullname}</Option>
-                ))
-              : null}
-          </Select>
+              {userlist
+                ? userlist.map((el) => {
+                    let fuulname = el.firstname + " " + el.lastname;
+                    return (
+                      <Option value={[el.firstname, el.lastname]}>
+                        {fuulname}
+                      </Option>
+                    );
+                  })
+                : null}
+            </Select>
+            <Select
+              showSearch
+              placeholder={"כל התוכניות"}
+              onChange={(value) => {
+                setprogram(value);
+              }}
+            >
+              <Option value={false}>כל התוכניות</Option>
+
+              {listofprogram
+                ? listofprogram.map((el) => {
+                    return (
+                      <Option value={[el.program[0]]}>
+                        {el.program[0]}
+
+                        <Badge
+                          dir="tlr"
+                          overflowCount={999}
+                          count={el?.program?.length}
+                          style={{
+                            backgroundColor: "#EBBE74",
+                            color: "black",
+                            fontsize: "16px",
+                          }}
+                        />
+                      </Option>
+                    );
+                  })
+                : null}
+            </Select>
+          </div>
         ) : null}
 
         <h2>{lang?.lang102}</h2>
@@ -246,33 +319,45 @@ function Users() {
               });
 
               return (
-                <Card bordered={false} key={i}>
-                  <div
-                    onClick={() => {
+                <Card
+                  bordered={false}
+                  key={i}
+                  onClick={() => {
+                    if (quickclose) {
+                      if (!checkboxref.current[i].checked) {
+                        Tikettoquikeclose(true, i);
+                      } else {
+                        Tikettoquikeclose(false, i);
+                        checkboxref.current[i].checked = false;
+                      }
+                    } else {
                       SelfOpenststus(i);
-                    }}
-                    className="titelcard"
-                  >
-                    <p>
-                      <Avatar size={42} icon={<UserOutlined />} />{" "}
-                      {user.firstname} {user.lastname}
-                    </p>
+                    }
+                  }}
+                >
+                  <div>
+                    <div className="discriptun">
+                      <p id="discriptun">
+                        <Avatar size={42} icon={<UserOutlined />} />{" "}
+                        {user.firstname} {user.lastname}
+                      </p>
 
-                    <p>
-                      <Badge color={levelscolor} text={levelname} />
-                    </p>
-                    <div>
+                      <input
+                        type="checkbox"
+                        id="horns"
+                        name="horns"
+                        className="closecheckboox"
+                        ref={(el) => (checkboxref.current[i] = el)}
+                        // value={el.ticketguid}
+                      />
+                    </div>
+                    <div className="Smallcard">
+                      <span id="cooment">
+                        <Badge color={levelscolor} text={levelname} />
+                      </span>
                       {cunter > 0 ? (
-                        <div>
-                          <Badge
-                            dir="tlr"
-                            overflowCount={999}
-                            count={cunter}
-                            style={{
-                              backgroundColor: "#EBBE74",
-                              color: "black",
-                              fontsize: "16px",
-                            }}
+                        <span className="opentask">
+                          <a
                             onClick={() => {
                               gotolistoftask([
                                 user.firstname + " " + user.lastname,
@@ -280,70 +365,194 @@ function Users() {
                                 user.lastname,
                               ]);
                             }}
-                          />
-                          <p>פניות פתוחות</p>
-                        </div>
+                          >
+                            פניות פתוחות
+                          </a>
+                          <span>
+                            <Badge
+                              dir="tlr"
+                              overflowCount={999}
+                              count={cunter}
+                              style={{
+                                backgroundColor: "#EBBE74",
+                                color: "black",
+                                fontsize: "16px",
+                                top: "-10px",
+                              }}
+                            />
+                          </span>
+                        </span>
                       ) : null}
                     </div>
-                    <input
-                      type="checkbox"
-                      id="horns"
-                      name="horns"
-                      className="closecheckboox"
-                      // checked={true}
-                      ref={(el) => (checkboxref.current[i] = el)}
-                      value={user.ticketguid}
-                    />
-                  </div>
-
-                  <div
-                    ref={(el) => (itemsRef.current[i] = el)}
-                    style={{
-                      display: "none",
-                      color: "#807e94",
-                      marginTop: "20px",
-                    }}
-                  >
-                    <hr />
-
                     <div
-                      onClick={() => {
-                        SelfOpenststus(i);
+                      ref={(el) => (itemsRef.current[i] = el)}
+                      style={{
+                        display: "none",
+                        color: "#807e94",
+                        marginTop: "20px",
                       }}
                     >
+                      <hr />
+
+                      <p>
+                        <AiOutlineMail />
+
+                        <span
+                          className="Calltoaction"
+                          onClick={() => {
+                            window.location.href = `mailto:${user.email}`;
+                          }}
+                        >
+                          {user.email}
+                        </span>
+                      </p>
+                      <p>
+                        <AiFillPhone />
+
+                        <span
+                          className="Calltoaction"
+                          onClick={() => {
+                            window.open(`tel:${user.phone}`);
+                          }}
+                        >
+                          {user.phone}
+                        </span>
+                      </p>
+                      <p>
+                        <FaMapPin />
+                        <span className="bigcardparagraf">{user.roomname}</span>
+                      </p>
+                      <p>
+                        <BsLayers />
+                        <span className="bigcardparagraf">
+                          {user.academicyear}
+                        </span>
+                      </p>
                       <Badge
                         color={"#f50"}
                         text={`${lang?.lang237} ${user.ticketcount} `}
                       />
-                      <p>
-                        <FaMapPin />
-                        {user.roomname}
-                      </p>
-                      <p>
-                        <span
-                          className="Calltoaction"
-                          onClick={() => {
-                            window.open(`tel:${user?.phone}`);
-                          }}
-                        >
-                          <BiPhoneCall />
-
-                          {user.phone}
-                        </span>
-                        <p className="Calltoaction">
-                          <AiOutlineMail />
-                          {user?.email}
-                        </p>
-                      </p>
+                      {/* <Carddatabig el={el} /> */}
                     </div>
-                  </div>
-                  <div className="action">
-                    <button className="cardbutton">
-                      <BsTrash />
+                    {/* <div className="action"> */}
+                    {/* <Dropdown
+                      overlay={setingmenu}
+                      placement="bottomLeft"
+                      trigger={["click"]}
+                      className="cardbutton"
+                    > */}
+                    <button
+                      className="action"
+                      onClick={() => {
+                        // setvisibletaskDrawer(!visibletaskDrawer);
+                        // setChusenrikit(el.ticketguid);
+                      }}
+                    >
+                      <BsThreeDotsVertical />
                     </button>
-                    <AiOutlineEdit />
+
+                    {/* </Dropdown> */}
                   </div>
+                  {/* </div> */}
                 </Card>
+                // <Card bordered={false} key={i}>
+                //   <div
+                //     onClick={() => {
+                //       SelfOpenststus(i);
+                //     }}
+                //     className="titelcard"
+                //   >
+                //     <p>
+                //       <Avatar size={42} icon={<UserOutlined />} />{" "}
+                //       {user.firstname} {user.lastname}
+                //     </p>
+
+                //     <p>
+                //       <Badge color={levelscolor} text={levelname} />
+                //     </p>
+                //     <div>
+                //       {cunter > 0 ? (
+                //         <div>
+                //           <Badge
+                //             dir="tlr"
+                //             overflowCount={999}
+                //             count={cunter}
+                //             style={{
+                //               backgroundColor: "#EBBE74",
+                //               color: "black",
+                //               fontsize: "16px",
+                //             }}
+                //             onClick={() => {
+                //               gotolistoftask([
+                //                 user.firstname + " " + user.lastname,
+                //                 user.firstname,
+                //                 user.lastname,
+                //               ]);
+                //             }}
+                //           />
+                //           <p>פניות פתוחות</p>
+                //         </div>
+                //       ) : null}
+                //     </div>
+                //     <input
+                //       type="checkbox"
+                //       id="horns"
+                //       name="horns"
+                //       className="closecheckboox"
+                //       // checked={true}
+                //       ref={(el) => (checkboxref.current[i] = el)}
+                //       value={user.ticketguid}
+                //     />
+                //   </div>
+
+                //   <div
+                //     ref={(el) => (itemsRef.current[i] = el)}
+                //     style={{
+                //       display: "none",
+                //       color: "#807e94",
+                //       marginTop: "20px",
+                //     }}
+                //   >
+                //     <hr />
+
+                //     <div
+                //       onClick={() => {
+                //         SelfOpenststus(i);
+                //       }}
+                //     >
+                //       <Badge
+                //         color={"#f50"}
+                //         text={`${lang?.lang237} ${user.ticketcount} `}
+                //       />
+                //       <p>
+                //         <FaMapPin />
+                //         {user.roomname}
+                //       </p>
+                //       <p>
+                //         <span
+                //           className="Calltoaction"
+                //           onClick={() => {
+                //             window.open(`tel:${user?.phone}`);
+                //           }}
+                //         >
+                //           <BiPhoneCall />
+
+                //           {user.phone}
+                //         </span>
+                //         <p className="Calltoaction">
+                //           <AiOutlineMail />
+                //           {user?.email}
+                //         </p>
+                //       </p>
+                //     </div>
+                //   </div>
+                //   <div className="action">
+                //     <button className="cardbutton">
+                //       <BsTrash />
+                //     </button>
+                //     <AiOutlineEdit />
+                //   </div>
+                // </Card>
               );
             })
           : null}

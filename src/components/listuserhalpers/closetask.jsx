@@ -42,6 +42,7 @@ export const Closetask = ({
       <div>
         {data > 0 ? (
           <div className="Closepopup-numbertasks">
+            <div> {data} נבחרו </div>
             {/* {!cancelquickfunc.status ? (
               <div> {data} נבחרו </div>
             ) : (

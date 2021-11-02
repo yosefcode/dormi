@@ -7,6 +7,71 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
+
+  .discriptun {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+  }
+  #discriptun {
+    margin-inline-end: -15px;
+    margin-inline-start: 4px;
+    font-weight: bold;
+    font-size: 17px;
+    margin: 4px 7px;
+    color: #0f0743;
+    line-height: 122.88%;
+    /* width: 291px;
+    height: 21px; */
+    text-align: right;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 4px 0px;
+  }
+  #cooment {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 122.88%;
+    color: #0f0743;
+  }
+  .Smallcard {
+    /* display: flex; */
+  }
+  .opentask {
+    margin-inline-start: 13px;
+  }
+  .action {
+    position: absolute;
+    left: 10px;
+    border: none;
+    position: absolute;
+    left: 10px;
+    bottom: 9px;
+    background: none;
+    bottom: 9px;
+  }
+  hr {
+    color: #d6e2f1;
+  }
+  .Calltoaction {
+    text-decoration-line: underline;
+    font-weight: bold;
+    color: #0f0743;
+    margin-inline-start: 9px;
+  }
+  .bigcardparagraf {
+    margin-inline-start: 13px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .Closepopup {
+      width: 420px;
+
+      border-radius: 43px;
+    }
+  }
   .Closepopup {
     position: fixed;
     bottom: 1px;
@@ -16,9 +81,14 @@ export const Contener = styled.div`
     align-items: center;
     padding: 8px 30px;
     background-color: rgba(15, 7, 67, 1);
-    color: white;
-    width: 100%;
     height: 63px;
+    color: white;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .Closepopup {
+      width: 100%;
+    }
   }
 
   .Closepopupsubmit {
@@ -138,12 +208,7 @@ export const Contener = styled.div`
   .ant-card-extra {
     margin-right: -14px;
   }
-  .titelcard {
-    display: flex;
-    align-content: flex-end;
-    justify-content: space-around;
-    align-items: center;
-  }
+
   .cardbutton {
     background-color: white;
     border: none;

@@ -55,7 +55,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const chanfefilter = useContext(DataContext).chanfefilter;
   // רוטר טיפול במשימות
   const ticketruter = "ticket";
-  document.body.style.backgroundColor = "#e5e5e5";
+  document.body.style.backgroundColor = "rgba(250, 252, 255, 1)";
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketlist;
   const defoltlang = useContext(DataContext).lang;
@@ -789,7 +789,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   <div>
                     <div className="discriptun">
                       <p id="discriptun">
-                        {el.categoryname} - {el.categoryname}
+                        {el.breadcrumb} - {el.categoryname}
                       </p>
 
                       <input

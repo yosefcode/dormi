@@ -15,7 +15,7 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-const Uplodetaskimage = ({ userid, ticketid }) => {
+const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;
@@ -80,6 +80,7 @@ const Uplodetaskimage = ({ userid, ticketid }) => {
 
     setButtonsecses(true);
     setloadings([0]);
+    setuplodeimagescreen();
   };
 
   return (

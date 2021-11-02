@@ -43,24 +43,108 @@ export const Contyner = styled.div`
   .imagelogo {
     width: 80px;
   }
-  svg {
-    font-size: 190%;
+  .ant-badge {
+    color: rgba(228, 237, 237, 1);
   }
+  .ant-badge-rtl .ant-badge-count {
+    transform: translate(-116%, -30%);
+  }
+  /* svg {
+    font-size: 190%;
+  } */
   .progresbar {
     color: brown;
     background-color: red;
   }
-  .haeder {
-    width: 100%;
-    height: 52px;
-    background-color: #1c1547;
-    color: #e5e5e5;
+  .hderdesktop {
+    margin-top: 39px;
+    display: flex;
+
+    flex-direction: column;
+  }
+  a {
+    color: rgba(228, 237, 237, 0.71);
+  }
+  a:focus {
+    font-family: "Heebo";
+
+    font-size: 14px;
+    line-height: 118.88%;
+    color: #ffffff;
+
+    color: #ffffff;
+  }
+  hr {
+    border: 1px solid #2c2a51;
+    transform: rotate(180deg);
+  }
+  .desktopbutton {
+    margin-bottom: 17px;
+    align-items: center;
+    padding: 7px;
+
+    position: static;
+    width: 196px;
+    height: 33px;
+    left: 0px;
+    top: 27px;
+
+    background: #ffd17e;
+    border-radius: 4px;
+    /* font-family:""; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 118.88%;
+    /* or 15px */
+
+    text-align: center;
+
+    color: #0f0743;
+  }
+  .desktopmenu {
+    margin-top: 84px;
+
+    margin-inline-start: 23px;
+    width: 166px;
+  }
+  .desktopicon {
+    width: 29px;
+    height: 29px;
+    left: 83px;
+    top: 0px;
+    margin-inline-end: 13px;
+    background: rgba(228, 237, 237, 0.13);
+    border-radius: 72.5px;
+  }
+  .desktoplogo {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    z-index: 2;
-    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 30%);
+  }
+
+  @media only screen and (min-width: 600px) {
+    .haederphone {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .haderdesktop {
+      display: none;
+    }
+    .haederphone {
+      width: 100%;
+      height: 52px;
+      background-color: #1c1547;
+      color: #e5e5e5;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 2;
+      box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 30%);
+    }
   }
 `;
 
@@ -98,6 +182,9 @@ export const MenuStyel = styled(Menu)`
   }
   .ant-menu-item-selected {
     color: red;
+  }
+  .ant-menu-submenu-title {
+    padding-right: 0px;
   }
   .ant-menu-rtl {
     background-color: #1c1547 !important;
