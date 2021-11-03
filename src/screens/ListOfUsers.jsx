@@ -8,7 +8,7 @@ import { FaFilter, FaMapPin } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Closetask } from "../components/listuserhalpers/closetask";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
-
+import { OpenSmallscreencard } from "../components/listuserhalpers/carddara";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsTrash, BsThreeDotsVertical, BsLayers } from "react-icons/bs";
 
@@ -33,7 +33,7 @@ function Users() {
   const lang = defoltlang?.lang;
 
   document.body.style.backgroundColor = "white";
-  const onSearch = (e) => console.log(e.target.value);
+
   const [screnphunesize, setscrenphunesize] = useState();
   const [firstlode, setfirstlode] = useState(false);
   const [Alluserarry, setAlluserarry] = useState();
@@ -217,11 +217,11 @@ function Users() {
         <button className="MangerButton shwobutton">
           <Link to="/Adduser">{lang?.lang244} </Link>
         </button>
-        <button className="MangerButton shwobutton" onClick={AllOpenststus}>
+        {/* <button className="MangerButton shwobutton" onClick={AllOpenststus}>
           <p>
             {opentikitatatus ? "הצג כל פרטי המשתמש" : "סגור כל פרטי המשתמש"}{" "}
           </p>
-        </button>
+        </button> */}
 
         <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
           <button className="DropdownButton shwobuttondropdown">
@@ -319,45 +319,33 @@ function Users() {
               });
 
               return (
-                <Card
-                  bordered={false}
-                  key={i}
-                  onClick={() => {
-                    if (quickclose) {
-                      if (!checkboxref.current[i].checked) {
-                        Tikettoquikeclose(true, i);
+                <div>
+                  <Card
+                    bordered={false}
+                    key={i}
+                    onClick={() => {
+                      if (quickclose) {
+                        if (!checkboxref.current[i].checked) {
+                          Tikettoquikeclose(true, i);
+                        } else {
+                          Tikettoquikeclose(false, i);
+                          checkboxref.current[i].checked = false;
+                        }
                       } else {
-                        Tikettoquikeclose(false, i);
-                        checkboxref.current[i].checked = false;
+                        SelfOpenststus(i);
                       }
-                    } else {
-                      SelfOpenststus(i);
-                    }
-                  }}
-                >
-                  <div>
-                    <div className="discriptun">
-                      <p id="discriptun">
-                        <Avatar size={42} icon={<UserOutlined />} />{" "}
-                        {user.firstname} {user.lastname}
-                      </p>
-
-                      <input
-                        type="checkbox"
-                        id="horns"
-                        name="horns"
-                        className="closecheckboox"
-                        ref={(el) => (checkboxref.current[i] = el)}
-                        // value={el.ticketguid}
-                      />
-                    </div>
-                    <div className="Smallcard">
-                      <span id="cooment">
+                    }}
+                    // className="phonecard"
+                  >
+                    <div>
+                      <div className="discriptun">
+                        <p id="discriptun">
+                          <Avatar size={42} icon={<UserOutlined />} />{" "}
+                          {user.firstname} {user.lastname}
+                        </p>
                         <Badge color={levelscolor} text={levelname} />
-                      </span>
-                      {cunter > 0 ? (
-                        <span className="opentask">
-                          <a
+                        {cunter > 0 ? (
+                          <div
                             onClick={() => {
                               gotolistoftask([
                                 user.firstname + " " + user.lastname,
@@ -366,95 +354,127 @@ function Users() {
                               ]);
                             }}
                           >
-                            פניות פתוחות
-                          </a>
-                          <span>
                             <Badge
-                              dir="tlr"
-                              overflowCount={999}
-                              count={cunter}
                               style={{
                                 backgroundColor: "#EBBE74",
                                 color: "black",
                                 fontsize: "16px",
-                                top: "-10px",
+                                top: "-16px",
                               }}
-                            />
-                          </span>
-                        </span>
-                      ) : null}
-                    </div>
-                    <div
-                      ref={(el) => (itemsRef.current[i] = el)}
-                      style={{
-                        display: "none",
-                        color: "#807e94",
-                        marginTop: "20px",
-                      }}
-                    >
-                      <hr />
-
-                      <p>
-                        <AiOutlineMail />
-
-                        <span
-                          className="Calltoaction"
-                          onClick={() => {
-                            window.location.href = `mailto:${user.email}`;
-                          }}
-                        >
-                          {user.email}
-                        </span>
-                      </p>
-                      <p>
-                        <AiFillPhone />
-
-                        <span
-                          className="Calltoaction"
-                          onClick={() => {
-                            window.open(`tel:${user.phone}`);
-                          }}
-                        >
-                          {user.phone}
-                        </span>
-                      </p>
-                      <p>
-                        <FaMapPin />
-                        <span className="bigcardparagraf">{user.roomname}</span>
-                      </p>
-                      <p>
-                        <BsLayers />
-                        <span className="bigcardparagraf">
-                          {user.academicyear}
-                        </span>
-                      </p>
-                      <Badge
-                        color={"#f50"}
-                        text={`${lang?.lang237} ${user.ticketcount} `}
+                              overflowCount={999}
+                              count={cunter}
+                            >
+                              פניות פתוחות
+                            </Badge>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                      </div>
+                      <input
+                        type="checkbox"
+                        id="horns"
+                        name="horns"
+                        className="closecheckboox"
+                        ref={(el) => (checkboxref.current[i] = el)}
+                        // value={el.ticketguid}
                       />
-                      {/* <Carddatabig el={el} /> */}
-                    </div>
-                    {/* <div className="action"> */}
-                    {/* <Dropdown
-                      overlay={setingmenu}
-                      placement="bottomLeft"
-                      trigger={["click"]}
-                      className="cardbutton"
-                    > */}
-                    <button
-                      className="action"
-                      onClick={() => {
-                        // setvisibletaskDrawer(!visibletaskDrawer);
-                        // setChusenrikit(el.ticketguid);
-                      }}
-                    >
-                      <BsThreeDotsVertical />
-                    </button>
+                      <div className="smallscreen">
+                        <div
+                          ref={(el) => (itemsRef.current[i] = el)}
+                          style={{
+                            display: "none",
+                            color: "#807e94",
+                            marginTop: "20px",
+                          }}
+                        >
+                          <hr />
+                          <OpenSmallscreencard user={user} />
+                        </div>
+                        <button
+                          className="action"
+                          onClick={() => {
+                            // setvisibletaskDrawer(!visibletaskDrawer);
+                            // setChusenrikit(el.ticketguid);
+                          }}
+                        >
+                          <BsThreeDotsVertical />
+                        </button>
+                      </div>
 
-                    {/* </Dropdown> */}
-                  </div>
-                  {/* </div> */}
-                </Card>
+                      <div className="fullscreen">
+                        <hr />
+                        <OpenSmallscreencard user={user} />
+                        <button
+                          className="action"
+                          onClick={() => {
+                            // setvisibletaskDrawer(!visibletaskDrawer);
+                            // setChusenrikit(el.ticketguid);
+                          }}
+                        >
+                          <BsThreeDotsVertical />
+                        </button>
+                      </div>
+                    </div>
+                  </Card>
+                  {/* <Card
+                    className="fullscreen"
+                    bordered={false}
+                    key={i}
+                    onClick={() => {
+                      if (quickclose) {
+                        if (!checkboxref.current[i].checked) {
+                          Tikettoquikeclose(true, i);
+                        } else {
+                          Tikettoquikeclose(false, i);
+                          checkboxref.current[i].checked = false;
+                        }
+                      } else {
+                        SelfOpenststus(i);
+                      }
+                    }}
+                  >
+                    <div>
+                      <div className="discriptun">
+                        <p id="discriptun">
+                          <Avatar size={42} icon={<UserOutlined />} />{" "}
+                          {user.firstname} {user.lastname}
+                        </p>
+
+                        <input
+                          type="checkbox"
+                          id="horns"
+                          name="horns"
+                          className="closecheckboox"
+                          ref={(el) => (checkboxref.current[i] = el)}
+                          // value={el.ticketguid}
+                        />
+                      </div>
+                      <div className="Smallcard">
+                        <Smallscreencard
+                          user={user}
+                          levelscolor={levelscolor}
+                          levelname={levelname}
+                          cunter={cunter}
+                          gotolistoftask={gotolistoftask}
+                        />
+                      </div>
+
+                      <hr />
+                      <OpenSmallscreencard user={user} />
+
+                      <button
+                        className="action"
+                        onClick={() => {
+                          // setvisibletaskDrawer(!visibletaskDrawer);
+                          // setChusenrikit(el.ticketguid);
+                        }}
+                      >
+                        <BsThreeDotsVertical />
+                      </button>
+                    </div>
+                  </Card> */}
+                </div>
                 // <Card bordered={false} key={i}>
                 //   <div
                 //     onClick={() => {

@@ -8,27 +8,88 @@ export const Contener = styled.div`
   justify-content: center;
   align-items: center;
 
-  .discriptun {
+  .action {
+    border: none;
+    position: absolute;
+    left: 10px;
+
+    background: none;
+  }
+  .Mangeroption {
     display: flex;
-    justify-content: space-between;
-    align-content: flex-end;
+    margin-top: 11px;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-around;
+  }
+  @media only screen and (min-width: 600px) {
+    .Smallcard {
+      background-color: red;
+    }
+    .Mangeroption {
+      margin-top: -8%;
+    }
+    .details {
+      display: flex;
+      justify-content: space-around;
+    }
+    .smallscreen {
+      display: none;
+    }
+    .action {
+      bottom: 69%;
+    }
+    .discriptun {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 90%;
+    }
+    .closecheckboox {
+      position: absolute;
+      top: 11%;
+      inset-inline-start: 93%;
+    }
+    #discriptun {
+      margin-inline-end: 24px;
+    }
   }
   #discriptun {
-    margin-inline-end: -15px;
-    margin-inline-start: 4px;
     font-weight: bold;
     font-size: 17px;
-    margin: 4px 7px;
+    margin-top: 5px;
+    margin-bottom: -2px;
     color: #0f0743;
     line-height: 122.88%;
-    /* width: 291px;
-    height: 21px; */
-    text-align: right;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 4px 0px;
+
+    text-align: start;
   }
+  @media only screen and (max-width: 600px) {
+    .Mangeroption {
+      margin-top: 11px;
+    }
+    #discriptun {
+      margin-inline-end: -15px;
+      margin-inline-start: 4px;
+    }
+    .fullscreen {
+      display: none;
+    }
+    .action {
+      bottom: 9px;
+    }
+    .discriptun {
+      display: flex;
+      flex-direction: column;
+    }
+    .closecheckboox {
+      position: absolute;
+      top: 23px;
+      inset-inline-start: 282px;
+    }
+  }
+
   #cooment {
     font-style: normal;
     font-weight: normal;
@@ -36,24 +97,14 @@ export const Contener = styled.div`
     line-height: 122.88%;
     color: #0f0743;
   }
-  .Smallcard {
-    /* display: flex; */
-  }
+
   .opentask {
+    display: flex;
     margin-inline-start: 13px;
   }
-  .action {
-    position: absolute;
-    left: 10px;
-    border: none;
-    position: absolute;
-    left: 10px;
-    bottom: 9px;
-    background: none;
-    bottom: 9px;
-  }
+
   hr {
-    color: #d6e2f1;
+    border: 1px solid #e9f0f8;
   }
   .Calltoaction {
     text-decoration-line: underline;
@@ -213,13 +264,7 @@ export const Contener = styled.div`
     background-color: white;
     border: none;
   }
-  .Mangeroption {
-    display: flex;
-    margin-top: 11px;
-    flex-wrap: nowrap;
-    align-content: space-around;
-    justify-content: space-around;
-  }
+
   .MangerButton {
     border: 1px solid #d6e2f1;
     box-sizing: border-box;
@@ -246,10 +291,7 @@ export const Contener = styled.div`
     background-color: white;
     position: relative;
   }
-  .action {
-    display: flex;
-    justify-content: space-around;
-  }
+
   .shwobutton {
     display: ${(props) => (props.Screnphunesize ? "none" : "inherit")};
   }

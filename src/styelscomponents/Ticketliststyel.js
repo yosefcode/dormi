@@ -10,13 +10,59 @@ export const Contener = styled.div`
   justify-content: center;
   align-items: center;
   font-family: "Heebo";
+  .Mangeroption {
+    display: flex;
 
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-around;
+  }
   @media only screen and (min-width: 600px) {
+    .shwobuttondropdown {
+      display: none;
+    }
+    .shwobutton {
+      display: inherit;
+    }
+    .Mangeroption {
+      margin-top: -8%;
+    }
     .Closepopup {
       width: 420px;
 
       border-radius: 43px;
     }
+    .smallscreen {
+      display: none;
+    }
+    .details {
+      display: flex;
+      justify-content: space-around;
+    }
+    .action {
+      bottom: 69%;
+    }
+    .discriptun {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+    }
+    .closecheckboox {
+      position: absolute;
+      top: 11%;
+      inset-inline-start: 93%;
+    }
+    #discriptun {
+      margin-inline-end: 24px;
+    }
+  }
+  .action {
+    position: absolute;
+    left: 10px;
+    border: none;
+
+    background: none;
   }
   .Closepopup {
     position: fixed;
@@ -30,10 +76,55 @@ export const Contener = styled.div`
     height: 63px;
     color: white;
   }
+  #discriptun {
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 5px;
+    margin-bottom: -2px;
+    color: #0f0743;
+    line-height: 122.88%;
+
+    text-align: start;
+  }
+  .Repeatedtask {
+    background-color: rgba(255, 209, 126, 1);
+    color: #0f0743;
+    font-weight: 500;
+    font-size: 12px;
+  }
 
   @media only screen and (max-width: 600px) {
+    .shwobuttondropdown {
+      display: inherit;
+    }
+    .shwobutton {
+      display: none;
+    }
+
+    .Mangeroption {
+      margin-top: 11px;
+    }
     .Closepopup {
       width: 100%;
+    }
+    #discriptun {
+      margin-inline-end: -15px;
+      margin-inline-start: 4px;
+    }
+    .fullscreen {
+      display: none;
+    }
+    .action {
+      bottom: 9px;
+    }
+    .discriptun {
+      display: flex;
+      flex-direction: column;
+    }
+    .closecheckboox {
+      position: absolute;
+      top: 9px;
+      inset-inline-start: 282px;
     }
   }
 
@@ -86,11 +177,7 @@ export const Contener = styled.div`
     display: flex;
     /* flex-direction: row; */
   }
-  @media only screen and (min-width: 600px) {
-    .closecheckboox {
-      margin-right: 63%;
-    }
-  }
+
   .closecheckboox {
     -webkit-appearance: none;
 
@@ -99,7 +186,7 @@ export const Contener = styled.div`
     width: 19px;
     height: 19px;
     border: none;
-    /* border: 1.52px solid #ffd17e; */
+
     box-sizing: border-box;
     border-radius: 76px;
     margin-top: 7px;
@@ -138,14 +225,7 @@ export const Contener = styled.div`
   .ant-form-item {
     margin-bottom: 0px;
   }
-  .Mangeroption {
-    display: flex;
 
-    margin-top: 11px;
-    flex-wrap: nowrap;
-    align-content: space-around;
-    justify-content: space-around;
-  }
   .MangerButton {
     border: 1px solid #d6e2f1;
     box-sizing: border-box;
@@ -172,25 +252,8 @@ export const Contener = styled.div`
     background-color: white;
     position: relative;
   }
-  .action {
-    position: absolute;
-    left: 10px;
-    border: none;
-    position: absolute;
-    left: 10px;
-    bottom: 9px;
-    background: none;
-    bottom: 9px;
-  }
-  .pointerblock {
-  }
-  .shwobutton {
-    display: ${(props) => (props.Screnphunesize ? "none" : "inherit")};
-  }
 
-  .shwobuttondropdown {
-    display: ${(props) =>
-      props.Screnphunesize ? "inherit" : "none"}!important;
+  .pointerblock {
   }
 
   @media only screen and (max-width: 600px) {
@@ -220,19 +283,16 @@ export const Contener = styled.div`
   }
 
   hr {
-    color: #d6e2f1;
+    border: 1px solid #e9f0f8;
   }
-  .discriptun {
-    display: flex;
-    justify-content: space-between;
-    align-content: flex-end;
-  }
+
   #cooment {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 122.88%;
     color: #0f0743;
+    margin-top: 5px;
   }
   #status {
   }
@@ -246,22 +306,7 @@ export const Contener = styled.div`
   .ant-badge-status-dot {
     top: 0px;
   }
-  #discriptun {
-    margin-inline-end: -15px;
-    margin-inline-start: 4px;
-    font-weight: bold;
-    font-size: 17px;
-    margin: 4px 7px;
-    color: #0f0743;
-    line-height: 122.88%;
-    /* width: 291px;
-    height: 21px; */
-    text-align: right;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 4px 0px;
-  }
+
   .Smallcard {
     display: flex;
   }
@@ -455,121 +500,6 @@ export const QuickcloDrawerstyle = styled(Drawer)`
   }
 `;
 export const Drawerstyle = styled(Drawer)`
-  /* .listQuickclosebuuton {
-    display: flex;
-    flex-direction: column;
-
-    margin-top: 21%;
-  }
-  .ant-drawer-content {
-    background-color: transparent;
-  }
-  .Quickclosebuutonup {
-    border: none;
-    background: #fafcff;
-    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
-    margin: 1px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 23px;
-    padding: 16px 15px 16px 0px;
-    width: 310px;
-    height: 56px;
-    border-radius: 24px 24px 0px 0px;
-    text-align: start;
-
-    color: #0f0743;
-  }
-  .Quickclosebuutdown {
-    border: none;
-    background: #fafcff;
-    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
-    margin: 1px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 23px;
-    width: 310px;
-    height: 56px;
-  
-    border-radius: 0px 0px 24px 24px;
-
-    text-align: start;
-
-    color: #f71919;
-  }
-  .Quickclosebuuton {
-    border: none;
-    background: #fafcff;
-    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
-    margin: 1px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 23px;
-    width: 310px;
-    height: 56px;
- 
-
-    text-align: start;
-
-    color: #0f0743;
-  }
-
-  .Closepopup {
-    position: fixed;
-    bottom: 1px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 30px;
-    background-color: rgba(15, 7, 67, 1);
-    color: white;
-    width: 100%;
-    height: 63px;
-  }
-
-  .Closepopupsubmit {
-    padding: 0px 12px 0px 20px;
-
-    width: 165px;
-    height: 47px;
-
-    background: #ffffff;
-    border-radius: 11px;
-    font-weight: bold;
-    font-size: 17px;
-    line-height: 118.88%;
-    
-
-    text-align: center;
-    content: url("/images/lightning.svg");
-    color: #0f0743;
-
-  }
-  .cancelClosep {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 17px;
-    line-height: 118.88%;
-    
-
-    text-align: center;
-    text-decoration-line: underline;
-
-    color: #ffffff;
-    background: none;
-    border: none;
-  }
-  .Closepopup-numbertasks {
-    font-weight: bold;
-    font-size: 17px;
-    line-height: 118.88%;
-   
-
-    text-align: center;
-
-    color: #ffffff;
-  }*/
   .clearbutton {
     background: none;
     color: #0f0743;

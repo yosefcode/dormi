@@ -68,7 +68,195 @@ export const Problemcontener = styled.div`
     }
   }
 `;
+export const FormContenerdesktop = styled.div`
+  /* word-wrap: break-word; */
+  margin-top: 10px;
+  .goback {
+    background: inherit;
 
+    border: none;
+    font-size: 19px;
+    float: right;
+    margin-top: -69px;
+  }
+  .cancel {
+    width: 157px;
+    height: 63px;
+    left: 515px;
+    top: 13px;
+
+    background: #e5ebf3;
+    border-radius: 11px;
+    border-color: #e5ebf3;
+    color: rgba(15, 7, 67, 1);
+    float: right;
+  }
+  .selecthiden {
+    display: flex;
+  }
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+  }
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    height: 59px;
+    padding: 14px;
+  }
+
+  .ant-btn.ant-btn-primary {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 491px;
+    height: 63px;
+    border-color: #ffd17e;
+    color: rgba(15, 7, 67, 1);
+    float: left;
+  }
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    height: 55px;
+  }
+  .flexposition {
+    flex-grow: 2;
+    margin-left: 4px;
+    margin-right: 4px;
+
+    /* margin: 1px; */
+  }
+  /*
+
+  flex-direction: column;
+  align-items: center;
+
+
+  .ant-form {
+    width: 267px;
+  }
+  .Lable {
+    color: #0f0743;
+    text-align: start;
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 10%;
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    .ant-form {
+      width: 267px;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .goback {
+      align-self: flex-start;
+      font-size: 47px;
+      margin-right: 17%;
+      margin-top: -3%;
+    }
+  }
+  .theproblemis {
+    display: -webkit-box;
+  }
+  .iconproblem {
+    font-size: 100px;
+    color: black;
+    width: 54%;
+    height: 15px;
+  }
+  .textbloon {
+    width: 274px;
+    margin-top: -34px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .Sendedmassege {
+      width: 180px;
+      height: 180px;
+    }
+  }
+  @media only screen and (min-width: 600px) {
+    .Sendedmassege {
+      width: 310px;
+      height: 310px;
+    }
+  }
+  .avaterpopup {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 26px solid white;
+    border-bottom: 13px solid transparent;
+    display: contents;
+  }
+  .uploadimage {
+    margin-top: ${(props) => (props.Position >= 1 ? "0px" : "100px")};
+
+    width: 258px;
+    height: 63px;
+    left: 1px;
+    top: 661px;
+    height: 50px;
+    background: #ffd17e;
+    border-radius: 11px;
+    color: #0f0743;
+    font-weight: bold;
+    font-size: 17px;
+    border-color: white;
+  }
+  .camraicon {
+    color: #0f0743;
+    font-size: 17px;
+  }
+  .ant-upload-list {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .ant-upload-list-item-error {
+    border-color: white;
+  }
+  .ant-tooltip {
+    visibility: collapse;
+  }
+  .ant-tooltip-inner {
+    display: none;
+  }
+  .ant-upload-list-item-error {
+    border-color: #e5ebf3;
+  }
+  .uploadimage-send {
+    width: 217px;
+    height: 45px;
+    color: white;
+    background-color: blue;
+    margin-top: 6px;
+    border-radius: 100px;
+  }
+  .ant-upload.ant-upload-select.ant-upload-select-picture-card.ant-upload-rtl {
+    display: contents;
+  }
+
+  .uplodeimage {
+    color: white;
+  }
+
+  .frequency {
+    float: left;
+    margin-top: -106px;
+    width: 243px;
+    margin-inline-end: 25px;
+  } */
+`;
 export const FormContener = styled.div`
   margin-top: 10%;
   text-align: center;

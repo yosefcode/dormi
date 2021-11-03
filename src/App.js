@@ -11,7 +11,12 @@ import { DataProvider } from "./DataContext";
 import { PostToServer } from "./serveses";
 import { Loginfunction } from "./components/Loginfanction";
 import { onMessageListener } from "./firebase";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Cookies from "universal-cookie";
 
 function App() {
@@ -141,30 +146,35 @@ function App() {
 
     setticketlist(ressult);
   };
+  const [rebderfromlog, setrebderfromlog] = useState(false);
+  const firstlogd = () => {
+    setrebderfromlog(true);
+  };
   useEffect(() => {
     if (!loginstatus) {
       Logincheckstatus();
     }
     Updetdata();
   }, [getmassege]);
-
   return (
     <div>
       <DataProvider value={providerOptions}>
         <Language Language={dir}>
-          <ConfigProvider direction={dir}>
-            {!loginstatus?.logde ? (
-              <div>
-                <Menu LoginScreen={true} />
-                <Login />
-                {/* </Language> */}
-              </div>
-            ) : (
-              <div>
-                <ContrulScreen dir={dir} />
-              </div>
-            )}
-          </ConfigProvider>
+          <Router>
+            <ConfigProvider direction={dir}>
+              {!loginstatus?.logde ? (
+                <div>
+                  <Menu LoginScreen={true} />
+                  <Login firstlogd={firstlogd} />
+                  {/* </Language> */}
+                </div>
+              ) : (
+                <div>
+                  <ContrulScreen dir={dir} rebderfromlog={rebderfromlog} />
+                </div>
+              )}
+            </ConfigProvider>
+          </Router>
         </Language>
       </DataProvider>
     </div>

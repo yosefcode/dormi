@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 
 import ReactToPrint from "react-to-print";
 import { AiOutlineFilePdf } from "react-icons/ai";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Checkform from "../components/checkform";
 import Nwerequest from "../screens/new_request";
 import User from "./user";
@@ -24,23 +29,27 @@ import SendsForm from "./SendsForm";
 import Dasktopmenu from "./Dasktopmenu";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
-const ContrulScreen = ({ dir }) => {
+const ContrulScreen = ({ dir, rebderfromlog }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
   const masof = useContext(DataContext).masof;
   const userlist = useContext(DataContext).userlist;
   const loginstatus = useContext(DataContext).loginstatus;
+  let history = useHistory();
 
   const componentRef = useRef();
-  const [desktop, setdesktop] = useState(false);
-
-  useEffect(() => {
-    let intViewportWidth = window.innerWidth;
-    if (intViewportWidth > 600) {
-      setdesktop(true);
-    }
-  }, []);
+  let location = useLocation();
+  // useEffect(() => {
+  //   if (location.pathname === "/ListOfreq") {
+  //     history.push("/ListOfreq");
+  //   }
+  //   debugger;
+  // }, [rebderfromlog]);
+  // if (location.pathname === "/ListOfreq") {
+  //   history.push("/ListOfreq");
+  // }
   return (
     <Router>
       <div className="controlscreendiv">
@@ -69,11 +78,11 @@ const ContrulScreen = ({ dir }) => {
             </svg>
           </div>
         </div>
-        {ticketlist && defullang && userlist ? (
-          <div className="nav">
-            <Dasktopmenu dir={dir} />
-          </div>
-        ) : null}
+
+        <div className="nav">
+          <Dasktopmenu dir={dir} />
+        </div>
+
         <div className="continer">
           <Switch>
             <Route path="/Users">
@@ -93,11 +102,10 @@ const ContrulScreen = ({ dir }) => {
             <Route path="/Checkform">
               <Checkform />
             </Route>
-            {!desktop ? (
-              <Route exact path="/">
-                <Nwerequest />
-              </Route>
-            ) : null}
+
+            <Route exact path="/">
+              <Nwerequest />
+            </Route>
 
             <Route path="/test">
               {ticketlist && defullang ? (
@@ -113,37 +121,22 @@ const ContrulScreen = ({ dir }) => {
                 </div>
               )}
             </Route>
-            {!desktop ? (
-              <Route path="/ListOfreq">
-                {ticketlist && defullang ? (
-                  <Ticketlis Repeatedtask={false} />
-                ) : (
-                  <div>
-                    <img
-                      src="/images/Semdimag.png"
-                      className="lodingimage"
-                      alt="lodingimage"
-                    />
-                    <FaSpinner />
-                  </div>
-                )}
-              </Route>
-            ) : (
-              <Route exact path="/">
-                {ticketlist && defullang ? (
-                  <Ticketlis Repeatedtask={false} />
-                ) : (
-                  <div>
-                    <img
-                      src="/images/Semdimag.png"
-                      className="lodingimage"
-                      alt="lodingimage"
-                    />
-                    <FaSpinner />
-                  </div>
-                )}
-              </Route>
-            )}
+
+            <Route path="/ListOfreq">
+              {ticketlist && defullang ? (
+                <Ticketlis Repeatedtask={false} />
+              ) : (
+                <div>
+                  <img
+                    src="/images/Semdimag.png"
+                    className="lodingimage"
+                    alt="lodingimage"
+                  />
+                  <FaSpinner />
+                </div>
+              )}
+            </Route>
+
             <Route path="/Repeatedtask">
               {ticketlist && defullang ? (
                 <Ticketlis Repeatedtask={true} />

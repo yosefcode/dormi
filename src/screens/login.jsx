@@ -6,7 +6,10 @@ import { Contener } from "../styelscomponents/Loginstyels";
 import DataContext from "../DataContext";
 import Cookies from "universal-cookie";
 import { Loginfunction } from "../components/Loginfanction";
-const Login = (props) => {
+
+import { useHistory } from "react-router-dom";
+
+const Login = ({ firstlogd }) => {
   document.body.style.backgroundColor = "white";
 
   const [fult, setfult] = useState(false);
@@ -61,6 +64,8 @@ const Login = (props) => {
 
     return true;
   };
+  let history = useHistory();
+
   const onFinish = async (values) => {
     setfult(" ");
     let res = await Loginfunction(values);
@@ -74,6 +79,12 @@ const Login = (props) => {
 
       changloginstatus(res.changloginstatus);
       changlang(res.changlang);
+      let intViewportWidth = window.innerWidth;
+
+      if (intViewportWidth > 600) {
+        history.push("/ListOfreq");
+        firstlogd();
+      }
     }
   };
   const Forgetpass = () => {

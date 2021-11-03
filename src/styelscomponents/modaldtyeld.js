@@ -1,11 +1,36 @@
 import { Modal } from "antd";
 
 import styled from "styled-components";
+export const ModalStyeldnewreq = styled(Modal)`
+  .ant-modal-content {
+    border-radius: 19px;
+    text-align: center;
+  }
+  @media only screen and (min-width: 600px) {
+    .ant-modal-content {
+      width: 792px;
+      height: 786px;
+    }
+  }
+
+  .ant-modal-header {
+    border-radius: 19px;
+    border-bottom: none;
+    text-align: center;
+  }
+`;
 export const ModalStyeld = styled(Modal)`
   .ant-modal-content {
     border-radius: 19px;
     text-align: center;
   }
+  @media only screen and (min-width: 600px) {
+    .ant-modal-content {
+      width: 792px;
+      height: 786px;
+    }
+  }
+
   .ant-modal-header {
     border-radius: 19px;
     border-bottom: none;

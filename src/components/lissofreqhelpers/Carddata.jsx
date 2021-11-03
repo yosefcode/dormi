@@ -16,7 +16,7 @@ export function Carddatabig({ el }) {
   const [imegvesebule, setimegvesebule] = useState(false);
 
   return (
-    <div>
+    <div className="details">
       <p>
         <FaMapPin />
         {el.locationName}-{el.roomName}

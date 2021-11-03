@@ -318,7 +318,13 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
           </Form>
         ) : (
           <div>
-            <Uplodetaskimage ticketid={ticketid} userid={loginstatus.userid} />
+            <Uplodetaskimage
+              ticketid={ticketid}
+              userid={loginstatus.userid}
+              setuplodeimagescreen={() => {
+                setuplodeimagescreen(false);
+              }}
+            />
           </div>
         )}
         <ModalStyeld
