@@ -26,6 +26,9 @@ export const Drawerstyle = styled(Drawer)`
 `;
 
 export const Contyner = styled.div`
+  .ListOfreqmenue {
+    margin-bottom: 7px;
+  }
   .Drawercontennet {
     /* display: flex;
     flex-direction: row;

@@ -9,6 +9,9 @@
   }
 }
 @media only screen and (min-width: 600px) {
+  .loginphone {
+    display: none;
+  }
   .controlscreendiv {
     display: grid;
     grid-template-areas:
@@ -70,6 +73,9 @@
   }
 }
 @media only screen and (max-width: 600px) {
+  .logidesktop {
+    display: none;
+  }
   .controlscreendiv {
   }
   .nav {

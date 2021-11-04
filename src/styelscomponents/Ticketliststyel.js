@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Drawer, Select } from "antd";
+import { Drawer, Select, Modal } from "antd";
 import { BsCheck } from "react-icons/bs";
 
 export const Contener = styled.div`
@@ -18,6 +18,10 @@ export const Contener = styled.div`
     justify-content: space-around;
   }
   @media only screen and (min-width: 600px) {
+    #phoneactionbutton {
+      display: none;
+    }
+
     .shwobuttondropdown {
       display: none;
     }
@@ -94,6 +98,9 @@ export const Contener = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
+    #desktopactionbutton {
+      display: none;
+    }
     .shwobuttondropdown {
       display: inherit;
     }
@@ -355,13 +362,171 @@ export const Selectfilter = styled.div`
     }
   }
 `;
-export const QuickcloDrawerstyle = styled(Drawer)`
+
+export const Quickclomodaltyle = styled(Modal)`
   font-family: "Heebo";
+
+  .userQuickclosebuuton {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 21%;
+  }
   .listQuickclosebuuton {
     display: flex;
     flex-direction: column;
 
     margin-top: 21%;
+  }
+  .ant-modal-content {
+    /* background-color: transparent; */
+    /* width: 0px; */
+  }
+  .Quickclosebuutdownclose {
+    border: none;
+    background: #fafcff;
+    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
+    margin: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    width: 310px;
+    height: 56px;
+
+    color: #0f0743;
+  }
+  .Quickclosebuutonup {
+    border: none;
+    background: #fafcff;
+    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
+    margin: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding: 16px 15px 16px 0px;
+    width: 310px;
+    height: 56px;
+    border-radius: 24px 24px 0px 0px;
+    text-align: start;
+
+    color: #0f0743;
+  }
+  .Quickclosebuutdown {
+    border: none;
+    background: #fafcff;
+    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
+    margin: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    width: 310px;
+    height: 56px;
+    /* identical to box height */
+    border-radius: 0px 0px 24px 24px;
+
+    text-align: start;
+
+    color: #f71919;
+  }
+  .Quickclosebuuton {
+    border: none;
+    background: #fafcff;
+    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
+    margin: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    width: 310px;
+    height: 56px;
+    /* identical to box height */
+
+    text-align: start;
+
+    color: #0f0743;
+  }
+
+  .Closepopup {
+    position: fixed;
+    bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 30px;
+    background-color: rgba(15, 7, 67, 1);
+    color: white;
+    width: 100%;
+    height: 63px;
+  }
+
+  .Closepopupsubmit {
+    padding: 0px 12px 0px 20px;
+
+    width: 165px;
+    height: 47px;
+
+    background: #ffffff;
+    border-radius: 11px;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+    content: url("/images/lightning.svg");
+    color: #0f0743;
+
+    /* Inside Auto Layout */
+  }
+  .cancelClosep {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #ffffff;
+    background: none;
+    border: none;
+  }
+  .Closepopup-numbertasks {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 118.88%;
+    /* or 20px */
+
+    text-align: center;
+
+    color: #ffffff;
+  }
+  .clearbutton {
+    background: none;
+    color: #0f0743;
+    border: none;
+    margin-inline-start: 75%;
+    margin-bottom: 5%;
+
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+`;
+
+export const QuickcloDrawerstyle = styled(Drawer)`
+  font-family: "Heebo";
+
+  .userQuickclosebuuton {
+    display: flex;
+    flex-direction: column;
+    margin-top: 73%;
+  }
+  .listQuickclosebuuton {
+    display: flex;
+    flex-direction: column;
   }
   .ant-drawer-content {
     background-color: transparent;

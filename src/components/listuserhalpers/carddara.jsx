@@ -8,7 +8,7 @@ import { FaMapPin } from "react-icons/fa";
 
 export const OpenSmallscreencard = ({ user }) => {
   const defoltlang = useContext(DataContext).lang;
-  let lang = defoltlang;
+  let lang = defoltlang.lang;
 
   return (
     <div className="details">

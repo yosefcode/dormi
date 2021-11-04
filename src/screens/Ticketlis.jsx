@@ -4,6 +4,7 @@ import {
   Drawerstyle,
   Selectfilter,
   QuickcloDrawerstyle,
+  Quickclomodaltyle,
 } from "../styelscomponents/Ticketliststyel";
 import DataContext from "../DataContext";
 import { FaFilter } from "react-icons/fa";
@@ -13,6 +14,7 @@ import { PostToServer } from "../serveses";
 import Formtaskfromlist from "../components/Formtaskfromlist";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import { Buttonmuneu } from "../styelscomponents/Buttonmuneu";
 
 import {
   Ordercareguris,
@@ -86,6 +88,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   //  הגדרת מאפיין - משימות מתוזמנות או רגילות
 
   const [Drawervisible, setDrawervisible] = useState(false);
+  const [Vmodalquickclos, setVmodalquickclos] = useState(false);
   const openfilter = () => {
     setDrawervisible(!Drawervisible);
   };
@@ -265,10 +268,18 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     setcunter(0);
   };
   const closeMenue = () => {
-    if (cunter > 0 && !visible) {
-      setvisible(true);
+    if (window.innerWidth > 600) {
+      if (cunter > 0 && !Vmodalquickclos) {
+        setVmodalquickclos(true);
+      } else {
+        setVmodalquickclos(false);
+      }
     } else {
-      setvisible(false);
+      if (cunter > 0 && !visible) {
+        setvisible(true);
+      } else {
+        setvisible(false);
+      }
     }
   };
   const closepupup = () => {
@@ -568,17 +579,17 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
       setAllTikets(result);
     }
   }, [
-    AllOpenCategoris,
-    filterallUrgency,
-    chingeurgency,
-    nolist,
+    // AllOpenCategoris,
+    // filterallUrgency,
+    // chingeurgency,
+    // nolist,
 
-    locationfilter,
-    filteruser,
-    selectedstatus,
-    fullcard,
+    // locationfilter,
+    // filteruser,
+    // selectedstatus,
+    // fullcard,
     updaterefresh,
-    firstlode,
+    // firstlode,
   ]);
 
   const SelfOpenststus = (i) => {
@@ -622,13 +633,22 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     setedittask(true);
   };
   const [claerapruchform, setclaerapruchform] = useState(false);
-
+  const [filterpresd, setfilterpresd] = useState(false);
+  const [presd, setpresd] = useState(false);
+  const [visabletaskmodal, setvisabletaskmodal] = useState(false);
   return (
     <div>
       {edittask ? (
         <Contener Screnphunesize={screnphunesize}>
           <div className="Mangeroption">
-            <button className="MangerButton" onClick={openfilter}>
+            <Buttonmuneu
+              presd={filterpresd}
+              onClick={() => {
+                openfilter();
+
+                setfilterpresd(!filterpresd);
+              }}
+            >
               {lang?.lang196} <FaFilter />
               {filtercunter > 0 ? (
                 <div>
@@ -646,11 +666,17 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   />
                 </div>
               ) : null}
-            </button>
+            </Buttonmuneu>
 
-            <button className="MangerButton" onClick={Opquickctaskoption}>
+            <Buttonmuneu
+              presd={presd}
+              onClick={() => {
+                Opquickctaskoption();
+                setpresd(!presd);
+              }}
+            >
               <img src="/images/multipulchuis.svg" /> בחירה
-            </button>
+            </Buttonmuneu>
             <button className="MangerButton shwobutton">
               הצג פניות פתוחות
             </button>
@@ -670,18 +696,23 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 filteruser={filteruser}
                 setingAllOpenCategoris={(value) => {
                   setAllOpenCategoris(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 setingfilterallUrgency={(value) => {
                   setfilterallUrgency(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 setlocationsort={(value) => {
                   setlocationfilter(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 setUserFilter={(value) => {
                   setfilteruser(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 selectedstatus={(value) => {
                   setselectedstatus(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 clear={() => {
                   setAllOpenCategoris(false);
@@ -689,6 +720,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   setlocationfilter(false);
                   setfilteruser(false);
                   setselectedstatus(false);
+                  setupdaterefresh(!updaterefresh);
                 }}
               />
             </Selectfilter>
@@ -865,6 +897,18 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       <Carddatabig el={el} />
                       <button
                         className="action"
+                        id="desktopactionbutton"
+                        onClick={() => {
+                          setvisabletaskmodal(!visabletaskmodal);
+
+                          setChusenrikit(el.ticketguid);
+                        }}
+                      >
+                        <BsThreeDotsVertical />
+                      </button>
+                      <button
+                        className="action"
+                        id="phoneactionbutton"
                         onClick={() => {
                           setvisibletaskDrawer(!visibletaskDrawer);
                           setChusenrikit(el.ticketguid);
@@ -911,18 +955,23 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 filterarry={filterarry}
                 setingAllOpenCategoris={(value) => {
                   setAllOpenCategoris(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 setingfilterallUrgency={(value) => {
                   setfilterallUrgency(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 setlocationsort={(value) => {
                   setlocationfilter(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 setUserFilter={(value) => {
                   setfilteruser(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 selectedstatus={(value) => {
                   setselectedstatus(value);
+                  setupdaterefresh(!updaterefresh);
                 }}
                 clear={() => {
                   setAllOpenCategoris(false);
@@ -931,13 +980,27 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   setfilteruser(false);
                   setselectedstatus(false);
 
-                  // setupdaterefresh(!updaterefresh);
+                  setupdaterefresh(!updaterefresh);
                 }}
               />
             </Drawerstyle>
           ) : null}
           {/* משימות סגירה רגילה */}
-
+          <Quickclomodaltyle
+            visible={visabletaskmodal}
+            onCancel={() => {
+              setvisabletaskmodal(!visabletaskmodal);
+            }}
+            width={0}
+            footer={null}
+          >
+            <ListtaskforEdit
+              action={Taskeditfunc}
+              close={() => {
+                setvisabletaskmodal(!visabletaskmodal);
+              }}
+            />
+          </Quickclomodaltyle>
           <QuickcloDrawerstyle
             placement={"bottom"}
             onClose={() => {
@@ -953,6 +1016,18 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
               }}
             />
           </QuickcloDrawerstyle>
+          {/* מחיקה מהירה מודל ומגירה */}
+          <Quickclomodaltyle
+            visible={Vmodalquickclos}
+            onCancel={() => {
+              setVmodalquickclos(!Vmodalquickclos);
+            }}
+            width={0}
+            footer={null}
+            // maskStyle={{ height: "92%" }}
+          >
+            <Quickclosebuuton action={Oqquickaction} />
+          </Quickclomodaltyle>
           <QuickcloDrawerstyle
             placement={"bottom"}
             onClose={closeMenue}
@@ -971,7 +1046,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 ) : null}
               </div>
             }
-            // zIndex={-1}
           >
             <Quickclosebuuton action={Oqquickaction} />
           </QuickcloDrawerstyle>

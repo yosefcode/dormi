@@ -9,7 +9,7 @@ export const ModalStyeldnewreq = styled(Modal)`
   @media only screen and (min-width: 600px) {
     .ant-modal-content {
       width: 792px;
-      height: 786px;
+      height: 700px;
     }
   }
 

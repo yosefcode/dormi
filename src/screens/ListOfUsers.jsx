@@ -6,11 +6,20 @@ import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { FaFilter, FaMapPin } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-import { Closetask } from "../components/listuserhalpers/closetask";
+import {
+  Closetask,
+  ListtaskforEdit,
+  ListtaskforEditquik,
+} from "../components/listuserhalpers/closetask";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
 import { OpenSmallscreencard } from "../components/listuserhalpers/carddara";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsTrash, BsThreeDotsVertical, BsLayers } from "react-icons/bs";
+import { Buttonmuneu } from "../styelscomponents/Buttonmuneu";
+import {
+  QuickcloDrawerstyle,
+  Quickclomodaltyle,
+} from "../styelscomponents/Ticketliststyel";
 
 const { Option } = Select;
 
@@ -40,6 +49,10 @@ function Users() {
   const [userfilter, setuserfilter] = useState();
   const [program, setprogram] = useState(false);
   const [locallist, setlocallist] = useState();
+  const [rerender, setrerender] = useState(false);
+  const [useridfortask, setuseridfortask] = useState();
+  const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
+  const [visabletaskmodal, setvisabletaskmodal] = useState(false);
 
   let history = useHistory();
   const filterserch = useContext(DataContext).filterserch;
@@ -80,6 +93,30 @@ function Users() {
     }
   }
   const [listofprogram, setlistofprogram] = useState();
+  const [filtercunter, setfiltercunter] = useState(0);
+  const Taskeditfunc = async (type, value) => {
+    // setChusenrikit(null);
+    // Drawerforalltask();
+
+    switch (type) {
+      case "close":
+        break;
+      case "pending":
+        break;
+      case "open":
+        break;
+      case "forward":
+        break;
+      case "message":
+        break;
+      case "cost":
+        break;
+      case "edit":
+        break;
+      default:
+        break;
+    }
+  };
   useEffect(() => {
     if (!firstlode) {
       let intViewportWidth = window.innerWidth;
@@ -101,13 +138,33 @@ function Users() {
       setlocallist(userlist);
       setfirstlode(true);
     } else {
+      let cunter_num_of_filter = [false, false, false, false, false, false];
+
       let result = locallist;
 
-      result = FilterAllusers(userlist, userfilter);
-      result = Filterprogram(userlist, program);
+      result = FilterAllusers(result, userfilter);
+      if (userfilter) {
+        cunter_num_of_filter[0] = true;
+      } else {
+        cunter_num_of_filter[0] = false;
+      }
+      result = Filterprogram(result, program);
+      if (program) {
+        cunter_num_of_filter[1] = true;
+      } else {
+        cunter_num_of_filter[1] = false;
+      }
+      let cunter = 0;
+      cunter_num_of_filter.map((el) => {
+        if (el) {
+          cunter = cunter + 1;
+        }
+      });
+      setfiltercunter(cunter);
+
       setAlluserarry(result);
     }
-  }, [userfilter, Alluserarry, program]);
+  }, [rerender]);
 
   const SelfOpenststus = (i) => {
     if (itemsRef.current[i].style.display === "inherit") {
@@ -202,15 +259,49 @@ function Users() {
       setcunter(num);
     }
   };
+  const [presd, setpresd] = useState(false);
+  const [filterpresd, setfilterpresd] = useState(false);
+
   return (
     <Contener Screnphunesize={screnphunesize}>
       <div className="Mangeroption">
-        <button className="MangerButton" onClick={openfilter}>
+        <Buttonmuneu
+          presd={filterpresd}
+          // className="MangerButton"
+          onClick={() => {
+            openfilter();
+            setfilterpresd(!filterpresd);
+          }}
+        >
           {lang?.lang248} <FaFilter />
-        </button>
-        <button className="MangerButton" onClick={Opquickctaskoption}>
+        </Buttonmuneu>
+        {/* {filtercunter > 0 ? (
+          <div> */}
+        {/* <Badge
+                dir="tlr"
+                overflowCount={999}
+                count={filtercunter}
+                style={{
+                  backgroundColor: "#EBBE74",
+                  color: "black",
+                  fontsize: "16px",
+                  right: "13px",
+                  // bottom: "18px",
+                }}
+              /> */}
+        {/* </div>
+        ) : null} */}
+        <Buttonmuneu
+          presd={presd}
+          // className="MangerButton"
+          id="chusingbutoon"
+          onClick={() => {
+            Opquickctaskoption();
+            setpresd(!presd);
+          }}
+        >
           <img src="/images/multipulchuis.svg" /> בחירה
-        </button>
+        </Buttonmuneu>
         {/* <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
         </button> */}
@@ -231,12 +322,13 @@ function Users() {
       </div>
       <div className="haderflex">
         {Drawervisible ? (
-          <div>
+          <div className="filtermenue">
             <Select
               showSearch
               placeholder={lang?.lang352}
               onChange={(value) => {
                 setuserfilter(value);
+                setrerender(!rerender);
               }}
             >
               <Option value={false}>{lang.lang352}</Option>
@@ -257,14 +349,15 @@ function Users() {
               placeholder={"כל התוכניות"}
               onChange={(value) => {
                 setprogram(value);
+                setrerender(!rerender);
               }}
             >
               <Option value={false}>כל התוכניות</Option>
 
               {listofprogram
-                ? listofprogram.map((el) => {
+                ? listofprogram.map((el, i) => {
                     return (
-                      <Option value={[el.program[0]]}>
+                      <Option key={i} value={[el.program[0]]}>
                         {el.program[0]}
 
                         <Badge
@@ -289,7 +382,6 @@ function Users() {
 
         {Alluserarry
           ? Alluserarry.map((user, i) => {
-              // debugger;
               let levelname;
               let levelscolor;
               switch (user.langid) {
@@ -319,263 +411,145 @@ function Users() {
               });
 
               return (
-                <div>
-                  <Card
-                    bordered={false}
-                    key={i}
-                    onClick={() => {
-                      if (quickclose) {
-                        if (!checkboxref.current[i].checked) {
-                          Tikettoquikeclose(true, i);
-                        } else {
-                          Tikettoquikeclose(false, i);
-                          checkboxref.current[i].checked = false;
-                        }
+                <Card
+                  bordered={false}
+                  key={`${user}${i}`}
+                  onClick={() => {
+                    if (quickclose) {
+                      if (!checkboxref.current[i].checked) {
+                        Tikettoquikeclose(true, i);
                       } else {
-                        SelfOpenststus(i);
+                        Tikettoquikeclose(false, i);
+                        checkboxref.current[i].checked = false;
                       }
-                    }}
-                    // className="phonecard"
-                  >
-                    <div>
-                      <div className="discriptun">
-                        <p id="discriptun">
-                          <Avatar size={42} icon={<UserOutlined />} />{" "}
-                          {user.firstname} {user.lastname}
-                        </p>
-                        <Badge color={levelscolor} text={levelname} />
-                        {cunter > 0 ? (
-                          <div
-                            onClick={() => {
-                              gotolistoftask([
-                                user.firstname + " " + user.lastname,
-                                user.firstname,
-                                user.lastname,
-                              ]);
-                            }}
-                          >
-                            <Badge
-                              style={{
-                                backgroundColor: "#EBBE74",
-                                color: "black",
-                                fontsize: "16px",
-                                top: "-16px",
-                              }}
-                              overflowCount={999}
-                              count={cunter}
-                            >
-                              פניות פתוחות
-                            </Badge>
-                          </div>
-                        ) : (
-                          <div></div>
-                        )}
-                      </div>
-                      <input
-                        type="checkbox"
-                        id="horns"
-                        name="horns"
-                        className="closecheckboox"
-                        ref={(el) => (checkboxref.current[i] = el)}
-                        // value={el.ticketguid}
-                      />
-                      <div className="smallscreen">
+                    } else {
+                      SelfOpenststus(i);
+                    }
+                  }}
+                >
+                  <div>
+                    <div className="discriptun">
+                      <p id="discriptun">
+                        <Avatar size={42} icon={<UserOutlined />} />{" "}
+                        {user.firstname} {user.lastname}
+                      </p>
+                      <Badge color={levelscolor} text={levelname} />
+                      {cunter > 0 ? (
                         <div
-                          ref={(el) => (itemsRef.current[i] = el)}
-                          style={{
-                            display: "none",
-                            color: "#807e94",
-                            marginTop: "20px",
-                          }}
-                        >
-                          <hr />
-                          <OpenSmallscreencard user={user} />
-                        </div>
-                        <button
-                          className="action"
                           onClick={() => {
-                            // setvisibletaskDrawer(!visibletaskDrawer);
-                            // setChusenrikit(el.ticketguid);
+                            gotolistoftask([
+                              user.firstname + " " + user.lastname,
+                              user.firstname,
+                              user.lastname,
+                            ]);
                           }}
                         >
-                          <BsThreeDotsVertical />
-                        </button>
-                      </div>
-
-                      <div className="fullscreen">
+                          <Badge
+                            style={{
+                              backgroundColor: "#EBBE74",
+                              color: "black",
+                              fontsize: "16px",
+                              top: "-16px",
+                            }}
+                            overflowCount={999}
+                            count={cunter}
+                          >
+                            פניות פתוחות
+                          </Badge>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+                    <input
+                      type="checkbox"
+                      id="horns"
+                      name="horns"
+                      className="closecheckboox"
+                      ref={(el) => (checkboxref.current[i] = el)}
+                      // value={el.ticketguid}
+                    />
+                    <div className="smallscreen">
+                      <div
+                        ref={(el) => (itemsRef.current[i] = el)}
+                        style={{
+                          display: "none",
+                          color: "#807e94",
+                          marginTop: "20px",
+                        }}
+                      >
                         <hr />
                         <OpenSmallscreencard user={user} />
-                        <button
-                          className="action"
-                          onClick={() => {
-                            // setvisibletaskDrawer(!visibletaskDrawer);
-                            // setChusenrikit(el.ticketguid);
-                          }}
-                        >
-                          <BsThreeDotsVertical />
-                        </button>
                       </div>
-                    </div>
-                  </Card>
-                  {/* <Card
-                    className="fullscreen"
-                    bordered={false}
-                    key={i}
-                    onClick={() => {
-                      if (quickclose) {
-                        if (!checkboxref.current[i].checked) {
-                          Tikettoquikeclose(true, i);
-                        } else {
-                          Tikettoquikeclose(false, i);
-                          checkboxref.current[i].checked = false;
-                        }
-                      } else {
-                        SelfOpenststus(i);
-                      }
-                    }}
-                  >
-                    <div>
-                      <div className="discriptun">
-                        <p id="discriptun">
-                          <Avatar size={42} icon={<UserOutlined />} />{" "}
-                          {user.firstname} {user.lastname}
-                        </p>
-
-                        <input
-                          type="checkbox"
-                          id="horns"
-                          name="horns"
-                          className="closecheckboox"
-                          ref={(el) => (checkboxref.current[i] = el)}
-                          // value={el.ticketguid}
-                        />
-                      </div>
-                      <div className="Smallcard">
-                        <Smallscreencard
-                          user={user}
-                          levelscolor={levelscolor}
-                          levelname={levelname}
-                          cunter={cunter}
-                          gotolistoftask={gotolistoftask}
-                        />
-                      </div>
-
-                      <hr />
-                      <OpenSmallscreencard user={user} />
-
                       <button
                         className="action"
                         onClick={() => {
-                          // setvisibletaskDrawer(!visibletaskDrawer);
-                          // setChusenrikit(el.ticketguid);
+                          setvisibletaskDrawer(!visibletaskDrawer);
+                          setuseridfortask(user.userguid);
                         }}
                       >
                         <BsThreeDotsVertical />
                       </button>
                     </div>
-                  </Card> */}
-                </div>
-                // <Card bordered={false} key={i}>
-                //   <div
-                //     onClick={() => {
-                //       SelfOpenststus(i);
-                //     }}
-                //     className="titelcard"
-                //   >
-                //     <p>
-                //       <Avatar size={42} icon={<UserOutlined />} />{" "}
-                //       {user.firstname} {user.lastname}
-                //     </p>
 
-                //     <p>
-                //       <Badge color={levelscolor} text={levelname} />
-                //     </p>
-                //     <div>
-                //       {cunter > 0 ? (
-                //         <div>
-                //           <Badge
-                //             dir="tlr"
-                //             overflowCount={999}
-                //             count={cunter}
-                //             style={{
-                //               backgroundColor: "#EBBE74",
-                //               color: "black",
-                //               fontsize: "16px",
-                //             }}
-                //             onClick={() => {
-                //               gotolistoftask([
-                //                 user.firstname + " " + user.lastname,
-                //                 user.firstname,
-                //                 user.lastname,
-                //               ]);
-                //             }}
-                //           />
-                //           <p>פניות פתוחות</p>
-                //         </div>
-                //       ) : null}
-                //     </div>
-                //     <input
-                //       type="checkbox"
-                //       id="horns"
-                //       name="horns"
-                //       className="closecheckboox"
-                //       // checked={true}
-                //       ref={(el) => (checkboxref.current[i] = el)}
-                //       value={user.ticketguid}
-                //     />
-                //   </div>
+                    <div className="fullscreen">
+                      <hr />
+                      <OpenSmallscreencard user={user} />
+                      <button
+                        className="action"
+                        onClick={() => {
+                          setvisabletaskmodal(!visabletaskmodal);
 
-                //   <div
-                //     ref={(el) => (itemsRef.current[i] = el)}
-                //     style={{
-                //       display: "none",
-                //       color: "#807e94",
-                //       marginTop: "20px",
-                //     }}
-                //   >
-                //     <hr />
-
-                //     <div
-                //       onClick={() => {
-                //         SelfOpenststus(i);
-                //       }}
-                //     >
-                //       <Badge
-                //         color={"#f50"}
-                //         text={`${lang?.lang237} ${user.ticketcount} `}
-                //       />
-                //       <p>
-                //         <FaMapPin />
-                //         {user.roomname}
-                //       </p>
-                //       <p>
-                //         <span
-                //           className="Calltoaction"
-                //           onClick={() => {
-                //             window.open(`tel:${user?.phone}`);
-                //           }}
-                //         >
-                //           <BiPhoneCall />
-
-                //           {user.phone}
-                //         </span>
-                //         <p className="Calltoaction">
-                //           <AiOutlineMail />
-                //           {user?.email}
-                //         </p>
-                //       </p>
-                //     </div>
-                //   </div>
-                //   <div className="action">
-                //     <button className="cardbutton">
-                //       <BsTrash />
-                //     </button>
-                //     <AiOutlineEdit />
-                //   </div>
-                // </Card>
+                          setuseridfortask(user.userguid);
+                        }}
+                      >
+                        <BsThreeDotsVertical />
+                      </button>
+                    </div>
+                  </div>
+                </Card>
               );
             })
           : null}
+        {/* משימות לגל כרטיס בנפד */}
+        <Quickclomodaltyle
+          visible={visabletaskmodal}
+          onCancel={() => {
+            setvisabletaskmodal(!visabletaskmodal);
+          }}
+          width={0}
+          style={{ marginTop: "120px" }}
+          footer={null}
+          // maskClosable={true}
+        >
+          <ListtaskforEdit
+            action={Taskeditfunc}
+            close={() => {
+              setvisabletaskmodal(!visabletaskmodal);
+            }}
+          />
+        </Quickclomodaltyle>
+        <QuickcloDrawerstyle
+          placement={"bottom"}
+          onClose={() => {
+            setvisibletaskDrawer(!visibletaskDrawer);
+          }}
+          visible={visibletaskDrawer}
+          height={600}
+        >
+          <ListtaskforEdit
+            action={Taskeditfunc}
+            close={() => {
+              setvisibletaskDrawer(!visibletaskDrawer);
+            }}
+          />
+        </QuickcloDrawerstyle>
+        {/* <ListtaskforEditquik
+          action={Taskeditfunc}
+          close={() => {
+            setvisibletaskDrawer(!visibletaskDrawer);
+          }}
+        /> */}
         {quickclose ? (
           <Closetask
             data={cunter}

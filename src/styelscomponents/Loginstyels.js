@@ -1,92 +1,182 @@
 import styled from "styled-components";
 
 export const Contener = styled.div`
-  display: flex;
-  text-align: start;
-  margin-top: 70px;
-
-  justify-content: space-evenly;
-
-  .info {
-    margin-inline-start: 40px;
-  }
-  h2 {
-    color: white;
-    text-decoration: underline;
-  }
-  a {
-    color: white;
-    text-decoration: underline;
-  }
-  .qrcode {
-    margin-inline-start: 146px;
-    margin-top: 34px;
-  }
-  .passbutoon {
-    background-color: white;
-    height: 32px;
-    border: none;
-    margin-inline-start: 10%;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  }
-  .avatar {
-    width: 100px;
-  }
-  .bg-info {
-    display: flex;
-    background-color: #33b5e5;
-    justify-content: space-between;
-    text-align: start;
-  }
-
+  /* height: 360px; */
+  font-family: "Heebo";
   .ant-form-item-label > label {
     width: 78px;
-
-    color: #aaa;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    color: #0f0743;
     margin-bottom: -3px;
     align-items: center;
   }
 
-  .ant-form-item-control-input {
-    width: 215px;
+  @media only screen and (min-width: 600px) {
+    /* height: 100vh; */
+    direction: rtl;
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "wrapper navlogin ";
+
+    grid-template-rows: 3% 1fr;
+    grid-template-columns: 1fr 300px;
+    grid-gap: 1px;
+    .hader {
+      grid-area: header;
+
+      height: 76px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      box-shadow: 0px 1px 0px rgba(15, 7, 67, 0.05);
+      background-color: #1c1547;
+      margin-bottom: 1px;
+    }
+    .wrapper {
+      grid-area: wrapper;
+      margin-top: 3%;
+
+      background-size: cover;
+      height: 87vh;
+
+      position: relative;
+    }
+    .loginimag {
+      position: absolute;
+      width: 550px;
+    }
+    .form {
+      margin-top: 14%;
+      margin-inline-start: 40%;
+      width: 30%;
+    }
+    .navlogin {
+      margin-top: 17%;
+      grid-area: navlogin;
+      background-color: #e5e5e5;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      color: #0f0743;
+    }
   }
   @media only screen and (max-width: 600px) {
-    .bg-qr {
+    display: flex;
+    flex-direction: column;
+    .hader {
+      grid-area: header;
+
+      height: 76px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      box-shadow: 0px 1px 0px rgba(15, 7, 67, 0.05);
+      background-color: #1c1547;
+      margin-bottom: 1px;
+    }
+    .navlogin {
       display: none;
     }
-    .bg-info {
-      display: none;
+    .wrapper {
+      display: flex;
+      position: relative;
     }
-
-    .ant-form-item-label > label {
-      position: static;
-      width: 332px;
-      height: 19px;
-      text-align: right;
+    .form {
+      margin-top: 31%;
+      margin-inline-start: 12%;
     }
-    .ant-form {
-      margin-inline-start: -11%;
-    }
-
-    .ant-form {
+    .loginimag {
       position: absolute;
-      padding: 28%;
-      width: 267px;
-      margin-left: 5%;
-      text-align: center;
-      padding-left: 7%;
-      padding-right: 7%;
-      margin-inline-start: -5%;
+      width: 100%;
     }
-    .ant-form {
-      position: absolute;
+  }
 
-      width: 267px;
-      margin-left: 5%;
-      text-align: center;
-      padding-left: 7%;
-      padding-right: 7%;
-      margin-inline-start: -11%;
-    }
+  .bg-qr {
+    margin-top: -77%;
+    margin-inline-start: 5%;
+  }
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+  }
+  .ant-input-affix-wrapper {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+  }
+  .subbutton {
+    margin: 12px;
+    height: 63px;
+    width: 176px;
+    background: #ffd17e;
+    border-radius: 11px;
+    border-color: #ffd17e;
+    color: #0f0743;
+    font-family: "Heebo";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+  }
+  .buttonwraper {
+    position: relative;
+    display: flex;
+    float: right;
+    color: #0f0743;
+    font-family: "Heebo";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+  }
+  .errmaseg {
+    position: relative;
+    padding: 4px;
+
+    margin-top: 34px;
+    text-align: center;
+    background-color: #ff7875;
+    color: #0f0743;
+    font-family: "Heebo";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    word-wrap: break-word;
+  }
+  .emailmassg {
+    position: relative;
+    padding: 4px;
+
+    margin-top: 34px;
+    text-align: center;
+    background-color: #f0ffff;
+    color: #0f0743;
+    font-family: "Heebo";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    word-wrap: break-word;
+  }
+  .passbutoon {
+    width: 25%;
+
+    height: 63px;
+    background: #e5ebf3;
+    border-radius: 11px;
+    border-color: #e5ebf3;
+    color: #0f0743;
+    font-family: "Heebo";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 12px;
   }
 `;

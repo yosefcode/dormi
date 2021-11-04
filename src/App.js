@@ -164,7 +164,7 @@ function App() {
             <ConfigProvider direction={dir}>
               {!loginstatus?.logde ? (
                 <div>
-                  <Menu LoginScreen={true} />
+                  {/* <Menu LoginScreen={true} /> */}
                   <Login firstlogd={firstlogd} />
                   {/* </Language> */}
                 </div>

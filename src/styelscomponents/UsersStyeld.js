@@ -7,7 +7,10 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
-
+  .filtermenue {
+    display: flex;
+    flex-direction: column;
+  }
   .action {
     border: none;
     position: absolute;

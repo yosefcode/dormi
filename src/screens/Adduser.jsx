@@ -49,9 +49,6 @@ const Adduser = () => {
   return (
     <Container>
       <div className="hader">
-        <div className="goback" onClick={goback}>
-          <FiArrowRight />
-        </div>
         <p>{lang?.lang244}</p>
       </div>
 

@@ -3,9 +3,21 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 10%;
   flex-direction: column;
-
+  @media only screen and (min-width: 600px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* margin-top: 6%; */
+    align-content: space-between;
+    align-items: center;
+    button.ant-btn.ant-btn-primary {
+      margin-inline-start: 24%;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    margin-top: 10%;
+  }
   align-content: space-around;
   flex-wrap: wrap;
   .hader {

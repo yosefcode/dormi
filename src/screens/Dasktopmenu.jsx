@@ -92,26 +92,30 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
               </button>
               <hr />
 
+              {/*  "רשימת פניות" */}
+
+              <Link to="/ListOfreq">
+                <div className="ListOfreqmenue">
+                  {lang?.lang196}
+                  <Badge
+                    style={{
+                      backgroundColor: "#EBBE74",
+                      color: "black",
+                      fontsize: "16px",
+                    }}
+                    overflowCount={999}
+                    count={chors.chors}
+                  ></Badge>
+                </div>
+              </Link>
+
               {/*  "מטלות מתוזמנות" */}
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
                 <p onClick={closeMenue}>
                   <Link to="/Repeatedtask">{lang?.lang285} </Link>
                 </p>
               ) : null}
-              {/*  "רשימת פניות" */}
 
-              <Link to="/ListOfreq">
-                {lang?.lang196}
-                <Badge
-                  style={{
-                    backgroundColor: "#EBBE74",
-                    color: "black",
-                    fontsize: "16px",
-                  }}
-                  overflowCount={999}
-                  count={chors.chors}
-                ></Badge>
-              </Link>
               <hr />
 
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
