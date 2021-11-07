@@ -9,7 +9,7 @@ import { FaMapPin } from "react-icons/fa";
 export const OpenSmallscreencard = ({ user }) => {
   const defoltlang = useContext(DataContext).lang;
   let lang = defoltlang.lang;
-
+  let x = "tset git ";
   return (
     <div className="details">
       <p>
