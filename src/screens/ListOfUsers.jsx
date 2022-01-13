@@ -52,7 +52,6 @@ function Users() {
   const [rerender, setrerender] = useState(false);
   const [useridfortask, setuseridfortask] = useState();
   const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
-  const [visabletaskmodal, setvisabletaskmodal] = useState(false);
 
   let history = useHistory();
   const filterserch = useContext(DataContext).filterserch;
@@ -409,7 +408,30 @@ function Users() {
                   cunter = cunter + 1;
                 }
               });
-
+              let taskforecheccard = (
+                <Menu>
+                  {/* עריכה */}
+                  <Menu.Item
+                    onClick={() => {
+                      setuseridfortask(user.userguid);
+                    }}
+                  >
+                    <img src="/images/pen.svg" alt="icon" /> {lang?.lang243}
+                  </Menu.Item>
+                  {/* שלח הודעה  */}
+                  <Menu.Item>
+                    <img src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
+                  </Menu.Item>
+                  {/* מחיקה */}
+                  <Menu.Item
+                    onClick={() => {
+                      setuseridfortask(user.userguid);
+                    }}
+                  >
+                    <img src="/images/trash.svg" alt="icon" /> {lang?.lang147}
+                  </Menu.Item>
+                </Menu>
+              );
               return (
                 <Card
                   bordered={false}
@@ -495,16 +517,13 @@ function Users() {
                     <div className="fullscreen">
                       <hr />
                       <OpenSmallscreencard user={user} />
-                      <button
+                      <Dropdown
+                        overlay={taskforecheccard}
                         className="action"
-                        onClick={() => {
-                          setvisabletaskmodal(!visabletaskmodal);
-
-                          setuseridfortask(user.userguid);
-                        }}
+                        trigger={["click"]}
                       >
                         <BsThreeDotsVertical />
-                      </button>
+                      </Dropdown>
                     </div>
                   </div>
                 </Card>
@@ -512,23 +531,7 @@ function Users() {
             })
           : null}
         {/* משימות לגל כרטיס בנפד */}
-        <Quickclomodaltyle
-          visible={visabletaskmodal}
-          onCancel={() => {
-            setvisabletaskmodal(!visabletaskmodal);
-          }}
-          width={0}
-          style={{ marginTop: "120px" }}
-          footer={null}
-          // maskClosable={true}
-        >
-          <ListtaskforEdit
-            action={Taskeditfunc}
-            close={() => {
-              setvisabletaskmodal(!visabletaskmodal);
-            }}
-          />
-        </Quickclomodaltyle>
+
         <QuickcloDrawerstyle
           placement={"bottom"}
           onClose={() => {

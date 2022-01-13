@@ -171,6 +171,7 @@ const Login = () => {
             שחזר סיסמה
           </button>
           {fult ? <div className="errmaseg">{fult}</div> : null}
+
           {emailmassg ? <div className="emailmassg">{emailmassg}</div> : null}
         </div>
       </div>

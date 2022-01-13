@@ -726,8 +726,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             </Selectfilter>
           ) : null}
           {/* כמה פניות יש */}
-          <p id="discriptun">מציג {AllTikets.length} פניות : </p>
-          {AllTikets.length > 0 ? (
+          <p id="discriptun">מציג {AllTikets?.length} פניות : </p>
+          {AllTikets?.length > 0 ? (
             AllTikets.map((el, i) => {
               // משימות עריכה
               const setingmenu = (
@@ -818,6 +818,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 >
                   <div>
                     <div className="discriptun">
+                      <span id="displyid">{el.ticketid}</span>
+
                       <p id="discriptun">
                         {el.breadcrumb} - {el.categoryname}
                       </p>
@@ -895,7 +897,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       <hr />
 
                       <Carddatabig el={el} />
-                      <button
+                      {/* <button
                         className="action"
                         id="desktopactionbutton"
                         onClick={() => {
@@ -905,7 +907,15 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         }}
                       >
                         <BsThreeDotsVertical />
-                      </button>
+                      </button> */}
+                      <Dropdown
+                        overlay={setingmenu}
+                        id="desktopactionbutton"
+                        className="action"
+                        trigger={["click"]}
+                      >
+                        <BsThreeDotsVertical />
+                      </Dropdown>
                       <button
                         className="action"
                         id="phoneactionbutton"

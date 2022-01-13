@@ -47,7 +47,7 @@ export const Loginfunction = async (value) => {
 
       // changlang(objlang);
       let logde = { logde: true, ...res };
-
+      // debugger;
       // changloginstatus(logde);
       let resulotloginfunction = {
         changloginstatus: logde,
@@ -55,6 +55,7 @@ export const Loginfunction = async (value) => {
         changmasof: masof,
         changuserlist: userlist,
       };
+
       //get tokeb for fierbase
       getToken()
         .then(async (result) => {

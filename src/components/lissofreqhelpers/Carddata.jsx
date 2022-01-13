@@ -19,17 +19,19 @@ export function Carddatabig({ el }) {
     <div className="details">
       <p>
         <FaMapPin />
-        {el.locationName}-{el.roomName}
+        {el.locationName ? el.locationName : null}-
+        {el.roomName ? el.roomName : null}
       </p>
       <p>
-        <BsFillPersonFill /> {el.firstname} {el.lastname}
+        <BsFillPersonFill /> {el.firstname ? el.firstname : null}{" "}
+        {el.lastname ? el.lastname : null}
         <span
           className="Calltoaction"
           onClick={() => {
             window.open(`tel:${el?.phone}`);
           }}
         >
-          {el.phone}
+          {el.phone ? el.phone : null}
         </span>
       </p>
       <p>
@@ -44,8 +46,8 @@ export function Carddatabig({ el }) {
         </span>
       </p>
       <p>
-        {el.dateopened}
-        <span id="displyid">{el.ticketid}</span>
+        {el.dateopened ? el.dateopened : null}
+        {/* <span id="displyid">{el.ticketid}</span> */}
       </p>
       <ModalStyeld
         visible={imegvesebule}

@@ -1,18 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 
 import ReactToPrint from "react-to-print";
 import { AiOutlineFilePdf } from "react-icons/ai";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Checkform from "../components/checkform";
 import Nwerequest from "../screens/new_request";
 import User from "./user";
 import Menu from "./Menu";
-import ListOfreq from "./ListOfreq";
+
 import Location from "./Location";
 import Users from "./ListOfUsers";
 import Categoris from "./Categoris";
@@ -102,21 +97,6 @@ const ContrulScreen = ({ dir, rebderfromlog }) => {
               <div className="logidesktop">
                 <Ticketlis Repeatedtask={false} />
               </div>
-            </Route>
-
-            <Route path="/test">
-              {ticketlist && defullang ? (
-                <ListOfreq repeatedtask={false} />
-              ) : (
-                <div>
-                  <img
-                    src="/images/Semdimag.png"
-                    className="lodingimage"
-                    alt="lodingimage"
-                  />
-                  <FaSpinner />
-                </div>
-              )}
             </Route>
 
             <Route path="/ListOfreq">
