@@ -636,20 +636,24 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const [filterpresd, setfilterpresd] = useState(false);
   const [presd, setpresd] = useState(false);
   const [visabletaskmodal, setvisabletaskmodal] = useState(false);
+
   return (
-    <div>
+    <div >
       {edittask ? (
         <Contener Screnphunesize={screnphunesize}>
           <div className="Mangeroption">
+           {lang?.lang196}
+           <div className="div_MangerButton">
             <Buttonmuneu
+            className="MangerButton"
               presd={filterpresd}
               onClick={() => {
                 openfilter();
 
                 setfilterpresd(!filterpresd);
               }}
-            >
-              {lang?.lang196} <FaFilter />
+            > 
+              <FaFilter style={{marginLeft:"7px", marginTop:"-4px"}}/> סינון
               {filtercunter > 0 ? (
                 <div>
                   <Badge
@@ -668,20 +672,23 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
               ) : null}
             </Buttonmuneu>
 
-            <Buttonmuneu
+            <Buttonmuneu           
+              className="MangerButton"
+
               presd={presd}
               onClick={() => {
                 Opquickctaskoption();
                 setpresd(!presd);
               }}
             >
-              <img src="/images/multipulchuis.svg" /> בחירה
+              <img src="/images/multipulchuis.svg" alt="" style={{marginLeft:"7px", marginTop:"-4px"}}/> בחירה
             </Buttonmuneu>
             <button className="MangerButton shwobutton">
               הצג פניות פתוחות
             </button>
 
             <Exelexport data={AllTikets} />
+            </div>
 
             <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
               <button className="DropdownButton shwobuttondropdown">
@@ -726,7 +733,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             </Selectfilter>
           ) : null}
           {/* כמה פניות יש */}
-          <p id="discriptun">מציג {AllTikets?.length} פניות : </p>
+          <p id="number_inquiries">מציג {AllTikets?.length} פניות : </p>
           {AllTikets?.length > 0 ? (
             AllTikets.map((el, i) => {
               // משימות עריכה
@@ -817,10 +824,11 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   }}
                 >
                   <div>
-                    <div className="discriptun">
                       <span id="displyid">{el.ticketid}</span>
+                      <div className="inquir">
 
-                      <p id="discriptun">
+                      
+                      <p id="description">
                         {el.breadcrumb} - {el.categoryname}
                       </p>
                       <div className="Smallcard">
@@ -858,6 +866,14 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                             </div>
                           </>
                         )}
+                                            <Dropdown
+                        overlay={setingmenu}
+                        id="desktopactionbutton"
+                        className="action_inquir"
+                        trigger={["click"]}
+                      >
+                        <BsThreeDotsVertical />
+                      </Dropdown>
                       </div>
                       <input
                         type="checkbox"
@@ -867,6 +883,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         ref={(el) => (checkboxref.current[i] = el)}
                         value={el.ticketguid}
                       />
+
                     </div>
                     <p id="cooment"> {el.comments}</p>
 
@@ -893,8 +910,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         <BsThreeDotsVertical />
                       </button>
                     </div>
+                    </div>
+
                     <div className="fullscreen">
-                      <hr />
+                      <hr style={{borderTop: "1px solid #E9F0F8"}}/>
 
                       <Carddatabig el={el} />
                       {/* <button
@@ -908,14 +927,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       >
                         <BsThreeDotsVertical />
                       </button> */}
-                      <Dropdown
-                        overlay={setingmenu}
-                        id="desktopactionbutton"
-                        className="action"
-                        trigger={["click"]}
-                      >
-                        <BsThreeDotsVertical />
-                      </Dropdown>
                       <button
                         className="action"
                         id="phoneactionbutton"
@@ -926,7 +937,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       >
                         <BsThreeDotsVertical />
                       </button>
-                    </div>
                   </div>
                 </Card>
               );

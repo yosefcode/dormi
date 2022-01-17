@@ -246,12 +246,12 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                 </Select>
               </Form.Item>
               {/* קטגוריה משנית  */}
+              {subcategory ? (
               <Form.Item
                 name="categoryid"
                 labelAlign={"right"}
                 rules={[{ required: true, message: lang?.lang110 }]}
               >
-                {subcategory ? (
                   <Select showSearch placeholder={lang?.lang110}>
                     {subcategory
                       ? subcategory.map((el) => {
@@ -263,8 +263,9 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                         })
                       : null}
                   </Select>
-                ) : null}
               </Form.Item>
+                ) :                null
+}
               {/* </div> */}
               {/* הערות */}
               <Form.Item name="comments">
@@ -289,7 +290,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                 <Form.Item
                   name="locationid"
                   rules={[{ required: true, message: lang?.lang340 }]}
-                  className="flexposition"
+                  className="select_half"
                 >
                   <Select
                     showSearch
@@ -313,10 +314,9 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                 <Form.Item
                   name="roomid"
                   rules={[{ required: true, message: lang?.lang341 }]}
-                  className="flexposition"
+                  className="select_half"
                 >
-                  {selectromm ? (
-                    <Select showSearch placeholder={lang?.lang341}>
+                    <Select showSearch={rommarry?true:false}  placeholder={rommarry?lang?.lang341:null}>
                       {rommarry
                         ? rommarry.map((el, index) => {
                             return (
@@ -330,11 +330,10 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                           })
                         : null}
                     </Select>
-                  ) : null}
                 </Form.Item>
               </div>
               {/* הפנה לאיש צוות */}
-              <Form.Item name="steff" className="flexposition">
+              <Form.Item name="steff" >
                 <Select showSearch placeholder={lang?.lang240}>
                   <Option value={false}>{lang?.lang240}</Option>
 
@@ -386,15 +385,17 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                   ) : null}
                 </div>
               ) : null}
+<div className="div_btn_send">
 
-              <Button type="primary" htmlType="submit" loading={loadings[2]}>
-                {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}
-              </Button>
-            </Form>
             <button className="cancel" onClick={closecancel}>
               {" "}
               ביטול
             </button>
+              <Button type="primary" htmlType="submit" loading={loadings[2]} >
+                {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}
+              </Button>
+</div>
+            </Form>
           </div>
         ) : (
           <div>

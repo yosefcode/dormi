@@ -8,15 +8,13 @@ const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 const Exelexport = ({ data }) => {
   return (
-    <div>
+    <div className="MangerButton shwobutton">
       <ExcelFile
         element={
-          <button className="MangerButton shwobutton">
-            יצא לאקסל <ImCloudDownload />
-          </button>
+             <ImCloudDownload style={{marginLeft:"7px", marginTop:"4px", fontSize:"2.2rem"}}/>
         }
         filename="dormi"
-      >
+      >xzxc
         <ExcelSheet data={data} name="Dormi">
           <ExcelColumn label="breadcrumb" value="breadcrumb" />
           <ExcelColumn label="categoryname" value="categoryname" />
@@ -43,7 +41,7 @@ const Exelexport = ({ data }) => {
           <ExcelColumn label="ticketguid" value="ticketguid" />
           <ExcelColumn label="urgencyadmin" value="urgencyadmin" />
         </ExcelSheet>
-      </ExcelFile>
+      </ExcelFile>יצא לאקסל
     </div>
   );
 };

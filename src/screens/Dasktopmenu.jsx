@@ -4,6 +4,7 @@ import { Menu, Badge, Avatar } from "antd";
 
 import { Contyner, MenuStyel } from "../styelscomponents/menustild";
 import { ModalStyeldnewreq } from "../styelscomponents/modaldtyeld";
+import logo from "../assets/logo.png";
 
 import { VscAccount } from "react-icons/vsc";
 import Desktnewreq from "../components/Desktnewreq";
@@ -65,7 +66,7 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
         <div className="hderdesktop">
           {/* <AiOutlineMenu onClick={closeMenue} /> */}
           <div className="desktoplogo">
-            <div className="desktopicon">gg</div>
+            <div className="desktopicon"><img src={logo} alt="" width="25px" height="25px" /></div>
             <svg
               width="70"
               height="17"
@@ -84,41 +85,50 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
               alt="Image"
               className="imagelogo"
             /> */}
-          <div className="desktopmenu">
             <div className="Drawercontennet">
               {/* פתח פנייה חדשה */}
               <button className="desktopbutton" onClick={Opentask}>
                 {lang?.lang100}
               </button>
-              <hr />
+              <hr style={{borderTop: "1px solid #2C2A51", margin:"24px 0"}}/>
 
               {/*  "רשימת פניות" */}
 
               <Link to="/ListOfreq">
                 <div className="ListOfreqmenue">
                   {lang?.lang196}
-                  <Badge
+                  <div className="count_inquiries">{chors.chors}</div>
+                  {/* <Badge 
                     style={{
-                      backgroundColor: "#EBBE74",
-                      color: "black",
-                      fontsize: "16px",
+                      display: "flex",
+justifyContent: "center",
+alignItems: "center",
+                      width: "32px",
+height: "18px",
+                      backgroundColor: "rgba(255, 255, 255, 0.26)",
+                      color: "#FFFFFF",
+                      fontsize: "1.4rem",
+                      boxShadow: "rgb(255 255 255 / 26%) 0px 0px 0px 14px inset",
+                      marginBottom:"-5px"
                     }}
                     overflowCount={999}
                     count={chors.chors}
-                  ></Badge>
+                  ></Badge> */}
                 </div>
               </Link>
 
               {/*  "מטלות מתוזמנות" */}
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
                 <p onClick={closeMenue}>
-                  <Link to="/Repeatedtask">{lang?.lang285} </Link>
+                  <Link className="ListOfreqmenue" to="/Repeatedtask">{lang?.lang285} </Link>
                 </p>
               ) : null}
 
-              <hr />
+<hr style={{borderTop: "1px solid #2C2A51", margin:"24px 0"}}/>
+<div className="div_dropdown">
 
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
+                
                 <MenuStyel
                   style={{ background: "#1c1547", border: "#1c1547" }}
                   // defaultSelectedKeys={["1"]}
@@ -132,26 +142,27 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
                     title={lang?.lang167}
                     style={{ border: "none" }}
                   >
-                    <Menu.Item key="8">
+                    <Menu.Item key="8"                   
+>
                       {/* "משתמשים" */}
 
-                      <Link to="list_users">{lang?.lang102} </Link>
+                      <Link to="list_users"  style={{fontSize: "1.3rem"}}>{lang?.lang102} </Link>
                     </Menu.Item>
                     <hr />
                     <Menu.Item key="9">
                       {/* מיקום */}
-                      <Link to="location">{lang?.lang333} </Link>
+                      <Link to="location"style={{fontSize: "1.3rem"}}>{lang?.lang333} </Link>
                     </Menu.Item>
                     <hr />
                     <Menu.Item key="10">
                       {/* קטגוריות */}
-                      <Link to="categoris">{lang?.lang104} </Link>
+                      <Link to="categoris"style={{fontSize: "1.3rem"}}>{lang?.lang104} </Link>
                     </Menu.Item>
                     <hr />
                     <Menu.Item key="11">
                       {" "}
                       {/* הגדרות */}
-                      <Link to="setings">{lang?.lang167}</Link>
+                      <Link to="setings"style={{fontSize: "1.3rem"}}>{lang?.lang167}</Link>
                     </Menu.Item>
                   </SubMenu>
                 </MenuStyel>
@@ -159,7 +170,8 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
 
               {/* סטטיסטיקה */}
               {userlevelid === 10 || userlevelid === 13 ? (
-                <Link to="/Statistics">{lang?.lang105}</Link>
+
+                <Link to="/Statistics" ><div className="btn_Statistics">{lang?.lang105}</div></Link>
               ) : null}
 
               {userlevelid === 10 ? (
@@ -171,12 +183,13 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
                   <SubMenu key="sub1-2" title="טפסים">
                     <Menu.Item key="3">
                       {" "}
-                      <Link to="/Forms"> טפסים</Link>
+                      <Link to="/Forms"style={{fontSize: "1.3rem"}}> טפסים</Link>
                     </Menu.Item>
+                    <hr />
 
                     <Menu.Item key="4">
                       {" "}
-                      <Link to="/SendsForm"> טפסים שנשלחו</Link>
+                      <Link to="/SendsForm"style={{fontSize: "1.3rem"}}> טפסים שנשלחו</Link>
                     </Menu.Item>
                   </SubMenu>
                 </MenuStyel>
@@ -190,29 +203,28 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
                 <SubMenu
                   key="sub1-4"
                   icon={
-                    <div style={{ marginInlineStart: "-20%" }}>
+                    <div style={{ marginInlineStart: "-24px" }} className="btn_profile">
                       <VscAccount />
-                    </div>
+                     </div>
                   }
                 >
                   <Menu.Item key="13">
-                    <Link to="/Users"> {lang?.lang289}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="14" onClick={exit}>
+                    <Link to="/Users" style={{fontSize: "1.3rem"}}> {lang?.lang289}</Link>
+                  </Menu.Item>                    <hr />
+
+                  <Menu.Item key="14" onClick={exit} >
                     {lang?.lang107}
                   </Menu.Item>
                 </SubMenu>
               </MenuStyel>
             </div>
-          </div>
+            </div>
           <ModalStyeldnewreq
             title={lang?.lang100}
             visible={visible}
             onCancel={Cancelmodalreq}
             footer={false}
-            style={{
-              wordBreak: "break-word",
-            }}
+            width={"100%"}
             // bodyStyle={{ wordBreak: "break-word", background: "red" }}
           >
             <Desktnewreq setvisual={Cancelmodalreq} />

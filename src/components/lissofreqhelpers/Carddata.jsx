@@ -17,26 +17,21 @@ export function Carddatabig({ el }) {
 
   return (
     <div className="details">
-      <p>
-        <FaMapPin />
-        {el.locationName ? el.locationName : null}-
-        {el.roomName ? el.roomName : null}
-      </p>
-      <p>
-        <BsFillPersonFill /> {el.firstname ? el.firstname : null}{" "}
-        {el.lastname ? el.lastname : null}
-        <span
+        <FaMapPin style={{marginLeft:"7px"}}/> {el.locationName ? el.locationName : null} - {el.roomName ? el.roomName : null}
+        <BsFillPersonFill style={{marginLeft:"7px", marginRight:"23px", fontSize:"1.2rem", }}/> {" "}{el.firstname ? el.firstname : null}{" "}
+        {" "}  {el.lastname ? el.lastname : null}
+         <p
+        style={{marginRight:"5px"}}
           className="Calltoaction"
           onClick={() => {
             window.open(`tel:${el?.phone}`);
           }}
         >
           {el.phone ? el.phone : null}
-        </span>
-      </p>
-      <p>
-        <AiOutlineCamera />
+        </p>
+        <AiOutlineCamera style={{marginLeft:"7px", marginRight:"23px", fontSize:"1.4rem", }}/>
         <span
+        
           className="Calltoaction"
           onClick={() => {
             setimegvesebule(true);
@@ -44,8 +39,7 @@ export function Carddatabig({ el }) {
         >
           תמונה
         </span>
-      </p>
-      <p>
+      <p style={{ marginRight:"23px"}}>
         {el.dateopened ? el.dateopened : null}
         {/* <span id="displyid">{el.ticketid}</span> */}
       </p>
@@ -90,9 +84,10 @@ export function Urgensy({
               color={urgency}
               style={{
                 insetinlinestart: "4%",
+                margin: "0 -5px 0 5px"
               }}
-            ></Badge>
-            {urgencytext}
+            ></Badge>{" "}
+            {" "}{urgencytext}
           </div>
         }
         onChange={onChinge}

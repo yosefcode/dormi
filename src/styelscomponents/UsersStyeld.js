@@ -29,9 +29,6 @@ export const Contener = styled.div`
     .Smallcard {
       background-color: red;
     }
-    .Mangeroption {
-      margin-top: -8%;
-    }
     .details {
       display: flex;
       justify-content: space-around;

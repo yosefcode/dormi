@@ -5,31 +5,95 @@ export const ModalStyeldnewreq = styled(Modal)`
   .ant-modal-content {
     border-radius: 19px;
     text-align: center;
-  }
-  @media only screen and (min-width: 600px) {
-    .ant-modal-content {
-      width: 792px;
-      height: 700px;
-    }
+    width: 50%;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: -50px;
   }
 
   .ant-modal-header {
-    border-radius: 19px;
     border-bottom: none;
-    text-align: center;
+    text-align: right;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  .ant-modal-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-family: "Heebo";
+    color: #0f0743;
+  }
+  .ant-modal-body {
+    padding: 0;
+  }
+  .div_btn_send {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ant-btn.ant-btn-primary {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 70%;
+    height: 55px;
+    color: #0f0743;
+    border: none;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+  .cancel {
+    width: 25%;
+    height: 55px;
+    border: none;
+    background: #e5ebf3;
+    border-radius: 11px;
+    color: #0f0743;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+    margin: 0 0;
+    height: 50px;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .ant-form-item textarea.ant-input {
+    padding: 10px 23px;
+  }
+
+  .selecthiden {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .select_half {
+    width: 48%;
+  }
+  .ant-select-arrow {
+    // display: none;
   }
 `;
 export const ModalStyeld = styled(Modal)`
-  .ant-modal-content {
-    border-radius: 19px;
-    text-align: center;
-  }
-  @media only screen and (min-width: 600px) {
-    .ant-modal-content {
-      width: 792px;
-      height: 786px;
-    }
-  }
+  // . {
+  //   width: 1800px !important;
+  //   height: 800px;
+  //   background: red !important;
+  // }
+  // .ant-modal-content {
+  //   border-radius: 19px;
+  //   text-align: center;
+  //   width: 100%;
+  //   height: 180px;
+  // }
 
   .ant-modal-header {
     border-radius: 19px;

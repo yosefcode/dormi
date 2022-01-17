@@ -79,18 +79,18 @@ export const FormContenerdesktop = styled.div`
     float: right;
     margin-top: -69px;
   }
-  .cancel {
-    width: 157px;
-    height: 63px;
-    left: 515px;
-    top: 13px;
+  // .cancel {
+  //   width: 157px;
+  //   height: 63px;
+  //   left: 515px;
+  //   top: 13px;
 
-    background: #e5ebf3;
-    border-radius: 11px;
-    border-color: #e5ebf3;
-    color: rgba(15, 7, 67, 1);
-    float: right;
-  }
+  //   background: #e5ebf3;
+  //   border-radius: 11px;
+  //   border-color: #e5ebf3;
+  //   color: rgba(15, 7, 67, 1);
+  //   float: right;
+  // }
   .selecthiden {
     display: flex;
   }
@@ -103,15 +103,15 @@ export const FormContenerdesktop = styled.div`
     padding: 14px;
   }
 
-  .ant-btn.ant-btn-primary {
-    background: #ffd17e;
-    border-radius: 11px;
-    width: 491px;
-    height: 63px;
-    border-color: #ffd17e;
-    color: rgba(15, 7, 67, 1);
-    float: left;
-  }
+  // .ant-btn.ant-btn-primary {
+  //   background: #ffd17e;
+  //   border-radius: 11px;
+  //   width: 491px;
+  //   height: 63px;
+  //   border-color: #ffd17e;
+  //   color: rgba(15, 7, 67, 1);
+  //   float: left;
+  // }
   .ant-select-selector {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;

@@ -27,13 +27,51 @@ export const Drawerstyle = styled(Drawer)`
 
 export const Contyner = styled.div`
   .ListOfreqmenue {
-    margin-bottom: 7px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: "Heebo";
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    height: 2.4rem;
   }
-  .Drawercontennet {
-    /* display: flex;
-    flex-direction: row;
+  .count_inquiries {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start; */
+    align-items: center;
+    width: 35px;
+    height: 19px;
+    background: rgba(255, 255, 255, 0.36);
+    color: white;
+    fontsize: 1.4rem;
+    border-radius: 10px;
+  }
+
+  .Drawercontennet {
+    width: 70%;
+    margin: 45px auto;
+  }
+  ul.ant-menu.ant-menu-root.ant-menu-inline {
+    min-height: 40px;
+  }
+  .btn_Statistics {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-family: "Heebo";
+    color: rgba(228, 237, 237, 0.71);
+  }
+  .btn_profile {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-family: "Heebo";
+    color: rgba(228, 237, 237, 0.71);
   }
 
   /* @media only screen and (min-width: 600px) {
@@ -60,10 +98,19 @@ export const Contyner = styled.div`
     background-color: red;
   }
   .hderdesktop {
-    margin-top: 39px;
+    margin-top: 30px;
     display: flex;
-
+    position: relative;
     flex-direction: column;
+    height: calc(100vh - 30px);
+  }
+  .div_dropdown {
+    // overflow-y: auto;
+    // max-height: 50vh;
+    overflow-x: hidden;
+  }
+  .ant-menu-item-only-child {
+    font-size: 1rem !important;
   }
   a {
     color: rgba(228, 237, 237, 0.71);
@@ -82,48 +129,39 @@ export const Contyner = styled.div`
     transform: rotate(180deg);
   }
   .desktopbutton {
-    margin-bottom: 17px;
     align-items: center;
-    padding: 7px;
-
-    position: static;
-    width: 196px;
+    width: 100%;
     height: 33px;
-    left: 0px;
-    top: 27px;
-
     background: #ffd17e;
     border-radius: 4px;
-    /* font-family:""; */
-    font-style: normal;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 1.4rem;
     line-height: 118.88%;
-    /* or 15px */
 
     text-align: center;
 
     color: #0f0743;
   }
-  .desktopmenu {
-    margin-top: 84px;
-
-    margin-inline-start: 23px;
-    width: 166px;
-  }
   .desktopicon {
     width: 29px;
     height: 29px;
-    left: 83px;
     top: 0px;
     margin-inline-end: 13px;
     background: rgba(228, 237, 237, 0.13);
     border-radius: 72.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ant-menu-submenu-arrow {
+    right: auto !important;
+    left: 0px !important;
   }
   .desktoplogo {
+    margin-right: 10%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
   }
 
@@ -207,16 +245,25 @@ export const MenuStyel = styled(Menu)`
     background-color: #1c1547 !important;
   }
   .ant-menu-title-content {
-    color: #e5e5e5;
+    color: rgba(228, 237, 237, 0.71);
     background-color: #1c1547 !important;
-    margin-inline-start: -21px;
+    margin-inline-start: -24px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-family: "Heebo";
   }
   .ant-menu-submenu-arrow {
-    color: #e5e5e5 !important;
+    color: rgba(228, 237, 237, 0.71);
     background: #1c1547 !important;
   }
   .ant-menu-item-icon {
-    color: #e5e5e5 !important;
+    color: rgba(228, 237, 237, 0.71);
     background: #1c1547 !important;
+    font-size: 2rem;
+    // right: 2.6rem;
+    // position: absolute;
+  }
+  .ant-menu-sub.ant-menu-inline > .ant-menu-item {
+    height: 30px;
   }
 `;

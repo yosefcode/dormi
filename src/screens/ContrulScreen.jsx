@@ -46,7 +46,7 @@ const ContrulScreen = ({ dir, rebderfromlog }) => {
               <p id="usename">
                 {loginstatus.firstname + " " + loginstatus.lastname}{" "}
               </p>
-              <p>שם תוכנית </p>
+              <p id="plan_name">שם תוכנית </p>
             </div>
             <svg
               width="40"
