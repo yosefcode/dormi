@@ -112,6 +112,18 @@ font-weight: 700;
    align-items: center;
     justify-content: center;
 }
+.task_todo{
+  height: 25px;
+  background: #FFD17E;
+  font-weight: 500;
+  font-size: 1.2rem;
+   color: #0f0743;
+   margin-top:-3px;
+   display:flex;
+   align-items: center;
+    justify-content: space-between;
+    padding: 0 10px
+}
 .action_inquir{
   height: 20px;
 width: 35px;
@@ -133,6 +145,7 @@ color:#807E94;
 }
 .Calltoaction{
   cursor: pointer;
+  text-decoration: underline;
 }
 p{
   margin-bottom:0 !important;

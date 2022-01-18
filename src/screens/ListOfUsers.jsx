@@ -16,6 +16,8 @@ import { OpenSmallscreencard } from "../components/listuserhalpers/carddara";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsTrash, BsThreeDotsVertical, BsLayers } from "react-icons/bs";
 import { Buttonmuneu } from "../styelscomponents/Buttonmuneu";
+import { Style_users } from "../styelscomponents/Styelsuser";
+
 import {
   QuickcloDrawerstyle,
   Quickclomodaltyle,
@@ -32,7 +34,7 @@ const Numberoftasks = "מספר פניות ";
 const delet = "מחיקה";
 
 function Users() {
-  document.body.style.backgroundColor = "white";
+  // document.body.style.backgroundColor = "white";
   const defoltlang = useContext(DataContext).lang;
   const userlist = useContext(DataContext).userlist;
   const ticketlist = useContext(DataContext).ticketlist;
@@ -41,7 +43,7 @@ function Users() {
   const checkboxref = useRef([]);
   const lang = defoltlang?.lang;
 
-  document.body.style.backgroundColor = "white";
+  // document.body.style.backgroundColor = "white";
 
   const [screnphunesize, setscrenphunesize] = useState();
   const [firstlode, setfirstlode] = useState(false);
@@ -263,16 +265,18 @@ function Users() {
 
   return (
     <Contener Screnphunesize={screnphunesize}>
-      <div className="Mangeroption">
+      <div className="Mangeroption_users">
+      {lang?.lang102}
+      <div className="div_MangerButton_users">
         <Buttonmuneu
           presd={filterpresd}
-          // className="MangerButton"
+          className="MangerButton"
           onClick={() => {
             openfilter();
             setfilterpresd(!filterpresd);
           }}
         >
-          {lang?.lang248} <FaFilter />
+         <FaFilter style={{marginLeft:"7px", marginTop:"-4px"}}/>  {lang?.lang248}
         </Buttonmuneu>
         {/* {filtercunter > 0 ? (
           <div> */}
@@ -292,21 +296,22 @@ function Users() {
         ) : null} */}
         <Buttonmuneu
           presd={presd}
-          // className="MangerButton"
+          className="MangerButton"
           id="chusingbutoon"
           onClick={() => {
             Opquickctaskoption();
             setpresd(!presd);
           }}
         >
-          <img src="/images/multipulchuis.svg" /> בחירה
+          <img src="/images/multipulchuis.svg" alt="" style={{marginLeft:"7px", marginTop:"-4px"}}/> בחירה
         </Buttonmuneu>
         {/* <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
         </button> */}
         <button className="MangerButton shwobutton">
-          <Link to="/Adduser">{lang?.lang244} </Link>
+          <Link to="/Adduser" style={{color: ' #0f0743'}}>{lang?.lang244}</Link>
         </button>
+        </div>
         {/* <button className="MangerButton shwobutton" onClick={AllOpenststus}>
           <p>
             {opentikitatatus ? "הצג כל פרטי המשתמש" : "סגור כל פרטי המשתמש"}{" "}
@@ -377,7 +382,6 @@ function Users() {
           </div>
         ) : null}
 
-        <h2>{lang?.lang102}</h2>
 
         {Alluserarry
           ? Alluserarry.map((user, i) => {
@@ -450,14 +454,22 @@ function Users() {
                   }}
                 >
                   <div>
-                    <div className="discriptun">
-                      <p id="discriptun">
-                        <Avatar size={42} icon={<UserOutlined />} />{" "}
-                        {user.firstname} {user.lastname}
-                      </p>
-                      <Badge color={levelscolor} text={levelname} />
-                      {cunter > 0 ? (
-                        <div
+                    <div className="yuser_name">
+                      <div>
+                        <Avatar size={38} icon={<UserOutlined />} style={{marginLeft:"7px", marginTop:"-4px"}}/>{" "}
+                        <span id="yuser_name">
+   {user.firstname} {user.lastname}</span>
+                      </div>
+                      <div className="status_yuser_name">
+                      <div className="level_neme">
+            <Badge
+              color={levelscolor}
+            ></Badge>
+            {levelname}
+          </div>
+
+                      {/* {cunter > 0 ? ( */}
+                      <div className="open_inquiries"
                           onClick={() => {
                             gotolistoftask([
                               user.firstname + " " + user.lastname,
@@ -465,24 +477,28 @@ function Users() {
                               user.lastname,
                             ]);
                           }}
-                        >
-                          <Badge
-                            style={{
-                              backgroundColor: "#EBBE74",
-                              color: "black",
-                              fontsize: "16px",
-                              top: "-16px",
-                            }}
-                            overflowCount={999}
-                            count={cunter}
+                        >פניות פתוחות
+                          <div className="count_open_inquiries"
+                            // overflowCount={ 999}
+                            // count={cunter === 0 ?"0":cunter}
                           >
-                            פניות פתוחות
-                          </Badge>
-                        </div>
-                      ) : (
+                           {cunter}
+                          </div> 
+                          </div>
+                      {/* ) : (
                         <div></div>
-                      )}
+                        )} */}
+                        <Dropdown
+                      overlay={taskforecheccard}
+                      className="action_yuser_name"
+                      trigger={["click"]}
+                    >
+                      <BsThreeDotsVertical />
+                    </Dropdown>
+
                     </div>
+                    </div>
+
                     <input
                       type="checkbox"
                       id="horns"
@@ -514,16 +530,9 @@ function Users() {
                       </button>
                     </div>
 
-                    <div className="fullscreen">
                       <hr />
+                    <div className="fullscreen">
                       <OpenSmallscreencard user={user} />
-                      <Dropdown
-                        overlay={taskforecheccard}
-                        className="action"
-                        trigger={["click"]}
-                      >
-                        <BsThreeDotsVertical />
-                      </Dropdown>
                     </div>
                   </div>
                 </Card>

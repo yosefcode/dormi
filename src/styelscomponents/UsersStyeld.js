@@ -7,6 +7,165 @@ export const Contener = styled.div`
   align-content: center;
   justify-content: center;
   align-items: center;
+  font-family: "Heebo";
+  width: 84%;
+  margin: 0 auto;
+
+  .Mangeroption_users {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 3rem;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .div_MangerButton_users {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: end;
+    width: 60%;
+  }
+
+  .MangerButton {
+    border:  1px solid #0F0743; !important;
+    box-sizing: border-box;
+    border-radius: 11px;
+    align-items: center;
+    padding: 0px 16px;
+    background-color: white;
+    width: 24%;
+    height: 55px;
+    color: #0f0743 !important;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-inline-start: 2%;
+    margin-inline-end: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+
+  }
+
+  .haderflex {
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ant-card {
+    width: 100%;
+padding: 20px;
+margin: 5px 0;
+background: #FFFFFF;
+border: 1px solid #D6E2F1;
+box-sizing: border-box;
+border-radius: 11px;
+  }
+  .ant-card-body {
+     padding: 0;
+    }
+.yuser_name{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#yuser_name{
+    font-size: 1.7rem;
+  font-weight: 700;
+    color: #0F0743;
+    margin-bottom: 0;
+  
+  }
+
+  .status_yuser_name{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end
+width: 50%;
+  }
+
+  .level_neme {
+    margin: 0 10px;
+    width: 80px;
+    height: 25px;
+    background: #e5ebf3;
+    font-weight: 500;
+    font-size: 1.2rem;
+     color: #0f0743;
+     display:flex;
+     align-items: center;
+      justify-content: center;
+      padding-top:1px;
+
+  }
+  .open_inquiries{
+    margin: 0 10px;
+    width: 120px;
+    height: 25px;
+    background:#EBBE74;
+    padding-top:1px;
+
+    font-weight: 500;
+    font-size: 1.2rem;
+     color: #0f0743;
+     display:flex;
+     align-items: center;
+      justify-content: center;
+// color: white;
+cursor: pointer;
+  }
+  .count_open_inquiries{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 20px;
+    background: rgba(255,255,255,0.56);
+    // color: white;
+    fontsize: 1.4rem;
+    border-radius: 10px;
+    Margin:-1px 5px 0 0;
+    padding-top:1px;
+    
+  }
+
+  .action_yuser_name{
+    height: 20px;
+  width: 20px;
+  color:#807E94;
+  cursor: pointer;
+
+  }
+  .fullscreen {
+    margin-top:15px;
+    width: 100%;
+  }
+  .details {
+    width: 100%;
+    font-weight: 500;
+    font-size: 1.2rem;
+      color: #0f0743;
+    display: grid;
+    grid-template-columns: 30% 20% 17% 17% 16% ;  }
+
+  .Calltoaction {
+    text-decoration-line: underline;
+    cursor: pointer;
+  }
+  .ant-badge-status{
+    line-height: 0;
+  }
+
   .filtermenue {
     display: flex;
     flex-direction: column;
@@ -18,20 +177,9 @@ export const Contener = styled.div`
 
     background: none;
   }
-  .Mangeroption {
-    display: flex;
-    margin-top: 11px;
-    flex-wrap: nowrap;
-    align-content: space-around;
-    justify-content: space-around;
-  }
   @media only screen and (min-width: 600px) {
     .Smallcard {
       background-color: red;
-    }
-    .details {
-      display: flex;
-      justify-content: space-around;
     }
     .smallscreen {
       display: none;
@@ -39,49 +187,20 @@ export const Contener = styled.div`
     .action {
       bottom: 69%;
     }
-    .discriptun {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      width: 90%;
-    }
     .closecheckboox {
       position: absolute;
       top: 11%;
       inset-inline-start: 93%;
     }
-    #discriptun {
-      margin-inline-end: 24px;
-    }
-  }
-  #discriptun {
-    font-weight: bold;
-    font-size: 17px;
-    margin-top: 5px;
-    margin-bottom: -2px;
-    color: #0f0743;
-    line-height: 122.88%;
-
-    text-align: start;
-  }
   @media only screen and (max-width: 600px) {
     .Mangeroption {
       margin-top: 11px;
-    }
-    #discriptun {
-      margin-inline-end: -15px;
-      margin-inline-start: 4px;
     }
     .fullscreen {
       display: none;
     }
     .action {
       bottom: 9px;
-    }
-    .discriptun {
-      display: flex;
-      flex-direction: column;
     }
     .closecheckboox {
       position: absolute;
@@ -105,15 +224,6 @@ export const Contener = styled.div`
 
   hr {
     border: 1px solid #e9f0f8;
-  }
-  .Calltoaction {
-    text-decoration-line: underline;
-    font-weight: bold;
-    color: #0f0743;
-    margin-inline-start: 9px;
-  }
-  .bigcardparagraf {
-    margin-inline-start: 13px;
   }
 
   @media only screen and (min-width: 600px) {
@@ -229,57 +339,18 @@ export const Contener = styled.div`
     margin-top: 2px;
   }
 
-  .haderflex {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    word-wrap: break-word;
-  }
   @media only screen and (max-width: 600px) {
     .ant-card {
       width: 315px;
     }
   }
-  @media only screen and (min-width: 600px) {
-    .ant-card {
-      width: 900px;
-    }
-  }
-  .ant-card {
-    background: #ffffff;
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    margin-top: 4px;
-  }
-  .ant-card-body {
-    padding: 12px;
-  }
-  .ant-card-extra {
-    margin-right: -14px;
-  }
+
 
   .cardbutton {
     background-color: white;
     border: none;
   }
 
-  .MangerButton {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    align-items: center;
-    padding: 0px 16px;
-    background-color: white;
-    width: 127.5px;
-    height: 55px;
-    color: #0f0743;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 500;
-    margin-inline-end: 4%;
-  }
   .DropdownButton {
     border: 1px solid #d6e2f1;
     box-sizing: border-box;
@@ -300,26 +371,26 @@ export const Contener = styled.div`
     display: ${(props) =>
       props.Screnphunesize ? "inherit" : "none"}!important;
   }
-  .ant-select {
-    width: 200px;
-    margin-top: 10px;
+  // .ant-select {
+  //   width: 200px;
+  //   margin-top: 10px;
 
-    border-color: none;
-    margin-bottom: 3px;
-    box-sizing: border-box;
-    border-radius: 11px;
-  }
-  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
-    margin-bottom: 2px;
-  }
-  .ant-select-selector {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
-  }
+  //   border-color: none;
+  //   margin-bottom: 3px;
+  //   box-sizing: border-box;
+  //   border-radius: 11px;
+  // }
+  // .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  //   border: 1px solid #d6e2f1;
+  //   box-sizing: border-box;
+  //   border-radius: 11px;
+  //   border-color: none;
+  //   margin-bottom: 2px;
+  // }
+  // .ant-select-selector {
+  //   border: 1px solid #d6e2f1;
+  //   box-sizing: border-box;
+  //   border-radius: 11px;
+  //   border-color: none;
+  // }
 `;

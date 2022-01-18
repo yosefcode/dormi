@@ -12,8 +12,8 @@ export const OpenSmallscreencard = ({ user }) => {
 
   return (
     <div className="details">
-      <p>
-        <AiOutlineMail />
+      <div>
+        <AiOutlineMail  style={{marginLeft:"10px", marginBottom:"-3px", fontSize:"1.5rem", }}/>
 
         <span
           className="Calltoaction"
@@ -23,9 +23,9 @@ export const OpenSmallscreencard = ({ user }) => {
         >
           {user.email}
         </span>
-      </p>
-      <p>
-        <AiFillPhone />
+      </div>
+      <div>
+        <AiFillPhone style={{marginLeft:"10px", marginBottom:"-3px", fontSize:"1.5rem", }}/>
 
         <span
           className="Calltoaction"
@@ -35,16 +35,20 @@ export const OpenSmallscreencard = ({ user }) => {
         >
           {user.phone}
         </span>
-      </p>
-      <p>
-        <FaMapPin />
+      </div>
+      <div>
+        <FaMapPin style={{marginLeft:"10px", marginBottom:"-3px", fontSize:"1.5rem", }}/>
         <span className="bigcardparagraf">{user.roomname}</span>
-      </p>
-      <p>
-        <BsLayers />
+      </div>
+      <div>
+        <BsLayers style={{marginLeft:"10px", marginBottom:"-3px", fontSize:"1.5rem", }}/>
         <span className="bigcardparagraf">{user.academicyear}</span>
-      </p>
-      <Badge color={"#f50"} text={`${lang?.lang237} ${user.ticketcount} `} />
+      </div>
+      <div>
+        <Badge color={"#f50"} style={{marginLeft:"1px", marginBottom:"-2px", fontSize:"1.5rem", }}/>
+        <span className="bigcardparagraf">{`${lang?.lang237} - ${user.ticketcount} `}</span>
+      </div>
+      {/* <Badge color={"#f50"} text={`${lang?.lang237} ${user.ticketcount} `} /> */}
       {/* <Carddatabig el={el} /> */}
     </div>
   );
