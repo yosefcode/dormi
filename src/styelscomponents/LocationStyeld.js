@@ -64,6 +64,7 @@ export const Contener = styled.div`
     width: 35px;
     color:#807E94;
     margin-left: -15px;
+    cursor: pointer;
     
   }
   .btn_footer_card {

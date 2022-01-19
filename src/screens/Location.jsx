@@ -56,19 +56,23 @@ function Location() {
   return (
     <Contener>
       <div className="hader">
-        <p>{lang?.lang211}</p>
+        {lang?.lang211}
 
-        <button onClick={showModal}>{lang?.lang210}</button>
+        <button className="btn_add_location" onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
         {locationarry
           ? locationarry.map((el) => {
               return (
+                <div className="card">
+
                 <CardStyeld
-                  hoverable
+                  // hoverable
                   title={el.locationname}
                   extra={
                     <Dropdown
+                    className="icon_dropdown"
+
                       overlay={menuofproject}
                       trigger={["click"]}
                       // icon={}
@@ -112,21 +116,31 @@ function Location() {
                           <div className="singellocation">
                             <div>
                               {item.roomname}
-                              {cunter > 0 ? (
-                                <Badge
-                                  dir="tlr"
-                                  overflowCount={999}
-                                  count={cunter}
-                                  style={{
-                                    backgroundColor: "#EBBE74",
-                                    color: "black",
-                                    fontsize: "16px",
-                                  }}
-                                />
+                              </div>
+                              <div>
+                                {cunter > 0 ? (
+                                                            <div className="div_count"
+                                                          >
+                                                           {cunter}
+                                                          </div> 
+
+                                // <Badge
+                                //   dir="tlr"
+                                //   overflowCount={999}
+                                //   count={cunter}
+                                //   style={{
+                                //     backgroundColor: "#EBBE74",
+                                //     color: "black",
+                                //     fontsize: "16px",
+                                //   }}
+                                // />
                               ) : null}
                             </div>
                             <div>
                               <Dropdown
+                                                                className="icon_dropdown"
+                                                                id="icon_dropdown_body"
+                                                                
                                 overlay={menuoflocation}
                                 trigger={["click"]}
                                 // icon={
@@ -146,6 +160,9 @@ function Location() {
                     )}
                   </div>
                 </CardStyeld>
+                <button className="btn_footer_card">+ הוספה</button>
+
+                  </div>
               );
             })
           : null}
