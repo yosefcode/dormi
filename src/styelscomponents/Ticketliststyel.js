@@ -134,6 +134,20 @@ color:#807E94;
   font-size: 1.2rem;
   color: #0f0743;
 }
+// .pointerblock {
+
+// margin: 0 10px;
+// width: 80px;
+// height: 25px;
+// background: #e5ebf3;
+// font-weight: 500;
+// font-size: 1.2rem;
+//  color: #0f0743;
+//  display:flex;
+//  align-items: center;
+//   justify-content: center;
+//   padding-top:1px;}
+
 
 .details {
   display: flex;
@@ -201,9 +215,6 @@ export const Drawerstyle = styled(Drawer)`
   }
 `;
 export const StyeldSelect = styled(Select)`
-  /* @media only screen and (min-width: 600px) {
-    width: 110px;
-  } */
   width: 97px;
   height: 24px;
   margin-top: -4%;

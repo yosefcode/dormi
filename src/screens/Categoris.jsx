@@ -90,9 +90,9 @@ function Categoris() {
   return (
     <Contener>
       <div className="hader">
-        <p>{lang?.lang104}</p>
-
-        <button onClick={showModal}>{lang?.lang210}</button>
+        {lang?.lang104}
+        
+        <button className="btn_add_location" onClick={showModal}>{lang?.lang210}</button>
       </div>
       <div className="listofcards">
         {localarry
@@ -110,14 +110,20 @@ function Categoris() {
                 icon = false;
               }
               //
-
-              return (
+              const headerCard = (
                 <div>
+                      <finicon.icon className="categoriicon" /> {el.maincategoryname}
+                </div>
+              );
+              
+              return (
+                <div className="card">
                   <CardStyeld
-                    hoverable
-                    title={el.maincategoryname}
+                    // hoverable
+                    title={headerCard}
                     extra={
                       <Dropdown
+                      className="icon_dropdown"
                         overlay={menuofproject}
                         trigger={["click"]}
                         onClick={() => {
@@ -128,9 +134,6 @@ function Categoris() {
                       </Dropdown>
                     }
                   >
-                    <div>
-                      <finicon.icon className="categoriicon" />
-                    </div>
                     <div className="listodors">
                       {el.subcategory ? (
                         el.subcategory.map((item) => {
@@ -165,21 +168,30 @@ function Categoris() {
                             <div className="singellocation">
                               <div>
                                 {item.subname}
+                              </div>
+                              <div>
                                 {cunter > 0 ? (
-                                  <Badge
-                                    dir="tlr"
-                                    overflowCount={999}
-                                    count={cunter}
-                                    style={{
-                                      backgroundColor: "#EBBE74",
-                                      color: "black",
-                                      fontsize: "16px",
-                                    }}
-                                  />
+                                                            <div className="div_count"
+                                                          >
+                                                           {cunter}
+                                                          </div> 
+                                
+                                  // <Badge
+                                  //   dir="tlr"
+                                  //   overflowCount={999}
+                                  //   count={cunter}
+                                  //   style={{
+                                  //     backgroundColor: "#EBBE74",
+                                  //     color: "black",
+                                  //     fontsize: "16px",
+                                  //   }}
+                                  // />
                                 ) : null}
                               </div>
                               <div>
                                 <Dropdown
+                                  className="icon_dropdown"
+id="icon_dropdown_body"
                                   overlay={menuoflocation}
                                   trigger={["click"]}
                                   // icon={
@@ -199,6 +211,7 @@ function Categoris() {
                       )}
                     </div>
                   </CardStyeld>
+                    <button className="btn_footer_card">+ הוספה</button>
                 </div>
               );
             })
