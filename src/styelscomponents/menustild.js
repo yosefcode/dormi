@@ -104,11 +104,32 @@ export const Contyner = styled.div`
     flex-direction: column;
     height: calc(100vh - 30px);
   }
-  .div_dropdown {
-    // overflow-y: auto;
-    // max-height: 50vh;
+  .div_dropdown_menu {
+    overflow-y: auto;
+    max-height: 50vh;
     overflow-x: hidden;
+    // scroll-padding: 250px;
+    direction: ltr;
+    width: 100%;
+    padding: 12px 20px 12px 0;
+    margin: 0 -10% 0 10%;}
   }
+  .div_dropdown_menu::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  .div_dropdown_menu::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  .div_dropdown_menu::-webkit-scrollbar-thumb {
+    background: rgba(228, 237, 237, 0.71);
+    border-radius: 10px;
+  }
+
   .ant-menu-item-only-child {
     font-size: 1rem !important;
   }

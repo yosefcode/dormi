@@ -125,7 +125,7 @@ height: "18px",
               ) : null}
 
 <hr style={{borderTop: "1px solid #2C2A51", margin:"24px 0"}}/>
-<div className="div_dropdown">
+<div className="div_dropdown_menu">
 
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
                 
@@ -171,7 +171,7 @@ height: "18px",
               {/* סטטיסטיקה */}
               {userlevelid === 10 || userlevelid === 13 ? (
 
-                <Link to="/Statistics" ><div className="btn_Statistics">{lang?.lang105}</div></Link>
+                <Link to="/Statistics" ><div dir="rtl" className="btn_Statistics">{lang?.lang105}</div></Link>
               ) : null}
 
               {userlevelid === 10 ? (
