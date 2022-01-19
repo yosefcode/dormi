@@ -45,6 +45,7 @@ export function Carddatabig({ el }) {
       </p>
       <ModalStyeld
         visible={imegvesebule}
+        width={"50%"}
         onCancel={() => {
           setimegvesebule(false);
         }}
@@ -53,7 +54,7 @@ export function Carddatabig({ el }) {
         <img
           src={`${imegeruter}/${el.openimage}`}
           alt="no img"
-          style={{ width: "100px", height: "100px" }}
+          style={{ width: "100%", height: "100%" }}
         />
       </ModalStyeld>
     </div>

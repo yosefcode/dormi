@@ -82,17 +82,15 @@ export const ModalStyeldnewreq = styled(Modal)`
   }
 `;
 export const ModalStyeld = styled(Modal)`
-  // . {
-  //   width: 1800px !important;
-  //   height: 800px;
-  //   background: red !important;
-  // }
-  // .ant-modal-content {
-  //   border-radius: 19px;
-  //   text-align: center;
-  //   width: 100%;
-  //   height: 180px;
-  // }
+  .ant-modal-close {
+    right: initial;
+    left: -15px;
+    top: -13px;
+  }
+  .ant-modal-close-x {
+    color: red;
+    font-size: 2rem;
+  }
 
   .ant-modal-header {
     border-radius: 19px;
