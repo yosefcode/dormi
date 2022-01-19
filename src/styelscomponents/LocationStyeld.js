@@ -114,6 +114,22 @@ export const CardStyeld = styled(Card)`
     text-align: start;
     height: 208px;
   }
+
+  .ant-card-body::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .ant-card-body::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 2px grey;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.36);
+  }
+
+  .ant-card-body::-webkit-scrollbar-thumb {
+    background: #d6e2f1;
+    border-radius: 10px;
+  }
+
   .listodors {
     display: flex;
 

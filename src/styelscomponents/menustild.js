@@ -118,13 +118,11 @@ export const Contyner = styled.div`
     width: 8px;
   }
 
-  /* Track */
   .div_dropdown_menu::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
   }
 
-  /* Handle */
   .div_dropdown_menu::-webkit-scrollbar-thumb {
     background: rgba(228, 237, 237, 0.71);
     border-radius: 10px;
