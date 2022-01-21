@@ -7,28 +7,29 @@ export const Problemcontener = styled.div`
   font-family: "Heebo";
 
   #hadep {
-    font-size: 31px;
-  }
-  .icondisply {
+    font-size: 2.4rem;
+    font-weight: 700;
     margin-top: 20px;
-
-    /* font-family: "Hebbo"; */
   }
 
   @media (max-width: 600px) {
     .wrapper {
+      margin-top: 26px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, 133px);
-      grid-gap: 16px;
-      grid-auto-rows: 64px;
+      grid-template-columns: 40vw 40vw;
+      grid-gap: 4vw;
+      grid-auto-rows: 20.5vw;
     }
 
     .item {
-      height: 140px;
-      display: block;
-      background-color: rgba(229, 235, 243, 1);
+      height: 45vw;
+      display: flex;
+      background-color: #e5ebf3;
       border-radius: 16px;
       grid-row-end: span 2;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .space {
@@ -50,21 +51,17 @@ export const Problemcontener = styled.div`
   }
 
   .uniqueproblem {
-    text-align: center;
+    font-weight: 500;
+    font-size: 1.6rem;
   }
 
   .iconproblem {
-    font-size: 33px;
-    /* height: 90px; */
-    line-height: 6px;
-    padding: 0px;
-    width: 60px;
-    text-align: center;
-    margin: 34px;
+    font-size: 15vw;
   }
   @media only screen and (max-width: 600px) {
     .icondisply {
-      padding-inline-start: 38px;
+      width: 84%;
+      margin: 80px auto;
     }
   }
 `;
@@ -258,13 +255,6 @@ export const FormContenerdesktop = styled.div`
   } */
 `;
 export const FormContener = styled.div`
-  margin-top: 10%;
-  text-align: center;
-
-  display: flex;
-
-  flex-direction: column;
-  align-items: center;
   button.ant-btn.ant-btn-primary {
     background: #ffd17e;
     border-radius: 11px;
@@ -291,10 +281,13 @@ export const FormContener = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    margin-top: 10%;
-    text-align: center;
-
+    position: fixed;
+    left: 8%;
+    padding: 20px 0;
+    width: 84%;
     display: flex;
+    // background: grey;
+    height: calc(100vh - 60px);
 
     flex-direction: column;
     align-items: center;

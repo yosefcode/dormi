@@ -37,10 +37,9 @@ const Nwerequest = ({ Temmembertask }) => {
         {typs ? (
           <Problemcontener>
             <div className="icondisply">
-              <p id="hadep">{lang?.lang337}</p>
-              <p>{lang?.lang338}</p>
+              <div id="hadep">{lang?.lang337}</div>
+              <div style={{fontSize:"1.6rem",fontWeight:"400"}}>{lang?.lang338}</div>
               <div>
-                <br />
                 <div className="wrapper">
                   {categorynames
                     ? categorynames.map((el, index) => {
@@ -65,17 +64,17 @@ const Nwerequest = ({ Temmembertask }) => {
                               chosentyp(el);
                             }}
                           >
-                            <p className="iconproblem">
+                            <div className="iconproblem">
                               {/* <img
                                 src={icon}
                                 alt="icon"
                                 style={{ width: "50px", height: "50px" }}
                               /> */}
                               {icon ? <finicon.icon /> : <PoweroffOutlined />}
-                            </p>
-                            <p className="uniqueproblem">
+                            </div>
+                            <div className="uniqueproblem">
                               {el.maincategoryname}
-                            </p>
+                            </div>
                           </div>
                         );
                       })

@@ -212,11 +212,14 @@ export const Contyner = styled.div`
       color: #e5e5e5;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       z-index: 2;
       box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 30%);
       font-size:3rem;
+      position: fixed;
+      top:0;
+      padding:0 20px;
     }
 
   }
