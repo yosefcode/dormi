@@ -88,7 +88,7 @@ export const ModalStyeld = styled(Modal)`
     top: -13px;
   }
   .ant-modal-close-x {
-    color: red;
+    // color: red;
     font-size: 2rem;
   }
 

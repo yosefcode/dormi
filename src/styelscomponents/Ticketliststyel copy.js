@@ -116,6 +116,10 @@ export const Contener = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
+    .ant-card {
+      width: 315px;
+    }
+
     #desktopactionbutton {
       display: none;
     }
@@ -126,9 +130,6 @@ export const Contener = styled.div`
       display: none;
     }
 
-    .Mangeroption {
-      margin-top: 11px;
-    }
     .Closepopup {
       width: 100%;
     }

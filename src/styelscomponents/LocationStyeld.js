@@ -84,6 +84,17 @@ cursor: pointer;
 border:none;
 
   }
+  @media only screen and (max-width: 600px) {
+    .hader {
+
+    font-size: 2.4rem;
+    position: relative;
+    font-weight: 700;}
+
+  .card {
+    width: 90%;
+    margin: 0 auto;
+}}
 
 `;
 

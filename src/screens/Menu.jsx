@@ -8,6 +8,7 @@ import {
   Avaterdrwor,
   Drawerstyle,
   MenuStyel,
+  MenuStyelDrouwer
 } from "../styelscomponents/menustild";
 import { VscAccount } from "react-icons/vsc";
 
@@ -51,6 +52,8 @@ const HaderMenu = ({ LoginScreen, dir }) => {
   const Dormilogo = () => {
     return (
       <Avaterdrwor>
+        <div className="menu_mobile">
+          <span className="close_menu" onClick={closeMenue}>X</span>
         <svg
           width="40"
           height="40"
@@ -68,6 +71,9 @@ const HaderMenu = ({ LoginScreen, dir }) => {
         </svg>
 
         <p>{loginstatus.firstname + " " + loginstatus.lastname} </p>
+        <p id="plan_name">שם תוכנית </p>
+</div>
+
       </Avaterdrwor>
     );
   };
@@ -99,6 +105,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
           </svg>
         </div>
       ) : (
+        <div>
         <div className="haederphone">
           <AiOutlineMenu onClick={closeMenue} />
 
@@ -115,6 +122,9 @@ const HaderMenu = ({ LoginScreen, dir }) => {
               fill="#E4EDED"
             />
           </svg>
+          <Link to="/"> 
+
+          <div>+</div></Link></div>
           <div>
             <Drawerstyle
               title={<Dormilogo />}
@@ -126,40 +136,48 @@ const HaderMenu = ({ LoginScreen, dir }) => {
             >
               <div className="Drawercontennet">
                 {/* פתח פנייה חדשה */}
-                <hr />
+                <hr style={{borderTop: "1px solid #2C2A51", margin:"0 0 24px 0"}}/>
 
-                <p onClick={closeMenue}>
+                <div onClick={closeMenue}>
                   <Link to="/"> {lang?.lang100}</Link>
-                </p>
+                </div>
 
                 {/*  "רשימת פניות" */}
-                <p onClick={closeMenue}>
                   <Link to="/ListOfreq">
-                    <Badge
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} onClick={closeMenue}> 
+                <div >
+                    {lang?.lang196}
+                    </div>
+
+                    <div
                       style={{
+                        width: 40,
+                        textAlign: 'center',
+                        borderRadius:20,
                         backgroundColor: "#EBBE74",
                         color: "black",
-                        fontsize: "16px",
-                      }}
-                      overflowCount={999}
-                      count={chors.chors}
-                    >
-                      {lang?.lang196}
-                    </Badge>
+                        fontSize: "1.6rem",
+                        height:"25px",
+                        lineHeight:"2.6rem"
+                      }}>
+                      {chors.chors}
+                    </div>
+                </div>
                   </Link>
-                </p>
                 {/*  "מטלות מתוזמנות" */}
                 {userlevelid === 10 ||
                 userlevelid === 5 ||
                 userlevelid === 13 ? (
-                  <p onClick={closeMenue}>
+                  <div onClick={closeMenue}>
                     <Link to="/Repeatedtask">{lang?.lang285} </Link>
-                  </p>
+                  </div>
                 ) : null}
+                                <hr style={{borderTop: "1px solid #2C2A51", margin:" 24px 0"}}/>
+
                 {userlevelid === 10 ||
                 userlevelid === 5 ||
                 userlevelid === 13 ? (
-                  <MenuStyel
+                  <MenuStyelDrouwer
                     style={{ background: "#1c1547", border: "#1c1547" }}
                     // defaultSelectedKeys={["1"]}
                     // defaultOpenKeys={["sub1"]}
@@ -170,31 +188,33 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                     <SubMenu
                       key="sub1-3"
                       title={lang?.lang167}
-                      style={{ border: "none" }}
+                      style={{ border: "none"}}
                     >
                       <Menu.Item key="8">
                         {/* "משתמשים" */}
 
                         <Link to="list_users">{lang?.lang102} </Link>
                       </Menu.Item>
-                      <hr />
+                      <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 15px "}}/>
                       <Menu.Item key="9">
                         {/* מיקום */}
                         <Link to="location">{lang?.lang333} </Link>
                       </Menu.Item>
-                      <hr />
+                      <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 15px "}}/>
                       <Menu.Item key="10">
                         {/* קטגוריות */}
                         <Link to="categoris">{lang?.lang104} </Link>
                       </Menu.Item>
-                      <hr />
+                      <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 15px "}}/>
                       <Menu.Item key="11">
                         {" "}
                         {/* הגדרות */}
                         <Link to="setings">{lang?.lang167}</Link>
                       </Menu.Item>
+                      <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 0 25px "}}/>
+
                     </SubMenu>
-                  </MenuStyel>
+                  </MenuStyelDrouwer>
                 ) : null}
 
                 {/* סטטיסטיקה */}
@@ -203,7 +223,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                 ) : null}
 
                 {userlevelid === 10 ? (
-                  <MenuStyel
+                  <MenuStyelDrouwer
                     onClick={closeMenue}
                     mode="inline"
                     style={{ background: "#1c1547", border: "#1c1547" }}
@@ -213,13 +233,16 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                         {" "}
                         <Link to="/Forms"> טפסים</Link>
                       </Menu.Item>
+                      <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 15px "}}/>
 
                       <Menu.Item key="4">
                         {" "}
                         <Link to="/SendsForm"> טפסים שנשלחו</Link>
                       </Menu.Item>
+                    <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 0 25px "}}/>
                     </SubMenu>
-                  </MenuStyel>
+                  </MenuStyelDrouwer>
+
                 ) : null}
                 {/* הפרופיל שלי */}
                 <MenuStyel
@@ -238,6 +261,8 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                     <Menu.Item key="13">
                       <Link to="/Users"> {lang?.lang289}</Link>
                     </Menu.Item>
+                    <hr style={{borderTop: "1px solid #2C2A51", margin:"12px 15px "}}/>
+
                     <Menu.Item key="14" onClick={exit}>
                       {lang?.lang107}
                     </Menu.Item>

@@ -688,13 +688,14 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             </button>
 
             <Exelexport data={AllTikets} />
-            </div>
 
-            <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
-              <button className="DropdownButton shwobuttondropdown">
+            <Dropdown  overlay={menu} placement="bottomLeft" trigger={["click"]}>
+              <button className="DropdownButton shwobuttondropdown_header">
                 <BsThreeDotsVertical />
               </button>
             </Dropdown>
+            </div>
+
           </div>
           {Drawervisible && !screnphunesize ? (
             <Selectfilter>
@@ -823,14 +824,16 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                     }
                   }}
                 >
-                  <div>
-                      <span id="displyid">{el.ticketid}</span>
+                  <div className="div_card">
+                      <span id="displyid_desktop">{el.ticketid}</span>
                       <div className="inquir">
 
                       
-                      <p id="description">
-                        {el.breadcrumb} - {el.categoryname}
-                      </p>
+                      <div id="description">
+                        {el.breadcrumb} - {el.categoryname}<br/>
+                      <p id="cooment"> {el.comments}</p>
+                      </div>
+
                       <div className="Smallcard">
                         {Repeatedtask ? (
                           <div className="task_todo">
@@ -850,13 +853,13 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                             מטלה מתוזמנת{" "}
                           </div>
                         ) : (
-                          <>
+                          <div style={{display: "flex"}}>
                             <Badge
                               id="status"
                               color={status}
                               text={statustext}
                             />
-                            <div className="pointerblock">
+                            <span className="pointerblock">
                               <Urgensy
                                 permission={Permission}
                                 el={el}
@@ -864,8 +867,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                                 urgencytext={urgencytext}
                                 findChangeurgency={findChangeurgency}
                               />
-                            </div>
-                          </>
+                            </span>
+                          </div>
                         )}
                                             <Dropdown
                         overlay={setingmenu}
@@ -885,24 +888,24 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         value={el.ticketguid}
                       />
 
-                    </div>
-                    <p id="cooment"> {el.comments}</p>
 
+                      </div>
+                    </div>
                     <div className="smallscreen">
                       <div
                         ref={(el) => (itemsRef.current[i] = el)}
                         style={{
                           display: "none",
                           color: "#807e94",
-                          marginTop: "20px",
+                          marginTop: "10px",
                         }}
                       >
-                        <hr />
+                      <hr style={{borderTop: "1px solid #E9F0F8"}}/>
 
                         <Carddatabig el={el} />
                       </div>
                       <button
-                        className="action"
+                        className="action_inquir_mobile"
                         onClick={() => {
                           setvisibletaskDrawer(!visibletaskDrawer);
                           setChusenrikit(el.ticketguid);
@@ -910,7 +913,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       >
                         <BsThreeDotsVertical />
                       </button>
-                    </div>
                     </div>
 
                     <div className="fullscreen">
@@ -929,7 +931,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         <BsThreeDotsVertical />
                       </button> */}
                       <button
-                        className="action"
+                        className="action_inquir_mobile"
                         id="phoneactionbutton"
                         onClick={() => {
                           setvisibletaskDrawer(!visibletaskDrawer);

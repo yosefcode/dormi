@@ -52,7 +52,7 @@ export const Contener = styled.div`
     cursor: pointer;
 
   }
-  .shwobuttondropdown {
+  .shwobuttondropdown_header {
     display: none;
   }
   #number_inquiries{
@@ -74,9 +74,10 @@ box-sizing: border-box;
 border-radius: 11px;
   }
   .ant-card-body {
+    height:100%;
      padding: 0;}
 
-     #displyid{
+     #displyid_desktop{
        color: #807E94;
        font-size: 1.2rem;
      }
@@ -87,11 +88,18 @@ border-radius: 11px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 #description{
   font-size: 1.7rem;
 font-weight: 700;
+  color: #0F0743;
+  margin-bottom: 0;
+
+}
+#cooment{
+  font-size: 1.4rem;
+font-weight: 400;
   color: #0F0743;
   margin-bottom: 0;
 
@@ -134,6 +142,13 @@ color:#807E94;
   font-size: 1.2rem;
   color: #0f0743;
 }
+.marginRight{
+  margin-right:25px;
+}
+
+#displyid_mobile{
+  display:none;
+}
 // .pointerblock {
 
 // margin: 0 10px;
@@ -154,7 +169,7 @@ color:#807E94;
   justify-content: flex-start;
   align-items: center;
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #807E94;
 }
 .Calltoaction{
@@ -167,6 +182,195 @@ p{
 }
 #phoneactionbutton {
   display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .Mangeroption {
+    display: block;
+    // flex-wrap: nowrap;
+    // justify-content: space-between;
+    // align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 2.4rem;
+    position: relative;
+    font-weight: 700;
+  }
+  .div_MangerButton{
+    margin-top: 20px;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .MangerButton {
+    border:  1px solid #D6E2F1; !important;
+    box-sizing: border-box;
+    border-radius: 11px;
+    align-items: center;
+    padding: 0px 16px;
+    background-color: white;
+    width: 41%;
+    height: 55px;
+    color: #0f0743;
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-inline-end: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+
+  }
+  .DropdownButton {
+    border:  1px solid #D6E2F1; !important;
+    box-sizing: border-box;
+    border-radius: 11px;
+    width: 12%;
+    height: 55px;
+    display:flex;
+    align-items: center;
+    background-color: white;
+    position: relative;
+    font-size:2.5rem;
+    justify-content: center;
+  }
+
+  .shwobutton {
+    display: none;
+  }
+
+
+  #number_inquiries{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.7rem;
+    font-weight:500;
+    height: auto;
+    margin: 25px auto 0;
+  }
+
+  .ant-card {
+    width: 100%;
+    padding:12px 20px;
+  }
+
+  .div_card {
+    height:80px;
+
+  }
+  #displyid_desktop{
+    display: none;
+  }
+
+
+  #desktopactionbutton {
+    display: none;
+  }
+
+
+  .inquir{
+    width: 100%;
+    display:flex;
+    height:100%;
+    flex-direction: column
+  }
+
+  #description{
+    font-size: 1.7rem;
+  font-weight: 700;
+    color: #0F0743;
+    margin-bottom: 0;
+  
+  }
+
+  #cooment{
+    font-size: 1.4rem;
+  font-weight: 400;
+    color: #0F0743;
+    margin-bottom: 0;
+  
+  }
+  
+  .closecheckboox {
+    display:none;
+  }
+  .Smallcard {
+    display: flex;
+    width: 100%;
+    justify-content: space-between
+  }
+  
+
+  .Closepopup {
+    width: 100%;
+  }
+  #discriptun {
+    margin-inline-end: -15px;
+    margin-inline-start: 4px;
+  }
+  .fullscreen {
+    display: none;
+  }
+
+  .action_inquir{
+display:none;}
+
+.action_inquir_mobile{
+  position:absolute;
+  left:5px;
+bottom:10px;
+border:none;
+background:none;
+font-size:1.6rem;
+
+}
+  .smallscreen {
+    display: inherit;
+  }
+
+  .details {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+        font-weight: 500;
+    font-size: 1.3rem;
+    color: #807E94;
+    line-height: 30px;
+
+  }
+  .marginRight{
+    margin-right:0px;
+  }
+
+  #displyid_mobile{
+    display:inherit;
+    margin-right:30px;
+  }
+  
+  .date_mobile{
+    display:flex;
+  }
+  
+  .Calltoaction{
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .discriptun {
+    display: flex;
+    flex-direction: column;
+  }
+  .closecheckboox {
+    position: absolute;
+    top: 9px;
+    inset-inline-start: 282px;
+  }
 }
 
 

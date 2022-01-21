@@ -193,9 +193,6 @@ cursor: pointer;
       inset-inline-start: 93%;
     }
   @media only screen and (max-width: 600px) {
-    .Mangeroption {
-      margin-top: 11px;
-    }
     .fullscreen {
       display: none;
     }

@@ -17,32 +17,40 @@ export function Carddatabig({ el }) {
 
   return (
     <div className="details">
-        <FaMapPin style={{marginLeft:"7px"}}/> {el.locationName ? el.locationName : null} - {el.roomName ? el.roomName : null}
-        <BsFillPersonFill style={{marginLeft:"7px", marginRight:"23px", fontSize:"1.2rem", }}/> {" "}{el.firstname ? el.firstname : null}{" "}
-        {" "}  {el.lastname ? el.lastname : null}
-         <p
+      <div>
+        
+      <FaMapPin style={{marginLeft:"7px"}}/> {el.locationName ? el.locationName : null} - {el.roomName ? el.roomName : null}
+      </div>
+
+        <div className="marginRight" > <BsFillPersonFill style={{marginLeft:"7px", fontSize:"1.2rem", }}/> 
+          <span
         style={{marginRight:"5px"}}
-          className="Calltoaction"
-          onClick={() => {
-            window.open(`tel:${el?.phone}`);
-          }}
+        className="Calltoaction"
+        onClick={() => {
+          window.open(`tel:${el?.phone}`);
+        }}
         >
           {el.phone ? el.phone : null}
-        </p>
-        <AiOutlineCamera style={{marginLeft:"7px", marginRight:"23px", fontSize:"1.4rem", }}/>
-        <span
-        
-          className="Calltoaction"
-          onClick={() => {
+        </span>
+        <span>
+          {el.firstname ? el.firstname : null}
+          {" "}  {el.lastname ? el.lastname : null}
+        </span>
+        </div>
+
+        <div className="marginRight Calltoaction"           onClick={() => {
             setimegvesebule(true);
           }}
-        >
-          תמונה
-        </span>
-      <p style={{ marginRight:"23px"}}>
+>  <AiOutlineCamera style={{marginLeft:"7px",  fontSize:"1.4rem", marginBottom:"-3px",}}/>
+           תמונה מצורפת
+        </div>
+        <div className="marginRight date_mobile"> 
         {el.dateopened ? el.dateopened : null}
-        {/* <span id="displyid">{el.ticketid}</span> */}
-      </p>
+        <span 
+         id="displyid_mobile">{el.ticketid}
+      </span>
+         </div>
+
       <ModalStyeld
         visible={imegvesebule}
         width={"50%"}
