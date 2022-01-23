@@ -686,8 +686,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             <button className="MangerButton shwobutton">
               הצג פניות פתוחות
             </button>
-
+            <div className="shwobutton" style={{    width: "24%"}}>
             <Exelexport data={AllTikets} />
+            </div>
 
             <Dropdown  overlay={menu} placement="bottomLeft" trigger={["click"]}>
               <button className="DropdownButton shwobuttondropdown_header">

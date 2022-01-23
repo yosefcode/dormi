@@ -52,6 +52,27 @@ export const Contener = styled.div`
     cursor: pointer;
 
   }
+  .MangerButton_exel {
+    border:  1px solid #0F0743; !important;
+    box-sizing: border-box;
+    border-radius: 11px;
+    align-items: center;
+    padding: 0px 16px;
+    background-color: white;
+    width: 100%;
+    height: 55px;
+    color: #0f0743;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-inline-end: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    background:white;
+
+  }
   .shwobuttondropdown_header {
     display: none;
   }
