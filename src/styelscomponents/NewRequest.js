@@ -269,7 +269,6 @@ export const FormContener = styled.div`
     border-radius: 11px !important;
     height: 55px !important;
   }
-  // .ant-select-selector
 
   .ant-input {
     border: 1px solid #d6e2f1;
