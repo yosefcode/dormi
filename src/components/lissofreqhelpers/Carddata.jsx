@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import DataContext from "../../DataContext";
-
 import { StyeldSelect } from "../../styelscomponents/Ticketliststyel";
 import { ModalStyeld } from "../../styelscomponents/modaldtyeld";
 import { AiOutlineClockCircle, AiOutlineCamera } from "react-icons/ai";
@@ -77,7 +76,6 @@ export function Urgensy({
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
-
   const onChinge = (value) => {
     findChangeurgency(value);
   };
@@ -87,6 +85,7 @@ export function Urgensy({
         primary={urgency}
         defaultValue={urgencytext}
         showArrow={false}
+        
         value={
           <div className="valueBadge">
             <Badge

@@ -18,7 +18,7 @@
     "react-icons": "^4.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "4.0.3",
     "react-signature-canvas": "^1.0.3",
     "react-to-print": "^2.13.0",
     "react-to-print-advanced": "^2.1.2",
@@ -29,7 +29,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm i && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -50,8 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-error-overlay": "^6.0.9"
   }
 }

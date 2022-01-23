@@ -827,8 +827,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   <div className="div_card">
                       <span id="displyid_desktop">{el.ticketid}</span>
                       <div className="inquir">
-
-                      
                       <div id="description">
                         {el.breadcrumb} - {el.categoryname}<br/>
                       <p id="cooment"> {el.comments}</p>

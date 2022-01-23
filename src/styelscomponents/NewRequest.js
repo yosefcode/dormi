@@ -30,6 +30,7 @@ export const Problemcontener = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-align: center;
     }
 
     .space {
@@ -128,7 +129,7 @@ export const FormContenerdesktop = styled.div`
 
 
   .ant-form {
-    width: 267px;
+    width: 100%;
   }
   .Lable {
     color: #0f0743;
@@ -145,7 +146,7 @@ export const FormContenerdesktop = styled.div`
     align-items: center;
 
     .ant-form {
-      width: 267px;
+      width: 100%;
     }
   }
 
@@ -266,14 +267,16 @@ export const FormContener = styled.div`
   .ant-select-selector {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
+    height: 55px !important;
   }
+  // .ant-select-selector
 
   .ant-input {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
   }
   .ant-form {
-    width: 267px;
+    width: 100%;
   }
   .Lable {
     color: #0f0743;
@@ -283,7 +286,7 @@ export const FormContener = styled.div`
   @media only screen and (max-width: 600px) {
     position: fixed;
     left: 8%;
-    padding: 20px 0;
+    padding: 40px 0;
     width: 84%;
     display: flex;
     // background: grey;
@@ -293,16 +296,13 @@ export const FormContener = styled.div`
     align-items: center;
 
     .ant-form {
-      width: 267px;
+      width: 100%;
     }
   }
   @media only screen and (max-width: 600px) {
     .goback {
-      /* margin-inline-end: 100%;
-    margin-bottom: 12%; */
       align-self: flex-start;
-      font-size: 24px;
-      margin-right: 31px;
+      font-size: 3.5rem;
     }
   }
   @media only screen and (min-width: 600px) {
@@ -313,14 +313,17 @@ export const FormContener = styled.div`
       margin-top: -3%;
     }
   }
+
   .theproblemis {
-    display: -webkit-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: 300;
+    font-size: 1.6rem;
   }
   .iconproblem {
-    font-size: 100px;
-    color: black;
-    width: 54%;
-    height: 15px;
+    width: 60px;
+    height: 60px;
   }
   .textbloon {
     width: 274px;

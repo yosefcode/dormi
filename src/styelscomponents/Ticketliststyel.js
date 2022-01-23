@@ -421,9 +421,8 @@ export const Drawerstyle = styled(Drawer)`
 export const StyeldSelect = styled(Select)`
   width: 97px;
   height: 24px;
-  margin-top: -4%;
-  background: #e5ebf3;
-  margin-inline-start: 10%;
+  margin: -4% 10px 0 0;
+
   .ant-badge-status-text {
     font-family: "Heebo";
     font-style: normal;
@@ -440,11 +439,25 @@ export const StyeldSelect = styled(Select)`
   .ant-select-selector {
     pointer-events: ${(props) =>
       props.permission ? "auto" : "none"}!important;
-
+    // background: #e5ebf3 !important;
     border: none !important;
     box-shadow: none !important;
+    // width: 97px;
+    // height: 24px !important;
+    // font-weight: 500 !important;
+    // font-size: 1.2rem !important;
+    // color: #0f0743 !important;
+    // display: flex !important;
+    // align-items: center !important;
+    // justify-content: center !important;
+    // text-align: center !important;
   }
-
+  span.ant-select-selection-item {
+    text-align: center !important;
+    font-weight: 500 !important;
+    font-size: 1.2rem !important;
+    color: #0f0743 !important;
+  }
   .ant-card-extra {
     /* margin-right: -14px; */
   }
