@@ -184,14 +184,14 @@ export const FormContenerdesktop = styled.div`
       height: 310px;
     }
   }
-  .avaterpopup {
-    width: 0;
-    height: 0;
-    border-top: 13px solid transparent;
-    border-right: 26px solid white;
-    border-bottom: 13px solid transparent;
-    display: contents;
-  }
+  // .avaterpopup {
+  //   width: 100%;
+  //   height: 0;
+  //   border-top: 13px solid transparent;
+  //   border-right: 26px solid white;
+  //   border-bottom: 13px solid transparent;
+  //   display: contents;
+  // }
   .uploadimage {
     margin-top: ${(props) => (props.Position >= 1 ? "0px" : "100px")};
 
@@ -259,15 +259,31 @@ export const FormContener = styled.div`
   button.ant-btn.ant-btn-primary {
     background: #ffd17e;
     border-radius: 11px;
-    width: 269px;
-    height: 34px;
+    width: 100%;
     border-color: #ffd17e;
-  }
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
 
+    color: #0f0743;
+
+    height: 63px;
+    margin: 6px 0px;
+  }
+  .ant-form-item {
+    margin-bottom: 32px;
+  }
   .ant-select-selector {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
     height: 55px !important;
+    align-items: center !important;
+    font-size: 1.7rem;
+    font-weight: 500;
   }
 
   .ant-input {
@@ -280,11 +296,21 @@ export const FormContener = styled.div`
   .Lable {
     color: #0f0743;
     text-align: start;
+    font-weight: 300;
+    font-size: 1.6rem;
+  }
+  .ant-badge-status-text {
+    color: #0f0743;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+  .ant-upload {
+    width: 100% !important;
   }
 
   @media only screen and (max-width: 600px) {
-    position: fixed;
-    left: 8%;
+    position: relative;
+    margin: 60px auto;
     padding: 40px 0;
     width: 84%;
     display: flex;
@@ -325,8 +351,12 @@ export const FormContener = styled.div`
     height: 60px;
   }
   .textbloon {
-    width: 274px;
-    margin-top: -34px;
+    width: 100%;
+  }
+  .close_addimg {
+    align-self: flex-start;
+    font-size: 3rem;
+    font-weight: bold;
   }
 
   @media only screen and (max-width: 600px) {
@@ -337,8 +367,22 @@ export const FormContener = styled.div`
       width: 100px;
     }
     .Sendedmassege {
-      width: 180px;
-      height: 180px;
+      margin: 20px 10%;
+      width: 80%;
+    }
+    .tnx1 {
+      font-weight: bold;
+      font-size: 2.4rem;
+      text-align: center;
+
+      color: #1c1547;
+    }
+    .tnx2 {
+      font-weight: normal;
+      font-size: 1.3rem;
+      text-align: center;
+
+      color: #1c1547;
     }
   }
   @media only screen and (min-width: 600px) {
@@ -363,26 +407,37 @@ export const FormContener = styled.div`
     border-bottom: 13px solid transparent;
     display: contents;
   }
-  .uploadimage {
-    margin-top: ${(props) => (props.Position >= 1 ? "0px" : "100px")};
+  .ant-upload-picture-card-wrapper {
+    margin-top: ${(props) => (props.sendbutton ? "50px" : "100px")};
+  }
+  .add_image {
+    position: absolute;
+    margin-top: 0px !important;
+    top: 100px;
+  }
 
-    width: 258px;
+  .uploadimage {
+    margin-top: 70px;
+    width: 100%;
     height: 63px;
-    left: 1px;
-    top: 661px;
-    height: 50px;
     background: #ffd17e;
     border-radius: 11px;
     color: #0f0743;
     font-weight: bold;
-    font-size: 17px;
-    border-color: white;
+    font-size: 1.7rem;
+    border: none;
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
   .camraicon {
     color: #0f0743;
-    font-size: 17px;
+    font-size: 3.5rem;
+    margin-left: 15px;
   }
   .ant-upload-list {
+    width: 100%;
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     align-content: space-around;
@@ -431,20 +486,20 @@ export const FormContener = styled.div`
 
 export const Buttonsenimage = styled.div`
   .ant-btn {
-    margin-top: 5%;
-    width: 258px;
+    margin-top: 70px;
+    width: 100%;
     height: 63px;
-    left: 1px;
-    top: -7px;
-    background: ${(props) => (props.Buttonsecses ? "white" : "#ffd17e")};
-
-    height: 50px;
-
     border-radius: 11px;
     color: #0f0743;
-
     font-weight: bold;
-    font-size: 17px;
+    font-size: 1.7rem;
+    border: 1px solid;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    background: ${(props) => (props.Buttonsecses ? "white" : "#ffd17e")};
+
     border-color: ${(props) => (props.Buttonsecses ? "#0f0743" : "#ffd17e")};
   }
 `;

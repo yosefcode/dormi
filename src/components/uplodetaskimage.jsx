@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import DataContext from "../DataContext";
+import { Link } from "react-router-dom";
 
 import { AiOutlineCamera } from "react-icons/ai";
 import { Modal, Upload, Button } from "antd";
@@ -36,6 +37,7 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
   const [previewVisible, setpreviewVisible] = useState(false);
   const [previewTitle, setpreviewTitle] = useState("");
   const [sendbutton, setsendbutton] = useState(false);
+  const [updateImage, setUpdateImage] = useState(false);
   // const [aftersend, setaftersend] = useState(false);
 
   const handlePreview = async (file) => {
@@ -84,20 +86,34 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
   };
 
   return (
-    <div>
-      <FormContener Position={uplodeimage?.fileList?.length}>
+      <FormContener sendbutton={sendbutton}>
         <div className="textbloon">
+<div className="close_addimg" onClick={() =>{!updateImage || (updateImage&&Buttonsecses) ?        
+   window.open("/") 
+
+:setUpdateImage(false)}}>
+          X</div>
+{!updateImage || (updateImage&&Buttonsecses) ?
+<div>
           <img
             src="/images/Semdimag.png"
             className="Sendedmassege"
             alt="Sendedmassege"
           />
 
-          <h2 style={{ color: "#1C1547" }}>{lang?.lang131}</h2>
-          <p>נעדכן אותך בהמשך טיפול</p>
+          <div className="tnx1" >{lang?.lang131}</div>
+          <div className="tnx2">נעדכן אותך בהמשך טיפול</div>
 
-          <div className="avaterpopup">
+          {!updateImage&&   <button className="uploadimage" onClick={() =>{setUpdateImage(true)}}>
+                    <span>
+                      <AiOutlineCamera className="camraicon" />
+                    </span>
+                    <span >צירוף תמונה לפנייה</span>
+                  </button> }
+</div>:
+
             <div>
+
               <Upload
                 listType="picture-card"
                 fileList={fileList}
@@ -105,28 +121,31 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
                 onChange={upludeimage}
               >
                 {!Buttonsecses ? (
-                  <button className="uploadimage">
+                  <button className="uploadimage add_image">
                     <span>
                       <AiOutlineCamera className="camraicon" />
                     </span>
-                    <span>{lang?.lang274}</span>
+                    <span >{lang?.lang274}</span>
                   </button>
                 ) : null}
               </Upload>
             </div>
+            }
 
-            {sendbutton || Buttonsecses ? (
+            {/* {sendbutton || Buttonsecses ? ( */}
+            {(updateImage && sendbutton) || (updateImage&&Buttonsecses)? (
               <Buttonsenimage Buttonsecses={Buttonsecses}>
-                <Button onClick={sendimage} loading={loadings[2]}>
-                  {!Buttonsecses ? lang?.lang265 : "נשלח"}
+                <Button className="uploadimage" onClick={sendimage} loading={loadings[2]}>
+                  {!Buttonsecses ? lang?.lang265 : "התמונה התווספה בהצלחה"}
+
                 </Button>
               </Buttonsenimage>
             ) : null}
           </div>
 
-          <p style={{ color: "#6B6B6B" }}>
-            {!Buttonsecses ? lang?.lang132 : "הזדמנות טובה לומר שוב תודה"}
-          </p>
+          <div className="tnx2" style={{ color: "#6B6B6B" }}>
+            {!updateImage  ? lang?.lang132 : updateImage && Buttonsecses ?"הזדמנות טובה לומר שוב תודה":null}
+          </div>
           <Modal
             visible={previewVisible}
             title={previewTitle}
@@ -137,9 +156,7 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
           >
             <img alt="example" style={{ width: "100%" }} src={previewImage} />
           </Modal>
-        </div>
-      </FormContener>
-    </div>
+       </FormContener>
   );
 };
 

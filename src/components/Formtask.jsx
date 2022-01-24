@@ -173,7 +173,9 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
   }
   return (
     <div>
+        {!uplodeimagescreen ? (
       <FormContener>
+          <div style={{ width: "100%" }}>
         <div
           className="goback"
           onClick={() => {
@@ -182,7 +184,6 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
         >
           <FiArrowRight />
         </div>
-        {!uplodeimagescreen ? (
           <Form
             name="basic"
             initialValues={{ remember: true }}
@@ -196,7 +197,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
                 <PoweroffOutlined className="iconproblem" />
               )}
             </div>
-
+<br/>
             {/* קטגוריה משנית  */}
             <Form.Item
               name="categoryid"
@@ -316,16 +317,18 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
               </Button>
             </Form.Item>
           </Form>
+          </div>
+      </FormContener>
+
         ) : (
-          <div>
             <Uplodetaskimage
+            style={{ width:"100%"}}
               ticketid={ticketid}
               userid={loginstatus.userid}
               setuplodeimagescreen={() => {
                 setuplodeimagescreen(false);
               }}
             />
-          </div>
         )}
         <ModalStyeld
           visible={errmassege}
@@ -336,8 +339,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
         >
           {errmassegetext}
         </ModalStyeld>
-      </FormContener>
-    </div>
+      </div>
   );
 };
 
