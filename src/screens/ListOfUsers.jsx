@@ -311,18 +311,19 @@ function Users() {
         <button className="MangerButton shwobutton">
           <Link to="/Adduser" style={{color: ' #0f0743'}}>{lang?.lang244}</Link>
         </button>
-        </div>
         {/* <button className="MangerButton shwobutton" onClick={AllOpenststus}>
           <p>
-            {opentikitatatus ? "הצג כל פרטי המשתמש" : "סגור כל פרטי המשתמש"}{" "}
+          {opentikitatatus ? "הצג כל פרטי המשתמש" : "סגור כל פרטי המשתמש"}{" "}
           </p>
         </button> */}
 
-        <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
+        <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}                    
+>
           <button className="DropdownButton shwobuttondropdown">
-            <BsThreeDotsVertical />
+            <BsThreeDotsVertical style={{width:"50px !important"}}/>
           </button>
         </Dropdown>
+        </div>
       </div>
       <div className="haderflex">
         {Drawervisible ? (
@@ -516,11 +517,11 @@ function Users() {
                           marginTop: "20px",
                         }}
                       >
-                        <hr />
+                      <hr style={{borderTop: "1px solid #E9F0F8"}}/>
                         <OpenSmallscreencard user={user} />
                       </div>
                       <button
-                        className="action"
+                        className="action_inquir_mobile"
                         onClick={() => {
                           setvisibletaskDrawer(!visibletaskDrawer);
                           setuseridfortask(user.userguid);
@@ -530,7 +531,6 @@ function Users() {
                       </button>
                     </div>
 
-                      <hr />
                     <div className="fullscreen">
                       <OpenSmallscreencard user={user} />
                     </div>

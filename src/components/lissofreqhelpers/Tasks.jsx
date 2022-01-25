@@ -107,58 +107,66 @@ export const ListtaskforEdit = ({ action, close }) => {
         onClick={() => {
           onfinish("close", null);
         }}
-        className="Quickclosebuutonup"
+        className="drower_bottom btn_up"
       >
-        <img src="/images/checkbox.svg" alt="icon" /> {lang?.lang145}
+        <img className="img_icon" src="/images/checkbox.svg" alt="icon" /> {lang?.lang145}
       </button>
+
       <button
-        className="Quickclosebuuton"
+        className="drower_bottom"
         onClick={() => {
           onfinish("cost", null);
         }}
       >
-        <img src="/images/apruchclose.svg" alt="icon" /> {lang?.lang208}
+        <img className="img_icon" src="/images/apruchclose.svg" alt="icon" /> {lang?.lang208}
       </button>
+
       <button
-        className="Quickclosebuuton"
+        className="drower_bottom"
         onClick={() => {
           onfinish("open", null);
         }}
       >
-        <img src="/images/camra.svg" alt="icon" /> {lang?.lang195}
+        <img className="img_icon" src="/images/camra.svg" alt="icon" /> {lang?.lang195}
       </button>
+
       <button
-        className="Quickclosebuuton"
+        className="drower_bottom"
         onClick={() => {
           onfinish("pending", null);
         }}
       >
-        <img src="/images/ranch.svg" alt="icon" /> {lang?.lang190}
+        <img className="img_icon" src="/images/ranch.svg" alt="icon" /> {lang?.lang190}
       </button>
-      <button className="Quickclosebuuton">
-        <img src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
+
+      <button className="drower_bottom">
+        <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
+
       <button
-        className="Quickclosebuuton"
+        className="drower_bottom"
         onClick={() => {
           onfinish("message", null);
         }}
       >
-        <img src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
+        <img className="img_icon" src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
       </button>
+
       <button
-        className="Quickclosebuuton"
+        className="drower_bottom"
         onClick={() => {
           onfinish("edit", null);
         }}
       >
-        <img src="/images/pen.svg" alt="icon" /> {lang?.lang243}
+        <img className="img_icon" src="/images/pen.svg" alt="icon" /> {lang?.lang243}
       </button>
-      <button className="Quickclosebuutdown">
-        <img src="/images/trash.svg" alt="icon" /> {lang?.lang147}
+
+      <button className="drower_bottom btn_down">
+        <img className="img_icon" src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
+
       <br />
-      <button className="Quickclosebuutdownclose" onClick={onclose}>
+      <button className="drower_bottom btn_cancel" onClick={onclose}>
         {lang?.lang251}
       </button>
     </div>

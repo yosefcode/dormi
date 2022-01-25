@@ -12,7 +12,7 @@ import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import Uplodetaskimage from "./uplodetaskimage";
 import { Arryoficons } from "../Icons";
 
-const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
+const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
   const { Option } = Select;
   const { TextArea } = Input;
 
@@ -109,7 +109,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
       // seterrmassege(true);
       setticketid(res.ticketid);
       seterrmassegetext(res.message);
-
+topFunction()
       // setTimeout(() => {
       // setuplodeimagescreen(true);
       // seterrmassege(false);
@@ -323,8 +323,10 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask }) => {
         ) : (
             <Uplodetaskimage
             style={{ width:"100%"}}
+            topFunction={topFunction}
               ticketid={ticketid}
               userid={loginstatus.userid}
+              Goeinfbacktopage={Goeinfbacktopage}
               setuplodeimagescreen={() => {
                 setuplodeimagescreen(false);
               }}

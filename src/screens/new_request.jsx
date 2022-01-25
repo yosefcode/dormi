@@ -25,6 +25,10 @@ const Nwerequest = ({ Temmembertask }) => {
     settyps(false);
     settypeofreq(value);
   };
+  const topFunction = () => {
+    window.scrollTo(0, 0);
+  };
+
 
   const Goback = () => {
     settyps(true);
@@ -62,6 +66,7 @@ const Nwerequest = ({ Temmembertask }) => {
                             key={index}
                             onClick={() => {
                               chosentyp(el);
+                              topFunction()
                             }}
                           >
                             <div className="iconproblem">
@@ -93,6 +98,7 @@ const Nwerequest = ({ Temmembertask }) => {
             Typeofreq={typeofreq}
             Goback={Goback}
             Temmembertask={Temmembertask}
+            topFunction={topFunction}
           />
         )}
       </div>

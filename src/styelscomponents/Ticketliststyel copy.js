@@ -360,6 +360,7 @@ export const Contener = styled.div`
 `;
 export const Selectfilter = styled.div`
   margin-top: 10px;
+
   .ant-select {
     width: 200px;
     border-color: none;

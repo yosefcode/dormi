@@ -124,7 +124,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
           </svg>
           <Link to="/"> 
 
-          <div>+</div></Link></div>
+          <div style={{fontSize:"4rem"}}>+</div></Link></div>
           <div>
             <Drawerstyle
               title={<Dormilogo />}

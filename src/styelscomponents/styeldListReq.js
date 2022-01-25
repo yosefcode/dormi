@@ -5,14 +5,16 @@ export const Contener = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .filteroption {
     display: flex;
-
+    background: red;
     flex-direction: column;
     align-items: center;
-    .ant-select {
-      width: 190px;
-    }
+  }
+
+  .ant-select {
+    width: 190px;
   }
   .selcts {
     margin: 4px;

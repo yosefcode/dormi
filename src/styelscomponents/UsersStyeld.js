@@ -191,14 +191,130 @@ cursor: pointer;
       position: absolute;
       top: 11%;
       inset-inline-start: 93%;
-    }
+    } }
   @media only screen and (max-width: 600px) {
-    .fullscreen {
+    .Mangeroption_users {
+      display: block;
+      // flex-wrap: nowrap;
+      // justify-content: space-between;
+      // align-items: center;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 2.4rem;
+      position: relative;
+      font-weight: 700;
+    }
+    .div_MangerButton_users{
+      margin-top: 20px;
+  
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
+    }
+  
+    .MangerButton {
+      border:  1px solid #D6E2F1; !important;
+      box-sizing: border-box;
+      border-radius: 11px;
+      align-items: center;
+      padding: 0px 16px;
+      background-color: white;
+      width: 41%;
+      height: 55px;
+      color: #0f0743;
+      font-size: 1.7rem;
+      font-weight: 500;
+      margin-inline-end: 0;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+  margin:0 !important;
+    }
+    .DropdownButton {
+      border:  1px solid #D6E2F1; !important;
+      box-sizing: border-box;
+      border-radius: 11px;
+      width: 12%;
+      height: 55px;
+      display:flex;
+      align-items: center;
+      background-color: white;
+      position: relative;
+      font-size:2.5rem !important;
+      justify-content: center;
+      padding:0 !important;
+    }
+  
+    .shwobutton {
       display: none;
     }
-    .action {
-      bottom: 9px;
+
+    .ant-card {
+      width: 100%;
+      padding:12px 20px;
     }
+  
+    .div_card {
+      height:80px;
+  
+    }
+    #displyid_desktop{
+      display: none;
+    }
+  
+    .yuser_name{
+      width: 100%;
+      display:flex;
+      height:100%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  .status_yuser_name{
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+
+  }
+  .level_neme {
+    margin: 0 0 0 10px;}
+
+    #desktopactionbutton {
+      display: none;
+    }
+  
+  .action_yuser_name{
+    display: none;
+  }
+  .smallscreen {
+    display: inherit;
+  }
+  .action_inquir_mobile{
+    position:absolute;
+    left:5px;
+  bottom:10px;
+  border:none;
+  background:none;
+  font-size:1.6rem;
+  
+  }
+      .fullscreen {
+      display: none;
+    }
+    .details {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+          font-weight: 500;
+      font-size: 1.3rem;
+      color: #807E94;
+      line-height: 30px;
+  
+    }
+  
+
     .closecheckboox {
       position: absolute;
       top: 23px;
@@ -336,11 +452,6 @@ cursor: pointer;
     margin-top: 2px;
   }
 
-  @media only screen and (max-width: 600px) {
-    .ant-card {
-      width: 315px;
-    }
-  }
 
 
   .cardbutton {

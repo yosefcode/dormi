@@ -642,7 +642,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
       {edittask ? (
         <Contener Screnphunesize={screnphunesize}>
           <div className="Mangeroption">
-           {lang?.lang196}
+          {Repeatedtask ? "מטלות מתוזמנות": lang?.lang196} 
            <div className="div_MangerButton">
             <Buttonmuneu
             className="MangerButton"
@@ -665,7 +665,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       color: "black",
                       fontsize: "16px",
                       right: "13px",
-                      bottom: "18px",
+                      bottom: "0px",
                     }}
                   />
                 </div>
@@ -731,7 +731,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   setselectedstatus(false);
                   setupdaterefresh(!updaterefresh);
                 }}
+                openfilter={openfilter}
               />
+
             </Selectfilter>
           ) : null}
           {/* כמה פניות יש */}
@@ -957,18 +959,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
               }}
               visible={Drawervisible}
               key={"bottom"}
-              footer={
-                <button
-                  className="ok"
-                  onClick={() => {
-                    setDrawervisible(false);
-                  }}
-                >
-                  אישור
-                  <FaFilter />
-                </button>
-              }
-              height={450}
+              height={"90%"}
               bodyStyle={{
                 textalign: "center",
               }}
@@ -1004,6 +995,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
                   setupdaterefresh(!updaterefresh);
                 }}
+                setDrawervisible={setDrawervisible}
+                screnphunesize={screnphunesize}
               />
             </Drawerstyle>
           ) : null}

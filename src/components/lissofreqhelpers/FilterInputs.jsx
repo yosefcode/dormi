@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Select, Badge, TreeSelect, Form } from "antd";
+import { FaFilter } from "react-icons/fa";
 
 import DataContext from "../../DataContext";
 const { Option } = Select;
@@ -9,10 +10,16 @@ const { SHOW_PARENT } = TreeSelect;
 
 const Treesslesctlocation = ({ data, locationfilter }) => {
   const defoltlang = useContext(DataContext).lang;
-  const lang = defoltlang?.lang;
   const filterserch = useContext(DataContext).filterserch;
   const chanfefilter = useContext(DataContext).chanfefilter;
+  const lang = defoltlang?.lang;
   const [locationvalue, setlocationvalue] = useState();
+  useEffect(() => {
+    if (filterserch.categoris) {
+      setlocationvalue(filterserch.categoris);
+    }
+  }, []);
+  
   const filter = (value) => {
     chanfefilter({
       categoris: false,
@@ -21,11 +28,6 @@ const Treesslesctlocation = ({ data, locationfilter }) => {
     setlocationvalue(value);
     locationfilter(value);
   };
-  useEffect(() => {
-    if (filterserch.categoris) {
-      setlocationvalue(filterserch.categoris);
-    }
-  }, []);
   const treeData = data.map((Item, index) => {
     function onlyUnique(value, index, self) {
       return self.indexOf(value) === index;
@@ -84,6 +86,7 @@ const Treesslesctlocation = ({ data, locationfilter }) => {
     />
   );
 };
+
 const Treesslescategoris = ({ data, AllOpenCategoris }) => {
   const defoltlang = useContext(DataContext).lang;
   const filterserch = useContext(DataContext).filterserch;
@@ -174,6 +177,9 @@ export function FiltersForsort({
   setUserFilter,
   selectedstatus,
   clear,
+  setDrawervisible,
+  screnphunesize,
+  openfilter
 }) {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
@@ -241,11 +247,14 @@ export function FiltersForsort({
 
   return (
     <div className="filteroption">
-      <button button onClick={clearform} className="clearbutton">
+    <div className="header_filter">
+סינון לפי
+      <button  onClick={clearform} className="clearbutton">
         נקה הכל
-      </button>
+      </button></div>
       <Form form={form} name="filterform">
         <div className="selcts">
+          סוג הפניות
           <Form.Item name="opentask">
             <Select
               showSearch
@@ -257,6 +266,7 @@ export function FiltersForsort({
               </Option>
               {/*  פנייה חדשה */}
               <Option key={"status2"} value={lang.lang194}>
+                <div style={{ width: "90%",display: "flex",justifyContent: "space-between", alignItems: "center"}}>
                 {lang.lang173}
 
                 <Badge
@@ -268,10 +278,12 @@ export function FiltersForsort({
                     color: "black",
                     fontsize: "16px",
                   }}
-                />
+                /></div>
               </Option>
               {/* בטיפול */}
               <Option key={"status3"} value={lang.lang174}>
+              <div style={{ width: "90%",display: "flex",justifyContent: "space-between", alignItems: "center"}}>
+
                 {lang.lang174}
                 <Badge
                   dir="tlr"
@@ -282,10 +294,12 @@ export function FiltersForsort({
                     color: "black",
                     fontsize: "16px",
                   }}
-                />
-              </Option>
+                  /></div>
+                  </Option>
               {/* בטיפול ספק חיצוני */}
               <Option key={"status4"} value={lang.lang175}>
+              <div style={{ width: "90%",display: "flex",justifyContent: "space-between", alignItems: "center"}}>
+
                 {lang.lang175}
                 <Badge
                   dir="tlr"
@@ -296,10 +310,12 @@ export function FiltersForsort({
                     color: "black",
                     fontsize: "16px",
                   }}
-                />
-              </Option>
+                  /></div>
+                  </Option>
               {/* סגור */}
               <Option key={"status5"} value={lang.lang176}>
+              <div style={{ width: "90%",display: "flex",justifyContent: "space-between", alignItems: "center"}}>
+
                 {lang.lang176}
                 <Badge
                   dir="tlr"
@@ -310,10 +326,12 @@ export function FiltersForsort({
                     color: "black",
                     fontsize: "16px",
                   }}
-                />
-              </Option>
+                  /></div>
+                  </Option>
               {/* נמחק */}
               <Option key={"status6"} value={lang.lang177}>
+              <div style={{ width: "90%",display: "flex",justifyContent: "space-between", alignItems: "center"}}>
+
                 {lang.lang177}
                 <Badge
                   dir="tlr"
@@ -324,18 +342,22 @@ export function FiltersForsort({
                     color: "black",
                     fontsize: "16px",
                   }}
-                />
-              </Option>
+                  /></div>
+                  </Option>
             </Select>
           </Form.Item>
         </div>
-
+        <div className="selcts">
+קטגוריות
         <Treesslescategoris
           data={filterarry.breadcrumb}
           AllOpenCategoris={AllOpenCategoris}
         />
+        </div>
+
         <Form.Item name="filterallUrgency">
           <div className="selcts">
+רמות דחיפות
             <Select
               showSearch
               placeholder={lang?.lang353}
@@ -355,15 +377,18 @@ export function FiltersForsort({
               </Option>
             </Select>
           </div>
-
+        <div className="selcts">
+מתחם - חדרים
           <Treesslesctlocation
             data={filterarry.locationName}
             locationfilter={locationfilter}
           />
+          </div>
         </Form.Item>
         <Form.Item name="filterofuser">
           {/*  כל המשתמשים  */}
           <div className="selcts">
+            משתמשים
             <Select
               showSearch
               placeholder={lang?.lang352}
@@ -402,6 +427,7 @@ export function FiltersForsort({
         <Form.Item name="poshtostaff">
           {/* הועבר לטיפול */}
           <div className="selcts">
+            גורם מטפל
             <Select
               showSearch
               placeholder={lang?.lang358}
@@ -411,6 +437,25 @@ export function FiltersForsort({
             </Select>
           </div>
         </Form.Item>
+        <div className="btn_filter">
+                <button
+                  className="cancel"
+                  onClick={() => {
+                    screnphunesize?setDrawervisible(false):openfilter();
+                   clearform()
+                  }}
+                >ביטול
+                </button>
+                <button
+                  className="ok"
+                  onClick={() => {
+                    screnphunesize?setDrawervisible(false):openfilter();
+                  }}
+                >
+              <FaFilter style={{marginLeft:"7px", marginBottom:"-4px"}}/> אישור
+                </button>
+                </div>
+
       </Form>
     </div>
   );

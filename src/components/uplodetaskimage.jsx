@@ -16,7 +16,7 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
+const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktopage, topFunction }) => {
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;
@@ -79,18 +79,17 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
     };
     let res = await PostToServer(reqruter, obj);
     setuplodeimage("");
-
+    topFunction()
     setButtonsecses(true);
     setloadings([0]);
-    setuplodeimagescreen();
+    // setuplodeimagescreen();
   };
 
   return (
       <FormContener sendbutton={sendbutton}>
         <div className="textbloon">
-<div className="close_addimg" onClick={() =>{!updateImage || (updateImage&&Buttonsecses) ?        
-   window.open("/") 
-
+<div className="close_addimg" onClick={() =>{topFunction();!updateImage || (updateImage&&Buttonsecses) ?        
+Goeinfbacktopage()
 :setUpdateImage(false)}}>
           X</div>
 {!updateImage || (updateImage&&Buttonsecses) ?
@@ -104,7 +103,7 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen }) => {
           <div className="tnx1" >{lang?.lang131}</div>
           <div className="tnx2">נעדכן אותך בהמשך טיפול</div>
 
-          {!updateImage&&   <button className="uploadimage" onClick={() =>{setUpdateImage(true)}}>
+          {!updateImage&&   <button className="uploadimage" onClick={() =>{setUpdateImage(true);topFunction()}}>
                     <span>
                       <AiOutlineCamera className="camraicon" />
                     </span>
