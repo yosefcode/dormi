@@ -31,26 +31,7 @@ export const Contener = styled.div`
   }
 
   .MangerButton {
-    border:  1px solid #0F0743; !important;
-    box-sizing: border-box;
-    border-radius: 11px;
-    align-items: center;
-    padding: 0px 16px;
-    background-color: white;
-    width: 24%;
-    height: 55px;
-    color: #0f0743 !important;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-inline-start: 2%;
-    margin-inline-end: 0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-
-  }
+margin: 0 2% 0 0;  }
 
   .haderflex {
     width: 100%;
@@ -214,24 +195,8 @@ cursor: pointer;
     }
   
     .MangerButton {
-      border:  1px solid #D6E2F1; !important;
-      box-sizing: border-box;
-      border-radius: 11px;
-      align-items: center;
-      padding: 0px 16px;
-      background-color: white;
       width: 41%;
-      height: 55px;
-      color: #0f0743;
-      font-size: 1.7rem;
-      font-weight: 500;
-      margin-inline-end: 0;
-      display:flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-  margin:0 !important;
+      margin:0;
     }
     .DropdownButton {
       border:  1px solid #D6E2F1; !important;

@@ -12,7 +12,6 @@ export const Contener = styled.div`
   width: 84%;
   margin: 0 auto;
 
-
   .Mangeroption {
     display: flex;
     flex-wrap: nowrap;
@@ -24,7 +23,7 @@ export const Contener = styled.div`
     position: relative;
     font-weight: 300;
   }
-  .div_MangerButton{
+  .div_MangerButton {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -54,105 +53,102 @@ export const Contener = styled.div`
   .shwobuttondropdown {
     display: none;
   }
-  #number_inquiries{
+  #number_inquiries {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
     height: 40px;
-    margin-bottom:0;
+    margin-bottom: 0;
   }
   .ant-card {
     width: 100%;
-padding: 20px;
-margin: 5px 0;
-background: #FFFFFF;
-border: 1px solid #D6E2F1;
-box-sizing: border-box;
-border-radius: 11px;
+    padding: 20px;
+    margin: 5px 0;
+    background: #ffffff;
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
   }
   .ant-card-body {
-     padding: 0;}
+    padding: 0;
+  }
 
-     #displyid{
-       color: #807E94;
-       font-size: 1.2rem;
-     }
-     .smallscreen {
-      display: none;
-    }
-.inquir{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#description{
-  font-size: 1.7rem;
-font-weight: 700;
-  color: #0F0743;
-  margin-bottom: 0;
-
-}
-.closecheckboox {
-  display:none;
-}
-.Smallcard {
-  display: flex;
-}
-.valueBadge {
-  height: 25px;
-  background: #e5ebf3;
-  font-weight: 500;
-  font-size: 1.2rem;
-   color: #0f0743;
-   display:flex;
-   align-items: center;
-    justify-content: center;
-}
-.task_todo{
-  height: 25px;
-  background: #FFD17E;
-  font-weight: 500;
-  font-size: 1.2rem;
-   color: #0f0743;
-   margin-top:-3px;
-   display:flex;
-   align-items: center;
+  #displyid {
+    color: #807e94;
+    font-size: 1.2rem;
+  }
+  .smallscreen {
+    display: none;
+  }
+  .inquir {
+    width: 100%;
+    display: flex;
     justify-content: space-between;
-    padding: 0 10px
-}
-.action_inquir{
-  height: 20px;
-width: 35px;
-color:#807E94;
-}
-.ant-badge-status-text {
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: #0f0743;
-}
+    align-items: center;
+  }
+  #description {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #0f0743;
+    margin-bottom: 0;
+  }
+  .closecheckboox {
+    display: none;
+  }
+  .Smallcard {
+    display: flex;
+  }
+  .valueBadge {
+    height: 25px;
+    background: #e5ebf3;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #0f0743;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .task_todo {
+    height: 25px;
+    background: #ffd17e;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #0f0743;
+    margin-top: -3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  .action_inquir {
+    height: 20px;
+    width: 35px;
+    color: #807e94;
+  }
+  .ant-badge-status-text {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #0f0743;
+  }
 
-.details {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: #807E94;
-}
-.Calltoaction{
-  cursor: pointer;
-  text-decoration: underline;
-}
-p{
-  margin-bottom:0 !important;
-
-}
-#phoneactionbutton {
-  display: none;
-}
-
-
+  .details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #807e94;
+  }
+  .Calltoaction {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  p {
+    margin-bottom: 0 !important;
+  }
+  #phoneactionbutton {
+    display: none;
+  }
 `;

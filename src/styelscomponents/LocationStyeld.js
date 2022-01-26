@@ -26,7 +26,7 @@ export const Contener = styled.div`
   }
 
   .btn_add_location {
-    border:  1px solid #0F0743; !important;
+    border:  1px solid #d6e2f1; !important;
     box-sizing: border-box;
     border-radius: 11px;
     align-items: center;

@@ -349,15 +349,19 @@ export function FiltersForsort({
         </div>
         <div className="selcts">
 קטגוריות
+<Form.Item name="AllOpenCategoris">
+
         <Treesslescategoris
           data={filterarry.breadcrumb}
           AllOpenCategoris={AllOpenCategoris}
         />
+        </Form.Item>
+
         </div>
 
-        <Form.Item name="filterallUrgency">
           <div className="selcts">
 רמות דחיפות
+        <Form.Item name="filterallUrgency">
             <Select
               showSearch
               placeholder={lang?.lang353}
@@ -376,19 +380,20 @@ export function FiltersForsort({
                 <Badge color={"#22E7B7"} text={lang?.lang122} />
               </Option>
             </Select>
+</Form.Item>
           </div>
         <div className="selcts">
 מתחם - חדרים
+<Form.Item name="locationfilter">
           <Treesslesctlocation
             data={filterarry.locationName}
-            locationfilter={locationfilter}
-          />
+            locationfilter={locationfilter}/>
+          </Form.Item>
           </div>
-        </Form.Item>
-        <Form.Item name="filterofuser">
           {/*  כל המשתמשים  */}
           <div className="selcts">
             משתמשים
+        <Form.Item name="filterofuser">
             <Select
               showSearch
               placeholder={lang?.lang352}
@@ -421,13 +426,13 @@ export function FiltersForsort({
                   ))
                 : null}
             </Select>
-          </div>
         </Form.Item>
+          </div>
 
-        <Form.Item name="poshtostaff">
           {/* הועבר לטיפול */}
           <div className="selcts">
             גורם מטפל
+        <Form.Item name="poshtostaff">
             <Select
               showSearch
               placeholder={lang?.lang358}
@@ -435,8 +440,8 @@ export function FiltersForsort({
             >
               <Option value={false}>{lang.lang358}</Option>
             </Select>
-          </div>
         </Form.Item>
+          </div>
         <div className="btn_filter">
                 <button
                   className="cancel"

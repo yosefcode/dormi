@@ -640,13 +640,13 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   return (
     <div >
       {edittask ? (
-        <Contener Screnphunesize={screnphunesize}>
+        <Contener Screnphunesize={screnphunesize} >
           <div className="Mangeroption">
           {Repeatedtask ? "מטלות מתוזמנות": lang?.lang196} 
            <div className="div_MangerButton">
             <Buttonmuneu
             className="MangerButton"
-              presd={filterpresd}
+              presd={Drawervisible}
               onClick={() => {
                 openfilter();
 
@@ -683,9 +683,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             >
               <img src="/images/multipulchuis.svg" alt="" style={{marginLeft:"7px", marginTop:"-4px"}}/> בחירה
             </Buttonmuneu>
-            <button className="MangerButton shwobutton">
+            <Buttonmuneu className="MangerButton shwobutton">
               הצג פניות פתוחות
-            </button>
+            </Buttonmuneu>
             <div className="shwobutton" style={{    width: "24%"}}>
             <Exelexport data={AllTikets} />
             </div>
@@ -811,6 +811,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
               return (
                 <Card
+                className={quickclose && checkboxref.current[i].checked ?
+                  "card_checked_border":quickclose?"card_checked_pointer": null}
                   bordered={false}
                   key={i}
                   onClick={() => {

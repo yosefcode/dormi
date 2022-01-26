@@ -1,18 +1,20 @@
 import styled from "styled-components";
 export const Buttonmuneu = styled.button`
-  border: 1px solid #d6e2f1;
-  box-sizing: border-box;
   border-radius: 11px;
   align-items: center;
   padding: 0px 16px;
   background-color: white;
-
-  border-color: ${(props) => (props.presd ? "inherit" : "1px solid #0F0743")};
-  width: 127.5px;
+  width: 24%;
   height: 55px;
   color: #0f0743;
-  text-align: center;
-  font-size: 13px;
+  font-size: 1.5rem;
   font-weight: 500;
-  margin-inline-end: 4%;
+  margin-inline-end: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #d6e2f1;
+  border-color: ${(props) => (props.presd ? "inherit" : "1px solid #0F0743")};
 `;

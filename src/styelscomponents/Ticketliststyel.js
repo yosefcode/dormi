@@ -13,7 +13,6 @@ export const Contener = styled.div`
   width: 84%;
   margin: 0 auto;
 
-
   .Mangeroption {
     display: flex;
     flex-wrap: nowrap;
@@ -32,28 +31,8 @@ export const Contener = styled.div`
     width: 60%;
   }
 
-  .MangerButton {
-    border:  1px solid #0F0743; !important;
-    box-sizing: border-box;
-    border-radius: 11px;
-    align-items: center;
-    padding: 0px 16px;
-    background-color: white;
-    width: 24%;
-    height: 55px;
-    color: #0f0743;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-inline-end: 0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-
-  }
   .MangerButton_exel {
-    border:  1px solid #0F0743; !important;
+    border: 1px solid rgb(214, 226, 241);
     box-sizing: border-box;
     border-radius: 11px;
     align-items: center;
@@ -85,6 +64,7 @@ export const Contener = styled.div`
     height: 40px;
     margin-bottom:0;
   }
+
   .ant-card {
     width: 100%;
 padding: 20px;
@@ -93,6 +73,13 @@ background: #FFFFFF;
 border: 1px solid #D6E2F1;
 box-sizing: border-box;
 border-radius: 11px;
+  }
+  .card_checked_border.ant-card {
+border: 1px solid #FFD17E;
+cursor: pointer;
+  }
+  .card_checked_pointer.ant-card {
+cursor: pointer;
   }
   .ant-card-body {
     height:100%;
@@ -124,9 +111,6 @@ font-weight: 400;
   color: #0F0743;
   margin-bottom: 0;
 
-}
-.closecheckboox {
-  display:none;
 }
 .Smallcard {
   display: flex;
@@ -170,20 +154,6 @@ color:#807E94;
 #displyid_mobile{
   display:none;
 }
-// .pointerblock {
-
-// margin: 0 10px;
-// width: 80px;
-// height: 25px;
-// background: #e5ebf3;
-// font-weight: 500;
-// font-size: 1.2rem;
-//  color: #0f0743;
-//  display:flex;
-//  align-items: center;
-//   justify-content: center;
-//   padding-top:1px;}
-
 
 .details {
   display: flex;
@@ -204,6 +174,76 @@ p{
 #phoneactionbutton {
   display: none;
 }
+
+.Closepopup {
+  width: 35%;
+  border-radius: 43px;
+  position: fixed;
+  bottom: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 30px;
+  background-color: rgba(15, 7, 67, 1);
+  height: 63px;
+  color: white;
+  left:24%;
+}
+
+
+.Closepopupsubmit {
+  width: 40%;
+  height: 47px;
+  background: #ffffff;
+  border-radius: 11px;
+  font-weight: bold;
+  font-size: 1.7rem;
+  text-align: center;
+  color: #0f0743;
+}
+
+.cancelClosep {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 118.88%;
+
+  text-align: center;
+  text-decoration-line: underline;
+
+  color: #ffffff;
+  background: none;
+  border: none;
+}
+
+.Closepopup-numbertasks {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+}
+.closecheckboox {
+  -webkit-appearance: none;
+}
+
+.closecheckboox:checked {
+  content: url("/images/Vector.svg");
+  align-items: center;
+  padding: 4px;
+  width: 25px;
+  height: 25px;
+  background: #ffd17e;
+  border: 1.52px solid #ffd17e;
+  box-sizing: border-box;
+  border-radius: 76px;
+}
+
+.closecheckboox {
+  position: absolute;
+  bottom: 12px;
+  left:20px;
+}
+
 
 @media only screen and (max-width: 600px) {
   .Mangeroption {
@@ -227,24 +267,7 @@ p{
   }
 
   .MangerButton {
-    border:  1px solid #D6E2F1; !important;
-    box-sizing: border-box;
-    border-radius: 11px;
-    align-items: center;
-    padding: 0px 16px;
-    background-color: white;
     width: 41%;
-    height: 55px;
-    color: #0f0743;
-    font-size: 1.7rem;
-    font-weight: 500;
-    margin-inline-end: 0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-
   }
   .DropdownButton {
     border:  1px solid #D6E2F1; !important;
@@ -397,26 +420,117 @@ font-size:1.6rem;
 
 `;
 export const Selectfilter = styled.div`
-  margin-top: 10px;
-  .ant-select {
-    width: 200px;
-    border-color: none;
-    margin-bottom: 3px;
-    box-sizing: border-box;
-    border-radius: 11px;
+  width: 100%;
+  padding: 20px;
+  margin: 30px 0;
+  background: #FFFFFF;
+  border: 1px solid #D6E2F1;
+  border-radius: 11px;}
+
+  .ant-drawer-header {
+    display: none;
   }
-  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
-    margin-bottom: 2px;
+
+  .filteroption {
+    width: 95%;
+    margin: 0 auto;
   }
+
+  .header_filter {
+    width: 100%;
+    font-weight: 500;
+    font-size: 1.9rem;
+    color: #0f0743;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  #filterform {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .clearbutton {
+    background: none;
+    color: #0f0743;
+    border: none;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    cursor: pointer;
+
+  }
+
   .ant-select-selector {
     border: 1px solid #d6e2f1;
-    box-sizing: border-box;
+    border-radius: 11px !important;
+    height: 55px !important;
+    align-items: center !important;
+    font-size: 1.7rem;
+    font-weight: 500;
+    width: 100%;
+  }
+
+  .ant-select-selection-item {
+    align-items: center !important;
+    display: flex !important;
+  }
+
+  .ant-select {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    height: 55px !important;
+    align-items: center !important;
+    font-size: 1.7rem;
+    font-weight: 500;
+    width: 100% !important;
+  }
+
+  .selcts {
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #485464;
+    width: 30%;
+  }
+  .ant-form-item {
+    width: 100%;
+    margin-bottom: 0px;
+  }
+
+  .ant-drawer-content {
+    border-radius: 24px 24px 0px 0px;
+  }
+
+  .btn_filter {
+    width: 100%;
+    margin: 35px 0 15px;
+    display: flex;
+    justify-content: space-around
+  }
+
+  .ok {
+    width: 35%;
+    height: 55px;
+    color: white;
+    background: #0f0743;
     border-radius: 11px;
-    border-color: none;
+    border: none;
+    font-weight: 500;
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+  .cancel {
+    width: 35%;
+    height: 55px;
+    color: #0f0743;
+    background: #e5ebf3;
+    border-radius: 11px;
+    border: none;
+    font-weight: bold;
+    font-size: 1.7rem;   
+     cursor: pointer;
+
   }
 `;
 
@@ -489,23 +603,11 @@ export const Drawerstyle = styled(Drawer)`
 
   .btn_filter {
     width: 100%;
-    margin: 25px 0;
+    margin: 35px 0;
     display: flex;
     justify-content: space-between;
   }
 
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-  .Clear {
-    width: 149.5px;
-    height: 63px;
-    border-color: white;
-    background: #e5ebf3;
-    border-radius: 11px;
-    color: #0f0743;
-  }
   .ok {
     width: 47%;
     height: 63px;

@@ -269,8 +269,8 @@ function Users() {
       {lang?.lang102}
       <div className="div_MangerButton_users">
         <Buttonmuneu
+        className="MangerButton"
           presd={filterpresd}
-          className="MangerButton"
           onClick={() => {
             openfilter();
             setfilterpresd(!filterpresd);
@@ -295,8 +295,8 @@ function Users() {
         {/* </div>
         ) : null} */}
         <Buttonmuneu
+        className="MangerButton"
           presd={presd}
-          className="MangerButton"
           id="chusingbutoon"
           onClick={() => {
             Opquickctaskoption();
@@ -308,9 +308,9 @@ function Users() {
         {/* <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
         </button> */}
-        <button className="MangerButton shwobutton">
+        <Buttonmuneu className="MangerButton shwobutton">
           <Link to="/Adduser" style={{color: ' #0f0743'}}>{lang?.lang244}</Link>
-        </button>
+        </Buttonmuneu>
         {/* <button className="MangerButton shwobutton" onClick={AllOpenststus}>
           <p>
           {opentikitatatus ? "הצג כל פרטי המשתמש" : "סגור כל פרטי המשתמש"}{" "}
