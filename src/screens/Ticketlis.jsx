@@ -821,7 +821,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         Tikettoquikeclose(true, i);
                       } else {
                         Tikettoquikeclose(false, i);
-
                         // checkboxref.current[i].checked = false;
                       }
                     } else {
