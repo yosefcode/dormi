@@ -765,7 +765,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   <Menu.Item
                     onClick={() => {
                       setopenaptuchclosemodal(true);
-
                       setproblemid(el.ticketguid);
                     }}
                   >
