@@ -2,7 +2,7 @@
   "name": "dormi-web",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "8": "0.0.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -26,9 +26,6 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.0.1"
   },
-  "peerDependencies" : {
-        "styled-components": ">= 5"
-       },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -42,7 +39,10 @@
       "react-app/jest"
     ]
   },
-  
+  "engines": {
+    "node": ">=0.10.0",
+    "npm": ">=0.10.0"
+  },
     
   "browserslist": {
     "production": [
