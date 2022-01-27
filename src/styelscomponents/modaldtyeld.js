@@ -92,6 +92,15 @@ export const ModalStyeld = styled(Modal)`
     font-size: 2rem;
   }
 
+  .ant-modal-content {
+    width: 60% !important;
+    margin: 0 auto !important;
+    min-height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .ant-modal-header {
     border-radius: 19px;
     border-bottom: none;
@@ -104,6 +113,16 @@ export const ModalStyeld = styled(Modal)`
     box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
   }
   @media only screen and (max-width: 600px) {
+    .ant-modal-content {
+      width: 100% !important;
+      margin: 0 auto !important;
+      min-height: 70vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(0, 35%);
+    }
+
     .formedittask {
       display: flex;
       flex-direction: column;

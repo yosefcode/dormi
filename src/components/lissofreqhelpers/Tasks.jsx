@@ -107,13 +107,13 @@ export const ListtaskforEdit = ({ action, close }) => {
         onClick={() => {
           onfinish("close", null);
         }}
-        className="drower_bottom btn_up"
+        className="drower_button btn_up"
       >
         <img className="img_icon" src="/images/checkbox.svg" alt="icon" /> {lang?.lang145}
       </button>
 
       <button
-        className="drower_bottom"
+        className="drower_button"
         onClick={() => {
           onfinish("cost", null);
         }}
@@ -122,7 +122,7 @@ export const ListtaskforEdit = ({ action, close }) => {
       </button>
 
       <button
-        className="drower_bottom"
+        className="drower_button"
         onClick={() => {
           onfinish("open", null);
         }}
@@ -131,7 +131,7 @@ export const ListtaskforEdit = ({ action, close }) => {
       </button>
 
       <button
-        className="drower_bottom"
+        className="drower_button"
         onClick={() => {
           onfinish("pending", null);
         }}
@@ -139,12 +139,12 @@ export const ListtaskforEdit = ({ action, close }) => {
         <img className="img_icon" src="/images/ranch.svg" alt="icon" /> {lang?.lang190}
       </button>
 
-      <button className="drower_bottom">
+      <button className="drower_button">
         <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
 
       <button
-        className="drower_bottom"
+        className="drower_button"
         onClick={() => {
           onfinish("message", null);
         }}
@@ -153,7 +153,7 @@ export const ListtaskforEdit = ({ action, close }) => {
       </button>
 
       <button
-        className="drower_bottom"
+        className="drower_button"
         onClick={() => {
           onfinish("edit", null);
         }}
@@ -161,12 +161,12 @@ export const ListtaskforEdit = ({ action, close }) => {
         <img className="img_icon" src="/images/pen.svg" alt="icon" /> {lang?.lang243}
       </button>
 
-      <button className="drower_bottom btn_down">
+      <button className="drower_button btn_down">
         <img className="img_icon" src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
 
       <br />
-      <button className="drower_bottom btn_cancel" onClick={onclose}>
+      <button className="drower_button btn_cancel" onClick={onclose}>
         {lang?.lang251}
       </button>
     </div>
@@ -180,36 +180,36 @@ export const Quickclosebuuton = ({ action }) => {
   };
 
   return (
-    <div>
+    <div  className="drower_checklist">
       <button
         onClick={() => {
           onfinish("close", null);
         }}
-        className="Quickclosebuutonup"
+        className="drower_button btn_up"
       >
-        <img src="/images/checkbox.svg" alt="icon" /> {lang?.lang145}
+        <img className="img_icon" src="/images/checkbox.svg" alt="icon" /> {lang?.lang145}
       </button>
       <button
-        className="Quickclosebuuton"
+        className="drower_button"
         onClick={() => {
           onfinish("open", null);
         }}
       >
-        <img src="/images/camra.svg" alt="icon" /> {lang?.lang195}
+        <img className="img_icon" src="/images/camra.svg" alt="icon" /> {lang?.lang195}
       </button>
       <button
-        className="Quickclosebuuton"
+        className="drower_button"
         onClick={() => {
           onfinish("pending", null);
         }}
       >
-        <img src="/images/ranch.svg" alt="icon" /> {lang?.lang190}
+        <img className="img_icon" src="/images/ranch.svg" alt="icon" /> {lang?.lang190}
       </button>
-      <button className="Quickclosebuuton">
-        <img src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
+      <button className="drower_button">
+        <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
-      <button className="Quickclosebuutdown">
-        <img src="/images/trash.svg" alt="icon" /> {lang?.lang147}
+      <button className="drower_button btn_down">
+        <img className="img_icon" src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
     </div>
   );

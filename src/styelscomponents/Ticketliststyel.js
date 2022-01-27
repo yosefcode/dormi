@@ -201,6 +201,8 @@ p{
   font-size: 1.7rem;
   text-align: center;
   color: #0f0743;
+  border:none;
+
 }
 
 .cancelClosep {
@@ -341,9 +343,6 @@ p{
   
   }
   
-  .closecheckboox {
-    display:none;
-  }
   .Smallcard {
     display: flex;
     width: 100%;
@@ -351,9 +350,6 @@ p{
   }
   
 
-  .Closepopup {
-    width: 100%;
-  }
   #discriptun {
     margin-inline-end: -15px;
     margin-inline-start: 4px;
@@ -410,22 +406,122 @@ font-size:1.6rem;
     display: flex;
     flex-direction: column;
   }
+
+  .Closepopup {
+    width: 100%;
+    border-radius: 0px;
+    position: fixed;
+    bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 25px;
+    background-color: rgba(15, 7, 67, 1);
+    height: 63px;
+    color: white;
+    left:0;
+    z-index:2000;
+  }
+  
+  
+  .Closepopupsubmit {
+    width: 50%;
+    height: 47px;
+    background: #ffffff;
+    border-radius: 11px;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
+    color: #0f0743;
+    border:none;
+  }
+  
+  .cancelClosep {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.7rem;
+    line-height: 118.88%;
+  
+    text-align: center;
+    text-decoration-line: underline;
+  
+    color: #ffffff;
+    background: none;
+    border: none;
+  }
+  
+  .Closepopup-numbertasks {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.7rem;
+  }
+  .closecheckboox {
+    -webkit-appearance: none;
+  }
+  
+  .closecheckboox:checked {
+    content: url("/images/Vector.svg");
+    align-items: center;
+    padding: 3px;
+    width: 22px;
+    height: 22px;
+    background: #ffd17e;
+    border: 1.52px solid #ffd17e;
+    box-sizing: border-box;
+    border-radius: 76px;
+  }
+  
   .closecheckboox {
     position: absolute;
-    top: 9px;
-    inset-inline-start: 282px;
+    top: 12px;
+    left:15px;
   }
+
+  
 }
 
 
 `;
 export const Selectfilter = styled.div`
   width: 100%;
-  padding: 20px;
-  margin: 30px 0;
-  background: #FFFFFF;
-  border: 1px solid #D6E2F1;
-  border-radius: 11px;}
+
+  .div_filter_inq {
+    width: 100%;
+    padding: 20px;
+    margin: 30px 0;
+    background: #ffffff;
+    border: 1px solid #d6e2f1;
+    border-radius: 11px;
+  }
+
+  .div_filter_users {
+    width: 100%;
+    margin: 25px auto 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .div_Select_users {
+    width: 47%;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .div_filter_users {
+      width: 100%;
+      height: 130px;
+      margin: 5px auto 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .div_Select_users {
+      width: 100%;
+    }
+  }
 
   .ant-drawer-header {
     display: none;
@@ -458,7 +554,6 @@ export const Selectfilter = styled.div`
     font-size: 1.4rem;
     text-decoration: underline;
     cursor: pointer;
-
   }
 
   .ant-select-selector {
@@ -506,7 +601,7 @@ export const Selectfilter = styled.div`
     width: 100%;
     margin: 35px 0 15px;
     display: flex;
-    justify-content: space-around
+    justify-content: space-around;
   }
 
   .ok {
@@ -528,9 +623,8 @@ export const Selectfilter = styled.div`
     border-radius: 11px;
     border: none;
     font-weight: bold;
-    font-size: 1.7rem;   
-     cursor: pointer;
-
+    font-size: 1.7rem;
+    cursor: pointer;
   }
 `;
 
@@ -842,7 +936,11 @@ export const QuickcloDrawerstyle = styled(Drawer)`
     background-color: transparent;
   }
 
-  .drower_bottom {
+  .drower_checklist {
+    width: 100%;
+  }
+
+  .drower_button {
     border: none;
     background: #fafcff;
     box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
@@ -874,19 +972,20 @@ export const QuickcloDrawerstyle = styled(Drawer)`
     display: none;
   }
 
-  .Closepopup {
-    position: fixed;
-    bottom: 1px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 30px;
-    background-color: rgba(15, 7, 67, 1);
-    color: white;
-    width: 100%;
-    height: 63px;
-  }
+  // .Closepopup {
+  //   position: fixed;
+  //   bottom: 1px;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   padding: 8px 30px;
+  //   background-color: rgba(15, 7, 67, 1);
+  //   color: white;
+  //   width: 100%;
+  //   height: 63px;
+  //   left: 0;
+  // }
 
   .Closepopupsubmit {
     padding: 0px 12px 0px 20px;

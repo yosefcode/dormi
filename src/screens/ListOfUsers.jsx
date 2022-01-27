@@ -21,6 +21,7 @@ import { Style_users } from "../styelscomponents/Styelsuser";
 import {
   QuickcloDrawerstyle,
   Quickclomodaltyle,
+  Selectfilter
 } from "../styelscomponents/Ticketliststyel";
 
 const { Option } = Select;
@@ -327,7 +328,10 @@ function Users() {
       </div>
       <div className="haderflex">
         {Drawervisible ? (
-          <div className="filtermenue">
+          <Selectfilter>
+            <div className="div_filter_users">
+            <div className="div_Select_users">
+
             <Select
               showSearch
               placeholder={lang?.lang352}
@@ -349,6 +353,9 @@ function Users() {
                   })
                 : null}
             </Select>
+            </div>
+            <div className="div_Select_users">
+
             <Select
               showSearch
               placeholder={"כל התוכניות"}
@@ -363,6 +370,8 @@ function Users() {
                 ? listofprogram.map((el, i) => {
                     return (
                       <Option key={i} value={[el.program[0]]}>
+     <div style={{ width: "90%",display: "flex",justifyContent: "space-between", alignItems: "center"}}>
+
                         {el.program[0]}
 
                         <Badge
@@ -374,13 +383,17 @@ function Users() {
                             color: "black",
                             fontsize: "16px",
                           }}
-                        />
-                      </Option>
+                          /></div>
+                          </Option>
                     );
                   })
                 : null}
             </Select>
-          </div>
+            </div>
+
+            </div>
+          </Selectfilter>
+
         ) : null}
 
 

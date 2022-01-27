@@ -282,6 +282,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
       }
     }
   };
+
   const closepupup = () => {
     setquickclose(!quickclose);
   };
@@ -426,6 +427,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     });
 
     closeMenue();
+    setpresd(!presd);
+
     for (let i = 0; locallist.length > i; i++) {
       checkboxref.current[i].checked = false;
     }
@@ -700,6 +703,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           </div>
           {Drawervisible && !screnphunesize ? (
             <Selectfilter>
+              <div className="div_filter_inq">
               <FiltersForsort
                 filterarry={filterarry}
                 filteruser={filteruser}
@@ -733,7 +737,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 }}
                 openfilter={openfilter}
               />
-
+</div>
             </Selectfilter>
           ) : null}
           {/* כמה פניות יש */}
@@ -1048,19 +1052,19 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             onClose={closeMenue}
             visible={visible}
             height={400}
-            footer={
-              <div>
-                {quickclose ? (
-                  <Closetask
-                    data={cunter}
-                    cancelClosep={cancelClosep}
-                    opendrwor={closeMenue}
-                    cancelquickfunc={cancelquickfunc}
-                    canceloperition={canceling}
-                  />
-                ) : null}
-              </div>
-            }
+            // footer={
+            //   <div>
+            //     {quickclose ? (
+            //       <Closetask
+            //         data={cunter}
+            //         cancelClosep={cancelClosep}
+            //         opendrwor={closeMenue}
+            //         cancelquickfunc={cancelquickfunc}
+            //         canceloperition={canceling}
+            //       />
+            //     ) : null}
+            //   </div>
+            // }
           >
             <Quickclosebuuton action={Oqquickaction} />
           </QuickcloDrawerstyle>

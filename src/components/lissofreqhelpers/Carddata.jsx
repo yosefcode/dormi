@@ -52,7 +52,7 @@ export function Carddatabig({ el }) {
 
       <ModalStyeld
         visible={imegvesebule}
-        width={"50%"}
+        width={"100%"}
         onCancel={() => {
           setimegvesebule(false);
         }}

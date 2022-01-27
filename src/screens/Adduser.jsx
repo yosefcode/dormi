@@ -49,10 +49,9 @@ const Adduser = () => {
   return (
     <Container>
       <div className="hader">
-        <p>{lang?.lang244}</p>
+        <span>{lang?.lang244}</span>
       </div>
 
-      <hr />
 
       <Form
         name="adduser"
@@ -61,30 +60,69 @@ const Adduser = () => {
         }}
         onFinish={onFinish}
       >
-        <Form.Item label={`${lang?.lang307}(${lang?.lang312})`} name="email">
+        <div className="display_adduser">
+
+        <div className="select_adduser">
+        {`${lang?.lang307} (${lang?.lang312})`}
+        <Form.Item label={`${lang?.lang307} (${lang?.lang312})`} name="email">
           <Input />
         </Form.Item>
-        <hr className="hr" />
+        </div>
+
+        <div className="select_adduser">
+        {lang?.lang309}
+                <Form.Item label={lang?.lang309} name="password">
+          <Input />
+        </Form.Item>
+        </div>
+
+        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
+
+
+        <div className="select_adduser">
+        {lang?.lang305}
         <Form.Item label={lang?.lang305} name="firstname">
           <Input />
         </Form.Item>
-        <hr />
-        <Form.Item label={lang?.lang306} name="lastname">
+        </div>
+
+        <div className="select_adduser">
+        {lang?.lang306}
+                <Form.Item label={lang?.lang306} name="lastname">
           <Input />
         </Form.Item>
-        <hr />
-        <Form.Item label={lang?.lang313} name="firstroom">
+        </div>
+
+        <div className="select_adduser">
+{lang?.lang308}
+        <Form.Item label={lang?.lang308} name="phonenumber">
+          <Input />
+        </Form.Item>
+        </div>
+
+
+        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
+
+        <div className="select_adduser">
+        {lang?.lang313}
+                <Form.Item label={lang?.lang313} name="firstroom">
           <Select defaultValue="עברית">
             {arry.map((el) => {
               return <Option>{el}</Option>;
             })}
           </Select>
         </Form.Item>
-        <hr />
-        <Form.Item label={`${lang?.lang377}?`} name="entrance">
+        </div>
+
+        <div className="select_adduser">
+        {`${lang?.lang377}?`}
+                <Form.Item label={`${lang?.lang377}?`} name="entrance">
           <Switch defaultChecked={false} />
         </Form.Item>
-        <hr />
+        </div>
+
+        <div className="select_adduser">
+{lang?.lang319}
         <Form.Item label={lang?.lang319} name="auht_rank">
           <Select onChange={Permission}>
             {permission.map((el) => {
@@ -92,8 +130,10 @@ const Adduser = () => {
             })}
           </Select>
         </Form.Item>
-        <hr />
-        <Form.Item
+        </div>
+        <div className="select_adduser">
+        {`${lang?.lang320} (${lang?.lang321})`}
+                <Form.Item
           label={`${lang?.lang320} (${lang?.lang321})`}
           name="schoolyaer"
         >
@@ -103,23 +143,26 @@ const Adduser = () => {
             })}
           </Select>
         </Form.Item>
-        <hr />
-        <Form.Item label={lang?.lang309} name="password">
-          <Input />
-        </Form.Item>
-        <hr />
-        <Form.Item label={lang?.lang308} name="phonenumber">
-          <Input />
-        </Form.Item>
-        <hr />
-        <Form.Item label={lang?.lang310} name="language">
+        </div>
+
+
+        <div className="select_adduser">
+        {lang?.lang310}
+                <Form.Item label={lang?.lang310} name="language">
           <Select defaultValue="עברית">
             {arry.map((el) => {
               return <Option>{el}</Option>;
             })}
           </Select>
         </Form.Item>
-        <hr />
+        </div>
+
+        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
+        {staf || aditionstaf?
+
+ 
+              <div className="select_adduser">
+{lang?.lang328}
         <Form.Item>
           {staf ? (
             <Form.Item
@@ -180,8 +223,9 @@ const Adduser = () => {
                   />
                 </div>
               </div>
-            </Form.Item>
+            </Form.Item>     
           ) : null}
+
           {aditionstaf ? (
             <div>
               <Form.Item label={lang?.lang387} name="appro">
@@ -238,10 +282,17 @@ const Adduser = () => {
               </Form.Item>
             </div>
           ) : null}
-          <Button type="primary" htmlType="submit">
+
+        </Form.Item>
+        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
+        </div>
+:null}
+
+
+          <Button type="primary" htmlType="submit" style={{width: "100%"}}>
             {lang?.lang156}
           </Button>
-        </Form.Item>
+        </div>
       </Form>
     </Container>
   );
