@@ -40,6 +40,32 @@ export const Container = styled.div`
     font-size: 1.5rem;
   }
 
+  .radio_adduser {
+    width: 100%;
+    margin: 25px 0 0 0;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .ant-form-item {
+    margin-bottom: 0 !important;
+  }
+  .ant-switch-checked {
+    background-color: #ffd17e;
+  }
+  button.ant-btn.ant-btn-primary {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 100%;
+    height: 50px;
+    border-color: #ffd17e;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 25px auto;
+  }
+
   @media only screen and (min-width: 600px) {
     margin: 20px auto;
 
@@ -47,20 +73,25 @@ export const Container = styled.div`
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      // justify-content: center;
-      // flex-direction: column;
-      // align-content: space-between;
-      // align-items: center;
     }
+
     .select_adduser {
       width: 30%;
       margin: 25px 0 0 3%;
     }
 
     button.ant-btn.ant-btn-primary {
-      margin-inline-start: 24%;
+width: 50%; 
+margin:40px 25% 70px;   }
+
+    .hr {
+      display: block;
+      border-top: 1px solid #d6e2f1;
+      width: 100%;
+      margin-top: 25px;
     }
   }
+
   @media only screen and (max-width: 600px) {
     margin: 90px auto;
   }
@@ -71,12 +102,15 @@ export const Container = styled.div`
     text-align: center;
     color: #0f0743;
   }
-
-  // .goback {
-  //   font-size: 47px;
-  //   width: 10px;
-  //   margin-top: -8%;
-  // }
+  hr {
+    display: none;
+  }
+}
+  .goback {
+    text-align: right;
+    cursor: pointer;
+    width:20px;
+  }
 
   // .ant-select-selector {
   //   border: 1px solid #d6e2f1;
@@ -103,13 +137,6 @@ export const Container = styled.div`
   //   color: #aaa;
   //   margin-bottom: -3px;
   //   align-items: center;
-  // }
-  // button.ant-btn.ant-btn-primary {
-  //   background: #ffd17e;
-  //   border-radius: 11px;
-  //   width: 269px;
-  //   height: 34px;
-  //   border-color: #ffd17e;
   // }
   // .closecheckboox {
   //   -webkit-appearance: none;
@@ -149,8 +176,5 @@ export const Container = styled.div`
   //   display: flex;
   //   flex-direction: row;
   //   justify-content: space-between;
-  // }
-  // .ant-switch-checked {
-  //   background-color: #ffd17e;
   // }
 `;

@@ -40,7 +40,8 @@ const Adduser = () => {
 
   const Userpermissions = (e) => {
     // console.log(typeof e.target.value);
-    if (e.target.value === "5" || e.target.value === "4") {
+    if (e === "5" || e === "4") {
+    // if (e.target.value === "5" || e.target.value === "4") {
       setaditionstaf(true);
     } else {
       setaditionstaf(false);
@@ -48,7 +49,16 @@ const Adduser = () => {
   };
   return (
     <Container>
+
+
       <div className="hader">
+<div
+          className="goback"
+          onClick={() => {
+            goback();
+          }}
+        >X
+        </div>
         <span>{lang?.lang244}</span>
       </div>
 
@@ -76,7 +86,7 @@ const Adduser = () => {
         </Form.Item>
         </div>
 
-        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
+        <hr className="hr" />
 
 
         <div className="select_adduser">
@@ -101,7 +111,7 @@ const Adduser = () => {
         </div>
 
 
-        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
+        <hr className="hr" />
 
         <div className="select_adduser">
         {lang?.lang313}
@@ -114,23 +124,8 @@ const Adduser = () => {
         </Form.Item>
         </div>
 
-        <div className="select_adduser">
-        {`${lang?.lang377}?`}
-                <Form.Item label={`${lang?.lang377}?`} name="entrance">
-          <Switch defaultChecked={false} />
-        </Form.Item>
-        </div>
 
-        <div className="select_adduser">
-{lang?.lang319}
-        <Form.Item label={lang?.lang319} name="auht_rank">
-          <Select onChange={Permission}>
-            {permission.map((el) => {
-              return <Option value={el.id}>{el.permission}</Option>;
-            })}
-          </Select>
-        </Form.Item>
-        </div>
+
         <div className="select_adduser">
         {`${lang?.lang320} (${lang?.lang321})`}
                 <Form.Item
@@ -157,9 +152,19 @@ const Adduser = () => {
         </Form.Item>
         </div>
 
-        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
-        {staf || aditionstaf?
+        <div className="select_adduser">
+{lang?.lang319}
+        <Form.Item label={lang?.lang319} name="auht_rank">
+          <Select onChange={Permission}>
+            {permission.map((el) => {
+              return <Option value={el.id}>{el.permission}</Option>;
+            })}
+          </Select>
+        </Form.Item>
+        </div>
 
+
+        {staf || aditionstaf?
  
               <div className="select_adduser">
 {lang?.lang328}
@@ -168,9 +173,17 @@ const Adduser = () => {
             <Form.Item
               label={lang?.lang328}
               name="userpermissions"
-              onChange={Userpermissions}
+              // onChange={Userpermissions}
             >
-              <div className="radiogrop">
+                        <Select onChange={Userpermissions}>
+               <Option value={1}>{lang?.lang360}</Option>;
+               <Option value={2}>{lang?.lang178}</Option>;
+               <Option value={3}>{lang?.lang322}</Option>;
+               <Option value={4}>{lang?.lang323}</Option>;
+               <Option value={5}>{lang?.lang324}</Option>;
+          </Select>
+
+              {/* <div className="radiogrop">
                 <div className="radio">
                   <label for="only my">{lang?.lang360}</label>
                   <input
@@ -222,7 +235,7 @@ const Adduser = () => {
                     value={5}
                   />
                 </div>
-              </div>
+              </div> */}
             </Form.Item>     
           ) : null}
 
@@ -284,15 +297,24 @@ const Adduser = () => {
           ) : null}
 
         </Form.Item>
-        <hr style={{borderTop: "1px solid #d6e2f1", width: "100%"}}/>
         </div>
 :null}
 
+<div className="radio_adduser">
+        {`${lang?.lang377}?`}
+                <Form.Item label={`${lang?.lang377}?`} name="entrance" style={{marginRight:"25px"}}>
+          <Switch defaultChecked={false} />
+        </Form.Item>
+        </div>
 
-          <Button type="primary" htmlType="submit" style={{width: "100%"}}>
+</div>
+
+
+
+          <Button type="primary" htmlType="submit" >
             {lang?.lang156}
           </Button>
-        </div>
+        {/* </div> */}
       </Form>
     </Container>
   );

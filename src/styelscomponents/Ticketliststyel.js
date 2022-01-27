@@ -628,6 +628,86 @@ export const Selectfilter = styled.div`
   }
 `;
 
+export const DrawerCloseTask = styled(Drawer)`
+  .continer_formedittask {
+    width: 100%;
+    font-weight: 700;
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .formedittask {
+    width: 100%;
+  }
+  .edittask {
+    width: 100%;
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-align: right;
+  }
+
+  .ant-select {
+    margin: 0px auto !important;
+    width: 100%;
+  }
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    width: 100%;
+    min-height: 55px;
+  }
+
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    height: 55px !important;
+    align-items: center !important;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+
+  .ant-modal-body {
+    width: 100%;
+  }
+  .modalbutoonsend {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 80%;
+    height: 40px;
+    border-color: #ffd17e;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 30px 10% 0;
+    border: none;
+  }
+  .ant-upload-list {
+    margin: 20px auto;
+    text-align: center;
+  }
+  .canvas_wrapper {
+    position: relative;
+  }
+  .canvas_wrapper .clear_button {
+    position: absolute;
+    bottom: 6%;
+    left: 12%;
+    color: #7b93a0;
+    text-decoration-line: underline;
+  }
+  .SignaturCanvas {
+    width: 100%;
+    height: 180px;
+    background: #f1f1f1;
+    border-radius: 7px;
+  }
+  .ant-row {
+    display: block;
+  }
+  .ant-drawer-content {
+    border-radius: 24px 24px 0px 0px;
+  }
+`;
 export const Drawerstyle = styled(Drawer)`
   .ant-drawer-header {
     display: none;
@@ -770,7 +850,6 @@ export const StyeldSelect = styled(Select)`
 
 export const Quickclomodaltyle = styled(Modal)`
   font-family: "Heebo";
-
   .userQuickclosebuuton {
     display: flex;
     flex-direction: column;
@@ -800,6 +879,7 @@ export const Quickclomodaltyle = styled(Modal)`
 
     color: #0f0743;
   }
+
   .Quickclosebuutonup {
     border: none;
     background: #fafcff;
@@ -918,6 +998,51 @@ export const Quickclomodaltyle = styled(Modal)`
     font-weight: 500;
     font-size: 14px;
     text-decoration: underline;
+  }
+  .drower_checklist {
+    width: 100%;
+  }
+
+  .ant-modal-body {
+    padding: 0 !important;
+  }
+  .ant-modal-content {
+    border-radius: 15px;
+  }
+  .ant-modal-close {
+    display: none;
+  }
+  .drower_button {
+    border: none;
+    background: #fafcff;
+    box-shadow: 0px 1px 0px rgba(171, 171, 171, 0.25);
+    margin: 1px;
+    font-weight: 500;
+    font-size: 1.6rem;
+    width: 100%;
+    height: 56px;
+    color: #0f0743;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .btn_cancel {
+    border-radius: 9px;
+    padding: 0px 20px;
+  }
+
+  .btn_up {
+    border-radius: 9px 9px 0px 0px;
+  }
+
+  .btn_down {
+    border-radius: 0px 0px 9px 9px;
+  }
+  .img_icon {
+    margin: 0px 17px;
+  }
+  button.ant-drawer-close {
+    display: none;
   }
 `;
 export const QuickcloDrawerstyle = styled(Drawer)`

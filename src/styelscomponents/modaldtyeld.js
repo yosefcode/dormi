@@ -112,6 +112,16 @@ export const ModalStyeld = styled(Modal)`
     border: none;
     box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
   }
+  .div_modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 2.2rem;
+  }
+
   @media only screen and (max-width: 600px) {
     .ant-modal-content {
       width: 100% !important;
@@ -131,51 +141,70 @@ export const ModalStyeld = styled(Modal)`
   .ant-input {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
+    width: 300px;
+    max-width: 100%;
+    min-height: 55px;
   }
   .ant-select {
+    margin: 0px auto !important;
     width: 300px;
-    border-color: none;
-    margin-bottom: 3px;
-    box-sizing: border-box;
-    border-radius: 11px;
-  }
-  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
-    margin-bottom: 2px;
+    max-width: 100%;
   }
   .ant-select-selector {
     border: 1px solid #d6e2f1;
-    box-sizing: border-box;
-    border-radius: 11px;
-    border-color: none;
+    border-radius: 11px !important;
+    height: 55px !important;
+    align-items: center !important;
+    font-size: 1.7rem;
+    font-weight: 500;
   }
 
+  button.ant-btn.ant-btn-primary {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 150px;
+    height: 40px;
+    border-color: #ffd17e;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 10px auto;
+  }
+  .ant-modal-body {
+    width: 100%;
+  }
+  .continer_formedittask {
+    width: 100%;
+    font-weight: 700;
+    font-size: 2.2rem;
+    text-align: center;
+  }
   .formedittask {
+    width: 100%;
     display: flex;
-    /* background-color: blue; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   .modalbutoonsend {
-    width: 149.5px;
-    height: 63px;
-
-    background: #0f0743;
+    background: #ffd17e;
     border-radius: 11px;
+    width: 40%;
+    height: 40px;
+    border-color: #ffd17e;
+    font-size: 2.2rem;
     font-weight: bold;
-    font-size: 17px;
-    line-height: 118.88%;
-    /* or 20px */
-
+    margin: 30px 30% 0;
+    border: none;
+  }
+  .ant-upload-list {
+    margin: 20px auto;
     text-align: center;
-
-    color: #ffffff;
   }
   .edittask {
-    display: flex;
-    /* flex-direction: row; */
-    justify-content: space-around;
+    width: 47%;
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 1.5rem;
   }
   .taskleft {
     margin-inline-start: 1%;
@@ -183,9 +212,6 @@ export const ModalStyeld = styled(Modal)`
   }
   .taskright {
     /* background-color: red; */
-  }
-  .ant-form-item {
-    display: contents;
   }
   .canvas_wrapper {
     position: relative;
@@ -198,14 +224,12 @@ export const ModalStyeld = styled(Modal)`
     text-decoration-line: underline;
   }
   .SignaturCanvas {
-    position: static;
-    width: 290px;
+    width: 100%;
     height: 180px;
-    left: 0px;
-    top: 0px;
-    margin-top: 4%;
     background: #f1f1f1;
     border-radius: 7px;
-    margin-bottom: 3%;
+  }
+  .ant-row {
+    display: block;
   }
 `;

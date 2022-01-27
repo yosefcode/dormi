@@ -452,6 +452,9 @@ function Users() {
               );
               return (
                 <Card
+                className={quickclose && checkboxref.current[i].checked ?
+                  "card_checked_border":quickclose?"card_checked_pointer": null}
+
                   bordered={false}
                   key={`${user}${i}`}
                   onClick={() => {

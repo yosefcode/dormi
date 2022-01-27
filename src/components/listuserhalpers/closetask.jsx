@@ -39,7 +39,7 @@ export const Closetask = ({
   };
   return (
     <div className="Closepopup">
-      <div>
+      
         {data > 0 ? (
           <div className="Closepopup-numbertasks">
             <div> {data} נבחרו </div>
@@ -52,9 +52,14 @@ export const Closetask = ({
             )} */}
           </div>
         ) : (
-          <div>בחר פניות</div>
-        )}
-      </div>
+          <button className="cancelClosep" onClick={allusers}>
+בחר הכל        </button>
+          )}
+                  {data > 0 ? (
+      <button className="cancelClosep" onClick={clearall}>
+      בטל
+    </button>): null}
+
       {/* {data > 0 && !cancelquickfunc.status ? (
         <button className="cancelClosep" onClick={cancelClosep}>
           בטל
@@ -68,12 +73,6 @@ export const Closetask = ({
       </button>
 
       {/* ) : ( */}
-      <button className="cancelClosep" onClick={allusers}>
-        בחר את כל המשתמשים
-      </button>
-      <button className="cancelClosep" onClick={clearall}>
-        בטל בחירה
-      </button>
       {/* )} */}
     </div>
   );

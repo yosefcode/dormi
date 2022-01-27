@@ -19,7 +19,10 @@ export function SendmasegeTask({ onsendmassege }) {
 
   return (
     <div>
+
       <Form name="masseg" onFinish={sendmassege} form={form}>
+              <div className="div_modal">
+        {lang?.lang263}
         <Form.Item name="comments" placeholder={lang?.lang266}>
           <TextArea rows={4} />
         </Form.Item>
@@ -29,6 +32,7 @@ export function SendmasegeTask({ onsendmassege }) {
             {lang?.lang265}
           </Button>
         </Form.Item>
+        </div>
       </Form>
     </div>
   );
@@ -47,6 +51,9 @@ export function Sentostaf({ onReferr }) {
 
   return (
     <Form name="masseg" onFinish={sendmassege} form={form}>
+              <div className="div_modal">
+        {lang?.lang240}
+
       <Form.Item name="stafmember">
         <Select showSearch placeholder="בחר איש צוות">
           <Option value={"אביתר"}>אביתר </Option>
@@ -60,6 +67,7 @@ export function Sentostaf({ onReferr }) {
           {lang?.lang265}
         </Button>
       </Form.Item>
+    </div>
     </Form>
   );
 }
@@ -139,7 +147,9 @@ export const ListtaskforEdit = ({ action, close }) => {
         <img className="img_icon" src="/images/ranch.svg" alt="icon" /> {lang?.lang190}
       </button>
 
-      <button className="drower_button">
+      <button className="drower_button"         onClick={() => {
+          onfinish("Referraltostaff", null);
+        }}>
         <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
 

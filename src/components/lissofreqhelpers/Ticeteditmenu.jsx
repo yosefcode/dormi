@@ -97,29 +97,49 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
   );
   let stafarry = ["אביתר", "בעז", "משה"];
   return (
-    <div className="Apruchclose">
-      <div className="edittask">
+    <div className="continer_formedittask">
+    {lang?.lang208}
         <Form name="basic" onFinish={onFinish} form={form}>
           <div className="formedittask">
-            {/* נסגר עי */}
-            <div className="taskright">
-              <Form.Item name="closdbi" label={lang?.lang197}>
+
+      <div className="edittask">
+    {lang?.lang197}
+              <Form.Item name="closdbi" >
                 <Select placeholder="איש צוות" allowClear>
                   {stafarry.map((el) => {
                     return <Option value={el}>{el}</Option>;
                   })}
                 </Select>
               </Form.Item>
-              <Form.Item
+ </div>
+
+      <div className="edittask">
+                  {`${lang?.lang149} (${lang?.lang204})`}
+                  <Form.Item
                 name="price"
-                label={`${lang?.lang149}(${lang?.lang204})`}
               >
                 <Input type="bunber" inputmode="numeric" />
               </Form.Item>
-              <Form.Item name="anbsuertostudent" label={lang?.lang205}>
+ </div>
+
+      <div className="edittask">
+      {lang?.lang205}
+      <Form.Item name="anbsuertostudent" >
                 <TextArea allowClear rows={4} />
               </Form.Item>
-              <Form.Item name="uplodeinag" allowClear label="בלבלבלב">
+ </div>
+
+      <div className="edittask">
+      {lang?.lang206}
+      <Form.Item name="insidetext" >
+                <TextArea allowClear rows={4} />
+              </Form.Item>
+ </div>
+
+
+      <div className="edittask">
+העלאה ?????
+<Form.Item name="uplodeinag" allowClear >
                 <Upload
                   listType="picture-card"
                   // fileList={fileList}
@@ -129,12 +149,10 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
                   {uploadButton}
                 </Upload>
               </Form.Item>
-            </div>
-            <div className="taskleft">
-              <Form.Item name="insidetext" label={lang?.lang206}>
-                <TextArea allowClear rows={4} />
-              </Form.Item>
-              <Form.Item label="signiture">
+ </div>
+      <div className="edittask">
+      signiture
+      <Form.Item>
                 <div className="canvas_wrapper">
                   <SignaturePad
                     ref={sigCanvas}
@@ -152,16 +170,16 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
                 />
                 <button onClick={clear}>cler</button> */}
               </Form.Item>
-            </div>
+ </div>
 
-            <br />
+
           </div>
+
           <button className="modalbutoonsend" htmlType="submit">
             send
           </button>
         </Form>
       </div>
-    </div>
   );
 };
 export const Posteditofticket = (task, ticketguid, value) => {

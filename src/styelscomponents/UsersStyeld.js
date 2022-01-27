@@ -50,6 +50,14 @@ border: 1px solid #D6E2F1;
 box-sizing: border-box;
 border-radius: 11px;
   }
+  .card_checked_border.ant-card {
+    border: 1px solid #FFD17E;
+    cursor: pointer;
+      }
+      .card_checked_pointer.ant-card {
+    cursor: pointer;
+      }
+    
   .ant-card-body {
      padding: 0;
     }
@@ -168,11 +176,7 @@ cursor: pointer;
     .action {
       bottom: 69%;
     }
-    .closecheckboox {
-      position: absolute;
-      top: 11%;
-      inset-inline-start: 93%;
-    } }
+   }
   @media only screen and (max-width: 600px) {
     .Mangeroption_users {
       display: block;
@@ -279,12 +283,25 @@ cursor: pointer;
   
     }
   
-
+    
+    .closecheckboox:checked {
+      content: url("/images/Vector.svg");
+      align-items: center;
+      padding: 3px !important;
+      width: 22px !important;
+      height: 22px !important;
+      background: #ffd17e;
+      border: 1.52px solid #ffd17e;
+      box-sizing: border-box;
+      border-radius: 76px;
+    }
+    
     .closecheckboox {
       position: absolute;
-      top: 23px;
-      inset-inline-start: 282px;
+      top: 12px;
+      left:15px;
     }
+  
   }
 
   #cooment {
@@ -306,74 +323,150 @@ cursor: pointer;
 
   @media only screen and (min-width: 600px) {
     .Closepopup {
-      width: 420px;
-
+      width: 35%;
       border-radius: 43px;
+      position: fixed;
+      bottom: 1px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 30px;
+      background-color: rgba(15, 7, 67, 1);
+      height: 63px;
+      color: white;
+      left:24%;
+    }
+    
+    .Closepopupsubmit {
+      width: 40%;
+      height: 47px;
+      background: #ffffff;
+      border-radius: 11px;
+      font-weight: bold;
+      font-size: 1.7rem;
+      text-align: center;
+      color: #0f0743;
+      border:none;
+    
+    }
+    
+    .cancelClosep {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 17px;
+      line-height: 118.88%;
+    
+      text-align: center;
+      text-decoration-line: underline;
+    
+      color: #ffffff;
+      background: none;
+      border: none;
+    }
+    
+    .Closepopup-numbertasks {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
     }
   }
-  .Closepopup {
-    position: fixed;
-    bottom: 1px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 30px;
-    background-color: rgba(15, 7, 67, 1);
-    height: 63px;
-    color: white;
-  }
-
   @media only screen and (max-width: 600px) {
     .Closepopup {
       width: 100%;
+      border-radius: 0px;
+      position: fixed;
+      bottom: 1px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 25px;
+      background-color: rgba(15, 7, 67, 1);
+      height: 63px;
+      color: white;
+      left:0;
+      z-index:2000;
     }
-  }
+    
+    
+    .Closepopupsubmit {
+      width: 50%;
+      height: 47px;
+      background: #ffffff;
+      border-radius: 11px;
+      font-weight: bold;
+      font-size: 1.7rem;
+      text-align: center;
+      color: #0f0743;
+      border:none;
+    }
+    
+    .cancelClosep {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.7rem;
+      line-height: 118.88%;
+    
+      text-align: center;
+      text-decoration-line: underline;
+    
+      color: #ffffff;
+      background: none;
+      border: none;
+    }
+    
+    .Closepopup-numbertasks {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 1.7rem;
+    }
+    }
 
-  .Closepopupsubmit {
-    padding: 0px 12px 0px 20px;
+  // .Closepopupsubmit {
+  //   padding: 0px 12px 0px 20px;
 
-    width: 165px;
-    height: 47px;
+  //   width: 165px;
+  //   height: 47px;
 
-    background: #ffffff;
-    border-radius: 11px;
-    font-weight: bold;
-    font-size: 17px;
-    line-height: 118.88%;
-    /* or 20px */
+  //   background: #ffffff;
+  //   border-radius: 11px;
+  //   font-weight: bold;
+  //   font-size: 17px;
+  //   line-height: 118.88%;
+  //   /* or 20px */
 
-    text-align: center;
-    content: url("/images/lightning.svg");
-    color: #0f0743;
+  //   text-align: center;
+  //   content: url("/images/lightning.svg");
+  //   color: #0f0743;
 
-    /* Inside Auto Layout */
-  }
-  .cancelClosep {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 17px;
-    line-height: 118.88%;
-    /* or 20px */
+  //   /* Inside Auto Layout */
+  // }
+  // .cancelClosep {
+  //   font-style: normal;
+  //   font-weight: normal;
+  //   font-size: 17px;
+  //   line-height: 118.88%;
+  //   /* or 20px */
 
-    text-align: center;
-    text-decoration-line: underline;
+  //   text-align: center;
+  //   text-decoration-line: underline;
 
-    color: #ffffff;
-    background: none;
-    border: none;
-  }
-  .Closepopup-numbertasks {
-    font-style: normal;
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 118.88%;
-    /* or 20px */
+  //   color: #ffffff;
+  //   background: none;
+  //   border: none;
+  // }
+  // .Closepopup-numbertasks {
+  //   font-style: normal;
+  //   font-weight: 300;
+  //   font-size: 17px;
+  //   line-height: 118.88%;
+  //   /* or 20px */
 
-    text-align: center;
+  //   text-align: center;
 
-    color: #ffffff;
-  }
+  //   color: #ffffff;
+  // }
   .clearbutton {
     background: none;
     color: #0f0743;
@@ -387,35 +480,27 @@ cursor: pointer;
   }
   .closecheckboox {
     -webkit-appearance: none;
-
-    padding: 0px;
-
-    width: 19px;
-    height: 19px;
-    border: none;
-    /* border: 1.52px solid #ffd17e; */
-    box-sizing: border-box;
-    border-radius: 76px;
-    margin-top: 7px;
   }
-  .closecheckboox:active {
-    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
-      inset 0px 1px 3px rgba(0, 0, 0, 0.1); */
+  .closecheckboox {
+    position: absolute;
+    bottom: 12px;
+    left:12px;
   }
+  
   .closecheckboox:checked {
     content: url("/images/Vector.svg");
     align-items: center;
-    padding: 0px;
-
-    width: 19px;
-    height: 19px;
-
+    padding: 4px;
+    width: 25px;
+    height: 25px;
     background: #ffd17e;
     border: 1.52px solid #ffd17e;
     box-sizing: border-box;
     border-radius: 76px;
-    margin-top: 2px;
+    
   }
+  
+  
 
 
 

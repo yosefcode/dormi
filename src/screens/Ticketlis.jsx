@@ -5,6 +5,7 @@ import {
   Selectfilter,
   QuickcloDrawerstyle,
   Quickclomodaltyle,
+  DrawerCloseTask
 } from "../styelscomponents/Ticketliststyel";
 import DataContext from "../DataContext";
 import { FaFilter } from "react-icons/fa";
@@ -164,7 +165,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const [Referraltostaff, setReferraltostaff] = useState(false);
 
   const onReferr = (value, id) => {
-    setSendmassege(false);
+    setReferraltostaff(false);
     console.log(value, problemid);
   };
 
@@ -222,6 +223,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           tickets: arrytecetsalltask,
           forwardtouser: value,
         };
+        break;
+      case "Referraltostaff":
+        setReferraltostaff(true);
         break;
       case "message":
         setSendmassege(true);
@@ -750,6 +754,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   {/* שלח הודעה */}
                   <Menu.Item
                     onClick={() => {
+                      setSendmassege(true);
+
                       setproblemid(el.ticketguid);
                     }}
                   >
@@ -1004,6 +1010,33 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
               />
             </Drawerstyle>
           ) : null}
+
+
+          {/*  סגירה מתקדמת לפלאפון */}
+          {screnphunesize ? (
+            <DrawerCloseTask
+              placement={"bottom"}
+              // closable={false}
+              onClose={() => {
+                setopenaptuchclosemodal(false);
+                setclaerapruchform(true);
+                }}
+              visible={openaptuchclosemodal}
+              key={"closeTask"}
+              height={"90%"}
+              bodyStyle={{
+                textalign: "center",
+              }}
+            >
+            <Apruchclose
+              ticketguid={problemid}
+              Closemodal={closeopenaptuchclosemoda}
+              Clearform={claerapruchform}
+            />
+
+            </DrawerCloseTask>
+          ) : null}
+
           {/* משימות סגירה רגילה */}
           <Quickclomodaltyle
             visible={visabletaskmodal}
@@ -1041,9 +1074,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             onCancel={() => {
               setVmodalquickclos(!Vmodalquickclos);
             }}
-            width={0}
+            width={"35%"}
             footer={null}
-            // maskStyle={{ height: "92%" }}
+            style={{ left: "-9%" }}
           >
             <Quickclosebuuton action={Oqquickaction} />
           </Quickclomodaltyle>
@@ -1082,8 +1115,12 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           ) : null}
           {/* מודלוים משימות כרטיס */}
           {/* סגריה מתקדמת */}
+          {!screnphunesize ? (
+
           <ModalStyeld
-            title={`${lang?.lang208} - ${problemid}`}
+                    width={"100% "}
+
+            // title={`${lang?.lang208} - ${problemid}`}
             visible={openaptuchclosemodal}
             onCancel={() => {
               setopenaptuchclosemodal(false);
@@ -1096,10 +1133,12 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
               Closemodal={closeopenaptuchclosemoda}
               Clearform={claerapruchform}
             />
-          </ModalStyeld>
+          </ModalStyeld>          ) : null}
+
           {/* שלח הודעה */}
           <ModalStyeld
-            title={lang?.lang263}
+          width={"100% "}
+            // title={lang?.lang263}
             visible={Sendmassege}
             onCancel={() => {
               setSendmassege(false);
@@ -1110,7 +1149,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           </ModalStyeld>
           {/* שלח לאיש צוות */}
           <ModalStyeld
-            title={lang?.lang240}
+          width={"100%"}
+            // title={lang?.lang240}
             visible={Referraltostaff}
             onCancel={() => {
               setReferraltostaff(false);
