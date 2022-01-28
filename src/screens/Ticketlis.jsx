@@ -869,6 +869,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                               id="status"
                               color={status}
                               text={statustext}
+                              style={{width:"100px" }}
                             />
                             <span className="pointerblock">
                               <Urgensy

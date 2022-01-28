@@ -806,7 +806,7 @@ export const Drawerstyle = styled(Drawer)`
 export const StyeldSelect = styled(Select)`
   width: 97px;
   height: 24px;
-  margin: -4% 10px 0 0;
+  margin: -4% 0px 0 0;
 
   .ant-badge-status-text {
     font-family: "Heebo";
