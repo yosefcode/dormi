@@ -21,10 +21,16 @@ function Setings() {
   ];
   return (
     <Contener>
-      <p>{lang?.lang152}</p>
-      <Form name="basic" onFinish={onFinish}>
+      <div >{lang?.lang152}</div>
+      <Form name="basic" onFinish={onFinish} layout="vertical" >
+
+      <div className="div_setting">
+
+
+
         <Form.Item
           label={lang?.lang154}
+          labelStyle={{fontSize:"50px"}}
           name="contact"
           rules={[
             {
@@ -32,13 +38,18 @@ function Setings() {
             },
           ]}
         >
-          <Select showSearch>
+          <Select showSearch >
             {problomtypearry.map((el) => {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
-          <div>{lang?.lang153}</div>
+          <div className="text_bottom">{lang?.lang153}</div>
         </Form.Item>
+</div>
+
+<div className="div_setting">
+
+
         <Form.Item
           name="contact-email"
           label={lang?.lang307}
@@ -53,8 +64,13 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
-          <div>*{lang?.lang153}</div>
+          <div  className="text_bottom">* {lang?.lang153}</div>
         </Form.Item>
+        </div>
+
+<div className="div_setting">
+
+
         <Form.Item
           label={lang?.lang168}
           name="language"
@@ -69,8 +85,13 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
-          <div>* {lang?.lang169}</div>
+          <div  className="text_bottom">* {lang?.lang169}</div>
         </Form.Item>
+        </div>
+
+<div className="div_setting">
+
+
         <Form.Item
           label={lang?.lang155}
           name="mail addres"
@@ -86,6 +107,10 @@ function Setings() {
             })}
           </Select>
         </Form.Item>
+        </div>
+
+<div className="div_setting">
+
         <Form.Item
           label="הפנייה מידית לאיש אחזקה"
           name="responsibe"
@@ -101,13 +126,16 @@ function Setings() {
             })}
           </Select>
         </Form.Item>
+        </div>
+
+
         <Form.Item>
           <Button type="primary" htmlType="submit">
             {lang?.lang156}
           </Button>
         </Form.Item>
       </Form>
-      <Link to="/SendMassege">שלוח הזמנה למשתמשים</Link>
+      <Link to="/SendMassege" className="link">שלוח הזמנה למשתמשים</Link>
     </Contener>
   );
 }

@@ -27,16 +27,14 @@ const User = () => {
   const arry = ["1", "2", "3"];
   return (
     <Contener>
-      <Form name="basic" onFinish={onFinish}>
+      <div className="user">
         <div className="gobacklink" onClick={goback}>
-          <div className="goback">
-            <FiArrowRight />
+          <FiArrowRight style={{fontSize:"3rem", marginLeft:"7px"}}/> 
+          {lang?.lang316}
           </div>
-          <p>{lang?.lang316}</p>
-        </div>
 
-        <p id="hadartext">{lang?.lang315}</p>
-        <div className="flecinbruwser">
+        {lang?.lang315}
+        <Form name="basic" layout="vertical" onFinish={onFinish} style={{marginTop:"25px"}}>
           <div>
             <Form.Item
               label={lang?.lang305}
@@ -54,7 +52,7 @@ const User = () => {
               <Input />
             </Form.Item>
             <Form.Item
-              label={`${lang?.lang307}(${lang?.lang312})`}
+              label={`${lang?.lang307} (${lang?.lang312})`}
               name="email"
             >
               <Input />
@@ -79,7 +77,7 @@ const User = () => {
               </Select>
             </Form.Item>
             <Form.Item
-              label={`${lang?.lang320}(${lang?.lang321})`}
+              label={`${lang?.lang320} (${lang?.lang321})`}
               name="school_year"
             >
               <Select defaultValue="עברית">
@@ -108,7 +106,7 @@ const User = () => {
                 })}
               </Select>
             </Form.Item>
-            <Form.Item label={`${lang?.lang311}?`} name="user_active">
+            <Form.Item label={`${lang?.lang311}?`} name="user_active"  style={{display: 'flex'}}>
               <Switch defaultChecked={false} />
             </Form.Item>
           </div>
@@ -118,7 +116,7 @@ const User = () => {
 
               <p>{lang?.lang365}:</p>
               <div className="nutificationstatus">
-                <Form.Item label={lang?.lang369} name="open_req_in_email">
+                <Form.Item label={lang?.lang369} layout="horizontal" name="open_req_in_email">
                   <Switch defaultChecked={false} />
                 </Form.Item>
 
@@ -155,13 +153,13 @@ const User = () => {
               </div>
             </div>
           </div>
-        </div>
         <Form.Item>
           <Button type="primary" htmlType="submit">
             {lang?.lang156}
           </Button>
         </Form.Item>
       </Form>
+      </div>
     </Contener>
   );
 };

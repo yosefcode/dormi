@@ -151,4 +151,114 @@ export const Contener = styled.div`
   #phoneactionbutton {
     display: none;
   }
+
+  .user{
+    width: 60%;
+    margin: 20px auto;
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-family: "Heebo";
+    color: #0f0743;
+    text-align: right;
+    padding: 0 0 50px;
+  
+  }
+
+  button.ant-btn.ant-btn-primary {
+    background: #ffd17e;
+    border-radius: 11px;
+    width: 300px;
+    border-color: #ffd17e;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
+    color: #0f0743;
+    height: 63px;
+    margin: 6px 0px;
+  }
+
+  .div_setting {
+    margin-top: 25px;
+    color: #485464;
+    width: 100%;
+  }
+  label {
+    font-weight: 600;
+    font-size: 1.6rem !important;
+  }
+
+  .text_bottom {
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #807e94;
+  }
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+  }
+  .ant-select {
+    width: 300px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 32px;
+  }
+
+  .ant-select-selector {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    height: 55px !important;
+    align-items: center !important;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+
+  .ant-input {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    width: 300px;
+    height:55px;
+
+  }
+  .ant-form {
+    width: 100%;
+  }
+
+  .gobacklink {
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #485464;
+    text-decoration: underline;
+    display:flex;
+    align-items: flex-end;
+    margin-bottom:25px;
+  }
+
+
+  @media only screen and (max-width: 600px) {
+   .user{ 
+      width: 100%;
+    padding: 20px 0;
+  margin:0;}
+
+    .ant-form {
+      width: 100%;
+    }
+    .ant-select {
+      width: 100%;
+    }
+    .ant-input {
+      width: 100%;}
+  
+    button.ant-btn.ant-btn-primary {
+      width: 100%;
+    }
+  }
+
 `;

@@ -154,17 +154,22 @@ const Forms = () => {
           נקה הכל
         </button>
       </div>
+<div className="div_select_form">
+
       <Select showSearch placeholder="בחר מיקום " onChange={onChange}>
         <Option value="jack">חנות</Option>
         <Option value="lucy">חלפ</Option>
       </Select>
-      ,
+</div>
+<div className="div_check_form">
+
+      
       <ol>
         {arryofcheckbox.map((item, i) => {
           return (
             <div className="radio">
               <li>
-                <p>{item.label}</p>
+                <div>{item.label}</div>
                 <div className="checkbox">
                   <input
                     // onChange={closetask}
@@ -176,9 +181,9 @@ const Forms = () => {
                     ref={(el) => (checkboxref.current[i] = el)}
                   />
                   {item.value === 22 ? (
-                    <p className="checklable">מאשר עבודה אינו נמצא</p>
+                    <div className="checklable">מאשר עבודה אינו נמצא</div>
                   ) : (
-                    <p className="checklable">בוצע</p>
+                    <div className="checklable">בוצע</div>
                   )}
                 </div>
               </li>
@@ -186,7 +191,7 @@ const Forms = () => {
           );
         })}
         <li>
-          <p> הערות</p>
+          <div className="radio"> הערות</div>
         </li>
         <TextArea
           rows={4}
@@ -195,9 +200,11 @@ const Forms = () => {
           }}
         />
       </ol>
+
       <button className="buttonsubmit" onClick={onFinish}>
         שלח
       </button>
+      </div>
     </Contener>
   );
 };
