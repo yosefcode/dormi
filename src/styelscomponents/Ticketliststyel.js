@@ -189,6 +189,7 @@ p{
   height: 63px;
   color: white;
   left:24%;
+  z-index:2000;
 }
 
 
@@ -523,9 +524,9 @@ export const Selectfilter = styled.div`
     }
   }
 
-  .ant-drawer-header {
-    display: none;
-  }
+  // .ant-drawer-header {
+  //   display: none;
+  // }
 
   .filteroption {
     width: 95%;
@@ -533,6 +534,7 @@ export const Selectfilter = styled.div`
   }
 
   .header_filter {
+    margin: 15px auto;
     width: 100%;
     font-weight: 500;
     font-size: 1.9rem;
@@ -709,9 +711,9 @@ export const DrawerCloseTask = styled(Drawer)`
   }
 `;
 export const Drawerstyle = styled(Drawer)`
-  .ant-drawer-header {
-    display: none;
-  }
+  // .ant-drawer-header {
+  //   display: none;
+  // }
 
   .filteroption {
     width: 95%;
@@ -719,6 +721,7 @@ export const Drawerstyle = styled(Drawer)`
   }
 
   .header_filter {
+    margin: 15px auto;
     width: 100%;
     font-weight: 500;
     font-size: 1.9rem;
@@ -861,10 +864,6 @@ export const Quickclomodaltyle = styled(Modal)`
     flex-direction: column;
 
     margin-top: 21%;
-  }
-  .ant-modal-content {
-    /* background-color: transparent; */
-    /* width: 0px; */
   }
   .Quickclosebuutdownclose {
     border: none;
@@ -1041,9 +1040,9 @@ export const Quickclomodaltyle = styled(Modal)`
   .img_icon {
     margin: 0px 17px;
   }
-  button.ant-drawer-close {
-    display: none;
-  }
+  // button.ant-drawer-close {
+  //   display: none;
+  // }
 `;
 export const QuickcloDrawerstyle = styled(Drawer)`
   font-family: "Heebo";
@@ -1093,9 +1092,9 @@ export const QuickcloDrawerstyle = styled(Drawer)`
   .img_icon {
     margin: 0px 17px;
   }
-  button.ant-drawer-close {
-    display: none;
-  }
+  // button.ant-drawer-close {
+  //   display: none;
+  // }
 
   // .Closepopup {
   //   position: fixed;

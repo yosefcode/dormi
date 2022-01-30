@@ -4,7 +4,8 @@ export const ModalStyeldnewreq = styled(Modal)`
   .ant-modal-content {
     border-radius: 19px;
     text-align: center;
-    width: 50%;
+    min-width: 600px;
+    max-width: 50%;
     margin: 0 auto;
     padding: 40px;
     margin-top: -50px;
@@ -83,9 +84,11 @@ export const ModalStyeldnewreq = styled(Modal)`
 `;
 export const ModalStyeld = styled(Modal)`
   .ant-modal-close {
-    right: initial;
-    left: -15px;
-    top: -13px;
+    background: white;
+    border-radius: 50%;
+    // right: initial;
+    // left: -15px;
+    // top: -13px;
   }
   .ant-modal-close-x {
     // color: red;
@@ -93,12 +96,16 @@ export const ModalStyeld = styled(Modal)`
   }
 
   .ant-modal-content {
-    width: 60% !important;
+    min-width: 600px;
+    max-width: 60%;
+
+    // width: 60% !important;
     margin: 0 auto !important;
     min-height: 40vw;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 15px;
   }
 
   .ant-modal-header {
@@ -131,6 +138,7 @@ export const ModalStyeld = styled(Modal)`
       align-items: center;
       justify-content: center;
       transform: translate(0, 35%);
+      border-radius: 12px;
     }
 
     .formedittask {

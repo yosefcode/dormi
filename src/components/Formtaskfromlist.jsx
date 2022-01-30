@@ -16,7 +16,6 @@ const Formtaslfromlist = ({
   data,
   Typeofreq,
   Goback,
-
   Temmembertask,
 }) => {
   document.body.style.backgroundColor = "white";
@@ -44,6 +43,11 @@ const Formtaslfromlist = ({
   useEffect(() => {
     useefctasync();
   }, []);
+
+  const topFunction = () => {
+    window.scrollTo(0, 0);
+  };
+
 
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
@@ -117,6 +121,7 @@ const Formtaslfromlist = ({
       setTimeout(() => {
         setuplodeimagescreen(true);
         seterrmassege(false);
+        topFunction()
       }, 2000);
     }
   };
@@ -136,8 +141,9 @@ const Formtaslfromlist = ({
   };
   return (
     <div>
-      <FormContener>
         {!uplodeimagescreen ? (
+      <FormContener>
+
           <Form
             name="basic"
             initialValues={{ remember: true }}
@@ -197,13 +203,18 @@ const Formtaslfromlist = ({
               </Select>
             </Form.Item>
 
+            <div className="problem">
+
+            {lang?.lang123}
+
             <Form.Item
-              label={lang?.lang123}
+              // label={lang?.lang123}
               name="comments"
               initialValue={data.comments}
             >
               <TextArea rows={4} />
             </Form.Item>
+            </div>
 
             <Form.Item
               name="urgencyid"
@@ -240,6 +251,8 @@ const Formtaslfromlist = ({
               </Button>
             </Form.Item>
           </Form>
+          </FormContener>
+
         ) : (
           // <div className="textbloon">
           //   <p>{lang?.lang131}</p>
@@ -270,7 +283,8 @@ const Formtaslfromlist = ({
           //   </Modal>
           // </div>
 
-          <Uplodetaskimage ticketid={ticketid} userid={loginstatus.userid} />
+          <Uplodetaskimage ticketid={ticketid} userid={loginstatus.userid} 
+          Goeinfbacktopage={Goeinfbacktopage} topFunction={topFunction}/>
         )}
         <ModalStyeld
           visible={errmassege}
@@ -281,7 +295,6 @@ const Formtaslfromlist = ({
         >
           {errmassegetext}
         </ModalStyeld>
-      </FormContener>
     </div>
   );
 };

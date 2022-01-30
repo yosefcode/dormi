@@ -257,10 +257,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   });
   const [cunter, setcunter] = useState(0);
   const canceling = async () => {
+    console.log("stop");
     canceljob.current = true;
     setcancelquickfunc({ status: false, type: null });
 
-    console.log("stop");
 
     console.log(AllTikets);
     let ruteruserid = "ticketlist";
@@ -311,6 +311,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     for (let i = 0; AllTikets.length > i; i++) {
       checkboxref.current[i].checked = false;
     }
+    setVmodalquickclos(false);
+
     setvisible(false);
     setcunter(0);
   };
@@ -938,6 +940,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                           setvisabletaskmodal(!visabletaskmodal);
 
                           setChusenrikit(el.ticketguid);
+
                         }}
                       >
                         <BsThreeDotsVertical />
@@ -962,7 +965,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           {/* פתיחת מגירה לפלאפון */}
           {screnphunesize ? (
             <Drawerstyle
-              title="סינון"
+              // title="סינון"
               placement={"bottom"}
               // closable={false}
               onClose={() => {

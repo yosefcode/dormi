@@ -220,7 +220,7 @@ height: "18px",
             </div>
             </div>
           <ModalStyeldnewreq
-            title={lang?.lang100}
+            // title={lang?.lang100}
             visible={visible}
             onCancel={Cancelmodalreq}
             footer={false}

@@ -16,7 +16,7 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktopage, topFunction }) => {
+const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktopage,topFunction,setvisual }) => {
   const defoltlang = useContext(DataContext).lang;
 
   const lang = defoltlang?.lang;
@@ -64,6 +64,16 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
     });
   };
 
+  const topPage =()=>{
+    if (topFunction) topFunction()
+  }
+
+  const close_modal =()=>{
+   if (setuplodeimagescreen) setuplodeimagescreen();
+    Goeinfbacktopage ? Goeinfbacktopage() :setvisual()
+  }
+
+
   const [Buttonsecses, setButtonsecses] = useState(false);
   const sendimage = async () => {
     enterLoading(2);
@@ -79,17 +89,20 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
     };
     let res = await PostToServer(reqruter, obj);
     setuplodeimage("");
-    topFunction()
     setButtonsecses(true);
     setloadings([0]);
+    topPage()
     // setuplodeimagescreen();
   };
 
   return (
-      <FormContener sendbutton={sendbutton}>
+      <FormContener sendbutton={sendbutton} >
+
         <div className="textbloon">
-<div className="close_addimg" onClick={() =>{topFunction();!updateImage || (updateImage&&Buttonsecses) ?        
-Goeinfbacktopage()
+<div className="close_addimg" onClick={() =>{    topPage();
+
+ !updateImage || (updateImage&&Buttonsecses) ?        
+ close_modal()
 :setUpdateImage(false)}}>
           X</div>
 {!updateImage || (updateImage&&Buttonsecses) ?
@@ -103,7 +116,7 @@ Goeinfbacktopage()
           <div className="tnx1" >{lang?.lang131}</div>
           <div className="tnx2">נעדכן אותך בהמשך טיפול</div>
 
-          {!updateImage&&   <button className="uploadimage" onClick={() =>{setUpdateImage(true);topFunction()}}>
+          {!updateImage&&   <button className="uploadimage" onClick={() =>{setUpdateImage(true); topPage()}}>
                     <span>
                       <AiOutlineCamera className="camraicon" />
                     </span>
@@ -155,6 +168,7 @@ Goeinfbacktopage()
           >
             <img alt="example" style={{ width: "100%" }} src={previewImage} />
           </Modal>
+
        </FormContener>
   );
 };

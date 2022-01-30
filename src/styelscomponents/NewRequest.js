@@ -68,6 +68,13 @@ export const Problemcontener = styled.div`
 `;
 export const FormContenerdesktop = styled.div`
   /* word-wrap: break-word; */
+  .headr_newreq {
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-family: "Heebo";
+    color: #0f0743;
+    text-align: right;
+  }
   margin-top: 10px;
   .goback {
     background: inherit;
@@ -154,8 +161,6 @@ export const FormContenerdesktop = styled.div`
     .goback {
       align-self: flex-start;
       font-size: 47px;
-      margin-right: 17%;
-      margin-top: -3%;
     }
   }
   .theproblemis {
@@ -274,6 +279,14 @@ export const FormContener = styled.div`
     height: 63px;
     margin: 6px 0px;
   }
+
+  .problem {
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #485464;
+  }
+
   .ant-form-item {
     margin-bottom: 32px;
   }
@@ -310,8 +323,8 @@ export const FormContener = styled.div`
 
   @media only screen and (max-width: 600px) {
     position: relative;
-    margin: 60px auto;
-    padding: 40px 0;
+    margin: 0px auto;
+    padding: 20px 0;
     width: 84%;
     display: flex;
     // background: grey;
@@ -331,11 +344,11 @@ export const FormContener = styled.div`
     }
   }
   @media only screen and (min-width: 600px) {
+    width: 50%;
+    margin: 20px auto;
     .goback {
       align-self: flex-start;
       font-size: 47px;
-      margin-right: 17%;
-      margin-top: -3%;
     }
   }
 
@@ -352,11 +365,17 @@ export const FormContener = styled.div`
   }
   .textbloon {
     width: 100%;
+    position: relative;
   }
   .close_addimg {
     align-self: flex-start;
     font-size: 3rem;
     font-weight: bold;
+    cursor: pointer;
+    text-align: right;
+  }
+  .ant-upload-list-picture-card-container {
+    width: 30%;
   }
 
   @media only screen and (max-width: 600px) {
@@ -370,25 +389,25 @@ export const FormContener = styled.div`
       margin: 20px 10%;
       width: 80%;
     }
-    .tnx1 {
-      font-weight: bold;
-      font-size: 2.4rem;
-      text-align: center;
+  }
+  .tnx1 {
+    font-weight: bold;
+    font-size: 2.4rem;
+    text-align: center;
 
-      color: #1c1547;
-    }
-    .tnx2 {
-      font-weight: normal;
-      font-size: 1.3rem;
-      text-align: center;
+    color: #1c1547;
+  }
+  .tnx2 {
+    font-weight: normal;
+    font-size: 1.3rem;
+    text-align: center;
 
-      color: #1c1547;
-    }
+    color: #1c1547;
   }
   @media only screen and (min-width: 600px) {
     .Sendedmassege {
-      width: 310px;
-      height: 310px;
+      margin: 20px 20%;
+      width: 60%;
     }
     .GoBackLink {
       color: black;
@@ -413,7 +432,7 @@ export const FormContener = styled.div`
   .add_image {
     position: absolute;
     margin-top: 0px !important;
-    top: 100px;
+    top: 50px;
   }
 
   .uploadimage {
@@ -429,6 +448,7 @@ export const FormContener = styled.div`
     align-items: center;
     display: flex;
     justify-content: center;
+    cursor: pointer;
   }
   .camraicon {
     color: #0f0743;

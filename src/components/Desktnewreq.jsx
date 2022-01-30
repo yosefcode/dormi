@@ -193,9 +193,13 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
   };
 
   return (
-    <div>
-      <FormContenerdesktop>
+    <div >
         {!uplodeimagescreen ? (
+      <FormContenerdesktop>
+        <div className="headr_newreq">
+
+        {lang?.lang100}
+        </div>
           <div>
             <Form
               form={form}
@@ -396,10 +400,12 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
               </Button>
 </div>
             </Form>
+
           </div>
+            </FormContenerdesktop>
         ) : (
           <div>
-            <button
+            {/* <button
               onClick={() => {
                 setuplodeimagescreen(false);
                 closecancel();
@@ -407,10 +413,11 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
               className="goback"
             >
               <FiArrowRight />
-            </button>
+            </button> */}
             <Uplodetaskimage
               ticketid={ticketid}
               userid={loginstatus.userid}
+              setvisual={setvisual}
               setuplodeimagescreen={() => {
                 setuplodeimagescreen(false);
                 closecancel();
@@ -427,7 +434,6 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
         >
           {errmassegetext}
         </ModalStyeld>
-      </FormContenerdesktop>
     </div>
   );
 };
