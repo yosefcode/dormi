@@ -222,7 +222,9 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                   {categorynames
                     ? categorynames.map((el) => {
                         let finicon = Arryoficons.find((ic) => {
-                          if (el.icon === ic.iconname) {
+                          // if (el.icon === ic.iconname) {
+                            if (el.id === ic.iconid) {
+
                             return ic;
                           }
                         });
@@ -234,15 +236,28 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                           icon = false;
                         }
 
+                        
+  const maincategoryname = (
+    <div >
+ {el.maincategoryname}
+          <img src={icon} alt= "" style={{height: "30px", marginRight:"10px" }}/> 
+    </div>
+  );
+
+
                         return (
                           <Option
+                          style={{padding: "0 25px"}}
                             value={[
-                              [el.maincategoryname, " ", <finicon.icon />],
+                              maincategoryname,
+                              // [el.maincategoryname, " ", <img src={icon} alt= ""  />],
                               el.id,
                             ]}
                           >
                             {el.maincategoryname}{" "}
-                            {icon ? <finicon.icon /> : <PoweroffOutlined />}
+                            {icon ? <img src={icon} alt= ""                         
+       style={{ height: "30px", margin:"5px 10px" }}/> 
+     : <PoweroffOutlined        style={{ width: "25px", marginLeft:"10px" }}/> }
                           </Option>
                         );
                       })

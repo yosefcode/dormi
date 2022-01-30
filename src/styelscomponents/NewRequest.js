@@ -122,6 +122,12 @@ export const FormContenerdesktop = styled.div`
     border-radius: 11px !important;
     height: 55px;
   }
+  .ant-select-rtl.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-item {
+    display: flex !important;
+    text-align: right;
+    align-items: center !important;
+  }
   .flexposition {
     flex-grow: 2;
     margin-left: 4px;
@@ -344,7 +350,7 @@ export const FormContener = styled.div`
     }
   }
   @media only screen and (min-width: 600px) {
-    width: 50%;
+    width: 350px;
     margin: 20px auto;
     .goback {
       align-self: flex-start;
@@ -499,6 +505,9 @@ export const FormContener = styled.div`
     margin-top: -106px;
     width: 243px;
     margin-inline-end: 25px;
+  }
+  .ant-modal-close-x {
+    display: none;
   }
 
   // iphune screen

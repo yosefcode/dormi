@@ -66,7 +66,7 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
         <div className="hderdesktop">
           {/* <AiOutlineMenu onClick={closeMenue} /> */}
           <div className="desktoplogo">
-            <div className="desktopicon"><img src={logo} alt="" width="25px" height="25px" /></div>
+            <div className="desktopicon"><img src={logo} alt="" width="60%" /></div>
             <svg
               width="70"
               height="17"

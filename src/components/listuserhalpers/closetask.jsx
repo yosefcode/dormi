@@ -90,28 +90,28 @@ export const ListtaskforEdit = ({ action, close }) => {
   return (
     <div className="userQuickclosebuuton">
       <button
-        className="Quickclosebuutonup"
+        className="drower_button btn_up"
         onClick={() => {
           onfinish("edit", null);
         }}
       >
-        <img src="/images/pen.svg" alt="icon" /> {lang?.lang243}
+        <img className="img_icon" src="/images/pen.svg" alt="icon" /> {lang?.lang243}
       </button>
 
       <button
-        className="Quickclosebuuton"
+        className="drower_button"
         onClick={() => {
           onfinish("message", null);
         }}
       >
-        <img src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
+        <img className="img_icon" src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
       </button>
 
-      <button className="Quickclosebuutdown">
-        <img src="/images/trash.svg" alt="icon" /> {lang?.lang147}
+      <button className="drower_button btn_down">
+        <img className="img_icon" src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
       <br />
-      <button className="Quickclosebuutdownclose" onClick={onclose}>
+      <button  className="drower_button btn_cancel"  onClick={onclose}>
         {lang?.lang251}
       </button>
     </div>

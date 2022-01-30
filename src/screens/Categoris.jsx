@@ -3,7 +3,7 @@ import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { Menu, Dropdown, Form, Input, Badge } from "antd";
+import { Menu, Dropdown, Form, Input, Badge, Button } from "antd";
 import { Arryoficons } from "../Icons";
 import { useHistory } from "react-router-dom";
 
@@ -68,7 +68,7 @@ function Categoris() {
             <Menu.Item key={ic.iconid}>
               <span
                 onClick={() => {
-                  chuseicon(ic.iconname);
+                  chuseicon(ic.iconid);
                 }}
               >
                 <ic.icon />
@@ -98,7 +98,9 @@ function Categoris() {
         {localarry
           ? localarry.map((el) => {
               let finicon = Arryoficons.find((ic) => {
-                if (el.icon === ic.iconname) {
+                // if (el.icon === ic.iconname) {
+                  if (el.id === ic.iconid) {
+
                   return ic;
                 }
               });
@@ -112,7 +114,7 @@ function Categoris() {
               //
               const headerCard = (
                 <div>
-                      <finicon.icon className="categoriicon" /> {el.maincategoryname}
+                      <img src={icon} alt= "" style={{height: "25px", marginLeft:"10px" }}/> {el.maincategoryname}
                 </div>
               );
               
@@ -218,7 +220,7 @@ id="icon_dropdown_body"
           : null}
       </div>
       <ModalStyeld
-        title={lang?.lang210}
+        // title={lang?.lang210}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
@@ -230,15 +232,16 @@ id="icon_dropdown_body"
           }}
           onFinish={onFinish}
         >
-          <p>{lang?.lang223}:</p>
+         <div className="div_modal">
+         {lang?.lang210}
           <Form.Item name="newproject">
-            <Input />
+          <Input placeholder={lang?.lang223} />
           </Form.Item>
           <Form.Item>
-            <button className="okbutton" type="primary" htmlType="submit">
+            <Button  type="primary" htmlType="submit">
               {lang?.lang290}
-            </button>
-          </Form.Item>
+            </Button>
+          </Form.Item></div>
         </Form>
       </ModalStyeld>
     </Contener>

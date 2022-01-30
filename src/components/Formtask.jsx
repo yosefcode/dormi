@@ -166,11 +166,13 @@ topFunction()
 
   let Icon;
   let findicon = Arryoficons.find((ic) => {
-    return Typeofreq.icon === ic.iconname;
+    return Typeofreq.id === ic.iconid;
+    // return Typeofreq.icon === ic.iconname;
   });
   if (findicon) {
     Icon = findicon.icon;
   }
+
   return (
     <div>
         {!uplodeimagescreen ? (
@@ -192,7 +194,7 @@ topFunction()
             <div className="theproblemis">
               <p>הבעיה היא {Typeofreq.maincategoryname}</p>
               {Icon ? (
-                <Icon className="iconproblem" />
+                <img src={Icon} alt= ""  className="iconproblem" />
               ) : (
                 <PoweroffOutlined className="iconproblem" />
               )}

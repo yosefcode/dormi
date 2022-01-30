@@ -1050,11 +1050,12 @@ export const QuickcloDrawerstyle = styled(Drawer)`
   .userQuickclosebuuton {
     display: flex;
     flex-direction: column;
-    margin-top: 73%;
+    margin-top: 40px;
   }
   .listQuickclosebuuton {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
   }
   .ant-drawer-content {
     background-color: transparent;

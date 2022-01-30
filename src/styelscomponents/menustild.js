@@ -174,8 +174,8 @@ export const Contyner = styled.div`
     color: #0f0743;
   }
   .desktopicon {
-    width: 29px;
-    height: 29px;
+    width: 35px;
+    height: 35px;
     top: 0px;
     margin-inline-end: 13px;
     background: rgba(228, 237, 237, 0.13);

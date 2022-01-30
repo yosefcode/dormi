@@ -3,7 +3,8 @@ import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { Menu, Dropdown, Form, Input, Badge } from "antd";
+import { Menu, Dropdown, Form, Input, Badge, Button } from "antd";
+
 import { useHistory } from "react-router-dom";
 
 import DataContext from "../DataContext";
@@ -138,8 +139,8 @@ function Location() {
                             </div>
                             <div>
                               <Dropdown
-                                                                className="icon_dropdown"
-                                                                id="icon_dropdown_body"
+                               className="icon_dropdown"
+                                id="icon_dropdown_body"
                                                                 
                                 overlay={menuoflocation}
                                 trigger={["click"]}
@@ -167,8 +168,24 @@ function Location() {
             })
           : null}
       </div>
+{/* 
+      <Form name="masseg" onFinish={sendmassege} form={form}>
+              <div className="div_modal">
+        {lang?.lang263}
+        <Form.Item name="comments" placeholder={lang?.lang266}>
+          <TextArea rows={4} />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            {lang?.lang265}
+          </Button>
+        </Form.Item>
+        </div>
+      </Form> */}
+
       <ModalStyeld
-        title={lang?.lang210}
+        // title={lang?.lang210}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
@@ -180,15 +197,17 @@ function Location() {
           }}
           onFinish={onFinish}
         >
-          <p>:{lang?.lang223}</p>
+                        <div className="div_modal">
+                        {lang?.lang210}
           <Form.Item name="newproject">
-            <Input />
+            <Input placeholder={lang?.lang223} />
           </Form.Item>
           <Form.Item>
-            <button className="okbutton" type="primary" htmlType="submit">
+            <Button  type="primary" htmlType="submit">
               {lang?.lang156}
-            </button>
+            </Button>
           </Form.Item>
+          </div>
         </Form>
       </ModalStyeld>
     </Contener>

@@ -33,6 +33,7 @@ const Nwerequest = ({ Temmembertask }) => {
   const Goback = () => {
     settyps(true);
   };
+
   return (
     <div>
       {/* <div> */}
@@ -45,10 +46,12 @@ const Nwerequest = ({ Temmembertask }) => {
               <div style={{fontSize:"1.6rem",fontWeight:"400"}}>{lang?.lang338}</div>
               <div>
                 <div className="wrapper">
+
                   {categorynames
                     ? categorynames.map((el, index) => {
                         let finicon = Arryoficons.find((ic) => {
-                          if (el.icon === ic.iconname) {
+                          // if (el.icon === ic.iconname) {
+                          if (el.id === ic.iconid) {
                             return ic;
                           }
                         });
@@ -75,11 +78,11 @@ const Nwerequest = ({ Temmembertask }) => {
                                 alt="icon"
                                 style={{ width: "50px", height: "50px" }}
                               /> */}
-                              {icon ? <finicon.icon /> : <PoweroffOutlined />}
-                              {/* {icon ? <img src={icon} alt= ""                         
-       style={{ width: "25px", marginLeft:"10px" }}/> 
+                              {/* {icon ? <finicon.icon /> : <PoweroffOutlined />} */}
+                              {icon ? <img src={icon} alt= ""                         
+       style={{ height:"20vw" }}/> 
      : <PoweroffOutlined        style={{ width: "25px", marginLeft:"10px" }}/> }
- */}
+
                             </div>
                             <div className="uniqueproblem">
                               {el.maincategoryname}

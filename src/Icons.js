@@ -11,10 +11,19 @@ import { PoweroffOutlined } from "@ant-design/icons";
 import { GiBroom } from "react-icons/gi";
 import { BsFillDropletFill, BsFillAlarmFill } from "react-icons/bs";
 
-import plumbing from "./assets/2.png";
-import lighting from "./assets/4.png";
+import plumbing from "./assets/plumbing-water.svg";
 import electric from "./assets/logo.png";
-import building from "./assets/1.png";
+import lighting from "./assets/light.png";
+import building from "./assets/building.png";
+import special from "./assets/megaphone.png";
+import other from "./assets/Other.png";
+import security from "./assets/kaktus.png";
+import change from "./assets/ladder.png";
+import kitchen from "./assets/kitchen.png";
+import clean from "./assets/clean.png";
+import pomp from "./assets/icons8-plunger.svg";
+import water from "./assets/bucket_plumbing.png";
+import games from "./assets/games.png";
 
 export const Arryoficons = [
   // { icon: "/images/icons/backettow.svg", iconid: 696, iconname: "pe-7s-paint" },
@@ -45,20 +54,29 @@ export const Arryoficons = [
   //   iconname: "noicon",
   // },
 
-  // { icon: building, iconid: 696, iconname: "pe-7s-paint" },
-  // { icon: electric, iconid: 5, iconname: "pe-7s-plug" },
-  // { icon: plumbing, iconid: 9, iconname: "fa fa-shower" },
-  // { icon: lighting, iconid: 11, iconname: "pe-7s-light" },
+  { icon: plumbing, iconid: 696, iconname: "pe-7s-paint" },
+  { icon: electric, iconid: 699, iconname: "pe-7s-plug" },
+  { icon: lighting, iconid: 705, iconname: "pe-7s-light" },
+  { icon: building, iconid: 707, iconname: "fa fa-shower" },
+  { icon: special, iconid: 711, iconname: "" },
+  { icon: other, iconid: 702, iconname: "" },
+  { icon: security, iconid: 5255, iconname: "" },
+  { icon: change, iconid: 6044, iconname: "" },
+  { icon: kitchen, iconid: 6429, iconname: "" },
+  { icon: clean, iconid: 6646, iconname: "" },
+  { icon: pomp, iconid: 11581, iconname: "" },
+  { icon: water, iconid: 13394, iconname: "" },
+  { icon: games, iconid: 13490, iconname: "" },
 
-  { icon: GoTools, iconid: 696, iconname: "pe-7s-paint" },
-  { icon: AiFillThunderbolt, iconid: 5, iconname: "pe-7s-plug" },
-  { icon: BsFillDropletFill, iconid: 9, iconname: "fa fa-shower" },
-  { icon: BsBuilding, iconid: 11, iconname: "pe-7s-light" },
-  { icon: RiComputerLine, iconid: 2, iconname: "d" },
-  { icon: AiOutlineCluster, iconid: 3, iconname: "p" },
-  { icon: AiFillFormatPainter, iconid: 4, iconname: "l" },
-  { icon: BsGearFill, iconid: 7, iconname: "r" },
-  { icon: GiBroom, iconid: 8, iconname: "t" },
-  { icon: BsFillAlarmFill, iconid: 10, iconname: "v" },
-  { icon: PoweroffOutlined, iconid: 12, iconname: "" },
+  // { icon: GoTools, iconid: 696, iconname: "pe-7s-paint" },
+  // { icon: AiFillThunderbolt, iconid: 5, iconname: "pe-7s-plug" },
+  // { icon: BsFillDropletFill, iconid: 9, iconname: "fa fa-shower" },
+  // { icon: BsBuilding, iconid: 11, iconname: "pe-7s-light" },
+  // { icon: RiComputerLine, iconid: 2, iconname: "d" },
+  // { icon: AiOutlineCluster, iconid: 3, iconname: "p" },
+  // { icon: AiFillFormatPainter, iconid: 4, iconname: "l" },
+  // { icon: BsGearFill, iconid: 7, iconname: "r" },
+  // { icon: GiBroom, iconid: 8, iconname: "t" },
+  // { icon: BsFillAlarmFill, iconid: 10, iconname: "v" },
+  // { icon: PoweroffOutlined, iconid: 12, iconname: "" },
 ];

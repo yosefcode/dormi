@@ -563,7 +563,7 @@ function Users() {
             setvisibletaskDrawer(!visibletaskDrawer);
           }}
           visible={visibletaskDrawer}
-          height={600}
+          height={400}
         >
           <ListtaskforEdit
             action={Taskeditfunc}

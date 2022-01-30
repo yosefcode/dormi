@@ -4,7 +4,7 @@ export const ModalStyeldnewreq = styled(Modal)`
   .ant-modal-content {
     border-radius: 19px;
     text-align: center;
-    min-width: 600px;
+    min-width: 520px;
     max-width: 50%;
     margin: 0 auto;
     padding: 40px;
@@ -81,6 +81,9 @@ export const ModalStyeldnewreq = styled(Modal)`
   .ant-select-arrow {
     // display: none;
   }
+  .ant-modal-close {
+    display: none;
+  }
 `;
 export const ModalStyeld = styled(Modal)`
   .ant-modal-close {
@@ -96,7 +99,7 @@ export const ModalStyeld = styled(Modal)`
   }
 
   .ant-modal-content {
-    min-width: 600px;
+    min-width: 520px;
     max-width: 60%;
 
     // width: 60% !important;
@@ -127,17 +130,21 @@ export const ModalStyeld = styled(Modal)`
     flex-direction: column;
     font-weight: 700;
     font-size: 2.2rem;
+    line-height: 80px;
   }
 
   @media only screen and (max-width: 600px) {
     .ant-modal-content {
+      min-width: 100%;
+      max-width: 100%;
+
       width: 100% !important;
       margin: 0 auto !important;
-      min-height: 70vw;
+      // min-height: 70vw;
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: translate(0, 35%);
+      // transform: translate(0, 35%);
       border-radius: 12px;
     }
 
@@ -170,7 +177,7 @@ export const ModalStyeld = styled(Modal)`
   button.ant-btn.ant-btn-primary {
     background: #ffd17e;
     border-radius: 11px;
-    width: 150px;
+    min-width: 150px;
     height: 40px;
     border-color: #ffd17e;
     font-size: 2.2rem;
