@@ -110,6 +110,7 @@ const User = () => {
               <Switch defaultChecked={false} />
             </Form.Item>
           </div>
+          
           <div>
             <div className="noteficatin">
               <p>{lang?.lang364}:</p>
