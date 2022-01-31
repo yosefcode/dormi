@@ -69,7 +69,7 @@ export const Contener = styled.div`
     }
   }
   @media only screen and (max-width: 600px) {
-    height: 100vh;
+    min-height: 100vh;
     background: #1c1547;
     display: flex;
     flex-direction: column;
@@ -114,7 +114,7 @@ export const Contener = styled.div`
     // }
     .loginimag {
       position: absolute;
-      height: 55vh;
+      width: 75%;
       right: 0;
       top: 2%;
     }
