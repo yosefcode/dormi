@@ -189,7 +189,7 @@ export const Contyner = styled.div`
     left: 0px !important;
   }
   .desktoplogo {
-    margin-right: 10%;
+    margin-inline-start: 10%;
     display: flex;
     flex-direction: row;
     // justify-content: center;
@@ -235,7 +235,7 @@ export const Avaterdrwor = styled.div`
       text-align: center;
     }
     .ant-drawer-rtl .ant-drawer-close {
-      margin-right: 0;
+      margin-inline-start: 0;
       margin-top: -100 !important;
     }
     p {

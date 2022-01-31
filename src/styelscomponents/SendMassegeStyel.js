@@ -55,7 +55,7 @@ export const Container = styled.div`
       position: absolute;
 
       width: 267px;
-      margin-left: 5%;
+      margin-inline-end: 5%;
       text-align: center;
       padding-left: 7%;
       padding-right: 7%;

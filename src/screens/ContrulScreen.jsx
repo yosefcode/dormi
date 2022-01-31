@@ -82,7 +82,7 @@ const ContrulScreen = ({ dir, rebderfromlog }) => {
                     className="lodingimage"
                     alt="lodingimage"
                   />
-                  <FaSpinner />
+                  {/* <FaSpinner /> */}
                 </div>
               )}
             </Route>

@@ -786,7 +786,7 @@ export const StyeldSelect = styled(Select)`
   }
 
   .ant-card-extra {
-    /* margin-right: -14px; */
+    /* margin-inline-start: -14px; */
   }
   .valueBadge {
     margin-top: -5%;

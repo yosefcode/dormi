@@ -34,10 +34,10 @@ export const Contener = styled.div`
   }
   span.text {
     width: 176px;
-    margin-right: 3%;
+    margin-inline-start: 3%;
 
     text-align: center;
-    margin-left: 3%;
+    margin-inline-end: 3%;
   }
   .cardname {
     background-color: #33b5e5;
@@ -139,7 +139,7 @@ export const StyeldSelect = styled(Select)`
     color: ${(props) => props.primary.color}!important;
   }
   .ant-card-extra {
-    margin-right: -14px;
+    margin-inline-start: -14px;
   }
 `;
 export const StyeldTag = styled(Tag)`

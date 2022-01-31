@@ -171,7 +171,7 @@ export const Contener = styled.div`
     font-size: 1.5rem;
     line-height: 118.88%;
     color: #0f0743;
-    margin-right: 18px;
+    margin-inline-start: 18px;
   }
 
   .ant-input {

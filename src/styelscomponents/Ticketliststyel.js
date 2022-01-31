@@ -148,7 +148,7 @@ color:#807E94;
   color: #0f0743;
 }
 .marginRight{
-  margin-right:25px;
+  margin-inline-start:25px;
 }
 
 #displyid_mobile{
@@ -386,12 +386,12 @@ font-size:1.6rem;
 
   }
   .marginRight{
-    margin-right:0px;
+    margin-inline-start:0px;
   }
 
   #displyid_mobile{
     display:inherit;
-    margin-right:30px;
+    margin-inline-start:30px;
   }
   
   .date_mobile{
@@ -847,7 +847,7 @@ export const StyeldSelect = styled(Select)`
     color: #0f0743 !important;
   }
   .ant-card-extra {
-    /* margin-right: -14px; */
+    /* margin-inline-start: -14px; */
   }
 `;
 

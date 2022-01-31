@@ -130,8 +130,8 @@ export const FormContenerdesktop = styled.div`
   }
   .flexposition {
     flex-grow: 2;
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-inline-end: 4px;
+    margin-inline-start: 4px;
 
     /* margin: 1px; */
   }
@@ -459,7 +459,7 @@ export const FormContener = styled.div`
   .camraicon {
     color: #0f0743;
     font-size: 3.5rem;
-    margin-left: 15px;
+    margin-inline-end: 15px;
   }
   .ant-upload-list {
     width: 100%;

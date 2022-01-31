@@ -63,7 +63,7 @@ export const Contener = styled.div`
     height: 20px;
     width: 35px;
     color:#807E94;
-    margin-left: -15px;
+    margin-inline-end: -15px;
     cursor: pointer;
     
   }
