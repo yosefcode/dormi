@@ -163,9 +163,9 @@
 @media only screen and (min-width: 600px) {
   .lodingimage {
     position: absolute;
-    width: 40%;
-    transform: translate(0, 50%);
-    left: 30%;
+    width: 300px;
+    transform: translate(100%, 50%);
+    /* left: 30%; */
   }
 }
 

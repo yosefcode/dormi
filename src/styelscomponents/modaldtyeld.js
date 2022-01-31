@@ -193,6 +193,10 @@ export const ModalStyeld = styled(Modal)`
     font-size: 2.2rem;
     text-align: center;
   }
+
+  .ant-input-affix-wrapper {
+    display: block;
+  }
   .formedittask {
     width: 100%;
     display: flex;

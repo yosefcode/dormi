@@ -76,7 +76,7 @@ const ContrulScreen = ({ dir, rebderfromlog }) => {
               {ticketlist && defullang && userlist ? (
                 <User />
               ) : (
-                <div>
+                <div >
                   <img
                     src="/images/Semdimag.png"
                     className="lodingimage"

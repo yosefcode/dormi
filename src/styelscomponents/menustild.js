@@ -162,7 +162,7 @@ export const Contyner = styled.div`
   .desktopbutton {
     align-items: center;
     width: 100%;
-    height: 33px;
+    height: 45px;
     background: #ffd17e;
     border-radius: 4px;
     font-weight: bold;

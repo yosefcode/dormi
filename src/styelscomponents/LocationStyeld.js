@@ -52,6 +52,9 @@ export const Contener = styled.div`
     margin-top:20px;
   }
   .card{width: 30%;}
+  @media only screen and (max-width: 900px) {
+    .card{width: 45%;}}
+
 
   .categoriicon {
     color: #0f0743;
