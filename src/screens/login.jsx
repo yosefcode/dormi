@@ -105,10 +105,9 @@ const Login = () => {
 
   return (
     <Contener>
+        <img src="/images/loginimag.png" alt="img" className="loginimag" />
       <div className="hader">
         <svg
-          width="105"
-          height="26"
           viewBox="0 0 105 26"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -120,9 +119,10 @@ const Login = () => {
         </svg>
       </div>
       <div className="wrapper">
-        <img src="/images/loginimag.png" alt="img" className="loginimag" />
         <div className="form">
           <Form
+          dir="ltr"
+layout="vertical"
             name="basic"
             initialValues={{
               remember: true,
@@ -131,6 +131,7 @@ const Login = () => {
             form={form}
           >
             <Form.Item
+
               label={lang?.lang307}
               name="email"
               rules={[
@@ -155,7 +156,7 @@ const Login = () => {
             >
               <Input.Password />
             </Form.Item>
-            <div className="buttonwraper">
+            <div className="buttonwraper" dir="rtl">
               <Button
                 className="subbutton"
                 type="primary"
@@ -164,12 +165,12 @@ const Login = () => {
               >
                 הכנס
               </Button>
-            </div>
-          </Form>
-
           <button className="passbutoon" onClick={Forgetpass}>
             שחזר סיסמה
           </button>
+            </div>
+          </Form>
+
           {fult ? <div className="errmaseg">{fult}</div> : null}
 
           {emailmassg ? <div className="emailmassg">{emailmassg}</div> : null}
@@ -186,7 +187,7 @@ const Login = () => {
           <QRCode
             className="qrcode"
             value="https://www.dormi.co.il/users"
-            size={250}
+            // size={250}
           />
         </div>
       </div>

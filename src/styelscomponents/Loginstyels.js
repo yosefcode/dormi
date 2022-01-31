@@ -1,111 +1,125 @@
 import styled from "styled-components";
 
 export const Contener = styled.div`
-  /* height: 360px; */
+  height: 100vh;
+  background: #1c1547;
+  position: fixed;
+  width: 100%;
   font-family: "Heebo";
+
   .ant-form-item-label > label {
     width: 78px;
     font-style: normal;
-    font-weight: bold;
-    font-size: 17px;
-    color: #0f0743;
-    margin-bottom: -3px;
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: #ffff;
+    margin-bottom: -10px;
     align-items: center;
   }
 
   @media only screen and (min-width: 600px) {
-    /* height: 100vh; */
     direction: rtl;
-    display: grid;
-    grid-template-areas:
-      "header header"
-      "wrapper navlogin ";
 
-    grid-template-rows: 3% 1fr;
-    grid-template-columns: 1fr 300px;
-    grid-gap: 1px;
-    .hader {
-      grid-area: header;
-
-      height: 76px;
-
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      box-shadow: 0px 1px 0px rgba(15, 7, 67, 0.05);
-      background-color: #1c1547;
-      margin-bottom: 1px;
+    .hader svg {
+      width: 80%;
     }
-    .wrapper {
-      grid-area: wrapper;
-      margin-top: 3%;
-
-      background-size: cover;
-      height: 87vh;
-
-      position: relative;
+    .hader {
+      position: absolute;
+      height: 25vh;
+      width: 20%;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
     .loginimag {
       position: absolute;
-      width: 550px;
-    }
-    .form {
-      margin-top: 14%;
-      margin-inline-start: 40%;
       width: 30%;
     }
+    .form {
+      width: 50%;
+      position: fixed;
+      height: 60vh;
+      left: 25%;
+      bottom: 0;
+      padding: 5vh 10%;
+    }
     .navlogin {
-      margin-top: 17%;
-      grid-area: navlogin;
+      padding: 30px;
+      text-align: center;
+      position: fixed;
+      width: 20%;
+      height: 75vh;
+      left: 0;
+      bottom: 0;
       background-color: #e5e5e5;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-evenly;
       align-items: center;
       font-style: normal;
       font-weight: bold;
-      font-size: 17px;
+      font-size: 1.7rem;
       color: #0f0743;
+    }
+    .ant-input {
+      width: 100%;
+      height: 8vh !important;
+      max-height: 55px !important;
     }
   }
   @media only screen and (max-width: 600px) {
+    height: 100vh;
+    background: #1c1547;
     display: flex;
     flex-direction: column;
-    .hader {
-      grid-area: header;
+    position: fixed;
+    width: 100%;
 
+    .hader {
       height: 76px;
 
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      box-shadow: 0px 1px 0px rgba(15, 7, 67, 0.05);
-      background-color: #1c1547;
-      margin-bottom: 1px;
+      margin: 42vh auto;
     }
     .navlogin {
       display: none;
     }
     .wrapper {
-      display: flex;
-      position: relative;
+      width: 100%;
+      position: absolute;
+      height: 50vh;
+      bottom: 0;
+      // display: flex;
+      // position: relative;
     }
     .form {
-      margin-top: 31%;
-      margin-inline-start: 12%;
+      width: 70%;
+      margin: 0 auto;
     }
+    label {
+      color: white;
+    }
+    .ant-input {
+      width: 100%;
+      height: 55px !important;
+      max-height: 55px !important;
+    }
+    .ant-form-item {
+      margin-bottom: 15px;
+    }
+    // .ant-form {
+    //   width: 100%;
+    //   height: 45px !important;
+    //   max-height: 45px !important;
+    // }
     .loginimag {
       position: absolute;
-      width: 100%;
+      height: 55%;
+      right: 0;
+      top: 2%;
     }
   }
 
-  .bg-qr {
-    margin-top: -77%;
-    margin-inline-start: 5%;
-  }
   .ant-input {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
@@ -113,11 +127,11 @@ export const Contener = styled.div`
   .ant-input-affix-wrapper {
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
+    padding: 0 11px !important;
   }
   .subbutton {
-    margin: 12px;
-    height: 63px;
-    width: 176px;
+    height: 8vh;
+    width: 60%;
     background: #ffd17e;
     border-radius: 11px;
     border-color: #ffd17e;
@@ -125,17 +139,18 @@ export const Contener = styled.div`
     font-family: "Heebo";
     font-style: normal;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 1.7rem;
   }
   .buttonwraper {
     position: relative;
+    width: 100%;
     display: flex;
-    float: right;
-    color: #0f0743;
+    justify-content: space-between;
     font-family: "Heebo";
     font-style: normal;
     font-weight: bold;
     font-size: 17px;
+    margin-top: 5vh;
   }
   .errmaseg {
     position: relative;
@@ -166,9 +181,8 @@ export const Contener = styled.div`
     word-wrap: break-word;
   }
   .passbutoon {
-    width: 25%;
-
-    height: 63px;
+    height: 8vh;
+    width: 30%;
     background: #e5ebf3;
     border-radius: 11px;
     border-color: #e5ebf3;
@@ -176,7 +190,6 @@ export const Contener = styled.div`
     font-family: "Heebo";
     font-style: normal;
     font-weight: bold;
-    font-size: 17px;
-    margin-top: 12px;
+    font-size: 1.7rem;
   }
 `;
