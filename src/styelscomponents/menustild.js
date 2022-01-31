@@ -59,7 +59,10 @@ export const Contyner = styled.div`
     fontsize: 1.4rem;
     border-radius: 10px;
   }
+.desktoplogo svg{
+  width: 40%;
 
+}
   .Drawercontennet {
     width: 70%;
     margin: 45px auto;
@@ -255,6 +258,7 @@ export const Avaterdrwor = styled.div`
   }
 `;
 export const MenuStyel = styled(Menu)`
+  word-wrap: break-word;
   hr {
     border: 1px solid #2c2a51;
     transform: rotate(180deg);
@@ -285,7 +289,7 @@ export const MenuStyel = styled(Menu)`
     color: red;
   }
   .ant-menu-submenu-title {
-    padding-right: 0px;
+    padding-inline-start: 0px;
   }
   .ant-menu-rtl {
     background-color: #1c1547 !important;
@@ -358,7 +362,7 @@ export const MenuStyelDrouwer = styled(Menu)`
     color: red;
   }
   .ant-menu-submenu-title {
-    padding-right: 0px;
+    padding-inline-start: 0px;
   }
   .ant-menu-rtl {
     background-color: #1c1547 !important;

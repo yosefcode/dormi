@@ -68,8 +68,8 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
           <div className="desktoplogo">
             <div className="desktopicon"><img src={logo} alt="" width="60%" /></div>
             <svg
-              width="70"
-              height="17"
+              // width="70%"
+              // height="17"
               viewBox="0 0 70 17"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

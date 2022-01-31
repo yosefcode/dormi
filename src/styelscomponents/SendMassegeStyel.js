@@ -57,8 +57,8 @@ export const Container = styled.div`
       width: 267px;
       margin-inline-end: 5%;
       text-align: center;
-      padding-left: 7%;
-      padding-right: 7%;
+      padding-inline-end: 7%;
+      padding-inline-start: 7%;
     }
   }
 `;
