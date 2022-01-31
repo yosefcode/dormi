@@ -73,7 +73,7 @@ export const Contener = styled.div`
     background: #1c1547;
     display: flex;
     flex-direction: column;
-    position: fixed;
+    // position: fixed;
     width: 100%;
 
     .hader {
@@ -114,7 +114,7 @@ export const Contener = styled.div`
     // }
     .loginimag {
       position: absolute;
-      height: 55%;
+      height: 55vh;
       right: 0;
       top: 2%;
     }
