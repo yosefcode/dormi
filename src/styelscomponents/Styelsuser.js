@@ -153,8 +153,8 @@ export const Contener = styled.div`
   }
 
   .user{
-    width: 60%;
-    margin: 20px auto;
+    width: 80%;
+    margin: 20px 0 0 0;
     font-size: 2.4rem;
     font-weight: 700;
     font-family: "Heebo";
@@ -162,6 +162,9 @@ export const Contener = styled.div`
     text-align: right;
     padding: 0 0 50px;
   
+  }
+  .ant-switch-checked{
+    background-color: #1c1547;
   }
 
   button.ant-btn.ant-btn-primary {
@@ -178,7 +181,7 @@ export const Contener = styled.div`
     text-align: center;
     color: #0f0743;
     height: 63px;
-    margin: 6px 0px;
+    margin: 50px 0px;
   }
 
   .div_setting {
@@ -239,7 +242,38 @@ export const Contener = styled.div`
     align-items: flex-end;
     margin-bottom:25px;
   }
+.nutificationstatus{
+  display: flex;
+    align-items: center;
+    margin-top:25px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    justify-content: space-between;
+  }
+.user_active{
+  display: flex;
+    align-items: center;
+    margin-top:25px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    align-items: center;
+    margin-bottom: 32px;
 
+
+  }
+  
+  .mail_sms{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0 25px 0 0;
+
+}
+.mail_sms .ant-form-item {
+margin:0px 7px 0 35px !important;}
+.user_active .ant-form-item {
+margin:0px 25px 0 35px !important;}
 
   @media only screen and (max-width: 600px) {
    .user{ 
@@ -259,6 +293,11 @@ export const Contener = styled.div`
     button.ant-btn.ant-btn-primary {
       width: 100%;
     }
+    .nutificationstatus{
+      display: block;}
+      .mail_sms{
+        margin: 5px 0;}
+    
   }
 
 `;

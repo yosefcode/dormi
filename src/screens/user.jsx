@@ -65,10 +65,12 @@ const User = () => {
               </Select>
             </Form.Item>
 
-            <Form.Item label={`${lang?.lang377}?`} name="entrance">
+            <div className="user_active" >
+{`${lang?.lang377}?`}
+            <Form.Item  name="entrance">
               <Switch defaultChecked={false} />
             </Form.Item>
-
+</div>
             <Form.Item label={lang?.lang319} name="auht_rank">
               <Select defaultValue="עברית">
                 {arry.map((el) => {
@@ -105,53 +107,79 @@ const User = () => {
                   return <Option>{el}</Option>;
                 })}
               </Select>
+
             </Form.Item>
-            <Form.Item label={`${lang?.lang311}?`} name="user_active"  style={{display: 'flex'}}>
+              <div className="user_active" >
+            {`${lang?.lang311}?`}
+            <Form.Item  name="user_active" >
               <Switch defaultChecked={false} />
             </Form.Item>
+          </div>
           </div>
           
           <div>
             <div className="noteficatin">
-              <p>{lang?.lang364}:</p>
+              <p style={{fontWeight: 600, fontSize: "1.6rem"}}>{lang?.lang364}:</p>
 
-              <p>{lang?.lang365}:</p>
               <div className="nutificationstatus">
-                <Form.Item label={lang?.lang369} layout="horizontal" name="open_req_in_email">
+              {lang?.lang365}:    
+              <div className="mail_sms">
+                {lang?.lang369}
+                <Form.Item   name="open_req_in_email">
                   <Switch defaultChecked={false} />
                 </Form.Item>
-
-                <Form.Item label={lang?.lang370} name="open_req_masege">
+{lang?.lang370}
+                <Form.Item  name="open_req_masege">
                   <Switch defaultChecked={false} />
                 </Form.Item>
+                </div>
               </div>
+
+              <div className="nutificationstatus">
               <p>{lang?.lang380}:</p>
-              <div className="nutificationstatus">
-                <Form.Item label={lang?.lang369} name="close_req_in_email">
+              <div className="mail_sms">
+              {lang?.lang369}
+
+                <Form.Item  name="close_req_in_email">
                   <Switch defaultChecked={false} />
                 </Form.Item>
-                <Form.Item label={lang?.lang370} name="close_req_masege">
+                {lang?.lang370}
+                <Form.Item  name="close_req_masege">
                   <Switch defaultChecked={false} />
                 </Form.Item>
               </div>
+              </div>
+
+              <div className="nutificationstatus">
               <p>{lang?.lang366}:</p>
-              <div className="nutificationstatus">
-                <Form.Item label={lang?.lang369} name="start_handle_in_email">
+              <div className="mail_sms">
+              {lang?.lang369}
+
+                <Form.Item  name="start_handle_in_email">
                   <Switch defaultChecked={false} />
                 </Form.Item>
-                <Form.Item label={lang?.lang370} name="start_handle_masege">
+                {lang?.lang370}
+                <Form.Item  name="start_handle_masege">
                   <Switch defaultChecked={false} />
                 </Form.Item>
               </div>
+              </div>
+
+              <div className="nutificationstatus">
               <p>{lang?.lang367}:</p>
-              <div className="nutificationstatus">
-                <Form.Item label={lang?.lang369} name="end_handle_in_email">
+              <div className="mail_sms">
+              {lang?.lang369}
+
+                <Form.Item  name="end_handle_in_email">
                   <Switch defaultChecked={false} />
                 </Form.Item>
-                <Form.Item label={lang?.lang370} name="end_handle_masege">
+                {lang?.lang370}
+                <Form.Item  name="end_handle_masege">
                   <Switch defaultChecked={false} />
                 </Form.Item>
               </div>
+              </div>
+
             </div>
           </div>
         <Form.Item>
