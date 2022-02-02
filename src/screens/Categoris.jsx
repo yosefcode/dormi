@@ -45,7 +45,8 @@ function Categoris() {
     let requst = categoryarry.findIndex(
       (Item) => Item.maincategoryname === chusencategori
     );
-    categoryarry[requst].icon = value;
+    categoryarry[requst].id = value;
+
     setchingeurgency(!chingeurgency);
 
     setlocalarry(categoryarry);
@@ -68,7 +69,7 @@ function Categoris() {
             <Menu.Item key={ic.iconid}>
               <img src={ic.icon} alt={"icon"} 
                 onClick={() => {
-                  chuseicon(ic.icon);
+                  chuseicon(ic.iconid);
                 }} style={{width:"20px", height:"20px"}}/>
             </Menu.Item>
           );
@@ -77,6 +78,7 @@ function Categoris() {
     </Menu>
   );
 
+
   const gotolistoftask = (value) => {
     filterserch.categoris = value;
 
@@ -84,6 +86,7 @@ function Categoris() {
     chanfefilter(filterserch);
     history.push("/ListOfreq");
   };
+
   return (
     <Contener>
       <div className="hader">
