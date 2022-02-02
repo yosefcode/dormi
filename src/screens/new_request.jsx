@@ -81,7 +81,7 @@ const Nwerequest = ({ Temmembertask }) => {
                               {/* {icon ? <finicon.icon /> : <PoweroffOutlined />} */}
                               {icon ? <img src={icon} alt= ""                         
        style={{ height:"20vw" }}/> 
-     : <PoweroffOutlined        style={{ width: "25px", marginLeft:"10px" }}/> }
+     : <PoweroffOutlined        style={{ width: "25px", marginInlineEnd:"10px" }}/> }
 
                             </div>
                             <div className="uniqueproblem">

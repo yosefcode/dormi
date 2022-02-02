@@ -457,7 +457,7 @@ export function FiltersForsort({
                     screnphunesize?setDrawervisible(false):openfilter();
                   }}
                 >
-              <FaFilter style={{marginLeft:"7px", marginBottom:"-4px"}}/> אישור
+              <FaFilter style={{marginInlineEnd:"7px", marginBottom:"-4px"}}/> אישור
                 </button>
                 </div>
 

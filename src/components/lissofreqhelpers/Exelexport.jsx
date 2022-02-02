@@ -12,7 +12,7 @@ const Exelexport = ({ data }) => {
     // <ExcelFile
     //     element={
           <button className="MangerButton_exel">
-             <ImCloudDownload style={{marginLeft:"7px", marginTop:"4px", fontSize:"30px" }}/>   יצא לאקסל </button>
+             <ImCloudDownload style={{marginInlineEnd:"7px", marginTop:"4px", fontSize:"30px" }}/>   יצא לאקסל </button>
 
       //   }
       //   filename="dormi"

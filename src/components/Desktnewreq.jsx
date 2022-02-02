@@ -240,7 +240,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
   const maincategoryname = (
     <div >
  {el.maincategoryname}
-          <img src={icon} alt= "" style={{height: "30px", marginRight:"10px" }}/> 
+          <img src={icon} alt= "" style={{height: "30px", marginInlineStart:"10px" }}/> 
     </div>
   );
 
@@ -257,7 +257,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                             {el.maincategoryname}{" "}
                             {icon ? <img src={icon} alt= ""                         
        style={{ height: "30px", margin:"5px 10px" }}/> 
-     : <PoweroffOutlined        style={{ width: "25px", marginLeft:"10px" }}/> }
+     : <PoweroffOutlined        style={{ width: "25px", marginInlineEnd:"10px" }}/> }
                           </Option>
                         );
                       })

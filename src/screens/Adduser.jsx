@@ -302,7 +302,7 @@ const Adduser = () => {
 
 <div className="radio_adduser">
         {`${lang?.lang377}?`}
-                <Form.Item label={`${lang?.lang377}?`} name="entrance" style={{marginRight:"25px"}}>
+                <Form.Item label={`${lang?.lang377}?`} name="entrance" style={{marginInlineStart:"25px"}}>
           <Switch defaultChecked={false} />
         </Form.Item>
         </div>
