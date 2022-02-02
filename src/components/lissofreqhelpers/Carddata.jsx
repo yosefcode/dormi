@@ -21,7 +21,7 @@ export function Carddatabig({ el }) {
       <FaMapPin style={{marginInlineEnd:"7px"}}/> {el.locationName ? el.locationName : null} - {el.roomName ? el.roomName : null}
       </div>
 
-        <div className="marginRight" > <BsFillPersonFill style={{marginInlineEnd:"7px", fontSize:"1.2rem", }}/> 
+        <div className="marginRight" > <BsFillPersonFill style={{marginLeft:"7px", fontSize:"1.2rem", }}/> 
           <span
         style={{marginInlineStart:"5px"}}
         className="Calltoaction"
@@ -40,7 +40,7 @@ export function Carddatabig({ el }) {
         <div className="marginRight Calltoaction"           onClick={() => {
             setimegvesebule(true);
           }}
->  <AiOutlineCamera style={{marginInlineEnd:"7px",  fontSize:"1.4rem", marginBottom:"-3px",}}/>
+>  <AiOutlineCamera style={{marginLeft:"7px",  fontSize:"1.4rem", marginBottom:"-3px",}}/>
            תמונה מצורפת
         </div>
         <div className="marginRight date_mobile"> 

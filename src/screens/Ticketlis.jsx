@@ -662,7 +662,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 setfilterpresd(!filterpresd);
               }}
             > 
-              <FaFilter style={{marginInlineEnd:"7px", marginTop:"-4px"}}/> סינון
+              <FaFilter style={{marginLeft:"7px", marginTop:"-4px"}}/> סינון
               {filtercunter > 0 ? (
                 <div>
                   <Badge
@@ -690,7 +690,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                 setpresd(!presd);
               }}
             >
-              <img src="/images/multipulchuis.svg" alt="" style={{marginInlineEnd:"7px", marginTop:"-4px"}}/> בחירה
+              <img src="/images/multipulchuis.svg" alt="" style={{marginLeft:"7px", marginTop:"-4px"}}/> בחירה
             </Buttonmuneu>
             <Buttonmuneu className="MangerButton shwobutton">
               הצג פניות פתוחות
@@ -856,7 +856,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                               viewBox="0 0 12 10"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
-                              style={{marginInlineEnd:8}}
+                              style={{marginLeft:8}}
                             >
                               <path
                                 d="M2.25854 0.25L1.09188 1.41667H0.166748V2.58333H1.57495L3.08341 1.07487L2.25854 0.25ZM4.25008 1.41667V2.58333H11.8334V1.41667H4.25008ZM2.25854 3.75L1.09188 4.91667H0.166748V6.08333H1.57495L3.08341 4.57487L2.25854 3.75ZM4.25008 4.91667V6.08333H11.8334V4.91667H4.25008ZM1.33341 8.125C1.10135 8.125 0.878791 8.21719 0.714696 8.38128C0.550602 8.54538 0.458415 8.76794 0.458415 9C0.458415 9.23206 0.550602 9.45462 0.714696 9.61872C0.878791 9.78281 1.10135 9.875 1.33341 9.875C1.56548 9.875 1.78804 9.78281 1.95213 9.61872C2.11623 9.45462 2.20841 9.23206 2.20841 9C2.20841 8.76794 2.11623 8.54538 1.95213 8.38128C1.78804 8.21719 1.56548 8.125 1.33341 8.125ZM4.25008 8.41667V9.58333H11.8334V8.41667H4.25008Z"

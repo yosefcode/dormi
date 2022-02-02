@@ -241,7 +241,7 @@ export const Closetask = ({
       ) : null}
       {!cancelquickfunc.status ? (
         <button className="Closepopupsubmit" onClick={opendrwor}>
-          <img src="images/lightning.svg" alt="lightning" style={{marginInlineEnd:"10px"}}/>
+          <img src="images/lightning.svg" alt="lightning" style={{marginLeft:"10px"}}/>
           פעולה מהירה
         </button>
       ) : (

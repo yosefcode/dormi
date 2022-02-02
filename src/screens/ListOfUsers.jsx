@@ -277,7 +277,7 @@ function Users() {
             setfilterpresd(!filterpresd);
           }}
         >
-         <FaFilter style={{marginInlineEnd:"7px", marginTop:"-4px"}}/>  {lang?.lang248}
+         <FaFilter style={{marginLeft:"7px", marginTop:"-4px"}}/>  {lang?.lang248}
         </Buttonmuneu>
         {/* {filtercunter > 0 ? (
           <div> */}
@@ -304,7 +304,7 @@ function Users() {
             setpresd(!presd);
           }}
         >
-          <img src="/images/multipulchuis.svg" alt="" style={{marginInlineEnd:"7px", marginTop:"-4px"}}/> בחירה
+          <img src="/images/multipulchuis.svg" alt="" style={{marginLeft:"7px", marginTop:"-4px"}}/> בחירה
         </Buttonmuneu>
         {/* <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
@@ -473,7 +473,7 @@ function Users() {
                   <div>
                     <div className="yuser_name">
                       <div>
-                        <Avatar size={38} icon={<UserOutlined />} style={{marginInlineEnd:"7px", marginTop:"-4px"}}/>{" "}
+                        <Avatar size={38} icon={<UserOutlined />} style={{marginLeft:"7px", marginTop:"-4px"}}/>{" "}
                         <span id="yuser_name">
    {user.firstname} {user.lastname}</span>
                       </div>

@@ -66,13 +66,10 @@ function Categoris() {
         {Arryoficons?.map((ic) => {
           return (
             <Menu.Item key={ic.iconid}>
-              <span
+              <img src={ic.icon} alt={"icon"} 
                 onClick={() => {
-                  chuseicon(ic.iconid);
-                }}
-              >
-                <ic.icon />
-              </span>
+                  chuseicon(ic.icon);
+                }} style={{width:"20px", height:"20px"}}/>
             </Menu.Item>
           );
         })}
@@ -114,7 +111,7 @@ function Categoris() {
               //
               const headerCard = (
                 <div>
-                      <img src={icon} alt= "" style={{height: "25px", marginInlineEnd:"10px" }}/> {el.maincategoryname}
+                      <img src={icon} alt= "" style={{height: "25px", marginLeft:"10px" }}/> {el.maincategoryname}
                 </div>
               );
               

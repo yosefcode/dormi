@@ -29,7 +29,7 @@ const User = () => {
     <Contener>
       <div className="user">
         <div className="gobacklink" onClick={goback}>
-          <FiArrowRight style={{fontSize:"3rem", marginInlineEnd:"7px"}}/> 
+          <FiArrowRight style={{fontSize:"3rem", marginLeft:"7px"}}/> 
           {lang?.lang316}
           </div>
 
