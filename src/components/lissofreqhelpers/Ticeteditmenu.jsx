@@ -182,9 +182,6 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
       </div>
   );
 };
-export const Posteditofticket = (task, ticketguid, value) => {
-  console.log("Delet", task, ticketguid);
-};
 
 export const Closetask = ({
   data,
@@ -210,6 +207,10 @@ export const Closetask = ({
       break;
     case "forward":
       text = "הופנו לאיש צוות";
+
+      break;
+    case "archive":
+      text = "נמחקו";
 
       break;
     default:

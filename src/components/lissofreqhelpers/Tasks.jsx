@@ -218,7 +218,11 @@ export const Quickclosebuuton = ({ action }) => {
       <button className="drower_button">
         <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
-      <button className="drower_button btn_down">
+      <button className="drower_button btn_down"
+      onClick={() => {
+          onfinish("archive", null);
+        }}>
+
         <img className="img_icon" src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
     </div>

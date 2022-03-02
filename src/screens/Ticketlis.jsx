@@ -372,6 +372,13 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             forwardtouser: value,
           };
           break;
+        case "archive":
+          obj = {
+            task: "archive",
+            userid: userid,
+            tickets: arrytecetsalltask,
+          };
+          break;
         default:
           break;
       }
@@ -385,6 +392,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     }
     Updatedata();
   };
+  
   const Oqquickaction = async (type, value) => {
     switch (type) {
       case "close":
@@ -401,6 +409,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
         break;
       case "forward":
         setcancelquickfunc({ status: true, type: "forward" });
+
+        break;
+      case "archive":
+        setcancelquickfunc({ status: true, type: "archive" });
 
         break;
       default:
@@ -793,6 +805,27 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   </Menu.Item>
                   {/* מחיקה */}
                   <Menu.Item
+                  
+      // מחיקת פנייה
+      onClick = {async () => {
+    let obj = {
+      task: "archive",
+      userid: userid,
+      tickets: [
+        {
+          ticketguid: el.ticketguid,
+        },
+      ],
+
+    };
+    
+     await PostToServer(ticketruter, obj);
+
+    Updatedata();
+  }}
+
+
+                  // onClick={()=>deleteInk}
                   // onClick={() => Posteditofticket("Delet", el.ticketguid)}
                   >
                     {lang?.lang147}
@@ -839,7 +872,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                     }
                   }}
                 >
-                  <div className="div_card">
+                  <div className="div_card" onClick={() =>console.log(el)}>
                       <span id="displyid_desktop">{el.ticketid}</span>
                       <div className="inquir">
                       <div id="description">

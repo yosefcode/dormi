@@ -81,11 +81,11 @@ const Formtaslfromlist = ({
     let locationid = value.locationid[1];
     let roomid = parseInt(value.roomid[1]);
     let categoryid = value.categoryid[1];
-    let urgencyid;
-    if (!value.urgencyid) {
-      urgencyid = 2;
+    let urgency;
+    if (!value.urgency) {
+      urgency = 2;
     } else {
-      urgencyid = value.urgencyid;
+      urgency = value.urgency;
     }
 
     let comments;
@@ -100,7 +100,7 @@ const Formtaslfromlist = ({
       locationid,
       roomid,
       categoryid,
-      urgencyid,
+      urgency,
       comments,
       // ...typeofreq,
     };
@@ -217,17 +217,17 @@ const Formtaslfromlist = ({
             </div>
 
             <Form.Item
-              name="urgencyid"
+              name="urgency"
               initialValue={parseInt(data.urgencyadmin)}
             >
               <Select defaultValue={2}>
-                <Option key={1} value={1}>
+                <Option key={1} value={3}>
                   <Badge color="#22E7B7" text={lang?.lang120} />
                 </Option>
                 <Option key={2} value={2}>
                   <Badge color="orange" text={lang?.lang121} />
                 </Option>
-                <Option key={3} value={3}>
+                <Option key={3} value={1}>
                   <Badge color="#D91D61" text={lang?.lang122} />
                 </Option>
               </Select>

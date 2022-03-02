@@ -13,7 +13,6 @@ const { Option } = Select;
 
 export function Carddatabig({ el }) {
   const [imegvesebule, setimegvesebule] = useState(false);
-
   return (
     <div className="details">
       <div>
@@ -36,13 +35,14 @@ export function Carddatabig({ el }) {
           {" "}  {el.lastname ? el.lastname : null}
         </span>
         </div>
-
+        {el.openimage ? 
         <div className="marginRight Calltoaction"           onClick={() => {
-            setimegvesebule(true);
-          }}
+          setimegvesebule(true);
+        }}
 >  <AiOutlineCamera style={{marginLeft:"7px",  fontSize:"1.4rem", marginBottom:"-3px",}}/>
            תמונה מצורפת
         </div>
+        : null}
         <div className="marginRight date_mobile"> 
         {el.dateopened ? el.dateopened : null}
         <span 

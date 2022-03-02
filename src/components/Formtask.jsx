@@ -68,11 +68,11 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
     if (value?.categoryid) {
       categoryid = value?.categoryid[1];
     }
-    let urgencyid;
-    if (value?.urgencyid) {
-      urgencyid = value?.urgencyid;
+    let urgency;
+    if (value?.urgency) {
+      urgency = value?.urgency;
     } else {
-      urgencyid = 2;
+      urgency = 2;
     }
     let comments;
     if (value.comments) {
@@ -86,7 +86,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
       locationid,
       roomid,
       categoryid,
-      urgencyid,
+      urgency,
       comments,
       // ...typeofreq,
     };
@@ -225,16 +225,16 @@ topFunction()
             </Form.Item>
 
             {/* דחיפות  */}
-            <Form.Item name="urgencyid" defaultValue={2}>
+            <Form.Item name="urgency" defaultValue={2}>
               <Select defaultValue={2}>
                 <Option key={1} value={1}>
-                  <Badge color="#22E7B7" text={lang?.lang120} />
+                  <Badge color="#22E7B7" text={lang?.lang122} />
                 </Option>
                 <Option key={2} value={2}>
                   <Badge color="orange" text={lang?.lang121} />
                 </Option>
                 <Option key={3} value={3}>
-                  <Badge color="#D91D61" text={lang?.lang122} />
+                  <Badge color="#D91D61" text={lang?.lang120} />
                 </Option>
               </Select>
             </Form.Item>

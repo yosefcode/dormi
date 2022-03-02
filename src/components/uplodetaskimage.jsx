@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import DataContext from "../DataContext";
 import { Link } from "react-router-dom";
-
+import Resizer from "react-image-file-resizer";
 import { AiOutlineCamera } from "react-icons/ai";
 import { Modal, Upload, Button } from "antd";
 import { FormContener, Buttonsenimage } from "../styelscomponents/NewRequest";
 
 import { PostToServer } from "../serveses";
+import { FiLogOut } from "react-icons/fi";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -26,20 +27,21 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
     previewImage: "",
     previewTitle: "",
   });
-  useEffect(() => {
-    if (uplodeimage?.fileList?.length >= 1) {
-      setsendbutton(true);
-    } else {
-      setsendbutton(false);
-    }
-  }, [uplodeimage]);
   const [previewImage, setpreviewImage] = useState();
   const [previewVisible, setpreviewVisible] = useState(false);
   const [previewTitle, setpreviewTitle] = useState("");
   const [sendbutton, setsendbutton] = useState(false);
   const [updateImage, setUpdateImage] = useState(false);
-  // const [aftersend, setaftersend] = useState(false);
+  const [urlbase64, setUrlbase64] = useState();
+  useEffect(() => {
+    if (uplodeimage?.fileList?.length >= 1||urlbase64) {
+      setsendbutton(true);
+    } else {
+      setsendbutton(false);
+    }
+  }, [uplodeimage, urlbase64]);
 
+  // const [aftersend, setaftersend] = useState(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -50,10 +52,9 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-
-  const upludeimage = ({ fileList }) => setuplodeimage({ fileList });
-
-  const { fileList } = uplodeimage;
+  
+  // const upludeimage = ({ fileList }) =>setuplodeimage({fileList});
+  const  {fileList} = uplodeimage;
   const [loadings, setloadings] = useState([]);
   const enterLoading = (index) => {
     setloadings((loadings) => {
@@ -77,17 +78,21 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
   const [Buttonsecses, setButtonsecses] = useState(false);
   const sendimage = async () => {
     enterLoading(2);
-    // let userid = loginstatus.userid;
     let task = "picture";
-    let img = fileList;
+    // let img =fileList
+    let img = [{name:"pic.jpeg",  type: "image/jpeg",thumbUrl :urlbase64.replace(/^data:image\/[a-z]+;base64,/, "")}]
     let reqruter = "ticketpicture";
     let obj = {
       task,
-      ticketid,
       userid,
       img,
+            ticketguid:ticketid,
+
     };
+    console.log(      obj );
     let res = await PostToServer(reqruter, obj);
+    console.log(      res );
+    setUrlbase64("")
     setuplodeimage("");
     setButtonsecses(true);
     setloadings([0]);
@@ -95,9 +100,35 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
     // setuplodeimagescreen();
   };
 
-  return (
-      <FormContener sendbutton={sendbutton} >
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      300,
+      300,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "base64"
+    );
+  });
 
+const upludeimage = async ( fileList ) => {
+  try {
+    const file = fileList.file;
+    const image = await resizeFile(file);
+    setUrlbase64(image)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+  return (
+
+      <FormContener sendbutton={sendbutton} >
         <div className="textbloon">
 <div className="close_addimg" onClick={() =>{    topPage();
 
@@ -128,9 +159,11 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
 
               <Upload
                 listType="picture-card"
-                fileList={fileList}
-                onPreview={handlePreview}
+                // fileList={fileList}
+                // onPreview={handlePreview}
                 onChange={upludeimage}
+                beforeUpload={() => false} 
+                maxCount={1}
               >
                 {!Buttonsecses ? (
                   <button className="uploadimage add_image">

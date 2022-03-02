@@ -62,11 +62,11 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
     if (value?.categoryid) {
       categoryid = value?.categoryid[1];
     }
-    let urgencyid;
-    if (value?.urgencyid) {
-      urgencyid = value?.urgencyid;
+    let urgency;
+    if (value?.urgency) {
+      urgency = value?.urgency;
     } else {
-      urgencyid = 2;
+      urgency = 2;
     }
     let comments;
     if (value.comments) {
@@ -80,7 +80,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
       locationid,
       roomid,
       categoryid,
-      urgencyid,
+      urgency,
       comments,
       // ...typeofreq,
     };
@@ -96,6 +96,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
       let ruteruserid = "ticketlist";
 
       let ticketlis = await PostToServer(ruteruserid, { userid: userid });
+
       changeticketlist(ticketlis);
       setloadings([0]);
       setuplodeimagescreen(true);
@@ -194,6 +195,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
 
   return (
     <div >
+        {/* {uplodeimagescreen ? ( */}
         {!uplodeimagescreen ? (
       <FormContenerdesktop>
         <div className="headr_newreq">
@@ -291,16 +293,16 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                 <TextArea rows={4} placeholder={lang?.lang123} />
               </Form.Item>
               {/* דחיפות  */}
-              <Form.Item name="urgencyid" defaultValue={2}>
+              <Form.Item name="urgency" defaultValue={2}>
                 <Select defaultValue={2}>
                   <Option key={1} value={1}>
-                    <Badge color="#22E7B7" text={lang?.lang120} />
+                    <Badge color="#22E7B7" text={lang?.lang122} />
                   </Option>
                   <Option key={2} value={2}>
                     <Badge color="orange" text={lang?.lang121} />
                   </Option>
                   <Option key={3} value={3}>
-                    <Badge color="#D91D61" text={lang?.lang122} />
+                    <Badge color="#D91D61" text={lang?.lang120} />
                   </Option>
                 </Select>
               </Form.Item>
