@@ -11,8 +11,13 @@ import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import Uplodetaskimage from "./uplodetaskimage";
 import { Arryoficons } from "../Icons";
+import { useHistory } from "react-router-dom";
+
+
 
 const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
+  let history = useHistory();
+  const routeRepeatedtask = history.location.pathname === "/Repeatedtask"
   const { Option } = Select;
   const { TextArea } = Input;
   const [form] = Form.useForm();
@@ -35,11 +40,12 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
 
   const [errmassege, seterrmassege] = useState(false);
   const [errmassegetext, seterrmassegetext] = useState();
+  const [dateName, setdateName] = useState();
 
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
   const onFinish = async (value) => {
-    enterLoading(2);
+    // enterLoading(2);
     let task = "save";
 
     if (ticketid) {
@@ -72,6 +78,15 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
     if (value.comments) {
       comments = value.comments.replace(/[<>${}]/g, "danger$&");
     }
+    let frequencytype;
+    if (value?.frequencytype) {
+      frequencytype = value?.frequencytype;
+    }
+
+    let valueDateName=value?.frequencyamount_m?value.frequencyamount_m
+    :value?.frequencyamount_w?value.frequencyamount_w:value.frequencydate
+    
+
 
     let obj = {
       task,
@@ -82,12 +97,16 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
       categoryid,
       urgency,
       comments,
+      frequencytype,
+      [dateName]:valueDateName
       // ...typeofreq,
     };
+console.log(obj);
 
-    let reqruter = "newticket";
+    let reqruter = routeRepeatedtask?"newplan":"newticket";
 
     let res = await PostToServer(reqruter, obj);
+    console.log(res);
     if (res.error === 1) {
       seterrmassege(true);
       seterrmassegetext(res.message);
@@ -123,25 +142,28 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
   };
 
   const frequencyarry = [
-    { value: "week", text: lang.lang275 },
-    { value: "month", text: lang.lang276 },
-    { value: "three_month", text: lang.lang363 },
-    { value: "half_year", text: lang.lang361 },
-    { value: "year", text: lang.lang277 },
+    { value: "w", text: lang.lang275 },
+    { value: "m", text: lang.lang276 },
+    { value: "x", text: lang.lang363 },
+    { value: "z", text: lang.lang361 },
+    { value: "y", text: lang.lang277 },
   ];
-
   const [datetype, setdatetype] = useState(false);
   const [datetypepiker, setdatetypepiker] = useState(false);
-  const Selectfreqtipe = (value) => {
-    switch (value) {
-      case "week":
-        setdatetype(week);
-        setdatetypepiker(false);
 
+
+    const Selectfreqtipe = (value) => {
+    switch (value) {
+      case "w":
+
+        setdatetypepiker(false);
+        setdateName("frequencyamount_w")
+        setdatetype(week);
         break;
-      case "month":
+      case "m":
         setdatetype(month);
         setdatetypepiker(false);
+        setdateName("frequencyamount_m")
 
         break;
       // case "three_month":
@@ -152,9 +174,16 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
       default:
         setdatetype(false);
         setdatetypepiker(true);
+        setdateName("frequencydate")  
+        
+        
         break;
+      }
+    };
+
+    function onChangeDatePicker(date, dateString) {
+      console.log(date, dateString);
     }
-  };
   const [subcategory, setsubcategory] = useState(false);
   const chusencategory = (value) => {
     if (value) {
@@ -189,8 +218,9 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
 
   const closecancel = () => {
     form.resetFields();
+    setsubcategory(false);
 
-    // setvisual();
+    setvisual();
   };
 
   return (
@@ -213,14 +243,14 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
               <Form.Item
                 name="maincategory"
                 labelAlign={"right"}
-                rules={[{ required: true, message: lang?.lang110 }]}
+                // rules={[{ required: true, message: lang?.lang110 }]}
               >
                 <Select
                   showSearch
                   placeholder={lang?.lang110}
                   onChange={chusencategory}
                 >
-                  <Option value={false}>{lang?.lang110}</Option>
+                  {/* <Option value={false}>{lang?.lang110}</Option> */}
                   {categorynames
                     ? categorynames.map((el) => {
                         let finicon = Arryoficons.find((ic) => {
@@ -271,7 +301,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
               <Form.Item
                 name="categoryid"
                 labelAlign={"right"}
-                rules={[{ required: true, message: lang?.lang110 }]}
+                // rules={[{ required: true, message: lang?.lang110 }]}
               >
                   <Select showSearch placeholder={lang?.lang110}>
                     {subcategory
@@ -310,7 +340,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
               <div className="selecthiden">
                 <Form.Item
                   name="locationid"
-                  rules={[{ required: true, message: lang?.lang340 }]}
+                  // rules={[{ required: true, message: lang?.lang340 }]}
                   className="select_half"
                 >
                   <Select
@@ -318,7 +348,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                     placeholder={lang?.lang340}
                     onChange={onChange}
                   >
-                    <Option value={false}>{lang?.lang340}</Option>
+                    {/* <Option value={false}>{lang?.lang340}</Option> */}
 
                     {locationarry
                       ? locationarry.map((el) => {
@@ -334,7 +364,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                 {/* בחר חדר */}
                 <Form.Item
                   name="roomid"
-                  rules={[{ required: true, message: lang?.lang341 }]}
+                  // rules={[{ required: true, message: lang?.lang341 }]}
                   className="select_half"
                 >
                     <Select showSearch={rommarry?true:false}  placeholder={rommarry?lang?.lang341:null}>
@@ -356,7 +386,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
               {/* הפנה לאיש צוות */}
               <Form.Item name="steff" >
                 <Select showSearch placeholder={lang?.lang240}>
-                  <Option value={false}>{lang?.lang240}</Option>
+                  {/* <Option value={false}>{lang?.lang240}</Option> */}
 
                   {steff
                     ? steff.map((el, index) => {
@@ -372,14 +402,20 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                     : null}
                 </Select>
               </Form.Item>
-              {Temmembertask ? (
+              {routeRepeatedtask? (
+              // {Temmembertask ? (
                 // תדירות
-                <div className="frequency">
-                  <Form.Item name="frequencytyep" label={lang?.lang269}>
-                    <Select style={{ width: 200 }} onSelect={Selectfreqtipe}>
+
+                <div className="selecthiden">
+                  <Form.Item name="frequencytype"  className="select_half"
+                                    // rules={[{ required: true, message: lang?.lang269 }]}
+
+>
+                    <Select  onSelect={Selectfreqtipe}placeholder={lang?.lang269}>
+                    {/* <Option value={false}>{lang?.lang269}</Option> */}
                       {frequencyarry.map((el, index) => {
                         return (
-                          <option ley={index} value={el.value}>
+                          <option key={index} value={el.value}>
                             {el.text}
                           </option>
                         );
@@ -387,11 +423,15 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                     </Select>
                   </Form.Item>
                   {datetype ? (
-                    <Form.Item name="frequencydate" label={lang?.lang269}>
-                      <Select>
+                    <Form.Item   className="select_half" 
+                     name={dateName}
+                    //  name={dateName==="frequencyamount_m"?"frequencyamount_m":"frequencyamount_w"}
+          //  rules={[{ required: true, message: lang?.lang269 }]}
+                    >
+                      <Select >
                         {datetype.map((el, index) => {
                           return (
-                            <option key={index} value={el.date}>
+                            <option key={index} value={index+1}>
                               {el.date}
                             </option>
                           );
@@ -400,20 +440,22 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
                     </Form.Item>
                   ) : null}
                   {datetypepiker ? (
-                    <Form.Item name="frequencydate" label={lang?.lang269}>
-                      <DatePicker />
+                    <Form.Item name="frequencydate"   className="select_half"                                    
+                    // rules={[{ required: true, message: lang?.lang269 }]}
+                    >
+                      <DatePicker  onChange={onChangeDatePicker}/>
                     </Form.Item>
                   ) : null}
                 </div>
               ) : null}
 <div className="div_btn_send">
 
-            <button className="cancel" onClick={closecancel}>
+            <Button className="cancel" onClick={closecancel}>
               {" "}
               ביטול
-            </button>
+            </Button>
               <Button type="primary" htmlType="submit" loading={loadings[2]} >
-                {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}
+                {routeRepeatedtask ? `${lang?.lang344}` : `${lang?.lang124}`}
               </Button>
 </div>
             </Form>

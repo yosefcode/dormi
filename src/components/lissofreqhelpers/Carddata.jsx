@@ -20,7 +20,7 @@ export function Carddatabig({ el }) {
       <FaMapPin style={{marginInlineEnd:"7px"}}/> {el.locationName ? el.locationName : null} - {el.roomName ? el.roomName : null}
       </div>
 
-        <div className="marginRight" > <BsFillPersonFill style={{marginLeft:"7px", fontSize:"1.2rem", }}/> 
+        <div className="marginInlineStartt" > <BsFillPersonFill style={{marginInlineEnd:"7px", fontSize:"1.2rem", }}/> 
           <span
         style={{marginInlineStart:"5px"}}
         className="Calltoaction"
@@ -36,14 +36,14 @@ export function Carddatabig({ el }) {
         </span>
         </div>
         {el.openimage ? 
-        <div className="marginRight Calltoaction"           onClick={() => {
+        <div className="marginInlineStartt Calltoaction"           onClick={() => {
           setimegvesebule(true);
         }}
->  <AiOutlineCamera style={{marginLeft:"7px",  fontSize:"1.4rem", marginBottom:"-3px",}}/>
+>  <AiOutlineCamera style={{marginInlineEnd:"7px",  fontSize:"1.4rem", marginBottom:"-3px",}}/>
            תמונה מצורפת
         </div>
         : null}
-        <div className="marginRight date_mobile"> 
+        <div className="marginInlineStartt date_mobile"> 
         {el.dateopened ? el.dateopened : null}
         <span 
          id="displyid_mobile">{el.ticketid}
@@ -92,7 +92,8 @@ export function Urgensy({
               color={urgency}
               style={{
                 insetinlinestart: "4%",
-                margin: "0 -5px 0 5px"
+                marginTop: "-2px",
+                marginInlineEnd: "5px",
               }}
             ></Badge>{" "}
             {" "}{urgencytext}

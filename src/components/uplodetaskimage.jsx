@@ -159,8 +159,8 @@ const upludeimage = async ( fileList ) => {
 
               <Upload
                 listType="picture-card"
-                // fileList={fileList}
-                // onPreview={handlePreview}
+                fileList={fileList}
+                onPreview={handlePreview}
                 onChange={upludeimage}
                 beforeUpload={() => false} 
                 maxCount={1}

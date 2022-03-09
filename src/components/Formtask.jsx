@@ -41,11 +41,12 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
 
   const [errmassege, seterrmassege] = useState(false);
   const [errmassegetext, seterrmassegetext] = useState();
+  const [dateName, setdateName] = useState();
 
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
   const onFinish = async (value) => {
-    enterLoading(2);
+    // enterLoading(2);
     let task = "save";
 
     if (ticketid) {
@@ -78,6 +79,13 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
     if (value.comments) {
       comments = value.comments.replace(/[<>${}]/g, "danger$&");
     }
+    let frequencytype;
+    if (value?.frequencytype) {
+      frequencytype = value?.frequencytype;
+    }
+
+    let valueDateName=value?.frequencyamount_m?value.frequencyamount_m
+    :value?.frequencyamount_w?value.frequencyamount_w:value.frequencydate
 
     let obj = {
       task,
@@ -87,13 +95,21 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
       roomid,
       categoryid,
       urgency,
-      comments,
+      comments, 
+           frequencytype,
+      [dateName]:valueDateName
+
       // ...typeofreq,
     };
+    console.log(obj);
 
     let reqruter = "newticket";
+    // let reqruter = "newplan";
+    // let reqruter = routeRepeatedtask?"newplan":"newticket";
 
     let res = await PostToServer(reqruter, obj);
+    console.log(res);
+
     if (res.error === 1) {
       seterrmassege(true);
       seterrmassegetext(res.message);
@@ -131,25 +147,27 @@ topFunction()
     Goback();
   };
   const frequencyarry = [
-    { value: "week", text: lang.lang275 },
-    { value: "month", text: lang.lang276 },
-    { value: "three_month", text: lang.lang363 },
-    { value: "half_year", text: lang.lang361 },
-    { value: "year", text: lang.lang277 },
+    { value: "w", text: lang.lang275 },
+    { value: "m", text: lang.lang276 },
+    { value: "x", text: lang.lang363 },
+    { value: "z", text: lang.lang361 },
+    { value: "y", text: lang.lang277 },
   ];
 
   const [datetype, setdatetype] = useState(false);
   const [datetypepiker, setdatetypepiker] = useState(false);
   const Selectfreqtipe = (value) => {
     switch (value) {
-      case "week":
-        setdatetype(week);
-        setdatetypepiker(false);
+      case "w":
 
+        setdatetypepiker(false);
+        setdateName("frequencyamount_w")
+        setdatetype(week);
         break;
-      case "month":
+      case "m":
         setdatetype(month);
         setdatetypepiker(false);
+        setdateName("frequencyamount_m")
 
         break;
       // case "three_month":
@@ -160,9 +178,12 @@ topFunction()
       default:
         setdatetype(false);
         setdatetypepiker(true);
+        setdateName("frequencydate")  
+        
+        
         break;
-    }
-  };
+      }
+    };
 
   let Icon;
   let findicon = Arryoficons.find((ic) => {
@@ -279,14 +300,14 @@ topFunction()
               </Form.Item>
             ) : null}
 
-            {Temmembertask ? (
+            {!Temmembertask ? (
               // תדירות
-              <div className="frequency">
-                <Form.Item name="frequencytyep" label={lang?.lang269}>
-                  <Select style={{ width: 200 }} onSelect={Selectfreqtipe}>
+              <div >
+                <Form.Item name="frequencytype" >
+                  <Select onSelect={Selectfreqtipe} placeholder={lang?.lang269}>
                     {frequencyarry.map((el, index) => {
                       return (
-                        <option ley={index} value={el.value}>
+                        <option key={index} value={el.value}>
                           {el.text}
                         </option>
                       );
@@ -294,11 +315,11 @@ topFunction()
                   </Select>
                 </Form.Item>
                 {datetype ? (
-                  <Form.Item name="frequencydate" label={lang?.lang269}>
-                    <Select>
+                  <Form.Item  name={dateName}>
+                    <Select placeholder={lang?.lang269}>
                       {datetype.map((el, index) => {
                         return (
-                          <option key={index} value={el.date}>
+                          <option key={index} value={index+1}>
                             {el.date}
                           </option>
                         );
@@ -307,7 +328,7 @@ topFunction()
                   </Form.Item>
                 ) : null}
                 {datetypepiker ? (
-                  <Form.Item name="frequencydate" label={lang?.lang269}>
+                  <Form.Item name="frequencydate" >
                     <DatePicker />
                   </Form.Item>
                 ) : null}

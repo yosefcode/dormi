@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
+import { PostToServer } from "../serveses";
 
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
@@ -18,24 +19,64 @@ function Categoris() {
   const filterserch = useContext(DataContext).filterserch;
   const chanfefilter = useContext(DataContext).chanfefilter;
   const ticketlist = useContext(DataContext).ticketlist;
+  const loginstatus = useContext(DataContext).loginstatus;
 
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
   let categoryarry = masof.categorynames;
+  console.log(categoryarry);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [chusencategori, setchusencategori] = useState();
   const [firstlode, setlfirstlode] = useState();
   const [localarry, setlocalarry] = useState();
+  const [mainCategory, setMainCategory] = useState(true);
+  const [parentID, setParentID] = useState();
+  const [subCategoryID, setSubCategoryID] = useState();
+  const [taskToServer, setTaskToServer] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
-  const showModal = () => {
+
+
+  console.log(subCategoryID);
+  const addMainCategory = () => {
+    setMainCategory(true);
     setIsModalVisible(true);
+    setTaskToServer("addparent")
+  };
+  const addSecondaryCategory = () => {
+    setMainCategory(false);
+    setIsModalVisible(true);
+    setTaskToServer("add")
   };
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-    setIsModalVisible(false);
+  const onFinish = async(values) => {
+    console.log(values);
+    let task = values.task?values.task:taskToServer 
+    let userid = loginstatus.userid;
+    let categoryname =values?.categoryname;
+    let icon ="d";
+    let parentid = parentID;
+    let categoryid = subCategoryID
+    let obj = {
+      task,
+      userid,
+      categoryname,
+      icon,
+      parentid,  
+      categoryid    
+    };
+    console.log("obj:", obj);
+
+    let reqruter = "category";
+    let res = await PostToServer(reqruter, obj);
+    console.log("res:", res);
+    if (res.error === 1) {
+    } else {
+      setIsModalVisible(false);
+
+    }
   };
+
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -51,6 +92,12 @@ function Categoris() {
 
     setlocalarry(categoryarry);
   };
+  const removeMainCategory= ()=>{
+    onFinish({task:"delparent"})
+  }
+  const removeSecondaryCategory= ()=>{
+    onFinish({task:"delcat"})
+  }
 
   useEffect(() => {
     if (!firstlode) {
@@ -60,10 +107,10 @@ function Categoris() {
   }, [chingeurgency]);
   const menuofproject = (
     <Menu>
-      <Menu.Item>{lang?.lang291} </Menu.Item>
+      <Menu.Item onClick={addSecondaryCategory}>{lang?.lang291} </Menu.Item>
       <Menu.Item>{lang?.lang294}</Menu.Item>
-      <Menu.Item>{lang?.lang147}</Menu.Item>
-      <SubMenu key="sub1" title="הוספת איכון" dir="tlr">
+      <Menu.Item onClick={removeMainCategory}>{lang?.lang147}</Menu.Item>
+      <SubMenu key="sub1" title="הוספת אייקון" dir="tlr">
         {Arryoficons?.map((ic) => {
           return (
             <Menu.Item key={ic.iconid}>
@@ -92,7 +139,7 @@ function Categoris() {
       <div className="hader">
         {lang?.lang104}
         
-        <button className="btn_add_location" onClick={showModal}>{lang?.lang210}</button>
+        <button className="btn_add_location" onClick={addMainCategory}>{lang?.lang290}</button>
       </div>
       <div className="listofcards">
         {localarry
@@ -111,10 +158,9 @@ function Categoris() {
               } else {
                 icon = false;
               }
-              //
               const headerCard = (
                 <div>
-                      <img src={icon} alt= "" style={{height: "25px", marginLeft:"10px" }}/> {el.maincategoryname}
+        <img src={icon} alt= "" style={{height: "25px", marginInlineEnd:"10px" }}/> {el.maincategoryname}
                 </div>
               );
               
@@ -130,6 +176,8 @@ function Categoris() {
                         trigger={["click"]}
                         onClick={() => {
                           setchusencategori(el.maincategoryname);
+                          setParentID(el.id);
+
                         }}
                       >
                         <HiOutlineDotsHorizontal />
@@ -163,7 +211,7 @@ function Categoris() {
                                 </Menu.Item>
                               ) : null}
                               <Menu.Item>{lang?.lang243}</Menu.Item>
-                              <Menu.Item>{lang?.lang147}</Menu.Item>
+                              <Menu.Item onClick={()=>{removeSecondaryCategory({task:"delcat"})}}>{lang?.lang147}</Menu.Item>
                             </Menu>
                           );
                           return (
@@ -196,6 +244,7 @@ function Categoris() {
 id="icon_dropdown_body"
                                   overlay={menuoflocation}
                                   trigger={["click"]}
+                                  onClick={() => {setSubCategoryID(item.subcategoryid)}}
                                   // icon={
                                   //
                                   // }
@@ -213,7 +262,8 @@ id="icon_dropdown_body"
                       )}
                     </div>
                   </CardStyeld>
-                    <button className="btn_footer_card">+ הוספה</button>
+                    <button className="btn_footer_card" 
+                    onClick={()=>{addSecondaryCategory(); setParentID(el.id);}}>+ הוספה</button>
                 </div>
               );
             })
@@ -233,14 +283,14 @@ id="icon_dropdown_body"
           onFinish={onFinish}
         >
          <div className="div_modal">
-         {lang?.lang210}
-          <Form.Item name="newproject">
-          <Input placeholder={lang?.lang223} />
+         {mainCategory?lang?.lang290:"הוספת קטגוריה משנית"}
+                   <Form.Item name="categoryname">
+          <Input placeholder={mainCategory?lang?.lang290:"הוספת קטגוריה משנית"} />
           </Form.Item>
           <Form.Item>
             <Button  type="primary" htmlType="submit">
-              {lang?.lang290}
-            </Button>
+            {mainCategory?lang?.lang290:"הוספת קטגוריה משנית"}
+                        </Button>
           </Form.Item></div>
         </Form>
       </ModalStyeld>

@@ -147,7 +147,7 @@ color:#807E94;
   font-size: 1.2rem;
   color: #0f0743;
 }
-.marginRight{
+.marginInlineStartt{
   margin-inline-start:25px;
 }
 
@@ -188,7 +188,8 @@ p{
   background-color: rgba(15, 7, 67, 1);
   height: 63px;
   color: white;
-  left:24%;
+  // left:24%;
+  min-width: 420px;
   z-index:2000;
 }
 
@@ -244,7 +245,8 @@ p{
 .closecheckboox {
   position: absolute;
   bottom: 12px;
-  left:20px;
+  inset-inline-end:20px;
+
 }
 
 
@@ -385,7 +387,7 @@ font-size:1.6rem;
     line-height: 30px;
 
   }
-  .marginRight{
+  .marginInlineStartt{
     margin-inline-start:0px;
   }
 

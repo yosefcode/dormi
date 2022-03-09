@@ -1,10 +1,10 @@
 export const week = [
-  { date: "יום א" },
-  { date: "יום ב" },
-  { date: "יום ג" },
-  { date: "יום ד" },
-  { date: "יום ה" },
-  { date: "יום ו" },
+  { date: "יום א", value: "1" },
+  { date: "יום ב", value: "2" },
+  { date: "יום ג", value: "3" },
+  { date: "יום ד", value: "4" },
+  { date: "יום ה", value: "5" },
+  { date: "יום ו", value: "6" },
 ];
 export const month = [
   { date: "כל ה 1 לחודש" },

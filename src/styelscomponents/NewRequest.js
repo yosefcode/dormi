@@ -342,6 +342,22 @@ export const FormContener = styled.div`
     .ant-form {
       width: 100%;
     }
+    .ant-picker {
+      border-radius: 11px !important;
+      height: 55px !important;
+      align-items: center !important;
+      font-size: 1.7rem;
+      font-weight: 500;
+      border: 1px solid #d6e2f1;
+      box-sizing: border-box;
+      border-color: none;
+      margin: 0 0;
+      padding: 0 25px;
+      width: 100%;
+    }
+    .ant-picker-focused {
+      border-color: #40a9ff !important;
+    }
   }
   @media only screen and (max-width: 600px) {
     .goback {

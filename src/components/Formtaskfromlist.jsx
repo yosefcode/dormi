@@ -31,7 +31,6 @@ const Formtaslfromlist = ({
   const lang = defoltlang?.lang;
   const [Subcategory, setSubcategory] = useState();
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
-  console.log(data);
   const useefctasync = async () => {
     let res = categorynames.filter(
       (item) => item.maincategoryname === data.breadcrumb
@@ -64,19 +63,24 @@ const Formtaslfromlist = ({
 
   const [errmassege, seterrmassege] = useState(false);
   const [errmassegetext, seterrmassegetext] = useState();
+  console.log("Success:", data);
 
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
+  console.log(data.ticketid.toString());
+  console.log(ticketid);
   const onFinish = async (value) => {
     enterLoading(2);
-    let task = "save";
+    let task = "edit";
+      // setticketid(data.ticketid);
 
-    if (ticketid) {
-      setticketid(value.ticketid);
-    } else {
-      setticketid(null);
-    }
+    // if (ticketid) {
+    //   setticketid(value.ticketid);
+    // } else {
+    //   setticketid(null);
+    // }
 
+    let ticketid =data.ticketid.toString();
     let userid = loginstatus.userid;
     let locationid = value.locationid[1];
     let roomid = parseInt(value.roomid[1]);
@@ -105,9 +109,10 @@ const Formtaslfromlist = ({
       // ...typeofreq,
     };
 
-    console.log("Success:", obj);
     let reqruter = "newticket";
+    console.log("obj:", obj);
     let res = await PostToServer(reqruter, obj);
+    console.log("res:", res);
     if (res.error === 1) {
       seterrmassege(true);
       seterrmassegetext(res.message);
@@ -221,14 +226,14 @@ const Formtaslfromlist = ({
               initialValue={parseInt(data.urgencyadmin)}
             >
               <Select defaultValue={2}>
-                <Option key={1} value={3}>
-                  <Badge color="#22E7B7" text={lang?.lang120} />
+                <Option key={1} value={1}>
+                  <Badge color="#22E7B7" text={lang?.lang122} />
                 </Option>
                 <Option key={2} value={2}>
                   <Badge color="orange" text={lang?.lang121} />
                 </Option>
-                <Option key={3} value={1}>
-                  <Badge color="#D91D61" text={lang?.lang122} />
+                <Option key={3} value={3}>
+                  <Badge color="#D91D61" text={lang?.lang120} />
                 </Option>
               </Select>
             </Form.Item>

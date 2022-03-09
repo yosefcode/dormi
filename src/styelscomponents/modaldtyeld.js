@@ -74,9 +74,25 @@ export const ModalStyeldnewreq = styled(Modal)`
     display: flex;
     justify-content: space-between;
   }
+  .ant-picker-focused {
+    border-color: #40a9ff !important;
+  }
 
   .select_half {
     width: 48%;
+  }
+  .ant-picker {
+    border: 1px solid #d6e2f1;
+    box-sizing: border-box;
+    border-radius: 11px;
+    border-color: none;
+    margin: 0 0;
+    height: 50px;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
   }
   .ant-select-arrow {
     // display: none;
