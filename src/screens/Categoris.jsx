@@ -24,27 +24,29 @@ function Categoris() {
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
   let categoryarry = masof.categorynames;
-  console.log(categoryarry);
+  // console.log(categoryarry);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [chusencategori, setchusencategori] = useState();
   const [firstlode, setlfirstlode] = useState();
   const [localarry, setlocalarry] = useState();
-  const [mainCategory, setMainCategory] = useState(true);
+  const [taskModal, setTaskmodal] = useState();
   const [parentID, setParentID] = useState();
   const [subCategoryID, setSubCategoryID] = useState();
   const [taskToServer, setTaskToServer] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
+  const [defaultValueModal, setDefaultValueModal] = useState("");
 
 
-  console.log(subCategoryID);
+  console.log(subCategoryID,parentID,defaultValueModal);
   const addMainCategory = () => {
-    setMainCategory(true);
+    setTaskmodal(lang?.lang290);
     setIsModalVisible(true);
     setTaskToServer("addparent")
   };
   const addSecondaryCategory = () => {
-    setMainCategory(false);
+    setDefaultValueModal("")
+    setTaskmodal("הוספת קטגוריה משנית");
     setIsModalVisible(true);
     setTaskToServer("add")
   };
@@ -72,13 +74,14 @@ function Categoris() {
     console.log("res:", res);
     if (res.error === 1) {
     } else {
+      setDefaultValueModal("")
       setIsModalVisible(false);
-
-    }
+      }
   };
 
 
   const handleCancel = () => {
+    setDefaultValueModal("")
     setIsModalVisible(false);
   };
 
@@ -95,8 +98,22 @@ function Categoris() {
   const removeMainCategory= ()=>{
     onFinish({task:"delparent"})
   }
+  const editMainCategory= ()=>{
+    setDefaultValueModal(chusencategori)
+
+    setTaskToServer("editparent")
+    setIsModalVisible(true);
+    setTaskmodal("עריכת שם קטגוריה ראשית");
+
+  }
   const removeSecondaryCategory= ()=>{
     onFinish({task:"delcat"})
+  }
+  const editSecondaryCategory= ()=>{
+    setTaskToServer("editcat")
+    setIsModalVisible(true);
+    setTaskmodal("עריכת שם קטגוריה משנית");
+
   }
 
   useEffect(() => {
@@ -108,7 +125,7 @@ function Categoris() {
   const menuofproject = (
     <Menu>
       <Menu.Item onClick={addSecondaryCategory}>{lang?.lang291} </Menu.Item>
-      <Menu.Item>{lang?.lang294}</Menu.Item>
+      <Menu.Item onClick={editMainCategory}>{lang?.lang294}</Menu.Item>
       <Menu.Item onClick={removeMainCategory}>{lang?.lang147}</Menu.Item>
       <SubMenu key="sub1" title="הוספת אייקון" dir="tlr">
         {Arryoficons?.map((ic) => {
@@ -124,7 +141,6 @@ function Categoris() {
       </SubMenu>
     </Menu>
   );
-
 
   const gotolistoftask = (value) => {
     filterserch.categoris = value;
@@ -177,7 +193,6 @@ function Categoris() {
                         onClick={() => {
                           setchusencategori(el.maincategoryname);
                           setParentID(el.id);
-
                         }}
                       >
                         <HiOutlineDotsHorizontal />
@@ -210,7 +225,11 @@ function Categoris() {
                                   {lang?.lang300}
                                 </Menu.Item>
                               ) : null}
-                              <Menu.Item>{lang?.lang243}</Menu.Item>
+                              
+                              <Menu.Item onClick={()=>{
+                              // setParentID(el.id);
+                              // setDefaultValueModal(item.subname);
+                              editSecondaryCategory();}}>{lang?.lang243}</Menu.Item>
                               <Menu.Item onClick={()=>{removeSecondaryCategory({task:"delcat"})}}>{lang?.lang147}</Menu.Item>
                             </Menu>
                           );
@@ -244,7 +263,10 @@ function Categoris() {
 id="icon_dropdown_body"
                                   overlay={menuoflocation}
                                   trigger={["click"]}
-                                  onClick={() => {setSubCategoryID(item.subcategoryid)}}
+                                  onClick={() => {setSubCategoryID(item.subcategoryid);
+                                 setParentID(el.id);
+                                    setDefaultValueModal(item.subname);
+      }}
                                   // icon={
                                   //
                                   // }
@@ -274,22 +296,27 @@ id="icon_dropdown_body"
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
-      >
+        >
         <Form
+        key={defaultValueModal}
           name="basic"
           initialValues={{
-            remember: true,
+            remember: false,
           }}
           onFinish={onFinish}
         >
          <div className="div_modal">
-         {mainCategory?lang?.lang290:"הוספת קטגוריה משנית"}
-                   <Form.Item name="categoryname">
-          <Input placeholder={mainCategory?lang?.lang290:"הוספת קטגוריה משנית"} />
+         {taskModal}
+                   <Form.Item name="categoryname"             
+>
+          <Input placeholder={taskModal}   defaultValue={defaultValueModal}/>
+          {/* <input placeholder={taskModal}   defaultValue={defaultValueModal}/> */}
           </Form.Item>
           <Form.Item>
             <Button  type="primary" htmlType="submit">
-            {mainCategory?lang?.lang290:"הוספת קטגוריה משנית"}
+            {/* {taskModal} */}
+            {lang?.lang156}
+
                         </Button>
           </Form.Item></div>
         </Form>
