@@ -4,6 +4,7 @@ import SignaturePad from "react-signature-canvas";
 import DataContext from "../../DataContext";
 import { BsCloudUpload } from "react-icons/bs";
 import { PostToServer } from "../../serveses";
+import Resizer from "react-image-file-resizer";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -25,11 +26,13 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
     previewImage: "",
     previewTitle: "",
   });
+  const [urlbase64, setUrlbase64] = useState();
+
   if (Clearform) {
     form.resetFields();
   }
   const sigCanvas = useRef({});
-  const upludeimage = ({ fileList }) => setuplodeimage({ fileList });
+  // const upludeimage = ({ fileList }) => setuplodeimage({ fileList });
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -48,30 +51,26 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
     sigCanvas.current.clear();
   };
   const onFinish = async (value) => {
-    const hiddensignature = sigCanvas.current
+    const hiddenSignature = sigCanvas.current
       .getTrimmedCanvas()
       .toDataURL("image/png");
-    console.log("hiddensignature", hiddensignature);
 
     let closingPic;
 
     let userid = loginstatus.userid;
-    if (fileList) {
-      closingPic = fileList;
+    if (urlbase64) {
+      closingPic =[{name:"pic.jpeg",  type: "image/jpeg",thumbUrl :urlbase64.replace(/^data:image\/[a-z]+;base64,/, "")}];
     } else {
       closingPic = [];
     }
-    // let y = ticketguid;
-    // let x = value;
     let task = "cost";
-    // let ticketguid = "82557424-473F-44D2-8718-8151243D9B91";
     let obj = {
       task,
       userid,
       tickets: [{ ticketguid }],
       ...value,
       closingPic,
-      hiddensignature,
+      hiddenSignature,
     };
 
     console.log(obj);
@@ -88,6 +87,35 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
       previewTitle: "",
     });
   };
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    console.log(file);
+    Resizer.imageFileResizer(
+      file,
+      300,
+      300,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      // "file"
+      "base64"
+    );
+  });
+  
+  const upludeimage = async ( fileList ) => {
+    try {
+      const file = fileList.file;
+      const image = await resizeFile(file);
+      setUrlbase64(image)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
   const uploadButton = (
     <div>
       <BsCloudUpload />
@@ -104,7 +132,7 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
 
       <div className="edittask">
     {lang?.lang197}
-              <Form.Item name="closdbi" >
+              <Form.Item name="closeByUserID" >
                 <Select placeholder="איש צוות" allowClear>
                   {stafarry.map((el) => {
                     return <Option value={el}>{el}</Option>;
@@ -116,7 +144,7 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
       <div className="edittask">
                   {`${lang?.lang149} (${lang?.lang204})`}
                   <Form.Item
-                name="price"
+                name="cost"
               >
                 <Input type="bunber" inputmode="numeric" />
               </Form.Item>
@@ -124,27 +152,29 @@ export const Apruchclose = ({ Closemodal, ticketguid, Clearform }) => {
 
       <div className="edittask">
       {lang?.lang205}
-      <Form.Item name="anbsuertostudent" >
+      <Form.Item name="commentstouser" >
                 <TextArea allowClear rows={4} />
               </Form.Item>
  </div>
 
       <div className="edittask">
       {lang?.lang206}
-      <Form.Item name="insidetext" >
+      <Form.Item name="closecomments" >
                 <TextArea allowClear rows={4} />
               </Form.Item>
  </div>
 
 
       <div className="edittask">
-העלאה ?????
-<Form.Item name="uplodeinag" allowClear >
+העלאת תמונה<Form.Item name="closingPic" allowClear >
                 <Upload
                   listType="picture-card"
-                  // fileList={fileList}
+                  fileList={fileList}
                   onPreview={handlePreview}
                   onChange={upludeimage}
+                  beforeUpload={() => false} 
+                  maxCount={1}
+  
                 >
                   {uploadButton}
                 </Upload>

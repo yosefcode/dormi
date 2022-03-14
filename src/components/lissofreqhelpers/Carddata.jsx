@@ -22,7 +22,7 @@ export function Carddatabig({ el }) {
 
         <div className="marginInlineStartt" > <BsFillPersonFill style={{marginInlineEnd:"7px", fontSize:"1.2rem", }}/> 
           <span
-        style={{marginInlineStart:"5px"}}
+                  style={{marginInlineStart:"5px"}}
         className="Calltoaction"
         onClick={() => {
           window.open(`tel:${el?.phone}`);
@@ -30,7 +30,7 @@ export function Carddatabig({ el }) {
         >
           {el.phone ? el.phone : null}
         </span>
-        <span>
+        <span style={{marginInlineStart:"5px"}}>
           {el.firstname ? el.firstname : null}
           {" "}  {el.lastname ? el.lastname : null}
         </span>

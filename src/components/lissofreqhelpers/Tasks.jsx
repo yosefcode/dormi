@@ -148,7 +148,7 @@ export const ListtaskforEdit = ({ action, close }) => {
       </button>
 
       <button className="drower_button"         onClick={() => {
-          onfinish("Referraltostaff", null);
+          onfinish("forward", null);
         }}>
         <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
       </button>
@@ -171,7 +171,11 @@ export const ListtaskforEdit = ({ action, close }) => {
         <img className="img_icon" src="/images/pen.svg" alt="icon" /> {lang?.lang243}
       </button>
 
-      <button className="drower_button btn_down">
+      <button className="drower_button btn_down"      
+         onClick={() => {
+          onfinish("archive", null);
+        }}
+>
         <img className="img_icon" src="/images/trash.svg" alt="icon" /> {lang?.lang147}
       </button>
 

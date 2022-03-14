@@ -24,7 +24,7 @@ function Categoris() {
   const masof = useContext(DataContext).masof;
   const lang = defoltlang?.lang;
   let categoryarry = masof.categorynames;
-  // console.log(categoryarry);
+  console.log(categoryarry);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [chusencategori, setchusencategori] = useState();
@@ -56,7 +56,7 @@ function Categoris() {
     let task = values.task?values.task:taskToServer 
     let userid = loginstatus.userid;
     let categoryname =values?.categoryname;
-    let icon ="d";
+    let icon =1234;
     let parentid = parentID;
     let categoryid = subCategoryID
     let obj = {

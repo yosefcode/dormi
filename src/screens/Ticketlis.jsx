@@ -69,6 +69,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const [locallist, setlocallist] = useState();
   const [firstlode, setlfirstlode] = useState();
   const [filtercunter, setfiltercunter] = useState(0);
+  const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
+  const [Chusenrikit, setChusenrikit] = useState();
+
   // עדכון דאטא
   const [updaterefresh, setupdaterefresh] = useState(false);
   const Updatedata = async () => {
@@ -142,11 +145,13 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     }
     let requst = ticketlist.findIndex((Item) => Item.ticketguid === value);
     ticketlist[requst].statusname = newstatusname;
-
+    
     setchingeurgency(!chingeurgency);
     setlocallist(ticketlist);
   }
-
+  
+  let arrytecetsalltask = [{ ticketguid: Chusenrikit }];
+  let obj;
   const [nolist, setnolist] = useState(false);
 
   const Checkstatuslist = (value) => {
@@ -157,9 +162,18 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
   const [Sendmassege, setSendmassege] = useState(false);
   const [problemid, setproblemid] = useState();
-  const onsendmassege = (value, id) => {
+
+  const onsendmassege = async(value, id) => {
+    obj = {
+      task: "message",
+      userid: userid,
+      tickets: problemid,
+      message: value?.comments
+    };
+    await PostToServer(ticketruter, obj);
+    Updatedata();
+
     setSendmassege(false);
-    console.log(value, problemid);
   };
 
   const [Referraltostaff, setReferraltostaff] = useState(false);
@@ -178,14 +192,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const Drawerforalltask = () => {
     setvisibletaskDrawer(false);
   };
-  const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
-  const [Chusenrikit, setChusenrikit] = useState();
   const Taskeditfunc = async (type, value) => {
     setChusenrikit(null);
     Drawerforalltask();
-    console.log(Chusenrikit, type, value);
-    let arrytecetsalltask = [{ ticketguid: Chusenrikit }];
-    let obj;
 
     switch (type) {
       case "close":
@@ -204,6 +213,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           userid: userid,
           tickets: arrytecetsalltask,
         };
+
         await PostToServer(ticketruter, obj);
         Updatedata();
         break;
@@ -223,15 +233,30 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           tickets: arrytecetsalltask,
           forwardtouser: value,
         };
+        await PostToServer(ticketruter, obj);
+        Updatedata();
+
+        break;
+      case "archive":
+        obj = {
+          task: "archive",
+          userid: userid,
+          tickets: arrytecetsalltask,
+        };
+        await PostToServer(ticketruter, obj);
+        Updatedata();
+
         break;
       case "Referraltostaff":
         setReferraltostaff(true);
         break;
       case "message":
         setSendmassege(true);
+        setproblemid(arrytecetsalltask)
         break;
       case "cost":
         setopenaptuchclosemodal(true);
+        // setproblemid(arrytecetsalltask)
 
         break;
       case "edit":
@@ -770,7 +795,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                     onClick={() => {
                       setSendmassege(true);
 
-                      setproblemid(el.ticketguid);
+                      setproblemid([{ticketguid:el.ticketguid}]);
                     }}
                   >
                     {lang?.lang263}
@@ -956,6 +981,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                         onClick={() => {
                           setvisibletaskDrawer(!visibletaskDrawer);
                           setChusenrikit(el.ticketguid);
+                          setproblemid(el.ticketguid);
+
                         }}
                       >
                         <BsThreeDotsVertical />
