@@ -126,6 +126,80 @@ export const ModalStyeld = styled(Modal)`
     justify-content: center;
     border-radius: 15px;
   }
+  .add_icon {
+    width: 300px;
+    max-height: 200px;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    margin-bottom: 20px;
+  }
+  .add_icon::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .add_icon::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 2px grey;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.36);
+  }
+
+  .add_icon::-webkit-scrollbar-thumb {
+    background: #d6e2f1;
+    border-radius: 10px;
+  }
+
+  .icon_modal {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #d6e2f1;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px 5px;
+    cursor: pointer;
+  }
+  .icon_modal_active {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ffd17e;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px 5px;
+    cursor: pointer;
+  }
+  .icon_chek {
+    border: 1px solid #d6e2f1;
+    border-radius: 11px !important;
+    width: 300px;
+    max-width: 100%;
+    height: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .btn_del_icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    boredr: 0;
+    background: none;
+    color: #0f0743;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+  }
 
   .ant-modal-header {
     border-radius: 19px;

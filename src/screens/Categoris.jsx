@@ -36,6 +36,7 @@ function Categoris() {
   const [taskToServer, setTaskToServer] = useState();
   const [chingeurgency, setchingeurgency] = useState(false);
   const [defaultValueModal, setDefaultValueModal] = useState("");
+  const [iconID, setIconID] = useState();
 
 
   console.log(subCategoryID,parentID,defaultValueModal);
@@ -56,7 +57,7 @@ function Categoris() {
     let task = values.task?values.task:taskToServer 
     let userid = loginstatus.userid;
     let categoryname =values?.categoryname;
-    let icon =1234;
+    let icon =iconID;
     let parentid = parentID;
     let categoryid = subCategoryID
     let obj = {
@@ -74,15 +75,14 @@ function Categoris() {
     console.log("res:", res);
     if (res.error === 1) {
     } else {
-      setDefaultValueModal("")
-      setIsModalVisible(false);
-      }
+      handleCancel()      }
   };
 
 
   const handleCancel = () => {
     setDefaultValueModal("")
     setIsModalVisible(false);
+    setIconID("")
   };
 
   const chuseicon = (value) => {
@@ -127,17 +127,28 @@ function Categoris() {
       <Menu.Item onClick={addSecondaryCategory}>{lang?.lang291} </Menu.Item>
       <Menu.Item onClick={editMainCategory}>{lang?.lang294}</Menu.Item>
       <Menu.Item onClick={removeMainCategory}>{lang?.lang147}</Menu.Item>
-      <SubMenu key="sub1" title="הוספת אייקון" dir="tlr">
+      <SubMenu key="sub1" title="הוספת / שינוי אייקון" dir="tlr">
+<div  style={{width:"300px",
+maxHeight:"200px",
+overflowY:"scroll",
+display: "flex", 
+justifyContent:"space-evenly",
+flexDirection: "row",
+flexWrap: "wrap"}}>
         {Arryoficons?.map((ic) => {
           return (
-            <Menu.Item key={ic.iconid}>
+            <Menu.Item key={ic.iconid} >
               <img src={ic.icon} alt={"icon"} 
+              className="icon_img"
                 onClick={() => {
-                  chuseicon(ic.iconid);
-                }} style={{width:"20px", height:"20px"}}/>
+                  chuseicon(ic.iconid);}}
+                   style={{width:"40px", height:"40px", 
+                   border: "1px solid #ccc", borderRadius: "5%",
+                   padding: "5px", marginBottom: "5px", marginTop: "5px"}}
+                   />
             </Menu.Item>
           );
-        })}
+        })}</div>
       </SubMenu>
     </Menu>
   );
@@ -310,8 +321,23 @@ id="icon_dropdown_body"
                    <Form.Item name="categoryname"             
 >
           <Input placeholder={taskModal}   defaultValue={defaultValueModal}/>
-          {/* <input placeholder={taskModal}   defaultValue={defaultValueModal}/> */}
           </Form.Item>
+     {iconID ? <div className="icon_chek">
+       <span onClick={()=>{setIconID()}} className="btn_del_icon">X</span> 
+       <img src={iconID.icon} alt={"icon"} style={{height:"80%"}}/> </div>:
+     taskToServer === "addparent" || taskToServer === "editparent"?  <div  className="add_icon">
+        {Arryoficons?.map((ic) => {
+          return (
+            <div key={ic.iconid} >
+              <img src={ic.icon} alt={"icon"} 
+                onClick={() => {
+                  setIconID({id:ic.iconid,icon:ic.icon})}}
+                  className={iconID === ic.iconid? "icon_modal_active" : "icon_modal"}
+                   />
+            </div>
+          );
+        })}</div>: null}
+
           <Form.Item>
             <Button  type="primary" htmlType="submit">
             {/* {taskModal} */}

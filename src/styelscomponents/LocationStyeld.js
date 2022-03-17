@@ -87,6 +87,11 @@ cursor: pointer;
 border:none;
 
   }
+  .icon_img {
+    width: 30px;
+    height: 30px;
+  }
+
   @media only screen and (max-width: 600px) {
     .hader {
 
@@ -98,6 +103,11 @@ border:none;
     width: 90%;
     margin: 0 auto;
 }}
+.add_icon {
+  background: blue !important;
+  width: 400px !important;
+}
+
 
 `;
 
