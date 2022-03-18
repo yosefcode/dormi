@@ -46,7 +46,6 @@ import icon32 from "./assets/icon32.png";
 import icon33 from "./assets/icon33.png";
 import icon34 from "./assets/icon34.png";
 import icon35 from "./assets/icon35.png";
-import icon36 from "./assets/icon36.svg";
 import icon37 from "./assets/icon37.png";
 import icon38 from "./assets/icon38.png";
 import icon39 from "./assets/icon39.png";
@@ -66,25 +65,25 @@ import icon52 from "./assets/icon52.png";
 import icon53 from "./assets/icon53.png";
 
 export const Arryoficons = [
-  { icon: icon1, iconid: 696, iconname: "pe-7s-paint" },
-  { icon: icon2, iconid: 699, iconname: "pe-7s-plug" },
-  { icon: icon3, iconid: 705, iconname: "pe-7s-light" },
-  { icon: icon4, iconid: 707, iconname: "fa fa-shower" },
-  { icon: icon5, iconid: 711, iconname: "" },
-  { icon: icon6, iconid: 702, iconname: "" },
-  { icon: icon7, iconid: 5255, iconname: "" },
-  { icon: icon8, iconid: 6044, iconname: "" },
-  { icon: icon9, iconid: 6429, iconname: "" },
-  { icon: icon10, iconid: 6646, iconname: "" },
-  { icon: icon11, iconid: 11581, iconname: "" },
-  { icon: icon12, iconid: 13394, iconname: "" },
-  { icon: icon13, iconid: 13490, iconname: "" },
-  { icon: icon14, iconid: 14, iconname: "" },
-  { icon: icon15, iconid: 15, iconname: "" },
-  { icon: icon16, iconid: 16, iconname: "" },
-  { icon: icon17, iconid: 17, iconname: "" },
-  { icon: icon18, iconid: 18, iconname: "" },
-  { icon: icon19, iconid: 19, iconname: "" },
+  { icon: icon1, iconid: 696 },
+  { icon: icon2, iconid: 699 },
+  { icon: icon3, iconid: 705 },
+  { icon: icon4, iconid: 707 },
+  { icon: icon5, iconid: 711 },
+  { icon: icon6, iconid: 702 },
+  { icon: icon7, iconid: 5255 },
+  { icon: icon8, iconid: 6044 },
+  { icon: icon9, iconid: 6429 },
+  { icon: icon10, iconid: 6646 },
+  { icon: icon11, iconid: 11581 },
+  { icon: icon12, iconid: 13394 },
+  { icon: icon13, iconid: 13490 },
+  { icon: icon14, iconid: 14 },
+  { icon: icon15, iconid: 15 },
+  { icon: icon16, iconid: 16 },
+  { icon: icon17, iconid: 17 },
+  { icon: icon18, iconid: 18 },
+  { icon: icon19, iconid: 19 },
   { icon: icon20, iconid: 20 },
   { icon: icon21, iconid: 21 },
   { icon: icon22, iconid: 22 },
@@ -101,7 +100,6 @@ export const Arryoficons = [
   { icon: icon33, iconid: 33 },
   { icon: icon34, iconid: 34 },
   { icon: icon35, iconid: 35 },
-  { icon: icon36, iconid: 36 },
   { icon: icon37, iconid: 37 },
   { icon: icon38, iconid: 38 },
   { icon: icon39, iconid: 39 },

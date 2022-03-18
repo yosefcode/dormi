@@ -159,8 +159,11 @@ export const ModalStyeld = styled(Modal)`
     border: 1px solid #d6e2f1;
     border-radius: 5px;
     padding: 5px;
-    margin: 0px 5px;
+    margin: 10px 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .icon_modal_active {
     width: 50px;
@@ -170,6 +173,11 @@ export const ModalStyeld = styled(Modal)`
     padding: 5px;
     margin: 0px 5px;
     cursor: pointer;
+    margin: 10px 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .icon_chek {
     border: 1px solid #d6e2f1;

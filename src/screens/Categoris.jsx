@@ -39,7 +39,6 @@ function Categoris() {
   const [iconID, setIconID] = useState();
 
 
-  console.log(subCategoryID,parentID,defaultValueModal);
   const addMainCategory = () => {
     setTaskmodal(lang?.lang290);
     setIsModalVisible(true);
@@ -127,7 +126,7 @@ function Categoris() {
       <Menu.Item onClick={addSecondaryCategory}>{lang?.lang291} </Menu.Item>
       <Menu.Item onClick={editMainCategory}>{lang?.lang294}</Menu.Item>
       <Menu.Item onClick={removeMainCategory}>{lang?.lang147}</Menu.Item>
-      <SubMenu key="sub1" title="הוספת / שינוי אייקון" dir="tlr">
+      <SubMenu key="sub1" title="הוספת / שינוי אייקון" dir="tlr" style={{marginInlineStart:"10px"}}>
 <div  style={{width:"300px",
 maxHeight:"200px",
 overflowY:"scroll",
@@ -138,14 +137,17 @@ flexWrap: "wrap"}}>
         {Arryoficons?.map((ic) => {
           return (
             <Menu.Item key={ic.iconid} >
+              <div                    style={{width:"40px", height:"40px", 
+                   border: "1px solid #ccc", borderRadius: "5px",
+                   marginBottom: "5px", marginTop: "5px",
+                   display: "flex", justifyContent: "center", alignItems: "center"}}>
               <img src={ic.icon} alt={"icon"} 
               className="icon_img"
-                onClick={() => {
-                  chuseicon(ic.iconid);}}
-                   style={{width:"40px", height:"40px", 
-                   border: "1px solid #ccc", borderRadius: "5%",
-                   padding: "5px", marginBottom: "5px", marginTop: "5px"}}
-                   />
+              onClick={() => {
+                chuseicon(ic.iconid);}}
+                style={{ height:"80%", maxWidth:"80%", maxHeight:"80%"}}
+                />
+                </div>
             </Menu.Item>
           );
         })}</div>
@@ -328,11 +330,13 @@ id="icon_dropdown_body"
      taskToServer === "addparent" || taskToServer === "editparent"?  <div  className="add_icon">
         {Arryoficons?.map((ic) => {
           return (
-            <div key={ic.iconid} >
-              <img src={ic.icon} alt={"icon"} 
+            <div key={ic.iconid}                  
+             className={iconID === ic.iconid? "icon_modal_active" : "icon_modal"}
+            >
+              <img src={ic.icon} alt={"icon"} style={{height:"80%"}}
                 onClick={() => {
                   setIconID({id:ic.iconid,icon:ic.icon})}}
-                  className={iconID === ic.iconid? "icon_modal_active" : "icon_modal"}
+                  // className={iconID === ic.iconid? "icon_modal_active" : "icon_modal"}
                    />
             </div>
           );
