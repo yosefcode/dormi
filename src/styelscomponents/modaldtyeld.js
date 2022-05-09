@@ -220,6 +220,11 @@ export const ModalStyeld = styled(Modal)`
     border: none;
     box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
   }
+
+  .err_border {
+    border-color: red !important;
+  }
+
   .div_modal {
     width: 100%;
     height: 100%;

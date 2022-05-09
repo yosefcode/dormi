@@ -37,6 +37,8 @@ function Categoris() {
   const [chingeurgency, setchingeurgency] = useState(false);
   const [defaultValueModal, setDefaultValueModal] = useState("");
   const [iconID, setIconID] = useState();
+  const [errmsg, seterrmsg] = useState(false);
+
 
 
   const addMainCategory = () => {
@@ -52,11 +54,12 @@ function Categoris() {
   };
 
   const onFinish = async(values) => {
-    console.log(values);
+    console.log("values", values);
     let task = values.task?values.task:taskToServer 
     let userid = loginstatus.userid;
-    let categoryname =values?.categoryname;
-    let icon =iconID;
+    let categoryname =chusencategori ? chusencategori : values?.categoryname;
+    // let icon =iconID;
+    let icon =values.iconID?values.iconID:iconID?.id;
     let parentid = parentID;
     let categoryid = subCategoryID
     let obj = {
@@ -70,12 +73,14 @@ function Categoris() {
     console.log("obj:", obj);
 
     let reqruter = "category";
+    if ( !categoryname) { seterrmsg(true)}else{ 
     let res = await PostToServer(reqruter, obj);
     console.log("res:", res);
-    if (res.error === 1) {
+    if (res.error === 1 || !categoryname) {
+      seterrmsg(true)
     } else {
       handleCancel()      }
-  };
+  };}
 
 
   const handleCancel = () => {
@@ -114,7 +119,6 @@ function Categoris() {
     setTaskmodal("עריכת שם קטגוריה משנית");
 
   }
-
   useEffect(() => {
     if (!firstlode) {
       setlocalarry(categoryarry);
@@ -144,7 +148,7 @@ flexWrap: "wrap"}}>
               <img src={ic.icon} alt={"icon"} 
               className="icon_img"
               onClick={() => {
-                chuseicon(ic.iconid);}}
+                onFinish({task:"editparent", iconID:ic.iconid})}}
                 style={{ height:"80%", maxWidth:"80%", maxHeight:"80%"}}
                 />
                 </div>
@@ -173,9 +177,10 @@ flexWrap: "wrap"}}>
       <div className="listofcards">
         {localarry
           ? localarry.map((el) => {
+
               let finicon = Arryoficons.find((ic) => {
-                // if (el.icon === ic.iconname) {
-                  if (el.id === ic.iconid) {
+                if (el.icon === ic.iconid) {
+                  // if (el.id === ic.iconid) {
 
                   return ic;
                 }
@@ -320,9 +325,11 @@ id="icon_dropdown_body"
         >
          <div className="div_modal">
          {taskModal}
-                   <Form.Item name="categoryname"             
->
-          <Input placeholder={taskModal}   defaultValue={defaultValueModal}/>
+                   <Form.Item name="categoryname" onChange={(e)=>{
+                     if(e.target.value.length>0) seterrmsg(false);
+                  setchusencategori("")}}>
+
+          <Input placeholder={taskModal}   defaultValue={defaultValueModal} className={errmsg && "err_border"}/>
           </Form.Item>
      {iconID ? <div className="icon_chek">
        <span onClick={()=>{setIconID()}} className="btn_del_icon">X</span> 
@@ -335,6 +342,7 @@ id="icon_dropdown_body"
             >
               <img src={ic.icon} alt={"icon"} style={{height:"80%"}}
                 onClick={() => {
+                  // setIconID(ic.iconid)}}
                   setIconID({id:ic.iconid,icon:ic.icon})}}
                   // className={iconID === ic.iconid? "icon_modal_active" : "icon_modal"}
                    />

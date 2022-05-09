@@ -61,8 +61,11 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   document.body.style.backgroundColor = "rgba(250, 252, 255, 1)";
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketlist;
+  // // const ticketlist = useContext(DataContext).ticketplanlist;
+  // const ticketplanlist  = useContext(DataContext).ticketplanlist;
   const defoltlang = useContext(DataContext).lang;
   const changeticketlist = useContext(DataContext).changeticketlist;
+  // const changeticketplanlist = useContext(DataContext).changeticketplanlist;
   const lang = defoltlang?.lang;
   let userlevelid = loginstatus?.levelid;
   let userid = loginstatus?.userid;
@@ -71,6 +74,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const [filtercunter, setfiltercunter] = useState(0);
   const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
   const [Chusenrikit, setChusenrikit] = useState();
+// console.log(ticketplanlist);
 
   // עדכון דאטא
   const [updaterefresh, setupdaterefresh] = useState(false);
@@ -897,7 +901,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                     }
                   }}
                 >
-                  <div className="div_card" onClick={() =>console.log(el)}>
+                  <div className="div_card" 
+                  // onClick={() =>console.log(el)}
+                  >
                       <span id="displyid_desktop">{el.ticketid}</span>
                       <div className="inquir">
                       <div id="description">

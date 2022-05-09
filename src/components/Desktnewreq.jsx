@@ -121,7 +121,7 @@ console.log(obj);
       setuplodeimagescreen(true);
 
       // seterrmassege(true);
-      setticketid(res.ticketid);
+      setticketid(res.ticketguid);
       seterrmassegetext(res.message);
 
       // setTimeout(() => {
@@ -275,7 +275,6 @@ console.log(obj);
           <img src={icon} alt= "" style={{height: "30px", marginInlineStart:"10px" }}/> 
     </div>
   );
-
 
                         return (
                           <Option

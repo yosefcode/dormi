@@ -28,19 +28,44 @@ const Formtaslfromlist = ({
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   let categorynames = masof?.categorynames;
+  let locationarry = masof?.locations;
+
   const lang = defoltlang?.lang;
   const [Subcategory, setSubcategory] = useState();
+  const [categoryID, setcategoryid] = useState();
+  const [locationID, setlocationid] = useState();
+  const [roomID, setroomid] = useState();
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
+
+console.log(categoryID);
+console.log(data);
   const useefctasync = async () => {
-    let res = categorynames.filter(
+    let Subcategory = categorynames.filter(
       (item) => item.maincategoryname === data.breadcrumb
     );
 
-    setSubcategory(res[0]);
-  };
+    let categoryid = Subcategory[0]?.subcategory.filter(
+      (item) => item.subname === data.categoryname
+      );
+
+      let locationid = locationarry.filter(
+        (item) => item.locationname === data.locationName
+        );
+        
+        let roomid = locationid[0]?.rooms.filter(
+          (item) => item.roomname === data.roomName
+          );
+    
+          
+          setSubcategory(Subcategory[0]);
+          setcategoryid(categoryid[0].subcategoryid);
+          setlocationid(locationid[0].locationid);
+          setroomid(roomid[0].roomid);
+        };
 
   useEffect(() => {
     useefctasync();
+
   }, []);
 
   const topFunction = () => {
@@ -48,27 +73,15 @@ const Formtaslfromlist = ({
   };
 
 
-  const [selectromm, setselectromm] = useState(false);
-  let locationarry = masof?.locations;
 
   let [rommarry, setrommarry] = useState();
-  const onChange = (value) => {
-    let listofrooms = locationarry.filter((el) => {
-      return el.locationid === value[1];
-    });
-
-    setrommarry(listofrooms[0].rooms);
-    setselectromm(true);
-  };
 
   const [errmassege, seterrmassege] = useState(false);
   const [errmassegetext, seterrmassegetext] = useState();
-  console.log("Success:", data);
+
 
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
-  console.log(data.ticketid.toString());
-  console.log(ticketid);
   const onFinish = async (value) => {
     enterLoading(2);
     let task = "edit";
@@ -80,11 +93,11 @@ const Formtaslfromlist = ({
     //   setticketid(null);
     // }
 
-    let ticketid =data.ticketid.toString();
+    let ticketguid =data.ticketguid;
     let userid = loginstatus.userid;
-    let locationid = value.locationid[1];
-    let roomid = parseInt(value.roomid[1]);
-    let categoryid = value.categoryid[1];
+    let locationid = locationID;
+    let roomid = roomID;
+    let categoryid = categoryID;
     let urgency;
     if (!value.urgency) {
       urgency = 2;
@@ -99,7 +112,7 @@ const Formtaslfromlist = ({
 
     let obj = {
       task,
-      ticketid,
+      ticketguid,
       userid,
       locationid,
       roomid,
@@ -120,7 +133,7 @@ const Formtaslfromlist = ({
     } else {
       setloadings([0]);
       seterrmassege(true);
-      setticketid(res.ticketid);
+      setticketid(res.ticketguid);
       seterrmassegetext(res.message);
 
       setTimeout(() => {
@@ -163,7 +176,8 @@ const Formtaslfromlist = ({
               <FiArrowRight />
             </div>
             <Form.Item name="categoryid" initialValue={data.categoryname}>
-              <Select showSearch placeholder={lang?.lang110}>
+              <Select showSearch placeholder={lang?.lang110}                 
+              onChange={(value)=>{setcategoryid(value[1])}}>
                 {Subcategory
                   ? Subcategory.subcategory.map((el) => {
                       return (
@@ -180,8 +194,13 @@ const Formtaslfromlist = ({
               <Select
                 showSearch
                 placeholder={lang?.lang340}
-                onChange={onChange}
-              >
+                onChange={(value)=>{setlocationid(value[1])
+                  let listofrooms = locationarry.filter((el) => {
+                    return el.locationid === value[1];
+                  });
+              
+                  setrommarry(listofrooms[0].rooms);
+              }}>
                 {locationarry
                   ? locationarry.map((el) => {
                       return (
@@ -195,7 +214,9 @@ const Formtaslfromlist = ({
             </Form.Item>
 
             <Form.Item name="roomid" initialValue={data.roomName}>
-              <Select showSearch placeholder={lang?.lang341}>
+              <Select showSearch placeholder={lang?.lang341}               
+               onChange={(value)=>{setroomid(value[1])}}              >
+
                 {rommarry
                   ? rommarry.map((el) => {
                       return (

@@ -17,6 +17,7 @@ import { BiPhoneCall } from "react-icons/bi";
 import { BsTrash, BsThreeDotsVertical, BsLayers } from "react-icons/bs";
 import { Buttonmuneu } from "../styelscomponents/Buttonmuneu";
 import { Style_users } from "../styelscomponents/Styelsuser";
+import AddUser from "./Adduser";
 
 import {
   QuickcloDrawerstyle,
@@ -55,6 +56,10 @@ function Users() {
   const [rerender, setrerender] = useState(false);
   const [useridfortask, setuseridfortask] = useState();
   const [visibletaskDrawer, setvisibletaskDrawer] = useState(false);
+  const [addUser, setAddUser] = useState(false);
+  const [taskAddUser, setTaskAddUser] = useState("");
+  const [user, setUser] = useState();
+
 
   let history = useHistory();
   const filterserch = useContext(DataContext).filterserch;
@@ -135,6 +140,7 @@ function Users() {
       }
 
       let resorginizprogram = OrderProgram(program, userlist);
+      console.log(resorginizprogram);
       setlistofprogram(resorginizprogram);
       setAlluserarry(userlist);
       setlocallist(userlist);
@@ -265,6 +271,10 @@ function Users() {
   const [filterpresd, setfilterpresd] = useState(false);
 
   return (
+           <div>   {addUser? 
+              <AddUser taskAddUser={taskAddUser} 
+              setAddUser={setAddUser}
+              user={user}/>:
     <Contener Screnphunesize={screnphunesize}>
       <div className="Mangeroption_users">
       {lang?.lang102}
@@ -309,9 +319,14 @@ function Users() {
         {/* <button className="MangerButton">
           <Link to="/SendMassege">שליחת הזמנה למשתמשים</Link>
         </button> */}
-        <Buttonmuneu className="MangerButton shwobutton">
-          <Link to="/Adduser" style={{color: ' #0f0743'}}>{lang?.lang244}</Link>
+        <Buttonmuneu className="MangerButton shwobutton" 
+        onClick={()=>{
+          setAddUser(true);
+          setTaskAddUser("add")}}>
+          {/* <Link to="/Adduser" style={{color: ' #0f0743'}}>{lang?.lang244}</Link> */}
+          {lang?.lang244}
         </Buttonmuneu>
+
         {/* <button className="MangerButton shwobutton" onClick={AllOpenststus}>
           <p>
           {opentikitatatus ? "הצג כל פרטי המשתמש" : "סגור כל פרטי המשתמש"}{" "}
@@ -430,15 +445,17 @@ function Users() {
                 <Menu>
                   {/* עריכה */}
                   <Menu.Item
-                    onClick={() => {
-                      setuseridfortask(user.userguid);
-                    }}
-                  >
+                          onClick={()=>{
+                            setAddUser(true);
+                            setUser(user);
+                              setuseridfortask(user.userguid);
+                            setTaskAddUser("edit")}}>
                     <img src="/images/pen.svg" alt="icon" /> {lang?.lang243}
                   </Menu.Item>
                   {/* שלח הודעה  */}
                   <Menu.Item>
                     <img src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
+
                   </Menu.Item>
                   {/* מחיקה */}
                   <Menu.Item
@@ -590,7 +607,7 @@ function Users() {
           />
         ) : null}
       </div>
-    </Contener>
+    </Contener>}</div>
   );
 }
 

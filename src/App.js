@@ -26,6 +26,7 @@ function App() {
   const [loginstatus, setloginstatus] = useState();
   const [masof, setmasof] = useState();
   const [ticketlist, setticketlist] = useState();
+  const [ticketplanlist, setticketplanlist] = useState();
   const [dir, setsir] = useState("tlr");
   const [userlist, srtuserlist] = useState();
   const [filterserch, setfilterserch] = useState({
@@ -33,6 +34,8 @@ function App() {
     location: false,
     user: false,
   });
+
+  // console.log(ticketlist);
   const providerOptions = {
     filterserch,
     chanfefilter: (value) => {
@@ -58,6 +61,10 @@ function App() {
     changeticketlist: (value) => {
       setticketlist(value);
     },
+    ticketplanlist,
+    changeticketplanlist: (value) => {
+      setticketplanlist(value);
+    },
     dir,
     changedir: (value) => {
       setsir(value);
@@ -67,6 +74,7 @@ function App() {
       srtuserlist(value);
     },
   };
+
   const cookies = new Cookies();
 
   let getemailcookies = cookies.get("email");
@@ -117,6 +125,9 @@ function App() {
         let ressult = await PostToServer("ticketlist", obj);
 
         setticketlist(ressult);
+        let ressultticketplanlist = await PostToServer("ticketplanlist", obj);
+
+        setticketplanlist(ressultticketplanlist);
 
         setloginstatus(res.changloginstatus);
         DirectionOfLang(res.changlang.langid);
@@ -145,6 +156,11 @@ function App() {
     });
 
     setticketlist(ressult);
+    let ressultticketplanlist = await PostToServer("ticketplanlist", {
+      userid: loginstatus?.userid,
+    });
+
+    setticketplanlist(ressultticketplanlist);
   };
   const [rebderfromlog, setrebderfromlog] = useState(false);
   const firstlogd = () => {
