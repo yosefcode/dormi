@@ -63,6 +63,7 @@ export const Problemcontener = styled.div`
     .icondisply {
       width: 84%;
       margin: 80px auto;
+      padding-bottom: 60px;
     }
   }
 `;

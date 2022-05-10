@@ -17,4 +17,8 @@ export const Buttonmuneu = styled.button`
   cursor: pointer;
   border: 1px solid #d6e2f1;
   border-color: ${(props) => (props.presd ? "inherit" : "1px solid #0F0743")};
+
+  .MangerButton_plan {
+    width: 42% !important;
+  }
 `;

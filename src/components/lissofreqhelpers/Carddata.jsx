@@ -46,7 +46,7 @@ export function Carddatabig({ el }) {
         <div className="marginInlineStartt date_mobile"> 
         {el.dateopened ? el.dateopened : null}
         <span 
-         id="displyid_mobile">{el.ticketid}
+         id="displyid_mobile">{el.ticketid?el.ticketid:el.ticketplanid}
       </span>
          </div>
 

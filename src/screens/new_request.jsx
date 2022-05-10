@@ -49,19 +49,21 @@ const Nwerequest = ({ Temmembertask }) => {
 
                   {categorynames
                     ? categorynames.map((el, index) => {
-                        let finicon = Arryoficons.find((ic) => {
-                          // if (el.icon === ic.iconname) {
-                          if (el.id === ic.iconid) {
-                            return ic;
-                          }
-                        });
-                        let icon;
+                        let finicon = Arryoficons.find((ic) => 
+                        el.icon === ic.iconid)
 
-                        if (finicon?.icon) {
-                          icon = finicon.icon;
-                        } else {
-                          icon = false;
-                        }
+                          // if (el.icon === ic.iconname) {
+                        //   if (el.id === ic.iconid) {
+                        //     return ic;
+                        //   }
+                        // });
+                        // let icon;
+
+                        // if (finicon?.icon) {
+                        //   icon = finicon.icon;
+                        // } else {
+                        //   icon = false;
+                        // }
 
                         return (
                           <div
@@ -79,9 +81,10 @@ const Nwerequest = ({ Temmembertask }) => {
                                 style={{ width: "50px", height: "50px" }}
                               /> */}
                               {/* {icon ? <finicon.icon /> : <PoweroffOutlined />} */}
-                              {icon ? <img src={icon} alt= ""                         
+                              {finicon ? <img src={finicon?.icon} alt= ""                         
        style={{ height:"20vw" }}/> 
-     : <PoweroffOutlined        style={{ width: "25px", marginInlineEnd:"10px" }}/> }
+     : "" }
+     {/* : <PoweroffOutlined        style={{ width: "25px", marginInlineEnd:"10px" }}/> } */}
 
                             </div>
                             <div className="uniqueproblem">

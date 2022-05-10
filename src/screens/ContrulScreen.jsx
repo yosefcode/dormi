@@ -18,6 +18,7 @@ import Adduser from "../screens/Adduser";
 import Statistics from "../screens/Statistics";
 import DataContext from "../DataContext";
 import Ticketlis from "../screens/Ticketlis";
+import TicketlisPlan from "../screens/Ticketlis_plan";
 import { FaSpinner } from "react-icons/fa";
 import Forms from "./Forms";
 import SendsForm from "./SendsForm";
@@ -29,6 +30,8 @@ import { useHistory } from "react-router-dom";
 const ContrulScreen = ({ dir, rebderfromlog }) => {
   const defullang = useContext(DataContext).lang;
   const ticketlist = useContext(DataContext).ticketlist;
+  const ticketplanlist = useContext(DataContext).ticketplanlist;
+
   const masof = useContext(DataContext).masof;
   const userlist = useContext(DataContext).userlist;
   const loginstatus = useContext(DataContext).loginstatus;
@@ -115,8 +118,8 @@ const ContrulScreen = ({ dir, rebderfromlog }) => {
             </Route>
 
             <Route path="/Repeatedtask">
-              {ticketlist && defullang ? (
-                <Ticketlis Repeatedtask={true} />
+              {ticketplanlist && defullang ? (
+                <TicketlisPlan Repeatedtask={true} />
               ) : (
                 <div>
                   <img

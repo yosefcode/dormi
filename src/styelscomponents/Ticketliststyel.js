@@ -30,6 +30,12 @@ export const Contener = styled.div`
     justify-content: space-between;
     width: 60%;
   }
+  .div_MangerButton_plan{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 47%;
+  }
 
   .MangerButton_exel {
     border: 1px solid rgb(214, 226, 241);
@@ -131,11 +137,12 @@ font-weight: 400;
   font-weight: 500;
   font-size: 1.2rem;
    color: #0f0743;
-   margin-top:-3px;
+   margin-top:0px;
    display:flex;
    align-items: center;
     justify-content: space-between;
     padding: 0 10px
+    
 }
 .action_inquir{
   height: 20px;
@@ -262,7 +269,7 @@ p{
     position: relative;
     font-weight: 700;
   }
-  .div_MangerButton{
+  .div_MangerButton {
     margin-top: 20px;
 
     display: flex;
@@ -270,8 +277,37 @@ p{
     justify-content: space-between;
     width: 100%;
   }
+   .div_MangerButton_plan{
+    margin-top: 20px;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .task_todo{
+    height: 30px;
+    background: #FFD17E;
+    font-weight: 500;
+    font-size: 1.2rem;
+     color: #0f0743;
+     margin-top:0px;
+     display:flex;
+     align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      line-height: 13px;
+  
+  }
+  .valueBadge {
+    height: 30px;}
+  
+  
 
   .MangerButton {
+    width: 41% !important;
+  }
+  .MangerButton_plan {
     width: 41%;
   }
   .DropdownButton {
@@ -811,7 +847,7 @@ export const Drawerstyle = styled(Drawer)`
 export const StyeldSelect = styled(Select)`
   width: 97px;
   height: 24px;
-  margin: -4% 0px 0 0;
+  // margin: -4% 0px 0 0;
 
   .ant-badge-status-text {
     font-family: "Heebo";

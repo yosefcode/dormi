@@ -89,6 +89,9 @@ function Categoris() {
     setIconID("")
   };
 
+  let finicon = Arryoficons?.find((ic) => iconID?.id === ic.iconid)
+                console.log(finicon);
+ 
   const chuseicon = (value) => {
     let requst = categoryarry.findIndex(
       (Item) => Item.maincategoryname === chusencategori
@@ -178,23 +181,18 @@ flexWrap: "wrap"}}>
         {localarry
           ? localarry.map((el) => {
 
-              let finicon = Arryoficons.find((ic) => {
-                if (el.icon === ic.iconid) {
-                  // if (el.id === ic.iconid) {
+              let finicon = Arryoficons.find((ic) => 
+                el.icon === ic.iconid)
+              // let icon;
 
-                  return ic;
-                }
-              });
-              let icon;
-
-              if (finicon?.icon) {
-                icon = finicon.icon;
-              } else {
-                icon = false;
-              }
+              // if (finicon?.icon) {
+              //   icon = finicon.icon;
+              // } else {
+              //   icon = false;
+              // }
               const headerCard = (
                 <div>
-        <img src={icon} alt= "" style={{height: "25px", marginInlineEnd:"10px" }}/> {el.maincategoryname}
+        <img src={finicon?.icon} alt= "" style={{height: "25px", marginInlineEnd:"10px" }}/> {el.maincategoryname}
                 </div>
               );
               
@@ -211,6 +209,8 @@ flexWrap: "wrap"}}>
                         onClick={() => {
                           setchusencategori(el.maincategoryname);
                           setParentID(el.id);
+                          setIconID({id:el.icon})
+
                         }}
                       >
                         <HiOutlineDotsHorizontal />
@@ -333,7 +333,9 @@ id="icon_dropdown_body"
           </Form.Item>
      {iconID ? <div className="icon_chek">
        <span onClick={()=>{setIconID()}} className="btn_del_icon">X</span> 
-       <img src={iconID.icon} alt={"icon"} style={{height:"80%"}}/> </div>:
+       <img src={finicon?.icon} alt={"icon"} style={{height:"80%"}}/>
+       
+        </div>:
      taskToServer === "addparent" || taskToServer === "editparent"?  <div  className="add_icon">
         {Arryoficons?.map((ic) => {
           return (

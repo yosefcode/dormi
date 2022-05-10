@@ -81,6 +81,16 @@ export const ModalStyeldnewreq = styled(Modal)`
   .select_half {
     width: 48%;
   }
+  .select_half_2 {
+    width: 42%;
+  }
+  .select_half_div {
+    width: 48%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 2rem;
+  }
   .ant-picker {
     border: 1px solid #d6e2f1;
     box-sizing: border-box;

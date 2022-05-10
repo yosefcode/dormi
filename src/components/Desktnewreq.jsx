@@ -6,7 +6,7 @@ import { Form, Input, Button, Select, DatePicker, Badge } from "antd";
 import { FormContenerdesktop } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 
-import { week, month } from "./Arrydaits";
+import { week, month, numMonth, day } from "./Arrydaits";
 import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import Uplodetaskimage from "./uplodetaskimage";
@@ -41,10 +41,12 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
   const [errmassege, seterrmassege] = useState(false);
   const [errmassegetext, seterrmassegetext] = useState();
   const [dateName, setdateName] = useState();
+  const [tickettypePick, settickettypePick] = useState();
 
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
   const onFinish = async (value) => {
+    console.log(value);
     // enterLoading(2);
     let task = "save";
 
@@ -84,7 +86,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
     }
 
     let valueDateName=value?.frequencyamount_m?value.frequencyamount_m
-    :value?.frequencyamount_w?value.frequencyamount_w:value.frequencydate
+    :value?.frequencyamount_w?value.frequencyamount_w: value.day+"/"+value.numMonth;
     
 
 
@@ -104,6 +106,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
 console.log(obj);
 
     let reqruter = routeRepeatedtask?"newplan":"newticket";
+    console.log(reqruter);
 
     let res = await PostToServer(reqruter, obj);
     console.log(res);
@@ -111,23 +114,31 @@ console.log(obj);
       seterrmassege(true);
       seterrmassegetext(res.message);
       setloadings([0]);
-    } else {
-      let ruteruserid = "ticketlist";
+
+    } else if  (res.error === "0") {
+      let ruteruserid = routeRepeatedtask? "ticketplanlist" : "ticketlist";
 
       let ticketlis = await PostToServer(ruteruserid, { userid: userid });
-
       changeticketlist(ticketlis);
       setloadings([0]);
       setuplodeimagescreen(true);
 
-      // seterrmassege(true);
+      routeRepeatedtask?
+      setticketid(res.ticketid):
       setticketid(res.ticketguid);
-      seterrmassegetext(res.message);
 
+      routeRepeatedtask?
+      settickettypePick("plan"):
+      settickettypePick("ticket");
+
+      seterrmassegetext(res.message);
       // setTimeout(() => {
       // setuplodeimagescreen(true);
       // seterrmassege(false);
       // }, 2000);
+    } else {
+      seterrmassegetext("אירעה שגיאה נסה שוב");
+      seterrmassege(true);
     }
   };
 
@@ -251,28 +262,31 @@ console.log(obj);
                   onChange={chusencategory}
                 >
                   {/* <Option value={false}>{lang?.lang110}</Option> */}
+
                   {categorynames
                     ? categorynames.map((el) => {
-                        let finicon = Arryoficons.find((ic) => {
+                        let finicon = Arryoficons.find((ic) => 
+                        el.icon === ic.iconid)
+
                           // if (el.icon === ic.iconname) {
-                            if (el.id === ic.iconid) {
+                        //     if (el.id === ic.iconid) {
 
-                            return ic;
-                          }
-                        });
-                        let icon;
+                        //     return ic;
+                        //   }
+                        // });
+                        // let icon;
 
-                        if (finicon?.icon) {
-                          icon = finicon.icon;
-                        } else {
-                          icon = false;
-                        }
+                        // if (finicon?.icon) {
+                        //   icon = finicon.icon;
+                        // } else {
+                        //   icon = false;
+                        // }
 
                         
   const maincategoryname = (
     <div >
  {el.maincategoryname}
-          <img src={icon} alt= "" style={{height: "30px", marginInlineStart:"10px" }}/> 
+          <img src={finicon?.icon} alt= "" style={{height: "25px", marginInlineStart:"10px" }}/> 
     </div>
   );
 
@@ -286,9 +300,10 @@ console.log(obj);
                             ]}
                           >
                             {el.maincategoryname}{" "}
-                            {icon ? <img src={icon} alt= ""                         
-       style={{ height: "30px", margin:"5px 10px" }}/> 
-     : <PoweroffOutlined        style={{ width: "25px", marginInlineEnd:"10px" }}/> }
+                            {finicon?.icon ? <img src={finicon?.icon} alt= ""                         
+       style={{ height: "25px", margin:"5px 10px" }}/> 
+     :"" }
+     {/* : <PoweroffOutlined        style={{ width: "25px", marginInlineEnd:"10px" }}/> } */}
                           </Option>
                         );
                       })
@@ -439,11 +454,33 @@ console.log(obj);
                     </Form.Item>
                   ) : null}
                   {datetypepiker ? (
-                    <Form.Item name="frequencydate"   className="select_half"                                    
-                    // rules={[{ required: true, message: lang?.lang269 }]}
-                    >
-                      <DatePicker  onChange={onChangeDatePicker}/>
-                    </Form.Item>
+                    <div className="select_half_div">
+                    <Form.Item name="numMonth"   className="select_half_2">
+                                            <Select >
+                        {numMonth.map((el, index) => {
+                          return (
+                            <option key={index} value={el.date}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                        </Form.Item>
+/
+
+                        <Form.Item name="day"   className="select_half_2">                                    
+                                            <Select >
+                        {day.map((el, index) => {
+                          return (
+                            <option key={index} value={el.date}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+
+                      {/* <DatePicker  onChange={onChangeDatePicker}/> */}
+                    </Form.Item></div>
                   ) : null}
                 </div>
               ) : null}
@@ -476,6 +513,7 @@ console.log(obj);
               ticketid={ticketid}
               userid={loginstatus.userid}
               setvisual={setvisual}
+              tickettypePick={tickettypePick}
               setuplodeimagescreen={() => {
                 setuplodeimagescreen(false);
                 closecancel();

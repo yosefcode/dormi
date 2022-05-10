@@ -5,9 +5,14 @@ import Resizer from "react-image-file-resizer";
 import { AiOutlineCamera } from "react-icons/ai";
 import { Modal, Upload, Button } from "antd";
 import { FormContener, Buttonsenimage } from "../styelscomponents/NewRequest";
+import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 
 import { PostToServer } from "../serveses";
 import { FiLogOut } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
+
+
+
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -17,8 +22,10 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktopage,topFunction,setvisual }) => {
+const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktopage,topFunction,setvisual,tickettypePick }) => {
   const defoltlang = useContext(DataContext).lang;
+  let history = useHistory();
+  const routeRepeatedtask = history.location.pathname === "/Repeatedtask"
 
   const lang = defoltlang?.lang;
   // seng imge
@@ -33,6 +40,9 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
   const [sendbutton, setsendbutton] = useState(false);
   const [updateImage, setUpdateImage] = useState(false);
   const [urlbase64, setUrlbase64] = useState();
+  const [errmassege, seterrmassege] = useState(false);
+  const [errmassegetext, seterrmassegetext] = useState();
+
   useEffect(() => {
     if (uplodeimage?.fileList?.length >= 1||urlbase64) {
       setsendbutton(true);
@@ -79,26 +89,42 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
   const sendimage = async () => {
     enterLoading(2);
     let task = "picture";
-    // let img =fileList
+    // let tickettype = routeRepeatedtask ? "plan" : "ticket"; 
     let img = [{name:"pic.jpeg",  type: "image/jpeg",thumbUrl :urlbase64.replace(/^data:image\/[a-z]+;base64,/, "")}]
     let reqruter = "ticketpicture";
     let obj = {
       task,
       userid,
       img,
-            ticketguid:ticketid,
-
+      ticketguid:ticketid,
+      tickettype:tickettypePick
     };
-    console.log(      obj );
+    console.log(obj);
+    console.log(tickettypePick);
     let res = await PostToServer(reqruter, obj);
     console.log(      res );
-    setUrlbase64("")
-    setuplodeimage("");
-    setButtonsecses(true);
-    setloadings([0]);
-    topPage()
-    // setuplodeimagescreen();
+
+    if (res.error === "1") {
+      seterrmassegetext("אירעה שגיאה נסה שוב");
+      seterrmassege(true);
+      setloadings([0]);
+    } else if  (res.success === "1") {
+      setUrlbase64("")
+      setuplodeimage("");
+      setButtonsecses(true);
+      setloadings([0]);
+      topPage()
+      setTimeout(() => {
+        close_modal()      }, 3000);
+
+
+    } else {
+      seterrmassegetext("אירעה שגיאה נסה שוב");
+      seterrmassege(true);
+      setloadings([0]);
+    }
   };
+
 
   const resizeFile = (file) =>
   new Promise((resolve) => {
@@ -131,6 +157,8 @@ const upludeimage = async ( fileList ) => {
       <FormContener sendbutton={sendbutton} >
         <div className="textbloon">
 <div className="close_addimg" onClick={() =>{    topPage();
+      setUrlbase64("")
+      setuplodeimage("");
 
  !updateImage || (updateImage&&Buttonsecses) ?        
  close_modal()
@@ -180,7 +208,8 @@ const upludeimage = async ( fileList ) => {
             {/* {sendbutton || Buttonsecses ? ( */}
             {(updateImage && sendbutton) || (updateImage&&Buttonsecses)? (
               <Buttonsenimage Buttonsecses={Buttonsecses}>
-                <Button className="uploadimage" onClick={sendimage} loading={loadings[2]}>
+                <Button className="uploadimage" onClick={sendimage} loading={loadings[2]} 
+                disabled={Buttonsecses ? true :false}>
                   {!Buttonsecses ? lang?.lang265 : "התמונה התווספה בהצלחה"}
 
                 </Button>
@@ -191,6 +220,17 @@ const upludeimage = async ( fileList ) => {
           <div className="tnx2" style={{ color: "#6B6B6B" }}>
             {!updateImage  ? lang?.lang132 : updateImage && Buttonsecses ?"הזדמנות טובה לומר שוב תודה":null}
           </div>
+
+          <ModalStyeld
+          visible={errmassege}
+          onCancel={() => {
+            seterrmassege(false);
+          }}
+          footer={false}
+        >
+          {errmassegetext}
+        </ModalStyeld>
+
           <Modal
             visible={previewVisible}
             title={previewTitle}

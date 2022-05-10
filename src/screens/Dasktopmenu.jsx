@@ -20,6 +20,8 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
   const changloginstatus = useContext(DataContext).changloginstatus;
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketlist;
+  const ticketplanlist = useContext(DataContext).ticketplanlist;
+
 
   const lang = defoltlang?.lang;
 
@@ -31,6 +33,13 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
   } else {
     chors = { chors: 0 };
   }
+  let chorsplan;
+  if (ticketplanlist?.length) {
+    chorsplan = { chors: ticketplanlist?.length };
+  } else {
+    chorsplan = { chors: 0 };
+  }
+
   const exit = () => {
     const cookies = new Cookies();
     cookies.remove("aut");
@@ -120,7 +129,10 @@ height: "18px",
               {/*  "מטלות מתוזמנות" */}
               {userlevelid === 10 || userlevelid === 5 || userlevelid === 13 ? (
                 <p onClick={closeMenue}>
-                  <Link className="ListOfreqmenue" to="/Repeatedtask">{lang?.lang285} </Link>
+                  <Link className="ListOfreqmenue" to="/Repeatedtask">{lang?.lang285}
+                  <div className="count_inquiries">{chorsplan.chors}</div>
+                  </Link>
+
                 </p>
               ) : null}
 

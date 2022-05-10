@@ -24,6 +24,7 @@ const HaderMenu = ({ LoginScreen, dir }) => {
   const changloginstatus = useContext(DataContext).changloginstatus;
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketlist;
+  const ticketplanlist = useContext(DataContext).ticketplanlist;
 
   const lang = defoltlang?.lang;
 
@@ -35,6 +36,14 @@ const HaderMenu = ({ LoginScreen, dir }) => {
   } else {
     chors = { chors: 0 };
   }
+
+  let chorsplan;
+  if (ticketplanlist?.length) {
+    chorsplan = { chors: ticketplanlist?.length };
+  } else {
+    chorsplan = { chors: 0 };
+  }
+
   const exit = () => {
     const cookies = new Cookies();
     cookies.remove("aut");
@@ -168,9 +177,25 @@ const HaderMenu = ({ LoginScreen, dir }) => {
                 {userlevelid === 10 ||
                 userlevelid === 5 ||
                 userlevelid === 13 ? (
-                  <div onClick={closeMenue}>
-                    <Link to="/Repeatedtask">{lang?.lang285} </Link>
+                    <Link to="/Repeatedtask">
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} onClick={closeMenue}> 
+                   <div> 
+                       {lang?.lang285} 
                   </div>
+                  <div
+                      style={{
+                        width: 40,
+                        textAlign: 'center',
+                        borderRadius:20,
+                        backgroundColor: "#EBBE74",
+                        color: "black",
+                        fontSize: "1.6rem",
+                        height:"25px",
+                        lineHeight:"2.6rem"
+                      }}>
+                      {chorsplan.chors}
+                    </div> </div>
+                      </Link>
                 ) : null}
                                 <hr style={{borderTop: "1px solid #2C2A51", margin:" 24px 0"}}/>
 

@@ -6,7 +6,7 @@ import { Form, Input, Button, Select, DatePicker, Badge } from "antd";
 import { FormContener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 
-import { week, month } from "./Arrydaits";
+import { week, month, numMonth, day } from "./Arrydaits";
 import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
 import Uplodetaskimage from "./uplodetaskimage";
@@ -28,6 +28,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
 
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
+  const [tickettypePick, settickettypePick] = useState();
 
   let [rommarry, setrommarry] = useState();
   const onChange = (value) => {
@@ -45,6 +46,7 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
 
   //ticketid = ticketguid
   const [ticketid, setticketid] = useState();
+  console.log("ticketid", ticketid);
   const onFinish = async (value) => {
     // enterLoading(2);
     let task = "save";
@@ -85,7 +87,8 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
     }
 
     let valueDateName=value?.frequencyamount_m?value.frequencyamount_m
-    :value?.frequencyamount_w?value.frequencyamount_w:value.frequencydate
+    :value?.frequencyamount_w?value.frequencyamount_w: value.day+"/"+value.numMonth;
+
 
     let obj = {
       task,
@@ -101,20 +104,19 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
 
       // ...typeofreq,
     };
+    
+    let reqruter = frequencytype?"newplan":"newticket";
     console.log(obj);
-
-    let reqruter = "newticket";
-    // let reqruter = "newplan";
-    // let reqruter = routeRepeatedtask?"newplan":"newticket";
+    console.log(reqruter);
 
     let res = await PostToServer(reqruter, obj);
     console.log(res);
 
-    if (res.error === 1) {
+    if (res.error === "1") {
       seterrmassege(true);
       seterrmassegetext(res.message);
       setloadings([0]);
-    } else {
+    } else if  (res.error === "0") {
       let ruteruserid = "ticketlist";
 
       let ticketlis = await PostToServer(ruteruserid, { userid: userid });
@@ -123,13 +125,26 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
       setuplodeimagescreen(true);
 
       // seterrmassege(true);
-      setticketid(res.ticketid);
+      res.ticketid?
+      setticketid(res.ticketid):
+      setticketid(res.ticketguid);
+
+      frequencytype?
+      settickettypePick("plan"):
+      settickettypePick("ticket");
+
+
       seterrmassegetext(res.message);
 topFunction()
       // setTimeout(() => {
       // setuplodeimagescreen(true);
       // seterrmassege(false);
       // }, 2000);
+    } else {
+      seterrmassegetext("אירעה שגיאה נסה שוב");
+      seterrmassege(true);
+
+
     }
   };
 
@@ -185,14 +200,17 @@ topFunction()
       }
     };
 
-  let Icon;
-  let findicon = Arryoficons.find((ic) => {
-    return Typeofreq.id === ic.iconid;
-    // return Typeofreq.icon === ic.iconname;
-  });
-  if (findicon) {
-    Icon = findicon.icon;
-  }
+    let finicon = Arryoficons.find((ic) => 
+    Typeofreq.icon === ic.iconid)
+
+  // let Icon;
+  // let findicon = Arryoficons.find((ic) => {
+  //   return Typeofreq.id === ic.iconid;
+  //   // return Typeofreq.icon === ic.iconname;
+  // });
+  // if (findicon) {
+  //   Icon = findicon.icon;
+  // }
 
   return (
     <div>
@@ -214,8 +232,8 @@ topFunction()
           >
             <div className="theproblemis">
               <p>הבעיה היא {Typeofreq.maincategoryname}</p>
-              {Icon ? (
-                <img src={Icon} alt= ""  className="iconproblem" />
+              {finicon ? (
+                <img src={finicon?.icon} alt= ""  className="iconproblem" />
               ) : (
                 <PoweroffOutlined className="iconproblem" />
               )}
@@ -327,12 +345,38 @@ topFunction()
                     </Select>
                   </Form.Item>
                 ) : null}
-                {datetypepiker ? (
-                  <Form.Item name="frequencydate" >
-                    <DatePicker />
-                  </Form.Item>
-                ) : null}
-              </div>
+
+
+{datetypepiker ? (
+                    <div className="select_half_div">
+                    <Form.Item name="numMonth"   className="select_half_2">
+                                            <Select >
+                        {numMonth.map((el, index) => {
+                          return (
+                            <option key={index} value={el.date}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                        </Form.Item>
+/
+
+                        <Form.Item name="day"   className="select_half_2">                                    
+                                            <Select >
+                        {day.map((el, index) => {
+                          return (
+                            <option key={index} value={el.date}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+
+                      {/* <DatePicker  onChange={onChangeDatePicker}/> */}
+                    </Form.Item></div>
+                  ) : null}
+                </div>
             ) : null}
             <Form.Item>
               <Button type="primary" htmlType="submit" loading={loadings[2]}>
@@ -350,6 +394,7 @@ topFunction()
               ticketid={ticketid}
               userid={loginstatus.userid}
               Goeinfbacktopage={Goeinfbacktopage}
+              tickettypePick={tickettypePick}
               setuplodeimagescreen={() => {
                 setuplodeimagescreen(false);
               }}

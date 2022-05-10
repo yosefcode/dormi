@@ -59,17 +59,16 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const chanfefilter = useContext(DataContext).chanfefilter;
   let history = useHistory();
 
-  const routeRepeatedtask = history.location.pathname === "/Repeatedtask"
 
   // רוטר טיפול במשימות
   const ticketruter = "ticket";
   document.body.style.backgroundColor = "rgba(250, 252, 255, 1)";
   const loginstatus = useContext(DataContext).loginstatus;
-  const ticketlist = useContext(DataContext).ticketlist;
+  const ticketlist = useContext(DataContext).ticketplanlist;
   // const ticketlist = routeRepeatedtask ? useContext_ticketplanlist : useContext_ticketlist
   // const ticketplanlist  = useContext(DataContext).ticketplanlist;
   const defoltlang = useContext(DataContext).lang;
-  const changeticketlist = useContext(DataContext).changeticketlist;
+  const changeticketlist = useContext(DataContext).changeticketplanlist;
   // const changeticketplanlist = useContext(DataContext).changeticketplanlist;
   const lang = defoltlang?.lang;
   let userlevelid = loginstatus?.levelid;
@@ -124,14 +123,14 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   // עדכון שינוי סטטוס דחיפות  פנייה
   const findChangeurgency = async (value) => {
     let obj = {
-      task: "urgencyadmin",
+      task: "urgency",
       userid: userid,
       tickets: [
         {
           ticketguid: value[1],
         },
       ],
-      urgencyadmin: parseInt(value[2]),
+      urgency: parseInt(value[2]),
     };
 
     await PostToServer(ticketruter, obj);
@@ -296,7 +295,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
 
     console.log(AllTikets);
-    let ruteruserid = "ticketlist";
+    let ruteruserid = "ticketplanlist";
 
     let ticketlis = await PostToServer(ruteruserid, { userid: userid });
 
@@ -692,14 +691,17 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const [presd, setpresd] = useState(false);
   const [visabletaskmodal, setvisabletaskmodal] = useState(false);
 
+  const month = ["", "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"];
+  const days = ["", "ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי"];
+
   return (
     <div >
       {edittask ? (
         <Contener Screnphunesize={screnphunesize} >
           <div className="Mangeroption">
-          {Repeatedtask ? lang?.lang285 : lang?.lang196} 
-           <div className="div_MangerButton">
+          {lang?.lang285}           <div className="div_MangerButton_plan">
             <Buttonmuneu
+            style={{width: "32%"}}
             className="MangerButton"
               presd={Drawervisible}
               onClick={() => {
@@ -729,6 +731,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
             <Buttonmuneu           
               className="MangerButton"
+              style={{width: "32%"}}
 
               presd={presd}
               onClick={() => {
@@ -738,10 +741,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             >
               <img src="/images/multipulchuis.svg" alt="" style={{marginInlineEnd:"7px", marginTop:"-4px"}}/> בחירה
             </Buttonmuneu>
-            <Buttonmuneu className="MangerButton shwobutton">
-              הצג פניות פתוחות
-            </Buttonmuneu>
-            <div className="shwobutton" style={{    width: "24%"}}>
+            <div className="shwobutton" style={{    width: "32%"}}>
             <Exelexport data={AllTikets} />
             </div>
 
@@ -793,41 +793,12 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             </Selectfilter>
           ) : null}
           {/* כמה פניות יש */}
-          <p id="number_inquiries">מציג {AllTikets?.length} פניות : </p>
+          <p id="number_inquiries">מציג {AllTikets?.length} מטלות מתוזמנות : </p>
           {AllTikets?.length > 0 ? (
             AllTikets.map((el, i) => {
               // משימות עריכה
               const setingmenu = (
                 <Menu>
-                  {/* שלח הודעה */}
-                  <Menu.Item
-                    onClick={() => {
-                      setSendmassege(true);
-
-                      setproblemid([{ticketguid:el.ticketguid}]);
-                    }}
-                  >
-                    {lang?.lang263}
-                  </Menu.Item>
-                  {/* הפנה לאיש צוות */}
-                  <Menu.Item
-                    onClick={() => {
-                      setReferraltostaff(true);
-                      setproblemid(el.ticketguid);
-                    }}
-                  >
-                    {lang?.lang240}
-                  </Menu.Item>
-
-                  {/* סגירה מתקדמת */}
-                  <Menu.Item
-                    onClick={() => {
-                      setopenaptuchclosemodal(true);
-                      setproblemid(el.ticketguid);
-                    }}
-                  >
-                    {lang?.lang208}
-                  </Menu.Item>
                   {/* עריכה */}
                   <Menu.Item
                     onClick={() => {
@@ -869,7 +840,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
               /// הגדרת סטטוס בקשה ודחיפות לכל כרטיס
               let resulturgency = Switchurgency(
-                el.urgencyadmin,
+                el.urgency,
                 lang?.lang122,
                 lang?.lang121,
                 lang?.lang120
@@ -909,7 +880,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   <div className="div_card" 
                   onClick={() =>console.log(el)}
                   >
-                      <span id="displyid_desktop">{el.ticketid}</span>
+                      <span id="displyid_desktop">{el.ticketplanid}</span>
                       <div className="inquir">
                       <div id="description">
                         {el.breadcrumb} - {el.categoryname}<br/>
@@ -917,23 +888,36 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       </div>
 
                       <div className="Smallcard">
-                          <div style={{display: "flex"}}>
 
-          {!el.ticketPlanID || el.ticketPlanID === "0" || el.ticketPlanID === ""? null : (
-                          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                          <div className="task_todo">
+                            {/* <svg
+                              width="12"
+                              height="10"
+                              viewBox="0 0 12 10"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              style={{marginInlineEnd:8}}
+                            >
+                              <path
+                                d="M2.25854 0.25L1.09188 1.41667H0.166748V2.58333H1.57495L3.08341 1.07487L2.25854 0.25ZM4.25008 1.41667V2.58333H11.8334V1.41667H4.25008ZM2.25854 3.75L1.09188 4.91667H0.166748V6.08333H1.57495L3.08341 4.57487L2.25854 3.75ZM4.25008 4.91667V6.08333H11.8334V4.91667H4.25008ZM1.33341 8.125C1.10135 8.125 0.878791 8.21719 0.714696 8.38128C0.550602 8.54538 0.458415 8.76794 0.458415 9C0.458415 9.23206 0.550602 9.45462 0.714696 9.61872C0.878791 9.78281 1.10135 9.875 1.33341 9.875C1.56548 9.875 1.78804 9.78281 1.95213 9.61872C2.11623 9.45462 2.20841 9.23206 2.20841 9C2.20841 8.76794 2.11623 8.54538 1.95213 8.38128C1.78804 8.21719 1.56548 8.125 1.33341 8.125ZM4.25008 8.41667V9.58333H11.8334V8.41667H4.25008Z"
+                                fill="#0F0743"
+                              />
+                            </svg> */}
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                             width="22" height="22"
                             viewBox="0 0 30 30"
-                            style={{marginInlineEnd:18}}
+                            style={{marginInlineEnd:8}}
                             >
-                            <path d="M 15 3 C 8.3844276 3 3 8.3844276 3 15 C 3 21.615572 8.3844276 27 15 27 C 21.615572 27 27 21.615572 27 15 C 27 8.3844276 21.615572 3 15 3 z M 14.001953 5.0488281 A 1 1 0 0 0 15 6 A 1 1 0 0 0 15.998047 5.0488281 C 20.73255 5.5157016 24.484298 9.2674502 24.951172 14.001953 A 1 1 0 0 0 24 15 A 1 1 0 0 0 24.951172 15.998047 C 24.484298 20.73255 20.73255 24.484298 15.998047 24.951172 A 1 1 0 0 0 15 24 A 1 1 0 0 0 14.001953 24.951172 C 9.2674502 24.484298 5.5157016 20.73255 5.0488281 15.998047 A 1 1 0 0 0 6 15 A 1 1 0 0 0 5.0488281 14.001953 C 5.5157016 9.2674502 9.2674502 5.5157016 14.001953 5.0488281 z M 15 7 C 10.582 7 7 10.582 7 15 C 7 19.418 10.582 23 15 23 C 19.418 23 23 19.418 23 15 C 23 10.582 19.418 7 15 7 z M 15 9 C 15.553 9 16 9.448 16 10 L 16 14.585938 L 18.707031 17.292969 C 19.098031 17.683969 19.098031 18.316031 18.707031 18.707031 C 18.512031 18.902031 18.256 19 18 19 C 17.744 19 17.487969 18.902031 17.292969 18.707031 L 14 15.414062 L 14 10 C 14 9.448 14.447 9 15 9 z"></path></svg>
-          )}
-                            <Badge
-                              id="status"
-                              color={status}
-                              text={statustext}
-                              style={{width:"100px" }}
-                            />
-                            <span className="pointerblock">
+                                  <path d="M 15 3 C 8.3844276 3 3 8.3844276 3 15 C 3 21.615572 8.3844276 27 15 27 C 21.615572 27 27 21.615572 27 15 C 27 8.3844276 21.615572 3 15 3 z M 14.001953 5.0488281 A 1 1 0 0 0 15 6 A 1 1 0 0 0 15.998047 5.0488281 C 20.73255 5.5157016 24.484298 9.2674502 24.951172 14.001953 A 1 1 0 0 0 24 15 A 1 1 0 0 0 24.951172 15.998047 C 24.484298 20.73255 20.73255 24.484298 15.998047 24.951172 A 1 1 0 0 0 15 24 A 1 1 0 0 0 14.001953 24.951172 C 9.2674502 24.484298 5.5157016 20.73255 5.0488281 15.998047 A 1 1 0 0 0 6 15 A 1 1 0 0 0 5.0488281 14.001953 C 5.5157016 9.2674502 9.2674502 5.5157016 14.001953 5.0488281 z M 15 7 C 10.582 7 7 10.582 7 15 C 7 19.418 10.582 23 15 23 C 19.418 23 23 19.418 23 15 C 23 10.582 19.418 7 15 7 z M 15 9 C 15.553 9 16 9.448 16 10 L 16 14.585938 L 18.707031 17.292969 C 19.098031 17.683969 19.098031 18.316031 18.707031 18.707031 C 18.512031 18.902031 18.256 19 18 19 C 17.744 19 17.487969 18.902031 17.292969 18.707031 L 14 15.414062 L 14 10 C 14 9.448 14.447 9 15 9 z"></path></svg>
+                           תזמון:{" "} 
+                            {el.frequencytype === "w" ? `שבועי - בכל יום ${days[el.frequencyamount]}`
+                            : el.frequencytype ==="m" ? `חודשי - כל ${el.frequencyamount} לחודש` 
+                            : el.frequencytype ==="x" ? `כל שלושה חודשים - החל מ-${el.frequencydateday} ב${month[el.frequencydatemonth]}`
+                            : el.frequencytype ==="z" ? `חצי שנתי - החל מ-${el.frequencydateday} ב${month[el.frequencydatemonth]}`
+                            : el.frequencytype ==="y" ? `שנתי - החל מ-${el.frequencydateday} ב${month[el.frequencydatemonth]}` :""}
+                             {/* - {el.frequencyamount} */}
+                          </div>
+                          <span className="pointerblock">
                               <Urgensy
                                 permission={Permission}
                                 el={el}
@@ -942,7 +926,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                                 findChangeurgency={findChangeurgency}
                               />
                             </span>
-                          </div>
+
                                             <Dropdown
                         overlay={setingmenu}
                         id="desktopactionbutton"
