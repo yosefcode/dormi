@@ -343,6 +343,18 @@ export const FormContener = styled.div`
     .ant-form {
       width: 100%;
     }
+
+    .select_half_div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 3rem;
+    }
+    .select_half_2 {
+      width: 44%;
+    }
+
     .ant-picker {
       border-radius: 11px !important;
       height: 55px !important;
