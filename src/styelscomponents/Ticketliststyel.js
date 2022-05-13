@@ -891,6 +891,7 @@ export const StyeldSelect = styled(Select)`
 
 export const Quickclomodaltyle = styled(Modal)`
   font-family: "Heebo";
+
   .userQuickclosebuuton {
     display: flex;
     flex-direction: column;

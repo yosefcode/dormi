@@ -13,6 +13,9 @@ const { Option } = Select;
 
 export function Carddatabig({ el }) {
   const [imegvesebule, setimegvesebule] = useState(false);
+  const [imgSrc, setImgSrc] = useState(`${imegeruter}/${el.openimage}`);
+
+  const handleError = () => setImgSrc(`https://b.dormi.co.il/uploads/${el.openimage}`)
   return (
     <div className="details">
       <div>
@@ -59,7 +62,8 @@ export function Carddatabig({ el }) {
         footer={false}
       >
         <img
-          src={`${imegeruter}/${el.openimage}`}
+          // src={`${imegeruter}/${el.openimage}`}
+          src={imgSrc} onError={handleError}
           alt="no img"
           style={{ width: "100%", height: "100%" }}
         />

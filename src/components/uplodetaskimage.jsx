@@ -22,7 +22,9 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktopage,topFunction,setvisual,tickettypePick }) => {
+const Uplodetaskimage = ({ userid, ticketid,
+   setuplodeimagescreen, Goeinfbacktopage,topFunction,setvisual,
+    tickettypePick }) => {
   const defoltlang = useContext(DataContext).lang;
   let history = useHistory();
   const routeRepeatedtask = history.location.pathname === "/Repeatedtask"
@@ -48,10 +50,9 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
       setsendbutton(true);
     } else {
       setsendbutton(false);
-    }
-  }, [uplodeimage, urlbase64]);
+    };
+  }, [ uplodeimage, urlbase64]);
 
-  // const [aftersend, setaftersend] = useState(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -63,7 +64,6 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
     );
   };
   
-  // const upludeimage = ({ fileList }) =>setuplodeimage({fileList});
   const  {fileList} = uplodeimage;
   const [loadings, setloadings] = useState([]);
   const enterLoading = (index) => {
@@ -123,7 +123,8 @@ const Uplodetaskimage = ({ userid, ticketid, setuplodeimagescreen, Goeinfbacktop
       seterrmassege(true);
       setloadings([0]);
     }
-  };
+  };    
+
 
 
   const resizeFile = (file) =>
@@ -152,7 +153,7 @@ const upludeimage = async ( fileList ) => {
   }
 };
 
-  return (
+return (
 
       <FormContener sendbutton={sendbutton} >
         <div className="textbloon">
@@ -175,7 +176,7 @@ const upludeimage = async ( fileList ) => {
           <div className="tnx1" >{lang?.lang131}</div>
           <div className="tnx2">נעדכן אותך בהמשך טיפול</div>
 
-          {!updateImage&&   <button className="uploadimage" onClick={() =>{setUpdateImage(true); topPage()}}>
+          {!updateImage  &&   <button className="uploadimage" onClick={() =>{setUpdateImage(true); topPage()}}>
                     <span>
                       <AiOutlineCamera className="camraicon" />
                     </span>
@@ -193,6 +194,8 @@ const upludeimage = async ( fileList ) => {
                 beforeUpload={() => false} 
                 maxCount={1}
               >
+                 <div>
+        </div>
                 {!Buttonsecses ? (
                   <button className="uploadimage add_image">
                     <span>

@@ -273,7 +273,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
         });
         debugger;
         setdataforedit(findtiket[0]);
-        setedittask(false);
+        setedittask(true);
         break;
       default:
         break;
@@ -682,10 +682,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
       </Menu.Item>
     </Menu>
   );
-  const [edittask, setedittask] = useState(true);
+  const [edittask, setedittask] = useState(false);
   const [dataforedit, setdataforedit] = useState();
   const Goback = () => {
-    setedittask(true);
+    setedittask(false);
   };
   const [claerapruchform, setclaerapruchform] = useState(false);
   const [filterpresd, setfilterpresd] = useState(false);
@@ -694,7 +694,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
   return (
     <div >
-      {edittask ? (
         <Contener Screnphunesize={screnphunesize} >
           <div className="Mangeroption">
           {Repeatedtask ? lang?.lang285 : lang?.lang196} 
@@ -831,7 +830,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   {/* עריכה */}
                   <Menu.Item
                     onClick={() => {
-                      setedittask(false);
+                      setedittask(true);
                       setdataforedit(el);
                     }}
                   >
@@ -1225,9 +1224,9 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             <Sentostaf onReferr={onReferr} />
           </ModalStyeld>
         </Contener>
-      ) : (
-        <Formtaskfromlist Goback={Goback} data={dataforedit} />
-      )}
+        {edittask &&
+    <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} edittask={edittask}/>
+      }
     </div>
   );
 };
