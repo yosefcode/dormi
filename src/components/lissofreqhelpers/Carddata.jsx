@@ -96,7 +96,7 @@ export function Urgensy({
               color={urgency}
               style={{
                 insetinlinestart: "4%",
-                marginTop: "-2px",
+                // marginTop: "-2px",
                 marginInlineEnd: "5px",
               }}
             ></Badge>{" "}

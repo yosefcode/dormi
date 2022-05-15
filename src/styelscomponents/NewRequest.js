@@ -596,6 +596,11 @@ export const ModalEdit = styled(Modal)`
     display: flex;
     justify-content: space-between;
   }
+  .div_modal_edit_date {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
   .cancel {
     width: 25%;
     height: 55px;
@@ -611,7 +616,7 @@ export const ModalEdit = styled(Modal)`
     margin-bottom: 32px;
   }
   .ant-select-selector {
-    border: 1px solid #d6e2f1;
+    border: 1px solid #d6e2f1 !important;
     border-radius: 11px !important;
     height: 55px !important;
     align-items: center !important;
@@ -623,9 +628,7 @@ export const ModalEdit = styled(Modal)`
     border: 1px solid #d6e2f1;
     border-radius: 11px !important;
   }
-  // .ant-form {
-  //   width: 100%;
-  // }
+
   .Lable {
     color: #0f0743;
     text-align: start;
@@ -653,52 +656,96 @@ export const ModalEdit = styled(Modal)`
     margin-top: 30px;
     padding: 0px 5% 5% 5%;
   }
+  .select_half_div2 {
+    width: 46%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 3rem;
+  }
+
+  .select_half_4 {
+    width: 44%;
+  }
 
   @media only screen and (max-width: 600px) {
-    position: relative;
-    margin: 0px auto;
-    padding: 20px 0;
-    width: 84%;
-    display: flex;
-    // background: grey;
-    height: calc(100vh - 60px);
-
-    flex-direction: column;
-    align-items: center;
-
-    .ant-form {
-      width: 100%;
-    }
-
-    .select_half_div {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-size: 3rem;
+    .ant-modal-content {
+      border-radius: 19px;
+      text-align: center;
+      width: 90%;
+      margin: 0 auto;
     }
 
     .select_half_2 {
+      width: 100%;
+    }
+    .div_form_edit {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding: 0px 5% 5% 5%;
+    }
+    .select_half_div2 {
+      width: 100%;
+      // display: flex;
+      // justify-content: space-between;
+      // align-items: baseline;
+      font-size: 3rem;
+    }
+
+    .select_half_4 {
       width: 44%;
     }
 
-    .ant-picker {
-      border-radius: 11px !important;
-      height: 55px !important;
-      align-items: center !important;
+    .div_modal_edit_date {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cancel {
+      width: 40%;
+      height: 55px;
+      border: none;
+      background: #e5ebf3;
+      border-radius: 11px;
+      color: #0f0743;
       font-size: 1.7rem;
+      font-weight: 700;
+    }
+
+    button.ant-btn.ant-btn-primary {
+      background: #ffd17e;
+      border-radius: 11px;
+      width: 55%;
+      border-color: #ffd17e;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.7rem;
+      text-align: center;
+      color: #0f0743;
+      height: 55px;
+    }
+
+    .problem {
       font-weight: 500;
-      border: 1px solid #d6e2f1;
-      box-sizing: border-box;
-      border-color: none;
-      margin: 0 0;
-      padding: 0 25px;
+      font-size: 1.5rem;
+      color: #485464;
       width: 100%;
     }
-    .ant-picker-focused {
-      border-color: #40a9ff !important;
+
+    .uploadimage {
+      width: 100% !important;
     }
   }
+
   .goback {
     background: black;
     color: white;
@@ -815,6 +862,7 @@ export const ModalEdit = styled(Modal)`
     cursor: pointer;
     margin: 0 auto;
   }
+
   input[type="file"] {
     display: none;
   }

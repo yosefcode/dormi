@@ -232,7 +232,7 @@ export const ModalStyeld = styled(Modal)`
   }
 
   .err_border {
-    border-color: red !important;
+    border: 20px solid red !important;
   }
 
   .div_modal {
@@ -246,6 +246,31 @@ export const ModalStyeld = styled(Modal)`
     line-height: 80px;
   }
 
+  .modal_text {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #0f0743;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .modal_text_2 {
+    border: 3px solid #d6e2f1;
+    padding: 10px 30px;
+    border-radius: 11px;
+    color: #0f0743;
+    font-weight: bold;
+    font-size: 1.7rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
   @media only screen and (max-width: 600px) {
     .ant-modal-content {
       min-width: 100%;

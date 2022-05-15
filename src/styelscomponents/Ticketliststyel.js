@@ -111,6 +111,9 @@ font-weight: 700;
   margin-bottom: 0;
 
 }
+#categoryname{
+  height: 40px;
+}
 #cooment{
   font-size: 1.4rem;
 font-weight: 400;
@@ -122,7 +125,7 @@ font-weight: 400;
   display: flex;
 }
 .valueBadge {
-  height: 25px;
+  height: 26px;
   background: #e5ebf3;
   font-weight: 500;
   font-size: 1.2rem;
@@ -132,16 +135,17 @@ font-weight: 400;
     justify-content: center;
 }
 .task_todo{
-  height: 25px;
+  height: 40px;
+  width: 170px;
   background: #FFD17E;
   font-weight: 500;
   font-size: 1.2rem;
    color: #0f0743;
-   margin-top:0px;
+   margin-top:-7px;
    display:flex;
    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px
+    // justify-content: center;
+    padding: 0 6px
     
 }
 .action_inquir{
@@ -286,7 +290,7 @@ p{
     width: 100%;
   }
   .task_todo{
-    height: 30px;
+    height: 35px;
     background: #FFD17E;
     font-weight: 500;
     font-size: 1.2rem;
@@ -294,9 +298,8 @@ p{
      margin-top:0px;
      display:flex;
      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      line-height: 13px;
+      padding: 0 5px;
+      line-height: 16px;
   
   }
   .valueBadge {
@@ -346,9 +349,8 @@ p{
   }
 
   .div_card {
-    height:80px;
-
-  }
+    min-height:100px;
+}
   #displyid_desktop{
     display: none;
   }
@@ -379,13 +381,37 @@ p{
   font-weight: 400;
     color: #0F0743;
     margin-bottom: 0;
+    height: 30px;
   
   }
   
   .Smallcard {
     display: flex;
     width: 100%;
-    justify-content: space-between
+    justify-content: space-between;
+    align-items: center;
+height:35px;
+  }
+  .ticketPlan{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .status{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .Urgensy{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   
 

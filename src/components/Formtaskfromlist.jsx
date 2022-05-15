@@ -6,6 +6,8 @@ import { ModalEdit, Problemcontener } from "../styelscomponents/NewRequest";
 import Resizer from "react-image-file-resizer";
 import { PostToServer } from "../serveses";
 import { ModalStyeld } from "../styelscomponents/modaldtyeld";
+import { week, month, numMonth, day } from "./Arrydaits";
+import iconMSG from "../assets/icon5.png";
 
 const Formtaslfromlist = ({
   data,
@@ -30,18 +32,62 @@ const Formtaslfromlist = ({
   const [categoryID, setcategoryid] = useState();
   const [locationID, setlocationid] = useState();
   const [roomID, setroomid] = useState();
+  const [frequencytype, setfrequencytype] = useState();
+  const [frequencydateday, setfrequencydateday] = useState();
+  const [frequencyamount, setfrequencyamount] = useState();
+  const [frequencydatemonth, setfrequencydatemonth] = useState();
   const [updateImage, setUpdateImage] = useState(false);
   const [urlbase64Edit, setUrlbase64Edit] = useState();
   const [rommarry, setrommarry] = useState();
   const [errmassege, setModalInEdit] = useState(false);
   const [errmassegetext, setModalInEdittext] = useState();
   const [ticketid, setticketid] = useState();
+  const [dateName, setdateName] = useState();
 
-  const [imgSrc, setImgSrc] = useState(`https://dormi.co.il/uploads/${data.openimage}`);
 
-  const handleError = () => setImgSrc(`https://b.dormi.co.il/uploads/${data.openimage}`)
+  const [imgSrc, setImgSrc] = useState(`https://dormi.co.il/uploads/${data?.openimage}`);
+
+  const handleError = () => setImgSrc(`https://b.dormi.co.il/uploads/${data?.openimage}`)
+  
+  const frequencyarry = [
+    { value: "w", text: lang.lang275 },
+    { value: "m", text: lang.lang276 },
+    { value: "x", text: lang.lang363 },
+    { value: "z", text: lang.lang361 },
+    { value: "y", text: lang.lang277 },
+  ];
+
+  const [datetype, setdatetype] = useState(false);
+  const [dayMonth, setDayMonth] = useState(false);
+
+
+    const Selectfreqtipe = (value) => {
+    switch (value) {
+      case "w" :
+
+        setDayMonth(false);
+        setdateName("frequencyamount_w")
+        setdatetype(week);
+        break;
+      case "m" :
+        setdatetype(month);
+        setDayMonth(false);
+        setdateName("frequencyamount_m")
+
+        break;
+      default:
+        setdatetype(false);
+        setDayMonth(true);
+        setdateName("frequencydate")  
+        break;
+      }
+    };
+
 
   const useefctasync = async () => {
+
+    Selectfreqtipe(data.frequencytype);
+
     let Subcategory = categorynames.filter(
       (item) => item.maincategoryname === data.breadcrumb
     );
@@ -57,13 +103,12 @@ const Formtaslfromlist = ({
         let roomid = locationid[0]?.rooms.filter(
           (item) => item.roomname === data.roomName
           );
-          
+
           setSubcategory(Subcategory[0]);
           setcategoryid(categoryid[0].subcategoryid);
           setlocationid(locationid[0].locationid);
           setroomid(roomid[0].roomid);
           setrommarry(locationid[0].rooms);
-
         };
 
   useEffect(() => {
@@ -74,7 +119,7 @@ const Formtaslfromlist = ({
   const topFunction = () => {
     window.scrollTo(0, 0);
   };
-  // ticketguid: "11839956-E8CF-43EC-A419-01A6B30477A7"
+
   const sendimage = async () => {
     let task = "picture";
     let img = [{name:"pic.jpeg",  type: "image/jpeg",
@@ -84,32 +129,40 @@ const Formtaslfromlist = ({
       userid : loginstatus.userid,
       img,
       ticketguid:data.ticketguid,
-      tickettype:"ticket"
+      tickettype:Temmembertask?"plan":"ticket",
     };
     console.log(obj);
     let reqruter = "ticketpicture";
     let res = await PostToServer(reqruter, obj);
     console.log(      res );
 
-    // if (res.error === "1") {
-    //   seterrmassegetext("אירעה שגיאה נסה שוב");
-    //   seterrmassege(true);
-    //   setloadings([0]);
-    // } else if  (res.success === "1") {
-    //   setUrlbase64("")
-    //   setuplodeimage("");
-    //   setButtonsecses(true);
-    //   setloadings([0]);
-    //   topPage()
-    //   setTimeout(() => {
-    //     close_modal()      }, 3000);
+    if (res.error === "1") {
+      setloadings([0]);
+      setModalInEdit(true);
+      setModalInEdittext(<div style={{lineHeight:"40px"}}>פרטי הפנייה עודכנו בהצלחה. <br/> קרתה שגיאה בעדכון התמונה</div>)
+      setTimeout(() => {
+        setedittask(false);
+        setModalInEdit(false);
+      }, 2000);
+} else if  (res.success === "1") {
+    setloadings([0]);
+    setModalInEdit(true);
+    setModalInEdittext(res.message);
+    setTimeout(() => {
+      setedittask(false);
+      setModalInEdit(false);
+    }, 2000);
 
+  } else {
+    setloadings([0]);
+    setModalInEdit(true);
+    setModalInEdittext(<div style={{lineHeight:"40px"}}>פרטי הפנייה עודכנו בהצלחה. {<br/>} היתה שגיאה בעדכון התמונה</div>)
+    setTimeout(() => {
+      setedittask(false);
+      setModalInEdit(false);
+    }, 2000);
 
-    // } else {
-    //   seterrmassegetext("אירעה שגיאה נסה שוב");
-    //   seterrmassege(true);
-    //   setloadings([0]);
-    // }
+  }
   };    
 
 
@@ -141,6 +194,16 @@ const Formtaslfromlist = ({
       comments = value.comments.replace(/[<>${}]/g, "danger$&");
     }
 
+    let frequencytype;
+    if (value?.frequencytype) {
+      frequencytype = value?.frequencytype;
+    }
+
+
+    let valueDateName=value?.frequencyamount_m?value.frequencyamount_m
+    :value?.frequencyamount_w?value.frequencyamount_w: value.day+"/"+value.numMonth;
+
+
     let obj = {
       task,
       ticketguid,
@@ -150,30 +213,46 @@ const Formtaslfromlist = ({
       categoryid,
       urgency,
       comments,
-      // ...typeofreq,
+      // ticketid,
+      frequencytype,
+      [dateName]:valueDateName
+
     };
 
-    let reqruter = "newticket";
+    let reqruter = Temmembertask?"newplan":"newticket";
     console.log("obj:", obj);
+
     let res = await PostToServer(reqruter, obj);
     console.log("res:", res);
-    if (res.error === 1) {
+    if (res.error === "1") {
       setModalInEdit(true);
       setModalInEdittext(res.message);
       setloadings([0]);
-    } else {
-      urlbase64Edit&& sendimage();
-      setloadings([0]);
-      setModalInEdit(true);
-      setticketid(res.ticketguid);
-      setModalInEdittext(res.message);
-
       setTimeout(() => {
         setedittask(false);
-        // setuplodeimagescreen(true);
-        // setModalInEdit(false);
-        // topFunction()
+        setModalInEdit(false);
       }, 2000);
+
+    } else if  (res.error === "0") {
+    if(urlbase64Edit)  sendimage();
+    else{
+      setloadings([0]);
+      setModalInEdit(true);
+      setModalInEdittext(res.message);
+      setTimeout(() => {
+        setedittask(false);
+        setModalInEdit(false);
+      }, 2000);
+    }
+    } else {
+      setModalInEdittext("אירעה שגיאה נסה שוב");
+      setModalInEdit(true);
+      setloadings([0]);
+      setTimeout(() => {
+        setedittask(false);
+        setModalInEdit(false);
+      }, 2000);
+
     }
   };
 
@@ -242,8 +321,8 @@ const upludeimage = async ( e ) => {
             </div> */}
             <div className="div_form_edit">
 
-            <Form.Item name="categoryid" initialValue={data.categoryname} className="select_half_2">
-              <Select showSearch placeholder={lang?.lang110}                 
+            <Form.Item name="categoryid" initialValue={data.categoryname} className="select_half_2" >
+              <Select showSearch placeholder={lang?.lang110}
               onChange={(value)=>{setcategoryid(value[1])}}>
                 {Subcategory
                   ? Subcategory.subcategory.map((el) => {
@@ -259,10 +338,10 @@ const upludeimage = async ( e ) => {
             
             <Form.Item
               name="urgency"
-              initialValue={parseInt(data.urgencyadmin)}
+              initialValue={parseInt(data.urgencyadmin?data.urgencyadmin:data.urgency)}
               className="select_half_2"
             >
-              <Select defaultValue={2}>
+              <Select defaultValue={2} >
                 <Option key={1} value={1}>
                   <Badge color="#22E7B7" text={lang?.lang122} />
                 </Option>
@@ -299,7 +378,7 @@ const upludeimage = async ( e ) => {
             </Form.Item>
 
             <Form.Item name="roomid" initialValue={data.roomName}className="select_half_2">
-              <Select showSearch placeholder={lang?.lang341}               
+              <Select showSearch placeholder={lang?.lang341}  
                onChange={(value)=>{setroomid(value[1])}}              >
 
                 {rommarry
@@ -313,6 +392,74 @@ const upludeimage = async ( e ) => {
                   : null}
               </Select>
             </Form.Item>
+
+            {Temmembertask ? (
+              <div className="div_modal_edit_date">
+
+<Form.Item name="frequencytype"   initialValue={data.frequencytype} className="select_half_2">
+                    <Select  onSelect={Selectfreqtipe}placeholder={lang?.lang269} >
+                      {frequencyarry.map((el, index) => {
+                        return (
+                          <option key={index} value={el.value}>
+                            {el.text}
+                          </option>
+                        );
+                      })}
+                    </Select>
+
+                  </Form.Item>
+                  {datetype  ? (
+                    <Form.Item   className="select_half_2" 
+                     name={dateName}
+                     initialValue={data.frequencyamount}
+                    >
+                      <Select>
+                        {datetype?.map((el, index) => {
+                          return (
+                            <option key={index} value={el.value}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                    </Form.Item>
+                  ) : null}
+                  {dayMonth ? (
+                    <div className="select_half_div2">
+                    <Form.Item name="numMonth"   className="select_half_4" 
+                   initialValue={data.frequencydatemonth}>
+                                            <Select >
+                        {numMonth.map((el, index) => {
+                          return (
+                            <option key={index} value={el.date}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                        </Form.Item>
+/
+
+                        <Form.Item name="day"   className="select_half_4"
+                initialValue={data.frequencydateday}>
+                                            <Select >
+                        {day.map((el, index) => {
+                          return (
+                            <option key={index} value={el.date}>
+                              {el.date}
+                            </option>
+                          );
+                        })}
+                      </Select>
+
+                      {/* <DatePicker  onChange={onChangeDatePicker}/> */}
+                    </Form.Item></div>                  ) : null}
+
+
+                
+                </div>
+            ) : null}
+
 
             <div className="problem">
 
@@ -357,19 +504,7 @@ const upludeimage = async ( e ) => {
 
                              </Form.Item>
 
-            {Temmembertask ? (
-              <div className="frequency">
-                <Form.Item name="frequency" label={lang?.lang269}>
-                  <Select showSearch>
-                    {locationarry.map((el) => {
-                      return (
-                        <Option value={[el.type, el.id]}>{el.type}</Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-              </div>
-            ) : null}
+            
             <div className="div_btn_send">
 
 <Button className="cancel" onClick={Goeinfbacktopage}>
@@ -378,8 +513,7 @@ const upludeimage = async ( e ) => {
 </Button>
 
               <Button type="primary" htmlType="submit" loading={loadings[2]}>
-                {Temmembertask ? `${lang?.lang344}` : `${lang?.lang124}`}
-              </Button>
+אישור              </Button>
 </div>
 
             </div>
@@ -428,7 +562,12 @@ const upludeimage = async ( e ) => {
           }}
           footer={false}
         >
+          <div className="modal_text">
+            <img src={iconMSG} alt="" style={{  width:"35%", marginBottom:"40px"}}/>
+          <div className="modal_text_2">
           {errmassegetext}
+          </div>
+          </div>
         </ModalStyeld>
     </div>
   );

@@ -271,7 +271,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
         let findtiket = ticketlist.filter((el) => {
           return el.ticketguid === Chusenrikit;
         });
-        debugger;
+        // console.log(findtiket);
+        // debugger;
         setdataforedit(findtiket[0]);
         setedittask(true);
         break;
@@ -911,27 +912,32 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       <span id="displyid_desktop">{el.ticketid}</span>
                       <div className="inquir">
                       <div id="description">
-                        {el.breadcrumb} - {el.categoryname}<br/>
+                      <div id="categoryname">
+ {el.breadcrumb} - {el.categoryname}</div>
                       <p id="cooment"> {el.comments}</p>
                       </div>
 
                       <div className="Smallcard">
-                          <div style={{display: "flex"}}>
+                          <div  className="ticketPlan">
 
           {!el.ticketPlanID || el.ticketPlanID === "0" || el.ticketPlanID === ""? null : (
-                          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                             width="22" height="22"
                             viewBox="0 0 30 30"
                             style={{marginInlineEnd:18}}
                             >
                             <path d="M 15 3 C 8.3844276 3 3 8.3844276 3 15 C 3 21.615572 8.3844276 27 15 27 C 21.615572 27 27 21.615572 27 15 C 27 8.3844276 21.615572 3 15 3 z M 14.001953 5.0488281 A 1 1 0 0 0 15 6 A 1 1 0 0 0 15.998047 5.0488281 C 20.73255 5.5157016 24.484298 9.2674502 24.951172 14.001953 A 1 1 0 0 0 24 15 A 1 1 0 0 0 24.951172 15.998047 C 24.484298 20.73255 20.73255 24.484298 15.998047 24.951172 A 1 1 0 0 0 15 24 A 1 1 0 0 0 14.001953 24.951172 C 9.2674502 24.484298 5.5157016 20.73255 5.0488281 15.998047 A 1 1 0 0 0 6 15 A 1 1 0 0 0 5.0488281 14.001953 C 5.5157016 9.2674502 9.2674502 5.5157016 14.001953 5.0488281 z M 15 7 C 10.582 7 7 10.582 7 15 C 7 19.418 10.582 23 15 23 C 19.418 23 23 19.418 23 15 C 23 10.582 19.418 7 15 7 z M 15 9 C 15.553 9 16 9.448 16 10 L 16 14.585938 L 18.707031 17.292969 C 19.098031 17.683969 19.098031 18.316031 18.707031 18.707031 C 18.512031 18.902031 18.256 19 18 19 C 17.744 19 17.487969 18.902031 17.292969 18.707031 L 14 15.414062 L 14 10 C 14 9.448 14.447 9 15 9 z"></path></svg>
           )}
+          </div>
+                          <div  className="status" >
                             <Badge
                               id="status"
                               color={status}
                               text={statustext}
-                              style={{width:"100px" }}
-                            />
+                              // style={{width:"50%" }}
+                            />          </div>
+
+                          <div  className="Urgensy">
                             <span className="pointerblock">
                               <Urgensy
                                 permission={Permission}
@@ -1225,7 +1231,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           </ModalStyeld>
         </Contener>
         {edittask &&
-    <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} edittask={edittask}/>
+    <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} edittask={edittask} Temmembertask={routeRepeatedtask}/>
       }
     </div>
   );

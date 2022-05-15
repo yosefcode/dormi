@@ -160,31 +160,31 @@ console.log(obj);
     { value: "y", text: lang.lang277 },
   ];
   const [datetype, setdatetype] = useState(false);
-  const [datetypepiker, setdatetypepiker] = useState(false);
+  const [dayMonth, setDayMonth] = useState(false);
 
 
     const Selectfreqtipe = (value) => {
     switch (value) {
       case "w":
 
-        setdatetypepiker(false);
+        setDayMonth(false);
         setdateName("frequencyamount_w")
         setdatetype(week);
         break;
       case "m":
         setdatetype(month);
-        setdatetypepiker(false);
+        setDayMonth(false);
         setdateName("frequencyamount_m")
 
         break;
       // case "three_month":
       //   setdatetype(false);
-      //   setdatetypepiker(true);
+      //   setDayMonth(true);
 
       //   break;
       default:
         setdatetype(false);
-        setdatetypepiker(true);
+        setDayMonth(true);
         setdateName("frequencydate")  
         
         
@@ -192,9 +192,6 @@ console.log(obj);
       }
     };
 
-    function onChangeDatePicker(date, dateString) {
-      console.log(date, dateString);
-    }
   const [subcategory, setsubcategory] = useState(false);
   const chusencategory = (value) => {
     if (value) {
@@ -453,7 +450,7 @@ console.log(obj);
                       </Select>
                     </Form.Item>
                   ) : null}
-                  {datetypepiker ? (
+                  {dayMonth ? (
                     <div className="select_half_div">
                     <Form.Item name="numMonth"   className="select_half_2">
                                             <Select >

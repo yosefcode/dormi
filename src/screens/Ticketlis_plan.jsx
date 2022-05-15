@@ -58,6 +58,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   const filterserch = useContext(DataContext).filterserch;
   const chanfefilter = useContext(DataContext).chanfefilter;
   let history = useHistory();
+  const routeRepeatedtask = history.location.pathname === "/Repeatedtask"
 
 
   // רוטר טיפול במשימות
@@ -270,9 +271,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
         let findtiket = ticketlist.filter((el) => {
           return el.ticketguid === Chusenrikit;
         });
-        debugger;
         setdataforedit(findtiket[0]);
-        setedittask(false);
+        setedittask(true);
         break;
       default:
         break;
@@ -681,10 +681,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
       </Menu.Item>
     </Menu>
   );
-  const [edittask, setedittask] = useState(true);
+  const [edittask, setedittask] = useState(false);
   const [dataforedit, setdataforedit] = useState();
   const Goback = () => {
-    setedittask(true);
+    setedittask(false);
   };
   const [claerapruchform, setclaerapruchform] = useState(false);
   const [filterpresd, setfilterpresd] = useState(false);
@@ -696,7 +696,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
   return (
     <div >
-      {edittask ? (
         <Contener Screnphunesize={screnphunesize} >
           <div className="Mangeroption">
           {lang?.lang285}           <div className="div_MangerButton_plan">
@@ -802,7 +801,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                   {/* עריכה */}
                   <Menu.Item
                     onClick={() => {
-                      setedittask(false);
+                      setedittask(true);
                       setdataforedit(el);
                     }}
                   >
@@ -909,14 +908,14 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                             style={{marginInlineEnd:8}}
                             >
                                   <path d="M 15 3 C 8.3844276 3 3 8.3844276 3 15 C 3 21.615572 8.3844276 27 15 27 C 21.615572 27 27 21.615572 27 15 C 27 8.3844276 21.615572 3 15 3 z M 14.001953 5.0488281 A 1 1 0 0 0 15 6 A 1 1 0 0 0 15.998047 5.0488281 C 20.73255 5.5157016 24.484298 9.2674502 24.951172 14.001953 A 1 1 0 0 0 24 15 A 1 1 0 0 0 24.951172 15.998047 C 24.484298 20.73255 20.73255 24.484298 15.998047 24.951172 A 1 1 0 0 0 15 24 A 1 1 0 0 0 14.001953 24.951172 C 9.2674502 24.484298 5.5157016 20.73255 5.0488281 15.998047 A 1 1 0 0 0 6 15 A 1 1 0 0 0 5.0488281 14.001953 C 5.5157016 9.2674502 9.2674502 5.5157016 14.001953 5.0488281 z M 15 7 C 10.582 7 7 10.582 7 15 C 7 19.418 10.582 23 15 23 C 19.418 23 23 19.418 23 15 C 23 10.582 19.418 7 15 7 z M 15 9 C 15.553 9 16 9.448 16 10 L 16 14.585938 L 18.707031 17.292969 C 19.098031 17.683969 19.098031 18.316031 18.707031 18.707031 C 18.512031 18.902031 18.256 19 18 19 C 17.744 19 17.487969 18.902031 17.292969 18.707031 L 14 15.414062 L 14 10 C 14 9.448 14.447 9 15 9 z"></path></svg>
-                           תזמון:{" "} 
-                            {el.frequencytype === "w" ? `שבועי - בכל יום ${days[el.frequencyamount]}`
-                            : el.frequencytype ==="m" ? `חודשי - כל ${el.frequencyamount} לחודש` 
-                            : el.frequencytype ==="x" ? `כל שלושה חודשים - החל מ-${el.frequencydateday} ב${month[el.frequencydatemonth]}`
-                            : el.frequencytype ==="z" ? `חצי שנתי - החל מ-${el.frequencydateday} ב${month[el.frequencydatemonth]}`
-                            : el.frequencytype ==="y" ? `שנתי - החל מ-${el.frequencydateday} ב${month[el.frequencydatemonth]}` :""}
+                        <div> תזמון:{" "} 
+                            {el.frequencytype === "w" ? <span> שבועי -<br/> בכל יום {days[el.frequencyamount]}</span> 
+                            : el.frequencytype ==="m" ? <span>חודשי -<br/> כל {el.frequencyamount} לחודש</span> 
+                            : el.frequencytype ==="x" ? <span>תלת חודשי -<br/> החל מ-{el.frequencydateday} ב{month[el.frequencydatemonth]}</span>
+                            : el.frequencytype ==="z" ? <span>חצי שנתי -<br/> החל מ-{el.frequencydateday} ב{month[el.frequencydatemonth]}</span>
+                            : el.frequencytype ==="y" ? <span>שנתי -<br/> החל מ-{el.frequencydateday} ב{month[el.frequencydatemonth]}</span> :""}
                              {/* - {el.frequencyamount} */}
-                          </div>
+                          </div> </div>  
                           <span className="pointerblock">
                               <Urgensy
                                 permission={Permission}
@@ -1209,10 +1208,10 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             <Sentostaf onReferr={onReferr} />
           </ModalStyeld>
         </Contener>
-      ) : (
-        <Formtaskfromlist Goback={Goback} data={dataforedit} />
-      )}
-    </div>
+        {edittask &&
+          <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} edittask={edittask} Temmembertask={routeRepeatedtask}/>
+            }
+          </div>
   );
 };
 
