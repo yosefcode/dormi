@@ -882,7 +882,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
                       <span id="displyid_desktop">{el.ticketplanid}</span>
                       <div className="inquir">
                       <div id="description">
-                        {el.breadcrumb} - {el.categoryname}<br/>
+                      <div id="categoryname">
+ {el.breadcrumb} - {el.categoryname}</div>
                       <p id="cooment"> {el.comments}</p>
                       </div>
 
@@ -1107,7 +1108,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
               setvisibletaskDrawer(!visibletaskDrawer);
             }}
             visible={visibletaskDrawer}
-            height={600}
+            height={300}
           >
             <ListtaskforEdit
               action={Taskeditfunc}

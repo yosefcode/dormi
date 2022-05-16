@@ -100,7 +100,7 @@ export function Carddata({ element }) {
   );
 }
 
-export const ListtaskforEdit = ({ action, close }) => {
+export const ListtaskforEdit = ({ action, close, ticketlist }) => {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
   const onfinish = (type, value) => {
@@ -111,7 +111,7 @@ export const ListtaskforEdit = ({ action, close }) => {
   };
   return (
     <div className="listQuickclosebuuton">
-      <button
+     { ticketlist && <div><button
         onClick={() => {
           onfinish("close", null);
         }}
@@ -160,10 +160,10 @@ export const ListtaskforEdit = ({ action, close }) => {
         }}
       >
         <img className="img_icon" src="/images/bubble.svg" alt="icon" /> {lang?.lang263}
-      </button>
+      </button></div>}
 
       <button
-        className="drower_button"
+        className= { ticketlist ? "drower_button" : "drower_button btn_up"}
         onClick={() => {
           onfinish("edit", null);
         }}

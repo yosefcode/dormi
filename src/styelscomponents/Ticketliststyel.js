@@ -303,7 +303,7 @@ p{
   
   }
   .valueBadge {
-    height: 30px;}
+    height: 35px;}
   
   
 
@@ -428,7 +428,7 @@ display:none;}
 
 .action_inquir_mobile{
   position:absolute;
-  left:5px;
+  inset-inline-end:5px;
 bottom:10px;
 border:none;
 background:none;
@@ -872,7 +872,7 @@ export const Drawerstyle = styled(Drawer)`
 `;
 export const StyeldSelect = styled(Select)`
   width: 97px;
-  height: 24px;
+  height: 35px;
   // margin: -4% 0px 0 0;
 
   .ant-badge-status-text {
@@ -895,7 +895,7 @@ export const StyeldSelect = styled(Select)`
     border: none !important;
     box-shadow: none !important;
     // width: 97px;
-    // height: 24px !important;
+    height: 35px !important;
     // font-weight: 500 !important;
     // font-size: 1.2rem !important;
     // color: #0f0743 !important;

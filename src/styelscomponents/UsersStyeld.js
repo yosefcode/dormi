@@ -262,7 +262,7 @@ cursor: pointer;
   }
   .action_inquir_mobile{
     position:absolute;
-    left:5px;
+    inset-inline-end:5px;
   bottom:10px;
   border:none;
   background:none;

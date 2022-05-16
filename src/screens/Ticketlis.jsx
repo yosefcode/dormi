@@ -1113,7 +1113,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             onCancel={() => {
               setvisabletaskmodal(!visabletaskmodal);
             }}
-            width={0}
+            width={"100%"}
             footer={null}
           >
             <ListtaskforEdit
@@ -1132,6 +1132,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             height={600}
           >
             <ListtaskforEdit
+            ticketlist={true}
               action={Taskeditfunc}
               close={() => {
                 setvisibletaskDrawer(!visibletaskDrawer);
