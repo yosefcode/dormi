@@ -72,6 +72,7 @@ function Categoris() {
       parentid,  
       categoryid    
     };
+
     console.log("obj:", obj);
 
     let reqruter = "category";
@@ -84,11 +85,14 @@ function Categoris() {
       let ruteruserid = "masof";
 
       let masof = await PostToServer(ruteruserid, {userid:userid});
-      setlocalarry(masof.categorynames);
+      changmasof(masof)
+
+      setlocalarry(masof?.categorynames);
 
       handleCancel() ;
       setchingeurgency(!chingeurgency);
-      
+      seterrmsg(false)
+
     }
   };}
   
@@ -227,7 +231,7 @@ flexWrap: "wrap"}}>
                     }
                   >
                     <div className="listodors">
-                      {el.subcategory ? (
+                      {el.subcategory.length>0 ? (
                         el.subcategory?.map((item) => {
                           let cunter = 0;
 // console.log("item:", item);

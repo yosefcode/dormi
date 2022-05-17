@@ -197,5 +197,9 @@ export const CardStyeld = styled(Card)`
     color: #856404;
     background-color: #fff3cd;
     border-color: #ffeeba;
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 11px;
+    text-align: center;
   }
 `;

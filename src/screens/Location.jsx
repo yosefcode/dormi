@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { CardStyeld, Contener } from "../styelscomponents/LocationStyeld";
 import { PostToServer } from "../serveses";
 
@@ -19,11 +19,13 @@ function Location() {
   const ticketlist = useContext(DataContext).ticketlist;
   const loginstatus = useContext(DataContext).loginstatus
   const masof = useContext(DataContext).masof;
+  const changmasof = useContext(DataContext).changmasof;
 
   const lang = defoltlang?.lang;
-  let locationarry = masof?.locations;
+  let locationarr = masof?.locations;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [locationarry, setlocationarry] = useState(locationarr);
   const [taskModal, setTaskmodal] = useState();
   const [locationID, setLocationID] = useState();
   const [roomID, setRoomID] = useState();
@@ -31,15 +33,18 @@ function Location() {
   const [defaultValueModal, setDefaultValueModal] = useState("");
   const [nameModal, setNameModal] = useState("");
   const [nameLocation, setNameLocation] = useState("");
+  const [errmsg, seterrmsg] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
+
   const addLocation = () => {
     setTaskmodal(lang?.lang210);
     setIsModalVisible(true);
     setTaskToServer("addloc")
     setNameModal("locationname")
+    setNameLocation("")
 
   };
   const addRoom = () => {
@@ -48,41 +53,56 @@ function Location() {
     setIsModalVisible(true);
     setTaskToServer("add")
     setNameModal("roomname")
-
   };
+  useEffect(() => {  setlocationarry(locationarr)
+},[locationarr])
 
-
-  const onFinish = async(values) => {
+  async function onFinish(values) {
     console.log(values);
-    let task = values.task?values.task:taskToServer 
+    let task = values.task ? values.task : taskToServer;
     let userid = loginstatus.userid;
-    let locationname =values?.locationname;
+    let locationname = nameLocation?nameLocation:values?.locationname;
     let locationid = locationID;
-    let roomid = roomID
-    let roomname = values?.roomname
+    let roomid = roomID;
+    let roomname =  nameLocation?nameLocation:values?.roomname;
     let obj = {
       task,
       userid,
       locationname,
-      locationid,  
-      roomid, 
-      roomname  
+      locationid,
+      roomid,
+      roomname
     };
+
     console.log("obj:", obj);
 
     let reqruter = "location";
+    if ( !locationname && !roomname) { seterrmsg(true)}else{ 
+
     let res = await PostToServer(reqruter, obj);
     console.log("res:", res);
-    if (res.error === 1) {
+    if (res.error === "1" || (!locationname && !roomname)) {
+      seterrmsg(true)
+
     } else {
-      setDefaultValueModal("")
+      let ruteruserid = "masof";
+
+      let masof = await PostToServer(ruteruserid, { userid: userid });
+       changmasof(masof)
+
+      setlocationarry(masof?.locations);
+      setNameLocation("")
+      setDefaultValueModal("");
       setIsModalVisible(false);
-      }
-  };
+    }}
+  }
 
   const handleCancel = () => {
     setDefaultValueModal("")
     setIsModalVisible(false);
+    seterrmsg(false)
+    setNameLocation("")
+
   };
   const removeLocation= ()=>{
     onFinish({task:"delloc"})
@@ -91,8 +111,7 @@ function Location() {
     setDefaultValueModal(nameLocation)
     setTaskToServer("editloc")
     setIsModalVisible(true);
-    setTaskmodal("עריכת שם מתחם");
-
+    setTaskmodal("עריכת שם מתחם")
   }
   const removeRoom= ()=>{
     onFinish({task:"delroom"})
@@ -113,15 +132,12 @@ function Location() {
     </Menu>)
 
 
-
   const gotolistoftask = (value) => {
     filterserch.location = value;
-
     console.log(filterserch);
     chanfefilter(filterserch);
     history.push("/ListOfreq");
   };
-console.log(locationarry);
   return (
     <Contener>
       <div className="hader">
@@ -154,7 +170,7 @@ console.log(locationarry);
                   }
                 >
                   <div className="listodors">
-                    {el.rooms ? (
+                    {el.rooms.length>0 ? (
                       el.rooms.map((item) => {
                         let cunter = 0;
                         ticketlist.map((tiket) => {
@@ -221,6 +237,8 @@ console.log(locationarry);
                                      setDefaultValueModal(item.roomname);
                                      setLocationID(el.locationid);
                                      setTaskToServer("add")
+                                     setNameLocation(item.roomname)
+
 
 
        }}
@@ -265,8 +283,9 @@ console.log(locationarry);
                         <div className="div_modal">
                         {taskModal}
 
-          <Form.Item name={nameModal}>
-            <Input placeholder={nameModal==="roomname"?"שם חדר":lang?.lang223} defaultValue={defaultValueModal}/>
+          <Form.Item name={nameModal}  onChange={(e)=>{
+                     if(e.target.value.length>0) seterrmsg(false);setNameLocation(e.target.value)}}>
+            <Input placeholder={nameModal==="roomname"?"שם חדר":lang?.lang223} defaultValue={defaultValueModal} className={errmsg && "err_border"}/>
           </Form.Item>
           <Form.Item>
             <Button  type="primary" htmlType="submit">
