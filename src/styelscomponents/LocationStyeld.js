@@ -133,7 +133,8 @@ export const CardStyeld = styled(Card)`
 
   .ant-card-body {
     border-top: 1px solid #d6e2f1;
-    padding: 14px 22px 0 0;
+    padding: 14px 0 0 0;
+    padding-inline-start: 22px;
     overflow-y: auto;
     text-align: start;
     height: 208px;

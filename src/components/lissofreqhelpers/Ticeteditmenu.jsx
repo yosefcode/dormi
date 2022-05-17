@@ -322,16 +322,15 @@ export const Switcstatus = (statusname, lang162, lang174) => {
   let blue = "#108ee9";
   let green = "#87d068";
   switch (statusname) {
-    case "פנייה חדשה":
+    case lang162:
       status = blue;
       statustext = lang162;
       return { status, statustext };
-      break;
-    case "בטיפול":
+    case lang174:
       status = green;
       statustext = lang174;
       return { status, statustext };
 
-      break;
+      default:
   }
 };

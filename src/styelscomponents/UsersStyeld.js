@@ -387,6 +387,8 @@ cursor: pointer;
       color: white;
       left:0;
       z-index:2000;
+      min-width:100%;
+
     }
     
     

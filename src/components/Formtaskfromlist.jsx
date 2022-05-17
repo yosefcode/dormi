@@ -15,7 +15,8 @@ const Formtaslfromlist = ({
   Goback,
   Temmembertask,
   setedittask,
-  edittask
+  edittask,
+  Updatedata
 }) => {
   document.body.style.backgroundColor = "white";
   const { Option } = Select;
@@ -140,27 +141,30 @@ const Formtaslfromlist = ({
       setloadings([0]);
       setModalInEdit(true);
       setModalInEdittext(<div style={{lineHeight:"40px"}}>פרטי הפנייה עודכנו בהצלחה. <br/> קרתה שגיאה בעדכון התמונה</div>)
+      Updatedata()
       setTimeout(() => {
         setedittask(false);
         setModalInEdit(false);
-      }, 2000);
+      }, 1000);
 } else if  (res.success === "1") {
     setloadings([0]);
     setModalInEdit(true);
     setModalInEdittext(res.message);
+    Updatedata()
     setTimeout(() => {
       setedittask(false);
       setModalInEdit(false);
-    }, 2000);
+    }, 1000);
 
   } else {
     setloadings([0]);
     setModalInEdit(true);
     setModalInEdittext(<div style={{lineHeight:"40px"}}>פרטי הפנייה עודכנו בהצלחה. {<br/>} היתה שגיאה בעדכון התמונה</div>)
+    Updatedata()
     setTimeout(() => {
       setedittask(false);
       setModalInEdit(false);
-    }, 2000);
+    }, 1000);
 
   }
   };    
@@ -231,7 +235,7 @@ const Formtaslfromlist = ({
       setTimeout(() => {
         setedittask(false);
         setModalInEdit(false);
-      }, 2000);
+      }, 1000);
 
     } else if  (res.error === "0") {
     if(urlbase64Edit)  sendimage();
@@ -242,7 +246,8 @@ const Formtaslfromlist = ({
       setTimeout(() => {
         setedittask(false);
         setModalInEdit(false);
-      }, 2000);
+      }, 1000);
+      Updatedata()
     }
     } else {
       setModalInEdittext("אירעה שגיאה נסה שוב");
@@ -251,7 +256,7 @@ const Formtaslfromlist = ({
       setTimeout(() => {
         setedittask(false);
         setModalInEdit(false);
-      }, 2000);
+      }, 1000);
 
     }
   };

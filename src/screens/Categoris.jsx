@@ -22,9 +22,9 @@ function Categoris() {
   const loginstatus = useContext(DataContext).loginstatus;
 
   const masof = useContext(DataContext).masof;
+  const changmasof = useContext(DataContext).changmasof;
   const lang = defoltlang?.lang;
   let categoryarry = masof.categorynames;
-  console.log(categoryarry);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [chusencategori, setchusencategori] = useState();
@@ -51,6 +51,8 @@ function Categoris() {
     setTaskmodal("הוספת קטגוריה משנית");
     setIsModalVisible(true);
     setTaskToServer("add")
+    setIconID("")
+    setchusencategori("");
   };
 
   const onFinish = async(values) => {
@@ -79,9 +81,17 @@ function Categoris() {
     if (res.error === 1 || !categoryname) {
       seterrmsg(true)
     } else {
-      handleCancel()      }
-  };}
+      let ruteruserid = "masof";
 
+      let masof = await PostToServer(ruteruserid, {userid:userid});
+      setlocalarry(masof.categorynames);
+
+      handleCancel() ;
+      setchingeurgency(!chingeurgency);
+      
+    }
+  };}
+  
 
   const handleCancel = () => {
     setDefaultValueModal("")
@@ -90,7 +100,6 @@ function Categoris() {
   };
 
   let finicon = Arryoficons?.find((ic) => iconID?.id === ic.iconid)
-                console.log(finicon);
  
   const chuseicon = (value) => {
     let requst = categoryarry.findIndex(
@@ -219,9 +228,9 @@ flexWrap: "wrap"}}>
                   >
                     <div className="listodors">
                       {el.subcategory ? (
-                        el.subcategory.map((item) => {
+                        el.subcategory?.map((item) => {
                           let cunter = 0;
-
+// console.log("item:", item);
                           ticketlist.map((tiket) => {
                             if (
                               tiket.breadcrumb === el.maincategoryname &&
@@ -284,6 +293,8 @@ id="icon_dropdown_body"
                                   onClick={() => {setSubCategoryID(item.subcategoryid);
                                  setParentID(el.id);
                                     setDefaultValueModal(item.subname);
+                                    setchusencategori(item.subname);
+                                    console.log(item.subname);
       }}
                                   // icon={
                                   //

@@ -25,7 +25,6 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
 
   //   setsubcategory(Typeofreq.maincategory);
-
   const [selectromm, setselectromm] = useState(false);
   let locationarry = masof?.locations;
   const [tickettypePick, settickettypePick] = useState();
@@ -105,19 +104,20 @@ const Formtask = ({ Typeofreq, Goback, Temmembertask,topFunction  }) => {
       // ...typeofreq,
     };
     
-    let reqruter = frequencytype?"newplan":"newticket";
+    let reqruter = frequencytype || Temmembertask?"newplan":"newticket";
     console.log(obj);
     console.log(reqruter);
 
     let res = await PostToServer(reqruter, obj);
     console.log(res);
-
+    
     if (res.error === "1") {
       seterrmassege(true);
       seterrmassegetext(res.message);
       setloadings([0]);
     } else if  (res.error === "0") {
-      let ruteruserid = "ticketlist";
+      
+      let ruteruserid =  "ticketlist";
 
       let ticketlis = await PostToServer(ruteruserid, { userid: userid });
       changeticketlist(ticketlis);

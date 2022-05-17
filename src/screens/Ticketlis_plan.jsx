@@ -66,11 +66,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   document.body.style.backgroundColor = "rgba(250, 252, 255, 1)";
   const loginstatus = useContext(DataContext).loginstatus;
   const ticketlist = useContext(DataContext).ticketplanlist;
-  // const ticketlist = routeRepeatedtask ? useContext_ticketplanlist : useContext_ticketlist
-  // const ticketplanlist  = useContext(DataContext).ticketplanlist;
   const defoltlang = useContext(DataContext).lang;
   const changeticketlist = useContext(DataContext).changeticketplanlist;
-  // const changeticketplanlist = useContext(DataContext).changeticketplanlist;
   const lang = defoltlang?.lang;
   let userlevelid = loginstatus?.levelid;
   let userid = loginstatus?.userid;
@@ -83,7 +80,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
   // עדכון דאטא
   const [updaterefresh, setupdaterefresh] = useState(false);
   const Updatedata = async () => {
-    let ruteruserid = "ticketlist";
+    let ruteruserid = "ticketplanlist";
 
     let ticketlis = await PostToServer(ruteruserid, { userid: userid });
 
@@ -107,6 +104,12 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
   /// סטייטס לכל הסינונים
   const [AllTikets, setAllTikets] = useState([]);
+  useEffect(() => {
+    // setlocallist(ticketlist);
+    setAllTikets(ticketlist);
+  
+  }, [ticketlist]);
+  
 
   const [filter, setfilter] = useState(false);
 
@@ -1125,7 +1128,7 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             }}
             width={"35%"}
             footer={null}
-            style={{ left: "-9%", bottom:"20px"}}
+            // style={{ left: "-9%", bottom:"20px"}}
           >
             <Quickclosebuuton action={Oqquickaction} />
           </Quickclomodaltyle>
@@ -1210,7 +1213,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           </ModalStyeld>
         </Contener>
         {edittask &&
-          <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} edittask={edittask} Temmembertask={routeRepeatedtask}/>
+          <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask}
+           edittask={edittask} Temmembertask={routeRepeatedtask} Updatedata={Updatedata}/>
             }
           </div>
   );

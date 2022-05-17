@@ -124,11 +124,12 @@ function App() {
         };
 
         let ressult = await PostToServer("ticketlist", obj);
-
         setticketlist(ressult);
-        let ressultticketplanlist = await PostToServer("ticketplanlist", obj);
+        console.log(ressult);
 
+        let ressultticketplanlist = await PostToServer("ticketplanlist", obj);
         setticketplanlist(ressultticketplanlist);
+        console.log(ressultticketplanlist);
 
         setloginstatus(res.changloginstatus);
         DirectionOfLang(res.changlang.langid);
@@ -155,13 +156,14 @@ function App() {
     let ressult = await PostToServer("ticketlist", {
       userid: loginstatus?.userid,
     });
-
     setticketlist(ressult);
+    console.log(ressult);
+
     let ressultticketplanlist = await PostToServer("ticketplanlist", {
       userid: loginstatus?.userid,
     });
-
     setticketplanlist(ressultticketplanlist);
+    console.log(ressultticketplanlist);
   };
   const [rebderfromlog, setrebderfromlog] = useState(false);
   const firstlogd = () => {

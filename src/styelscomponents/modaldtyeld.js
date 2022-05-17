@@ -232,7 +232,7 @@ export const ModalStyeld = styled(Modal)`
   }
 
   .err_border {
-    border: 20px solid red !important;
+    border: 1px solid red !important;
   }
 
   .div_modal {

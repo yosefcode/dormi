@@ -111,7 +111,8 @@ export const ListtaskforEdit = ({ action, close, ticketlist }) => {
   };
   return (
     <div className="listQuickclosebuuton">
-     { ticketlist && <div><button
+     { ticketlist && <div>
+       <button
         onClick={() => {
           onfinish("close", null);
         }}
@@ -186,7 +187,7 @@ export const ListtaskforEdit = ({ action, close, ticketlist }) => {
     </div>
   );
 };
-export const Quickclosebuuton = ({ action }) => {
+export const Quickclosebuuton = ({ action, ticketlist }) => {
   const defoltlang = useContext(DataContext).lang;
   const lang = defoltlang?.lang;
   const onfinish = (type, value) => {
@@ -195,6 +196,8 @@ export const Quickclosebuuton = ({ action }) => {
 
   return (
     <div  className="drower_checklist">
+           { ticketlist && <div>
+
       <button
         onClick={() => {
           onfinish("close", null);
@@ -221,8 +224,8 @@ export const Quickclosebuuton = ({ action }) => {
       </button>
       <button className="drower_button">
         <img className="img_icon" src="/images/avatar.svg" alt="icon" /> {lang?.lang240}
-      </button>
-      <button className="drower_button btn_down"
+      </button></div>}
+      <button className="drower_button btn_down" style={ticketlist?null:{borderRadius:"9px"}}
       onClick={() => {
           onfinish("archive", null);
         }}>

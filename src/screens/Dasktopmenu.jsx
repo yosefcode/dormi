@@ -107,22 +107,6 @@ const Dasktopmenu = ({ LoginScreen, dir }) => {
                 <div className="ListOfreqmenue">
                   {lang?.lang196}
                   <div className="count_inquiries">{chors.chors}</div>
-                  {/* <Badge 
-                    style={{
-                      display: "flex",
-justifyContent: "center",
-alignItems: "center",
-                      width: "32px",
-height: "18px",
-                      backgroundColor: "rgba(255, 255, 255, 0.26)",
-                      color: "#FFFFFF",
-                      fontsize: "1.4rem",
-                      boxShadow: "rgb(255 255 255 / 26%) 0px 0px 0px 14px inset",
-                      marginBottom:"-5px"
-                    }}
-                    overflowCount={999}
-                    count={chors.chors}
-                  ></Badge> */}
                 </div>
               </Link>
 

@@ -104,7 +104,7 @@ export const Contener = styled.div`
     height: 25px;
     background: #e5ebf3;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #0f0743;
     display: flex;
     align-items: center;
@@ -129,7 +129,7 @@ export const Contener = styled.div`
   }
   .ant-badge-status-text {
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #0f0743;
   }
 

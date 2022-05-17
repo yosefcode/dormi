@@ -93,7 +93,11 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
 
     setupdaterefresh(!updaterefresh);
   };
+useEffect(() => {
+  // setlocallist(ticketlist);
+  setAllTikets(ticketlist);
 
+}, [ticketlist]);
   //  הגדרות משתנות לפי גודל מסך
   const [screnphunesize, setscrenphunesize] = useState();
   const [fullcard, setfullcard] = useState(false);
@@ -296,7 +300,6 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
     setcancelquickfunc({ status: false, type: null });
 
 
-    console.log(AllTikets);
     let ruteruserid = "ticketlist";
 
     let ticketlis = await PostToServer(ruteruserid, { userid: userid });
@@ -1147,9 +1150,11 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
             }}
             width={"35%"}
             footer={null}
-            style={{ left: "-9%", bottom:"20px"}}
+            className="modal_check"
+            // style={{position: "fixed", bottom:"80px", minWidth:"420px", insetInlineEnd:"23%" }}
           >
-            <Quickclosebuuton action={Oqquickaction} />
+            <Quickclosebuuton action={Oqquickaction}  ticketlist={true}
+/>
           </Quickclomodaltyle>
           <QuickcloDrawerstyle
             placement={"bottom"}
@@ -1232,7 +1237,8 @@ const Ticketlis = ({ Repeatedtask, filtervalue }) => {
           </ModalStyeld>
         </Contener>
         {edittask &&
-    <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} edittask={edittask} Temmembertask={routeRepeatedtask}/>
+    <Formtaskfromlist Goback={Goback} data={dataforedit} setedittask={setedittask} 
+    edittask={edittask} Temmembertask={routeRepeatedtask} Updatedata={Updatedata}/>
       }
     </div>
   );

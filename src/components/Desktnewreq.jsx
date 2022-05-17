@@ -23,6 +23,7 @@ const Desktnewreq = ({ Typeofreq, Temmembertask, setvisual, modalwasclos }) => {
   const [form] = Form.useForm();
   const loginstatus = useContext(DataContext).loginstatus;
   const changeticketlist = useContext(DataContext).changeticketlist;
+  const changeticketplanlist = useContext(DataContext).changeticketplanlist;
   const defoltlang = useContext(DataContext).lang;
   const masof = useContext(DataContext).masof;
   const userlist = useContext(DataContext).userlist;
@@ -117,9 +118,11 @@ console.log(obj);
 
     } else if  (res.error === "0") {
       let ruteruserid = routeRepeatedtask? "ticketplanlist" : "ticketlist";
+      // let ruteruserid =  "ticketlist";
 
       let ticketlis = await PostToServer(ruteruserid, { userid: userid });
-      changeticketlist(ticketlis);
+
+      routeRepeatedtask?changeticketplanlist(ticketlis):changeticketlist(ticketlis);
       setloadings([0]);
       setuplodeimagescreen(true);
 
@@ -281,7 +284,7 @@ console.log(obj);
 
                         
   const maincategoryname = (
-    <div >
+    <div  style={{display:"inline"}}>
  {el.maincategoryname}
           <img src={finicon?.icon} alt= "" style={{height: "25px", marginInlineStart:"10px" }}/> 
     </div>

@@ -123,12 +123,14 @@ font-weight: 400;
 }
 .Smallcard {
   display: flex;
+  align-items: center;
+ height: 40px;
 }
 .valueBadge {
-  height: 26px;
+  height: 35px;
   background: #e5ebf3;
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
    color: #0f0743;
    display:flex;
    align-items: center;
@@ -141,7 +143,6 @@ font-weight: 400;
   font-weight: 500;
   font-size: 1.2rem;
    color: #0f0743;
-   margin-top:-7px;
    display:flex;
    align-items: center;
     // justify-content: center;
@@ -155,7 +156,7 @@ color:#807E94;
 }
 .ant-badge-status-text {
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #0f0743;
 }
 .marginInlineStartt{
@@ -291,6 +292,7 @@ p{
   }
   .task_todo{
     height: 35px;
+    width: 62%;
     background: #FFD17E;
     font-weight: 500;
     font-size: 1.2rem;
@@ -387,20 +389,20 @@ p{
   
   .Smallcard {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    width: 95%;
+    // justify-content: space-between;
     align-items: center;
 height:35px;
   }
   .ticketPlan{
-    width: 20%;
+    width: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
   .status{
-    width: 35%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -487,6 +489,7 @@ font-size:1.6rem;
     color: white;
     left:0;
     z-index:2000;
+    min-width:100%;
   }
   
   
@@ -540,7 +543,7 @@ font-size:1.6rem;
   .closecheckboox {
     position: absolute;
     top: 12px;
-    left:15px;
+    inset-inline-end:15px;
   }
 
   
@@ -879,7 +882,7 @@ export const StyeldSelect = styled(Select)`
     font-family: "Heebo";
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 1.4rem;
 
     color: #0f0743;
     margin-inline-start: 2.2px;
@@ -917,6 +920,12 @@ export const StyeldSelect = styled(Select)`
 
 export const Quickclomodaltyle = styled(Modal)`
   font-family: "Heebo";
+  .ant-modal-content {
+    position: fixed !important;
+    bottom: 80px !important;
+    min-width: 420px;
+    inset-inline-end: 23% !important;
+  }
 
   .userQuickclosebuuton {
     display: flex;
